@@ -33,45 +33,25 @@ color:white;
 
 </head>
 
-<body class="p-6">
+<body class="p-4">
 
 <div class="max-w-3xl mx-auto">
 
-<!-- Headline -->
+<!-- HEADLINE -->
 
-<h1 class="text-4xl font-bold text-center mb-3">
+<h1 class="text-3xl md:text-4xl font-bold text-center mb-3">
 Most Travel Nurses Are Underpaid by $3,000–$10,000 Per Contract
 </h1>
 
-<p class="text-xl text-center text-gray-700 mb-2">
+<p class="text-lg text-center text-gray-700 mb-6">
 Check Your Contract Pay Score in 30 Seconds
 </p>
 
-<p class="text-gray-600 text-center mb-6">
-Our analyzer estimates real market pay, negotiation range, and potential lost income.
-</p>
+<!-- CALCULATOR (NOW HIGH ON PAGE FOR MOBILE) -->
 
-<p class="text-center text-sm text-gray-500 mb-6">
-Used by travel nurses to quickly evaluate contract offers before accepting them.
-</p>
+<div class="bg-white p-6 rounded-xl shadow">
 
-<!-- Trust Block -->
-
-<div class="bg-blue-50 border border-blue-100 p-4 rounded-lg mb-6 text-center">
-
-<p class="font-semibold text-blue-900">
-Built specifically for travel nurses evaluating contract offers
-</p>
-
-<p class="text-sm text-blue-700">
-Estimate market pay, negotiation opportunities, and contract risk before accepting an assignment.
-</p>
-
-</div>
-
-<!-- Progress -->
-
-<p id="stepIndicator" class="text-sm text-gray-500 mb-2 text-center">
+<p class="text-sm text-gray-500 mb-2 text-center">
 Step 1 of 4
 </p>
 
@@ -79,11 +59,7 @@ Step 1 of 4
 <div id="progressBar" class="bg-blue-600 h-2 rounded" style="width:25%"></div>
 </div>
 
-<!-- Calculator -->
-
-<div class="bg-white p-6 rounded-xl shadow">
-
-<div class="grid grid-cols-2 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
 <input id="hourly" type="number" placeholder="Hourly Rate" class="p-3 border rounded">
 
@@ -105,7 +81,21 @@ Free analysis • No signup required • Instant results
 
 </div>
 
-<!-- Score -->
+<!-- TRUST BLOCK -->
+
+<div class="bg-blue-50 border border-blue-100 p-4 rounded-lg mt-6 text-center">
+
+<p class="font-semibold text-blue-900">
+Built specifically for travel nurses evaluating contract offers
+</p>
+
+<p class="text-sm text-blue-700">
+Estimate market pay, negotiation potential, and contract risk before accepting an assignment.
+</p>
+
+</div>
+
+<!-- SCORE SECTION -->
 
 <div id="scoreSection" class="hidden mt-8 text-center">
 
@@ -113,7 +103,7 @@ Free analysis • No signup required • Instant results
 Your Contract Pay Score
 </h2>
 
-<div id="scoreCircle" class="score-circle mx-auto bg-red-500">
+<div id="scoreCircle" class="score-circle mx-auto">
 0
 </div>
 
@@ -127,11 +117,13 @@ Share My Contract Score
 
 </div>
 
-<!-- Risk Meter -->
+<!-- RISK METER -->
 
 <div id="riskSection" class="hidden mt-6 text-center">
 
-<h3 class="font-bold text-lg">Contract Risk Meter</h3>
+<h3 class="font-bold text-lg">
+Contract Risk Meter
+</h3>
 
 <p id="riskLevel" class="text-xl font-semibold mt-2"></p>
 
@@ -139,7 +131,7 @@ Share My Contract Score
 
 </div>
 
-<!-- Email Gate -->
+<!-- EMAIL GATE -->
 
 <div id="emailGate" class="hidden mt-8 bg-white p-6 rounded-xl shadow">
 
@@ -148,7 +140,7 @@ Unlock Your Full Contract Intelligence Report
 </h3>
 
 <p class="text-gray-600 mb-4">
-See negotiation range, contract insights, and profit forecast.
+See negotiation range, profit forecast, and recruiter margin estimates.
 </p>
 
 <input id="email" type="email" placeholder="Enter your email" class="p-3 border rounded w-full">
@@ -159,7 +151,7 @@ Unlock Full Report
 
 </div>
 
-<!-- Paid Report -->
+<!-- PAID REPORT -->
 
 <div id="paidSection" class="hidden mt-8 bg-white p-6 rounded-xl shadow">
 
@@ -179,7 +171,7 @@ Secure payment via Stripe
 
 </div>
 
-<!-- Tax Protection -->
+<!-- TAX PROTECTION -->
 
 <div class="mt-8 bg-yellow-50 p-6 rounded-xl border">
 
@@ -206,27 +198,29 @@ Get Tax Protection – $49.99
 
 </div>
 
-<!-- How Tool Works -->
+<!-- HOW TOOL WORKS -->
 
 <div class="mt-8 bg-gray-50 p-4 rounded text-sm text-gray-600">
 
 <b>How This Tool Works</b>
 
 <p class="mt-2">
-The contract score uses estimated market pay ranges and travel nurse compensation patterns to highlight negotiation opportunities and risk factors.
+The contract score is calculated using estimated market pay ranges and typical travel nurse compensation patterns. Results highlight potential negotiation opportunities and contract risk indicators.
 </p>
 
 </div>
 
-<!-- Short Disclaimer -->
+<!-- DISCLAIMER -->
 
-<div class="mt-10 text-xs text-gray-500 text-center">
+<div class="mt-10 text-xs text-gray-500 text-center max-w-xl mx-auto">
 
-Disclaimer: Results are estimates based on market averages and user inputs. This tool does not provide legal, financial, or tax advice.
+<strong>Disclaimer:</strong> The calculations and contract analysis provided by this tool are estimates based on user-entered information and general market assumptions about travel nurse compensation. Results are provided for informational and educational purposes only and should not be interpreted as financial, legal, tax, or employment advice. Actual compensation structures vary by location, specialty, agency, and contract terms. Always consult a qualified tax professional, financial advisor, or legal professional before making decisions related to employment contracts, compensation, or tax matters.
+
+<p class="mt-2">
+<a href="/disclaimer.html" class="underline">View Full Legal Disclaimer</a>
+</p>
 
 </div>
-
-<!-- Copyright -->
 
 <footer class="text-center text-xs text-gray-500 mt-10">
 
@@ -261,25 +255,37 @@ else if(diff >= -100) score = 75
 else if(diff >= -300) score = 60
 else score = 45
 
-document.getElementById("scoreCircle").innerText = score
+const scoreCircle = document.getElementById("scoreCircle")
+scoreCircle.innerText = score
 
-let verdict = "Average Pay"
+if(score >= 90){
+scoreCircle.style.background="#16a34a"
+}
 
-if(score < 60) verdict = "Below Market"
-if(score > 80) verdict = "Strong Contract"
+else if(score >= 70){
+scoreCircle.style.background="#eab308"
+}
 
-document.getElementById("verdict").innerText = verdict
+else{
+scoreCircle.style.background="#dc2626"
+}
 
-const lost = Math.max(0, marketAverage - weeklyPay) * 13
+let verdict="Average Pay"
 
-document.getElementById("lostIncome").innerText =
-"Potential lost income: $" + lost.toLocaleString() + " per contract"
+if(score<60) verdict="Below Market"
+if(score>80) verdict="Strong Contract"
+
+document.getElementById("verdict").innerText=verdict
+
+const lost=Math.max(0,marketAverage-weeklyPay)*13
+
+document.getElementById("lostIncome").innerText=
+"Potential lost income: $"+lost.toLocaleString()+" per contract"
 
 document.getElementById("scoreSection").classList.remove("hidden")
 document.getElementById("emailGate").classList.remove("hidden")
 
 document.getElementById("progressBar").style.width="100%"
-document.getElementById("stepIndicator").innerText="Analysis Complete"
 
 let risk="Low"
 let reason="Your contract appears financially balanced."
@@ -294,15 +300,16 @@ risk="High"
 reason="Housing costs exceed your stipend."
 }
 
-document.getElementById("riskLevel").innerText = "Risk Level: " + risk
-document.getElementById("riskReason").innerText = reason
+document.getElementById("riskLevel").innerText="Risk Level: "+risk
+document.getElementById("riskReason").innerText=reason
+
 document.getElementById("riskSection").classList.remove("hidden")
 
 }
 
 function unlockReport(){
 
-const email = document.getElementById("email").value
+const email=document.getElementById("email").value
 
 if(!email){
 alert("Enter email to unlock report")
@@ -312,32 +319,10 @@ return
 document.getElementById("emailGate").classList.add("hidden")
 document.getElementById("paidSection").classList.remove("hidden")
 
-const negotiationLow = marketAverage - 50
-const negotiationHigh = marketAverage + 200
+const negotiationLow=marketAverage-50
+const negotiationHigh=marketAverage+200
 
-let insight1=""
-let insight2=""
-let insight3=""
-
-const percentDiff = Math.round(((weeklyPay - marketAverage) / marketAverage) * 100)
-
-if(percentDiff < -5){
-insight1 = "Your contract appears significantly below market pay."
-}
-
-else if(percentDiff < 5){
-insight1 = "Your contract is roughly in line with market averages."
-}
-
-else{
-insight1 = "Your contract appears above average compared to similar offers."
-}
-
-insight2 = "Recruiters often have $150–$350 weekly negotiation flexibility."
-
-insight3 = "Evaluate stipends, housing costs, and tax compliance when comparing contracts."
-
-document.getElementById("report").innerHTML = `
+document.getElementById("report").innerHTML=`
 
 <p><b>Your Weekly Pay:</b> $${weeklyPay}</p>
 
@@ -350,22 +335,8 @@ $${negotiationLow} – $${negotiationHigh}
 
 <p class="mt-3">
 Estimated 13-Week Profit Difference:
-$${(marketAverage - weeklyPay) * 13}
+$${(marketAverage-weeklyPay)*13}
 </p>
-
-<div class="mt-5 bg-gray-50 p-4 rounded">
-
-<b>Insight Summary</b>
-
-<ul class="list-disc ml-5 mt-2">
-
-<li>${insight1}</li>
-<li>${insight2}</li>
-<li>${insight3}</li>
-
-</ul>
-
-</div>
 
 `
 
@@ -373,10 +344,10 @@ $${(marketAverage - weeklyPay) * 13}
 
 function shareScore(){
 
-const score = document.getElementById("scoreCircle").innerText
-const lost = document.getElementById("lostIncome").innerText
+const score=document.getElementById("scoreCircle").innerText
+const lost=document.getElementById("lostIncome").innerText
 
-const text =
+const text=
 `My travel nurse contract score was ${score}/100.
 
 ${lost}
@@ -386,7 +357,7 @@ https://travel-nurse-intel.vercel.app`
 
 navigator.clipboard.writeText(text)
 
-alert("Your score message was copied. Paste it into a Facebook group or message!")
+alert("Score copied! Paste it into a Facebook group or message.")
 
 }
 
