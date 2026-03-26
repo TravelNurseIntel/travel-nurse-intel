@@ -47,7 +47,7 @@ Most Travel Nurses Are Underpaid by $3,000–$10,000 Per Contract
 Check Your Contract Pay Score in 30 Seconds
 </p>
 
-<!-- SCORE SECTION (placed high so mobile users see results immediately) -->
+<!-- SCORE -->
 
 <div id="scoreSection" class="hidden text-center mb-8">
 
@@ -75,13 +75,25 @@ Share My Contract Score
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-<input id="hourly" type="number" placeholder="Hourly Rate" class="p-3 border rounded">
+<div>
+<label class="text-sm text-gray-600">Hourly Rate</label>
+<input id="hourly" type="number" class="p-3 border rounded w-full">
+</div>
 
-<input id="hours" type="number" placeholder="Weekly Hours" class="p-3 border rounded">
+<div>
+<label class="text-sm text-gray-600">Weekly Hours</label>
+<input id="hours" type="number" class="p-3 border rounded w-full">
+</div>
 
-<input id="stipend" type="number" placeholder="Weekly Stipend" class="p-3 border rounded">
+<div>
+<label class="text-sm text-gray-600">Weekly Stipend</label>
+<input id="stipend" type="number" class="p-3 border rounded w-full">
+</div>
 
-<input id="rent" type="number" placeholder="Housing Cost" class="p-3 border rounded">
+<div>
+<label class="text-sm text-gray-600">Housing Cost</label>
+<input id="rent" type="number" class="p-3 border rounded w-full">
+</div>
 
 </div>
 
@@ -95,7 +107,7 @@ Free analysis • No signup required • Instant results
 
 </div>
 
-<!-- CONTRACT COMPARISON PANEL -->
+<!-- COMPARISON PANEL -->
 
 <div id="comparisonPanel" class="hidden mt-6 bg-white p-6 rounded-xl shadow text-center">
 
@@ -109,6 +121,44 @@ Travel Nurse Pay Comparison
 
 </div>
 
+<!-- PAY MAP (VIRAL FEATURE) -->
+
+<div class="mt-8 bg-white p-6 rounded-xl shadow">
+
+<h3 class="text-xl font-bold mb-4 text-center">
+Travel Nurse Pay Snapshot by State
+</h3>
+
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm text-center">
+
+<div class="bg-gray-50 p-3 rounded">
+<b>California</b><br>$3,100–$3,600
+</div>
+
+<div class="bg-gray-50 p-3 rounded">
+<b>Texas</b><br>$2,700–$3,200
+</div>
+
+<div class="bg-gray-50 p-3 rounded">
+<b>Florida</b><br>$2,600–$3,000
+</div>
+
+<div class="bg-gray-50 p-3 rounded">
+<b>New York</b><br>$3,000–$3,500
+</div>
+
+<div class="bg-gray-50 p-3 rounded">
+<b>Arizona</b><br>$2,800–$3,300
+</div>
+
+<div class="bg-gray-50 p-3 rounded">
+<b>Washington</b><br>$3,100–$3,600
+</div>
+
+</div>
+
+</div>
+
 <!-- EMAIL GATE -->
 
 <div id="emailGate" class="hidden mt-6 bg-white p-6 rounded-xl shadow">
@@ -117,11 +167,8 @@ Travel Nurse Pay Comparison
 Unlock Your Full Contract Intelligence Report
 </h3>
 
-<p class="text-gray-600 mb-4">
-See negotiation range, profit forecast, and recruiter margin insights.
-</p>
-
-<input id="email" type="email" placeholder="Enter your email" class="p-3 border rounded w-full">
+<input id="email" type="email" placeholder="Enter your email"
+class="p-3 border rounded w-full">
 
 <button onclick="unlockReport()" class="mt-3 w-full bg-black text-white p-3 rounded">
 Unlock Full Report
@@ -143,10 +190,6 @@ Full Contract Intelligence Report
 Unlock Full Report – $9.99
 </button>
 
-<p class="text-sm text-gray-500 mt-2 text-center">
-Secure payment via Stripe
-</p>
-
 </div>
 
 <!-- TAX PROTECTION -->
@@ -156,10 +199,6 @@ Secure payment via Stripe
 <h3 class="text-xl font-bold">
 Travel Nurse Tax & Compliance Protection
 </h3>
-
-<p class="text-gray-700 mt-2">
-Avoid costly IRS stipend mistakes and audit risks.
-</p>
 
 <ul class="mt-3 text-sm text-gray-600 list-disc ml-5">
 
@@ -180,7 +219,7 @@ Get Tax Protection – $49.99
 
 <div class="mt-10 text-xs text-gray-500 text-center max-w-xl mx-auto">
 
-<strong>Disclaimer:</strong> The calculations and contract analysis provided by this tool are estimates based on user-entered information and general market assumptions about travel nurse compensation. Results are provided for informational and educational purposes only and should not be interpreted as financial, legal, tax, or employment advice.
+<strong>Disclaimer:</strong> Results are estimates based on user inputs and market averages. This tool does not provide financial, legal, or tax advice.
 
 <p class="mt-2">
 <a href="/disclaimer.html" class="underline">View Full Legal Disclaimer</a>
@@ -190,7 +229,8 @@ Get Tax Protection – $49.99
 
 <footer class="text-center text-xs text-gray-500 mt-10">
 
-© 2026 Travel Nurse Intel™
+© 2026 Travel Nurse Intel™  
+All rights reserved.
 
 </footer>
 
@@ -227,71 +267,30 @@ scoreCircle.innerText = score
 if(score >= 90){
 scoreCircle.style.background="#16a34a"
 }
-
 else if(score >= 70){
 scoreCircle.style.background="#eab308"
 }
-
 else{
 scoreCircle.style.background="#dc2626"
 }
-
-let verdict="Average Pay"
-
-if(score<60) verdict="Below Market"
-if(score>80) verdict="Strong Contract"
-
-document.getElementById("verdict").innerText=verdict
-
-const lost=Math.max(0,marketAverage-weeklyPay)*13
-
-document.getElementById("lostIncome").innerText=
-"Potential lost income: $"+lost.toLocaleString()+" per contract"
 
 document.getElementById("scoreSection").classList.remove("hidden")
 
 document.getElementById("scoreSection").scrollIntoView({behavior:"smooth"})
 
-document.getElementById("emailGate").classList.remove("hidden")
-
 document.getElementById("comparisonPanel").classList.remove("hidden")
 
-let percentile=""
+document.getElementById("emailGate").classList.remove("hidden")
 
-if(weeklyPay < 2600){
-percentile="Your pay appears below ~40% of reported contracts."
-}
-else if(weeklyPay < 3000){
-percentile="Your pay appears around the middle of reported contracts."
-}
-else{
-percentile="Your contract appears higher than most reported offers."
-}
+document.getElementById("percentile").innerText =
+weeklyPay < 2600
+? "Your pay appears below many contracts."
+: weeklyPay < 3000
+? "Your pay appears around average."
+: "Your contract appears above average."
 
-document.getElementById("percentile").innerText=percentile
-
-document.getElementById("marketRange").innerText=
-"Typical travel nurse weekly pay ranges from $2,600–$3,200 depending on location and specialty."
-
-}
-
-function unlockReport(){
-
-const email=document.getElementById("email").value
-
-if(!email){
-alert("Enter email to unlock report")
-return
-}
-
-document.getElementById("emailGate").classList.add("hidden")
-document.getElementById("paidSection").classList.remove("hidden")
-
-document.getElementById("report").innerHTML=
-
-"<p><b>Your Weekly Pay:</b> $"+weeklyPay+"</p>"+
-"<p><b>Market Average:</b> $"+marketAverage+"</p>"+
-"<p class='mt-3'>Estimated 13-week difference: $"+((marketAverage-weeklyPay)*13)+"</p>"
+document.getElementById("marketRange").innerText =
+"Typical travel nurse pay ranges $2,600–$3,200 weekly."
 
 }
 
@@ -308,9 +307,23 @@ alert("Score copied! Share it in a travel nurse group.")
 
 }
 
+function unlockReport(){
+
+const email=document.getElementById("email").value
+
+if(!email){
+alert("Enter email")
+return
+}
+
+document.getElementById("emailGate").classList.add("hidden")
+document.getElementById("paidSection").classList.remove("hidden")
+
+}
+
 function taxProtection(){
 
-alert("Tax compliance protection will open after Stripe integration.")
+alert("Tax compliance protection will open after payment integration.")
 
 }
 
