@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Travel Nurse Contract Intelligence</title>
+<title>Travel Nurse Contract Analyzer</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -37,14 +37,47 @@ color:white;
 
 <div class="max-w-3xl mx-auto">
 
-<h1 class="text-3xl font-bold mb-2">
-Travel Nurse Contract Analyzer
+<!-- Headline -->
+
+<h1 class="text-4xl font-bold text-center mb-3">
+Most Travel Nurses Are Underpaid by $3,000–$10,000 Per Contract
 </h1>
 
-<p class="text-gray-600 mb-6">
-Check if your travel nurse contract is underpaid and see your potential profit.
+<p class="text-xl text-center text-gray-700 mb-2">
+Check Your Contract Pay Score in 30 Seconds
 </p>
 
+<p class="text-gray-600 text-center mb-6">
+Our analyzer estimates real market pay, negotiation range, and potential lost income.
+</p>
+
+<p class="text-center text-sm text-gray-500 mb-6">
+Used by travel nurses to quickly evaluate contract offers before accepting them.
+</p>
+
+<!-- Trust Block -->
+
+<div class="bg-blue-50 border border-blue-100 p-4 rounded-lg mb-6 text-center">
+
+<p class="font-semibold text-blue-900">
+Built specifically for travel nurses evaluating contract offers
+</p>
+
+<p class="text-sm text-blue-700">
+Estimate market pay, negotiation opportunities, and contract risk before accepting an assignment.
+</p>
+
+</div>
+
+<!-- Progress -->
+
+<p id="stepIndicator" class="text-sm text-gray-500 mb-2 text-center">
+Step 1 of 4
+</p>
+
+<div class="w-full bg-gray-200 rounded h-2 mb-6">
+<div id="progressBar" class="bg-blue-600 h-2 rounded" style="width:25%"></div>
+</div>
 
 <!-- Calculator -->
 
@@ -66,10 +99,13 @@ Check if your travel nurse contract is underpaid and see your potential profit.
 Analyze My Contract
 </button>
 
+<p class="text-center text-xs text-gray-500 mt-2">
+Free analysis • No signup required • Instant results
+</p>
+
 </div>
 
-
-<!-- Free Score -->
+<!-- Score -->
 
 <div id="scoreSection" class="hidden mt-8 text-center">
 
@@ -85,12 +121,23 @@ Your Contract Pay Score
 
 <p id="lostIncome" class="text-red-500"></p>
 
-<button onclick="shareScore()" class="mt-4 bg-gray-800 text-white px-4 py-2 rounded">
-Share My Score
+<button onclick="shareScore()" class="mt-4 bg-indigo-600 text-white px-5 py-2 rounded-lg">
+Share My Contract Score
 </button>
 
 </div>
 
+<!-- Risk Meter -->
+
+<div id="riskSection" class="hidden mt-6 text-center">
+
+<h3 class="font-bold text-lg">Contract Risk Meter</h3>
+
+<p id="riskLevel" class="text-xl font-semibold mt-2"></p>
+
+<p id="riskReason" class="text-gray-600 text-sm"></p>
+
+</div>
 
 <!-- Email Gate -->
 
@@ -101,7 +148,7 @@ Unlock Your Full Contract Intelligence Report
 </h3>
 
 <p class="text-gray-600 mb-4">
-See negotiation range, contract risk analysis, and profit forecast.
+See negotiation range, contract insights, and profit forecast.
 </p>
 
 <input id="email" type="email" placeholder="Enter your email" class="p-3 border rounded w-full">
@@ -111,7 +158,6 @@ Unlock Full Report
 </button>
 
 </div>
-
 
 <!-- Paid Report -->
 
@@ -124,7 +170,7 @@ Full Contract Intelligence Report
 <div id="report"></div>
 
 <button class="mt-6 w-full bg-green-600 text-white p-3 rounded">
-Unlock Full Report � $9.99
+Unlock Full Report – $9.99
 </button>
 
 <p class="text-sm text-gray-500 mt-2 text-center">
@@ -132,7 +178,6 @@ Secure payment via Stripe
 </p>
 
 </div>
-
 
 <!-- Tax Protection -->
 
@@ -155,113 +200,144 @@ Avoid costly IRS stipend mistakes and audit risks.
 
 </ul>
 
-<button class="mt-4 w-full bg-yellow-600 text-white p-3 rounded">
-Get Tax Protection � $49.99
+<button onclick="taxProtection()" class="mt-4 w-full bg-yellow-600 text-white p-3 rounded">
+Get Tax Protection – $49.99
 </button>
 
 </div>
 
+<!-- How Tool Works -->
+
+<div class="mt-8 bg-gray-50 p-4 rounded text-sm text-gray-600">
+
+<b>How This Tool Works</b>
+
+<p class="mt-2">
+The contract score uses estimated market pay ranges and travel nurse compensation patterns to highlight negotiation opportunities and risk factors.
+</p>
+
+</div>
 
 <!-- Short Disclaimer -->
 
 <div class="mt-10 text-xs text-gray-500 text-center">
 
-Disclaimer: The calculations and contract analysis provided by this tool are estimates based on user-entered information and general market data. Results are for informational and educational purposes only and should not be considered financial, legal, tax, or professional advice. Always consult a qualified professional before making employment or tax decisions.
+Disclaimer: Results are estimates based on market averages and user inputs. This tool does not provide legal, financial, or tax advice.
 
 </div>
 
+<!-- Copyright -->
 
-<!-- Full Disclaimer -->
+<footer class="text-center text-xs text-gray-500 mt-10">
 
-<div class="mt-8 text-xs text-gray-500">
+© 2026 Travel Nurse Intel™  
+All rights reserved.
 
-<h4 class="font-bold mb-2">Full Disclaimer</h4>
-
-<p>
-The information, tools, and calculations provided on this website are intended for informational and educational purposes only.
-</p>
-
-<p class="mt-2">
-TravelNurseIntel.com provides contract analysis tools and salary estimates based on general market data and user inputs.
-</p>
-
-<p class="mt-2">
-We do not guarantee accuracy or completeness of any results.
-</p>
-
-<p class="mt-2">
-Nothing on this site should be interpreted as financial, legal, or tax advice.
-</p>
-
-<p class="mt-2">
-Users should consult qualified professionals before making employment or financial decisions.
-</p>
+</footer>
 
 </div>
-
-</div>
-
 
 <script>
 
-let weeklyPay=0
-let marketAverage=2850
-
+let weeklyPay = 0
+let marketAverage = 2850
 
 function analyze(){
 
-const hourly=parseFloat(hourly.value)||0
-const hours=parseFloat(hours.value)||0
-const stipend=parseFloat(stipend.value)||0
-const rent=parseFloat(rent.value)||0
+const hourly = parseFloat(document.getElementById("hourly").value) || 0
+const hours = parseFloat(document.getElementById("hours").value) || 0
+const stipend = parseFloat(document.getElementById("stipend").value) || 0
+const rent = parseFloat(document.getElementById("rent").value) || 0
 
-weeklyPay=(hourly*hours)+stipend
+weeklyPay = (hourly * hours) + stipend
 
-const diff=weeklyPay-marketAverage
+const diff = weeklyPay - marketAverage
 
-let score=60
+let score = 60
 
-if(diff>=300) score=95
-else if(diff>=100) score=85
-else if(diff>=-100) score=75
-else if(diff>=-300) score=60
-else score=45
+if(diff >= 300) score = 95
+else if(diff >= 100) score = 85
+else if(diff >= -100) score = 75
+else if(diff >= -300) score = 60
+else score = 45
 
-scoreCircle.innerText=score
+document.getElementById("scoreCircle").innerText = score
 
-let verdict="Average Pay"
+let verdict = "Average Pay"
 
-if(score<60) verdict="Below Market"
-if(score>80) verdict="Strong Contract"
+if(score < 60) verdict = "Below Market"
+if(score > 80) verdict = "Strong Contract"
 
-document.getElementById("verdict").innerText=verdict
+document.getElementById("verdict").innerText = verdict
 
-const lost=Math.max(0,marketAverage-weeklyPay)*13
+const lost = Math.max(0, marketAverage - weeklyPay) * 13
 
-lostIncome.innerText="Potential lost income: $"+lost.toLocaleString()+" per contract"
+document.getElementById("lostIncome").innerText =
+"Potential lost income: $" + lost.toLocaleString() + " per contract"
 
-scoreSection.classList.remove("hidden")
-emailGate.classList.remove("hidden")
+document.getElementById("scoreSection").classList.remove("hidden")
+document.getElementById("emailGate").classList.remove("hidden")
+
+document.getElementById("progressBar").style.width="100%"
+document.getElementById("stepIndicator").innerText="Analysis Complete"
+
+let risk="Low"
+let reason="Your contract appears financially balanced."
+
+if(weeklyPay < marketAverage){
+risk="Moderate"
+reason="Your weekly pay appears below current market averages."
+}
+
+if(rent > stipend){
+risk="High"
+reason="Housing costs exceed your stipend."
+}
+
+document.getElementById("riskLevel").innerText = "Risk Level: " + risk
+document.getElementById("riskReason").innerText = reason
+document.getElementById("riskSection").classList.remove("hidden")
 
 }
 
-
 function unlockReport(){
 
-const email=document.getElementById("email").value
+const email = document.getElementById("email").value
 
 if(!email){
 alert("Enter email to unlock report")
 return
 }
 
-emailGate.classList.add("hidden")
-paidSection.classList.remove("hidden")
+document.getElementById("emailGate").classList.add("hidden")
+document.getElementById("paidSection").classList.remove("hidden")
 
-const negotiationLow=marketAverage-50
-const negotiationHigh=marketAverage+200
+const negotiationLow = marketAverage - 50
+const negotiationHigh = marketAverage + 200
 
-report.innerHTML=`
+let insight1=""
+let insight2=""
+let insight3=""
+
+const percentDiff = Math.round(((weeklyPay - marketAverage) / marketAverage) * 100)
+
+if(percentDiff < -5){
+insight1 = "Your contract appears significantly below market pay."
+}
+
+else if(percentDiff < 5){
+insight1 = "Your contract is roughly in line with market averages."
+}
+
+else{
+insight1 = "Your contract appears above average compared to similar offers."
+}
+
+insight2 = "Recruiters often have $150–$350 weekly negotiation flexibility."
+
+insight3 = "Evaluate stipends, housing costs, and tax compliance when comparing contracts."
+
+document.getElementById("report").innerHTML = `
 
 <p><b>Your Weekly Pay:</b> $${weeklyPay}</p>
 
@@ -269,26 +345,54 @@ report.innerHTML=`
 
 <p class="mt-3 text-red-500">
 Suggested Negotiation Range:
-$${negotiationLow} � $${negotiationHigh}
+$${negotiationLow} – $${negotiationHigh}
 </p>
 
 <p class="mt-3">
 Estimated 13-Week Profit Difference:
-$${(marketAverage-weeklyPay)*13}
+$${(marketAverage - weeklyPay) * 13}
 </p>
+
+<div class="mt-5 bg-gray-50 p-4 rounded">
+
+<b>Insight Summary</b>
+
+<ul class="list-disc ml-5 mt-2">
+
+<li>${insight1}</li>
+<li>${insight2}</li>
+<li>${insight3}</li>
+
+</ul>
+
+</div>
 
 `
 
 }
 
-
 function shareScore(){
 
-const text="I checked my Travel Nurse Contract Score using this analyzer."
+const score = document.getElementById("scoreCircle").innerText
+const lost = document.getElementById("lostIncome").innerText
 
-navigator.clipboard.writeText(window.location.href)
+const text =
+`My travel nurse contract score was ${score}/100.
 
-alert("Link copied. Share it with other nurses!")
+${lost}
+
+Check your contract here:
+https://travel-nurse-intel.vercel.app`
+
+navigator.clipboard.writeText(text)
+
+alert("Your score message was copied. Paste it into a Facebook group or message!")
+
+}
+
+function taxProtection(){
+
+alert("Tax Compliance Protection will open after payment integration.")
 
 }
 
