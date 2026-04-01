@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Thank You – Travel Nurse Intel</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-50 p-6">
+
+<!-- NAVIGATION RIBBON -->
+
+<div class="bg-white border-b shadow-sm mb-6">
+<div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-4 text-sm p-3">
+
+<a href="/" class="text-blue-600 hover:underline font-semibold">
+Contract Analyzer
+</a>
+
+<a href="/highest-paying-travel-nurse-states.html" class="text-gray-700 hover:underline">
+Highest Paying States
+</a>
+
+<a href="/travel-nurse-pay-by-specialty.html" class="text-gray-700 hover:underline">
+Pay by Specialty
+</a>
+
+<a href="/travel-nurse-pay-transparency.html" class="text-gray-700 hover:underline">
+Pay Transparency
+</a>
+
+<a href="/travel-nurse-salary-database.html" class="text-gray-700 hover:underline">
+Salary Database
+</a>
+
+<a href="/travel-nurse-tax-free-stipend-guide.html" class="text-gray-700 hover:underline">
+Tax Guide
+</a>
+
+</div>
+</div>
+
+<div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow text-center">
+
+<h1 class="text-3xl font-bold mb-4 text-green-600">
+Payment Successful
+</h1>
+
+<p class="text-gray-700 mb-6">
+Thank you for purchasing the Travel Nurse Contract Intelligence Report.
+</p>
+
+<p class="text-gray-700 mb-6">
+Use the contract analyzer below to review your pay package and estimate whether your contract is above or below current market rates.
+</p>
+
+<a href="/" class="bg-blue-600 text-white px-6 py-3 rounded-lg inline-block mb-6">
+Open Contract Analyzer
+</a>
+
+<hr class="my-8">
+
+<h2 class="text-xl font-bold mb-4">
+Want to Increase Your Travel Nurse Pay Even More?
+</h2>
+
+<p class="text-gray-600 mb-6">
+Many travel nurses lose thousands per contract because they don’t know how to negotiate recruiter margins or stipend structures.
+</p>
+
+<a href="YOUR_STRIPE_LINK_19_99"
+target="_blank"
+class="bg-green-600 text-white px-6 py-3 rounded-lg inline-block mb-4">
+Get the Negotiation Toolkit – $19.99
+</a>
+
+<p class="text-gray-500 text-sm mb-6">
+Step-by-step scripts and negotiation strategies used by experienced travel nurses.
+</p>
+
+<hr class="my-8">
+
+<h2 class="text-xl font-bold mb-4">
+Protect Your Tax-Free Stipends
+</h2>
+
+<p class="text-gray-600 mb-6">
+Travel nurses receiving housing and meal stipends must meet specific IRS rules. Understanding these rules helps avoid tax penalties.
+</p>
+
+<a href="YOUR_STRIPE_LINK_49_99"
+target="_blank"
+class="bg-yellow-600 text-white px-6 py-3 rounded-lg inline-block mb-4">
+Get Tax Compliance Protection – $49.99
+</a>
+
+<p class="text-gray-500 text-sm">
+Includes tax home guidance, audit risk indicators, and documentation checklist.
+</p>
+
+</div>
+
+<footer class="text-center text-xs text-gray-500 mt-10">
+
+<p>
+Travel Nurse Intel™<br>
+A registered fictitious name of Kingdom Come™, LLC
+</p>
+
+<p class="mt-2">
+© 2026 All rights reserved.
+</p>
+
+<p class="mt-2">
+<a href="/privacy.html" class="underline">Privacy Policy</a> •
+<a href="/terms.html" class="underline">Terms of Service</a> •
+<a href="/disclaimer.html" class="underline">Disclaimer</a>
+</p>
+
+</footer>
+
+</body>
+</html>
