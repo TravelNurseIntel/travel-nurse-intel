@@ -26,36 +26,24 @@
 
 <div class="flex flex-wrap justify-center gap-4 text-sm">
 
-<a href="/" class="text-blue-600 hover:underline font-semibold">
-Contract Analyzer
-</a>
+<a href="/" class="text-blue-600 hover:underline font-semibold">Contract Analyzer</a>
 
-<a href="/highest-paying-travel-nurse-contracts.html" class="text-gray-700 hover:underline">
-Highest Paying Contracts
-</a>
+<a href="/highest-paying-travel-nurse-contracts.html" class="text-gray-700 hover:underline">Highest Paying Contracts</a>
 
-<a href="/travel-nurse-pay-by-specialty.html" class="text-gray-700 hover:underline">
-Pay by Specialty
-</a>
+<a href="/travel-nurse-pay-by-specialty.html" class="text-gray-700 hover:underline">Pay by Specialty</a>
 
-<a href="/travel-nurse-pay-transparency.html" class="text-gray-700 hover:underline">
-Pay Transparency
-</a>
+<a href="/travel-nurse-pay-transparency.html" class="text-gray-700 hover:underline">Pay Transparency</a>
 
-<a href="/travel-nurse-salary-database.html" class="text-gray-700 hover:underline">
-Salary Database
-</a>
+<a href="/travel-nurse-salary-database.html" class="text-gray-700 hover:underline">Salary Database</a>
 
-<a href="/travel-nurse-tax-free-stipend-guide.html" class="text-gray-700 hover:underline">
-Tax Guide
-</a>
+<a href="/travel-nurse-tax-free-stipend-guide.html" class="text-gray-700 hover:underline">Tax Guide</a>
 
 </div>
 
 </div>
 </div>
 
-<!-- PAGE CONTENT -->
+<!-- MAIN CONTENT -->
 
 <div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
 
@@ -67,7 +55,7 @@ Highest Paying Travel Nurse Contracts This Week
 These example high-paying travel nurse contracts reflect typical market ranges across major U.S. hospitals and specialties.
 </p>
 
-<!-- CONTRACT TABLE -->
+<!-- STATIC MARKET TABLE -->
 
 <table class="w-full border border-gray-300 text-sm mb-10 border-collapse">
 
@@ -109,6 +97,55 @@ These example high-paying travel nurse contracts reflect typical market ranges a
 
 </table>
 
+<!-- RECENT CONTRACTS TABLE -->
+
+<h2 class="text-2xl font-bold mt-12 mb-4 text-center">
+Recent Travel Nurse Contracts Submitted
+</h2>
+
+<p class="text-gray-600 text-center mb-6">
+Anonymous travel nurses have submitted recent contract pay packages.
+</p>
+
+<table class="w-full border border-gray-300 text-sm mb-10 border-collapse">
+
+<thead>
+
+<tr class="border-b bg-gray-100">
+<th class="p-2 text-left">City</th>
+<th class="p-2 text-left">Specialty</th>
+<th class="p-2 text-left">Weekly Pay</th>
+<th class="p-2 text-left">Score</th>
+</tr>
+
+</thead>
+
+<tbody id="contractsTable"></tbody>
+
+</table>
+
+<!-- SUBMISSION FORM -->
+
+<h3 class="text-xl font-bold mt-10 mb-3 text-center">
+Submit Your Contract Pay (Anonymous)
+</h3>
+
+<form id="contractForm" class="grid grid-cols-2 gap-4 mb-10 max-w-xl mx-auto">
+
+<input id="city" type="text" placeholder="City" required class="p-2 border rounded">
+
+<input id="specialty" type="text" placeholder="Specialty" required class="p-2 border rounded">
+
+<input id="pay" type="number" placeholder="Weekly Pay" required class="p-2 border rounded">
+
+<input id="hospital" type="text" placeholder="Hospital (optional)" class="p-2 border rounded">
+
+<button class="col-span-2 bg-blue-600 text-white p-3 rounded">
+Submit Contract Pay
+</button>
+
+</form>
+
 <!-- ANALYZER CTA -->
 
 <div class="text-center mb-10">
@@ -127,7 +164,7 @@ Analyze My Travel Nurse Contract
 
 </div>
 
-<!-- REPORT MONETIZATION -->
+<!-- STRIPE MONETIZATION -->
 
 <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 text-center">
 
@@ -136,7 +173,7 @@ Unlock Your Full Contract Intelligence Report
 </h2>
 
 <p class="text-gray-700 mb-4">
-Get a deeper breakdown of your travel nurse contract including pay comparison, recruiter margin insights, and estimated lost income per contract.
+Get deeper pay comparison data, recruiter margin insights, and estimated lost income.
 </p>
 
 <a href="https://buy.stripe.com/dRm14pfhUfUD5EQ32q3Je00"
@@ -145,23 +182,7 @@ class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg inline-bloc
 Unlock Full Report – $9.99
 </a>
 
-<p class="text-xs text-gray-500 mt-3">
-Instant access after secure checkout.
-</p>
-
 </div>
-
-<!-- DISCLAIMER -->
-
-<p class="text-xs text-gray-500 mt-10">
-Disclaimer: Travel nurse compensation ranges and contract examples are based on aggregated market data and publicly available salary information. Actual contract pay may vary depending on hospital system, staffing agency, specialty demand, geographic location, experience level, shift differentials, and contract structure. This information is provided for educational and informational purposes only and should not be interpreted as financial, tax, legal, or employment advice.
-</p>
-
-<p class="mt-4">
-<a href="/" class="text-blue-600 underline">
-Return to Contract Analyzer
-</a>
-</p>
 
 </div>
 
@@ -175,10 +196,7 @@ A registered fictitious name of Kingdom Come™, LLC
 </p>
 
 <p class="mt-1">
-Support:
-<a href="mailto:support@travelnurseintel.com" class="underline">
-support@travelnurseintel.com
-</a>
+Support: <a href="mailto:support@travelnurseintel.com" class="underline">support@travelnurseintel.com</a>
 </p>
 
 <p class="mt-2">
@@ -194,6 +212,67 @@ support@travelnurseintel.com
 
 </footer>
 
+<!-- DYNAMIC TABLE SCRIPT -->
+
+<script>
+
+const table=document.getElementById("contractsTable")
+
+function calculateScore(pay){
+
+if(pay>=3500) return 90
+if(pay>=3200) return 80
+if(pay>=3000) return 70
+if(pay>=2800) return 60
+return 50
+
+}
+
+function renderContracts(){
+
+table.innerHTML=""
+
+const contracts=JSON.parse(localStorage.getItem("contracts")||"[]")
+
+contracts.forEach(c=>{
+
+const score=calculateScore(c.pay)
+
+table.innerHTML+=`
+<tr class="border-b">
+<td class="p-2">${c.city}</td>
+<td class="p-2">${c.specialty}</td>
+<td class="p-2">$${c.pay}</td>
+<td class="p-2 font-semibold">${score}</td>
+</tr>`
+
+})
+
+}
+
+document.getElementById("contractForm").addEventListener("submit",function(e){
+
+e.preventDefault()
+
+const city=document.getElementById("city").value
+const specialty=document.getElementById("specialty").value
+const pay=document.getElementById("pay").value
+
+const contracts=JSON.parse(localStorage.getItem("contracts")||"[]")
+
+contracts.unshift({city,specialty,pay})
+
+localStorage.setItem("contracts",JSON.stringify(contracts))
+
+renderContracts()
+
+this.reset()
+
+})
+
+renderContracts()
+
+</script>
+
 </body>
 </html>
-
