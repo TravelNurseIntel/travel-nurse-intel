@@ -14,10 +14,17 @@
 
 <body class="bg-gray-50 p-6">
 
-<!-- NAVIGATION RIBBON -->
+<!-- HEADER -->
 
 <div class="bg-white border-b shadow-sm mb-6">
-<div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-4 text-sm p-3">
+
+<div class="max-w-5xl mx-auto flex flex-col items-center p-4">
+
+<a href="/">
+<img src="/logo.png" alt="Travel Nurse Intel Logo" class="h-12 mb-3">
+</a>
+
+<div class="flex flex-wrap justify-center gap-4 text-sm">
 
 <a href="/" class="text-blue-600 hover:underline font-semibold">
 Contract Analyzer
@@ -44,6 +51,9 @@ Tax Guide
 </a>
 
 </div>
+
+</div>
+
 </div>
 
 <!-- PAGE CONTENT -->
@@ -75,89 +85,91 @@ Why Pay Transparency Matters
 </h2>
 
 <p class="text-gray-700 mb-6">
-Travel nurse agencies and hospitals often negotiate contracts individually, which means compensation may vary significantly between similar assignments. Transparent salary data helps nurses negotiate stronger contracts and avoid underpaid assignments.
+Travel nurse agencies and hospitals often negotiate contracts individually, which means compensation may vary significantly between similar assignments.
 </p>
-
-<!-- VIRAL FEATURE INTRO -->
 
 <p class="text-green-700 font-semibold mb-6">
 Compare your travel nurse contract pay with real contracts submitted by other nurses.
 </p>
 
-<!-- RECENT CONTRACT SCORES -->
+<!-- CONTRACT TABLE -->
 
-<h2 class="text-xl font-bold mt-10 mb-4">
-Recent Travel Nurse Contract Scores
+<div class="mt-12 bg-white p-6 rounded-xl shadow">
+
+<h2 class="text-xl font-bold mb-4">
+Recent Travel Nurse Contracts Submitted
 </h2>
 
-<table class="w-full border text-sm mb-8">
+<table class="w-full border border-gray-300 text-sm mb-6 border-collapse">
+
+<thead>
 
 <tr class="border-b bg-gray-100">
-<th class="p-2">City</th>
-<th class="p-2">Specialty</th>
-<th class="p-2">Weekly Pay</th>
-<th class="p-2">Contract Score</th>
+<th class="p-2 text-left">City</th>
+<th class="p-2 text-left">Specialty</th>
+<th class="p-2 text-left">Weekly Pay</th>
+<th class="p-2 text-left">Contract Score</th>
 </tr>
 
-<tr class="border-b">
+</thead>
+
+<tbody id="contractsTable">
+
+<tr>
 <td class="p-2">Seattle</td>
 <td class="p-2">ICU</td>
 <td class="p-2">$3,600</td>
 <td class="p-2 text-green-600 font-semibold">91</td>
 </tr>
 
-<tr class="border-b">
+<tr>
 <td class="p-2">Phoenix</td>
 <td class="p-2">ER</td>
 <td class="p-2">$3,150</td>
 <td class="p-2 text-yellow-600 font-semibold">72</td>
 </tr>
 
-<tr class="border-b">
+<tr>
 <td class="p-2">Boston</td>
 <td class="p-2">Labor & Delivery</td>
 <td class="p-2">$3,420</td>
 <td class="p-2 text-green-600 font-semibold">85</td>
 </tr>
 
-<tr class="border-b">
-<td class="p-2">Chicago</td>
-<td class="p-2">Telemetry</td>
-<td class="p-2">$2,980</td>
-<td class="p-2 text-red-600 font-semibold">58</td>
-</tr>
+</tbody>
 
 </table>
 
-<!-- SUBMIT CONTRACT FORM -->
-
-<h2 class="text-xl font-bold mt-10 mb-3">
+<h3 class="text-lg font-bold mb-3">
 Submit Your Contract Pay (Anonymous)
-</h2>
+</h3>
 
-<p class="text-gray-600 mb-4">
-Help other travel nurses understand current market pay.
-</p>
+<form id="contractForm" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
 
-<form class="grid grid-cols-2 gap-4 mb-6">
+<input id="city" type="text" placeholder="City"
+class="p-3 border rounded w-full">
 
-<input type="text" placeholder="City" class="p-2 border rounded">
+<input id="specialty" type="text" placeholder="Specialty"
+class="p-3 border rounded w-full">
 
-<input type="text" placeholder="Specialty" class="p-2 border rounded">
+<input id="weeklyPay" type="number" placeholder="Weekly Pay"
+class="p-3 border rounded w-full">
 
-<input type="number" placeholder="Weekly Pay" class="p-2 border rounded">
+<input id="hospital" type="text" placeholder="Hospital (optional)"
+class="p-3 border rounded w-full">
 
-<input type="text" placeholder="Hospital (optional)" class="p-2 border rounded">
-
-<button type="button" class="col-span-2 bg-blue-600 text-white p-3 rounded">
+<button type="submit"
+class="col-span-1 md:col-span-2 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg">
 Submit Contract Pay
 </button>
 
 </form>
 
-<!-- CONTRACT ANALYZER CTA -->
+</div>
 
-<div class="text-center">
+<!-- CTA -->
+
+<div class="text-center mt-8">
 
 <h2 class="text-xl font-bold mb-3">
 Check Your Travel Nurse Contract Pay
@@ -176,13 +188,7 @@ Analyze My Travel Nurse Contract
 <!-- DISCLAIMER -->
 
 <p class="text-xs text-gray-500 mt-6">
-Disclaimer: Compensation ranges shown are general estimates based on travel nurse market trends and publicly available compensation data. Actual contract pay may vary depending on hospital system, staffing agency, specialty demand, geographic location, and contract structure. This information is provided for educational and informational purposes only and should not be interpreted as financial, tax, legal, or employment advice. Users should consult qualified professionals including tax advisors, financial advisors, or legal professionals before making decisions related to employment contracts, compensation, or tax matters.
-</p>
-
-<p class="mt-4">
-<a href="/" class="text-blue-600 underline">
-Return to Contract Analyzer
-</a>
+Disclaimer: Compensation ranges shown are general estimates based on travel nurse market trends and publicly available compensation data. Actual contract pay may vary depending on hospital system, staffing agency, specialty demand, geographic location, and contract structure.
 </p>
 
 </div>
@@ -196,6 +202,13 @@ Travel Nurse Intel™<br>
 A registered fictitious name of Kingdom Come™, LLC
 </p>
 
+<p class="mt-1">
+Support:
+<a href="mailto:support@travelnurseintel.com" class="underline">
+support@travelnurseintel.com
+</a>
+</p>
+
 <p class="mt-2">
 © 2026 All rights reserved.
 </p>
@@ -203,10 +216,60 @@ A registered fictitious name of Kingdom Come™, LLC
 <p class="mt-2">
 <a href="/privacy.html" class="underline">Privacy Policy</a> •
 <a href="/terms.html" class="underline">Terms of Service</a> •
+<a href="/refund-policy.html" class="underline">Refund Policy</a> •
 <a href="/disclaimer.html" class="underline">Disclaimer</a>
 </p>
 
 </footer>
+
+<!-- CONTRACT SUBMISSION SCRIPT -->
+
+<script>
+
+const marketAverage = 2850
+
+document.getElementById("contractForm").addEventListener("submit", function(e){
+
+e.preventDefault()
+
+const city = document.getElementById("city").value
+const specialty = document.getElementById("specialty").value
+const weeklyPay = parseFloat(document.getElementById("weeklyPay").value)
+
+if(!city || !specialty || !weeklyPay){
+alert("Please complete all fields")
+return
+}
+
+let score = 60
+const diff = weeklyPay - marketAverage
+
+if(diff >= 300) score = 95
+else if(diff >= 100) score = 85
+else if(diff >= -100) score = 75
+else if(diff >= -300) score = 60
+else score = 45
+
+let scoreColor="text-red-600"
+if(score >= 90) scoreColor="text-green-600"
+else if(score >= 70) scoreColor="text-yellow-600"
+
+const row=document.createElement("tr")
+
+row.innerHTML = `
+<td class="p-2">${city}</td>
+<td class="p-2">${specialty}</td>
+<td class="p-2">$${weeklyPay}</td>
+<td class="p-2 ${scoreColor} font-semibold">${score}</td>
+`
+
+document.getElementById("contractsTable").prepend(row)
+
+document.getElementById("contractForm").reset()
+
+})
+
+</script>
 
 </body>
 </html>
