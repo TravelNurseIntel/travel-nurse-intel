@@ -8,6 +8,8 @@
 
 <title>Travel Nurse Pay Transparency (2026)</title>
 
+<meta name="description" content="Compare travel nurse contract pay with real salary submissions from other travel nurses. Discover whether your contract pay is competitive.">
+
 <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
@@ -16,7 +18,7 @@
 
 <!-- HEADER -->
 
-<div class="bg-white border-b shadow-sm mb-6">
+<header class="bg-white border-b shadow-sm mb-6">
 
 <div class="max-w-5xl mx-auto flex flex-col items-center p-4">
 
@@ -24,41 +26,29 @@
 <img src="/logo.png" alt="Travel Nurse Intel Logo" class="h-12 mb-3">
 </a>
 
-<div class="flex flex-wrap justify-center gap-4 text-sm">
+<nav class="flex flex-wrap justify-center gap-4 text-sm">
 
-<a href="/" class="text-blue-600 hover:underline font-semibold">
-Contract Analyzer
-</a>
+<a href="/" class="text-blue-600 hover:underline font-semibold">Contract Analyzer</a>
 
-<a href="/highest-paying-travel-nurse-states.html" class="text-gray-700 hover:underline">
-Highest Paying States
-</a>
+<a href="/highest-paying-travel-nurse-states.html" class="text-gray-700 hover:underline">Highest Paying States</a>
 
-<a href="/travel-nurse-pay-by-specialty.html" class="text-gray-700 hover:underline">
-Pay by Specialty
-</a>
+<a href="/travel-nurse-pay-by-specialty.html" class="text-gray-700 hover:underline">Pay by Specialty</a>
 
-<a href="/travel-nurse-pay-transparency.html" class="text-gray-700 hover:underline">
-Pay Transparency
-</a>
+<a href="/travel-nurse-pay-transparency.html" class="text-gray-700 hover:underline">Pay Transparency</a>
 
-<a href="/travel-nurse-salary-database.html" class="text-gray-700 hover:underline">
-Salary Database
-</a>
+<a href="/travel-nurse-salary-database.html" class="text-gray-700 hover:underline">Salary Database</a>
 
-<a href="/travel-nurse-tax-free-stipend-guide.html" class="text-gray-700 hover:underline">
-Tax Guide
-</a>
+<a href="/travel-nurse-tax-free-stipend-guide.html" class="text-gray-700 hover:underline">Tax Guide</a>
+
+</nav>
 
 </div>
 
-</div>
+</header>
 
-</div>
+<!-- MAIN CONTENT -->
 
-<!-- PAGE CONTENT -->
-
-<div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
+<main class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
 
 <h1 class="text-3xl font-bold mb-4">
 Travel Nurse Pay Transparency (2026)
@@ -73,11 +63,9 @@ Typical Travel Nurse Weekly Pay Ranges
 </h2>
 
 <ul class="list-disc ml-6 text-gray-700 mb-6">
-
 <li>$2,600 – $3,000/week (average contracts)</li>
 <li>$3,000 – $3,500/week (high-demand regions)</li>
 <li>$3,500 – $4,000+/week (critical shortage specialties)</li>
-
 </ul>
 
 <h2 class="text-xl font-bold mb-3">
@@ -88,88 +76,62 @@ Why Pay Transparency Matters
 Travel nurse agencies and hospitals often negotiate contracts individually, which means compensation may vary significantly between similar assignments.
 </p>
 
-<p class="text-green-700 font-semibold mb-6">
+<p class="text-green-700 font-semibold mb-6 text-center">
 Compare your travel nurse contract pay with real contracts submitted by other nurses.
 </p>
 
-<!-- CONTRACT TABLE -->
+<!-- DYNAMIC CONTRACT TABLE -->
 
-<div class="mt-12 bg-white p-6 rounded-xl shadow">
-
-<h2 class="text-xl font-bold mb-4">
+<h2 class="text-2xl font-bold mt-12 mb-4 text-center">
 Recent Travel Nurse Contracts Submitted
 </h2>
 
-<table class="w-full border border-gray-300 text-sm mb-6 border-collapse">
+<table class="w-full border border-gray-300 text-sm mb-10 border-collapse">
 
-<thead>
-
-<tr class="border-b bg-gray-100">
+<thead class="bg-gray-100">
+<tr>
 <th class="p-2 text-left">City</th>
 <th class="p-2 text-left">Specialty</th>
 <th class="p-2 text-left">Weekly Pay</th>
 <th class="p-2 text-left">Contract Score</th>
 </tr>
-
 </thead>
 
 <tbody id="contractsTable">
-
-<tr>
-<td class="p-2">Seattle</td>
-<td class="p-2">ICU</td>
-<td class="p-2">$3,600</td>
-<td class="p-2 text-green-600 font-semibold">91</td>
-</tr>
-
-<tr>
-<td class="p-2">Phoenix</td>
-<td class="p-2">ER</td>
-<td class="p-2">$3,150</td>
-<td class="p-2 text-yellow-600 font-semibold">72</td>
-</tr>
-
-<tr>
-<td class="p-2">Boston</td>
-<td class="p-2">Labor & Delivery</td>
-<td class="p-2">$3,420</td>
-<td class="p-2 text-green-600 font-semibold">85</td>
-</tr>
 
 </tbody>
 
 </table>
 
-<h3 class="text-lg font-bold mb-3">
+<!-- SUBMIT CONTRACT -->
+
+<h3 class="text-xl font-bold mt-10 mb-3 text-center">
 Submit Your Contract Pay (Anonymous)
 </h3>
 
-<form id="contractForm" class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+<p class="text-gray-600 text-center mb-4">
+Help other travel nurses understand current market pay.
+</p>
 
-<input id="city" type="text" placeholder="City"
-class="p-3 border rounded w-full">
+<form id="contractForm" class="grid grid-cols-2 gap-4 mb-10 max-w-xl mx-auto">
 
-<input id="specialty" type="text" placeholder="Specialty"
-class="p-3 border rounded w-full">
+<input name="city" type="text" placeholder="City" required class="p-2 border rounded">
 
-<input id="weeklyPay" type="number" placeholder="Weekly Pay"
-class="p-3 border rounded w-full">
+<input name="specialty" type="text" placeholder="Specialty" required class="p-2 border rounded">
 
-<input id="hospital" type="text" placeholder="Hospital (optional)"
-class="p-3 border rounded w-full">
+<input name="pay" type="number" placeholder="Weekly Pay" required class="p-2 border rounded">
 
-<button type="submit"
-class="col-span-1 md:col-span-2 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg">
+<input type="text" placeholder="Hospital (optional)" class="p-2 border rounded">
+
+<button class="col-span-2 bg-blue-600 text-white p-3 rounded hover:bg-blue-700">
 Submit Contract Pay
 </button>
 
 </form>
 
-</div>
+<!-- ANALYZER CTA -->
 
-<!-- CTA -->
-
-<div class="text-center mt-8">
+<div class="text-center">
 
 <h2 class="text-xl font-bold mb-3">
 Check Your Travel Nurse Contract Pay
@@ -185,13 +147,47 @@ Analyze My Travel Nurse Contract
 
 </div>
 
+<!-- STRIPE PRODUCTS -->
+
+<section class="text-center mt-10">
+
+<h2 class="text-xl font-bold mb-4">
+Advanced Travel Nurse Tools
+</h2>
+
+<div class="flex flex-col md:flex-row justify-center gap-4">
+
+<a href="https://buy.stripe.com/dRm14pfhUfUD5EQ32q3Je00"
+class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700">
+Contract Intelligence Report – $9.99
+</a>
+
+<a href="https://buy.stripe.com/00wfZj4Dg37R5EQ46u3Je03"
+class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+Negotiation Toolkit – $19.99
+</a>
+
+<a href="https://buy.stripe.com/eVqbJ3d9MfUD7MYfPc3Je02"
+class="bg-yellow-600 text-white px-6 py-3 rounded-lg hover:bg-yellow-700">
+Tax Compliance Protection – $49.99
+</a>
+
+<a href="https://buy.stripe.com/5kQ6oJc5IfUDebm32q3Je01"
+class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700">
+Pro Plan – $29.99/month
+</a>
+
+</div>
+
+</section>
+
 <!-- DISCLAIMER -->
 
-<p class="text-xs text-gray-500 mt-6">
+<p class="text-xs text-gray-500 mt-10">
 Disclaimer: Compensation ranges shown are general estimates based on travel nurse market trends and publicly available compensation data. Actual contract pay may vary depending on hospital system, staffing agency, specialty demand, geographic location, and contract structure.
 </p>
 
-</div>
+</main>
 
 <!-- FOOTER -->
 
@@ -222,52 +218,64 @@ support@travelnurseintel.com
 
 </footer>
 
-<!-- CONTRACT SUBMISSION SCRIPT -->
+<!-- DATABASE SCRIPT -->
 
 <script>
 
-const marketAverage = 2850
+async function loadContracts(){
 
-document.getElementById("contractForm").addEventListener("submit", function(e){
+const response = await fetch("/api/contracts")
+const data = await response.json()
 
-e.preventDefault()
+const table = document.getElementById("contractsTable")
+table.innerHTML=""
 
-const city = document.getElementById("city").value
-const specialty = document.getElementById("specialty").value
-const weeklyPay = parseFloat(document.getElementById("weeklyPay").value)
-
-if(!city || !specialty || !weeklyPay){
-alert("Please complete all fields")
-return
-}
-
-let score = 60
-const diff = weeklyPay - marketAverage
-
-if(diff >= 300) score = 95
-else if(diff >= 100) score = 85
-else if(diff >= -100) score = 75
-else if(diff >= -300) score = 60
-else score = 45
+data.forEach(contract => {
 
 let scoreColor="text-red-600"
-if(score >= 90) scoreColor="text-green-600"
-else if(score >= 70) scoreColor="text-yellow-600"
+if(contract.score >= 90) scoreColor="text-green-600"
+else if(contract.score >= 70) scoreColor="text-yellow-600"
 
 const row=document.createElement("tr")
 
-row.innerHTML = `
-<td class="p-2">${city}</td>
-<td class="p-2">${specialty}</td>
-<td class="p-2">$${weeklyPay}</td>
-<td class="p-2 ${scoreColor} font-semibold">${score}</td>
+row.innerHTML=`
+<td class="p-2">${contract.city}</td>
+<td class="p-2">${contract.specialty}</td>
+<td class="p-2">$${contract.pay}</td>
+<td class="p-2 ${scoreColor} font-semibold">${contract.score}</td>
 `
 
-document.getElementById("contractsTable").prepend(row)
-
-document.getElementById("contractForm").reset()
+table.appendChild(row)
 
 })
+
+}
+
+document.getElementById("contractForm").addEventListener("submit", async function(e){
+
+e.preventDefault()
+
+const form = new FormData(this)
+
+const payload = {
+city: form.get("city"),
+specialty: form.get("specialty"),
+pay: form.get("pay")
+}
+
+await fetch("/api/contracts",{
+method:"POST",
+headers:{ "Content-Type":"application/json" },
+body: JSON.stringify(payload)
+})
+
+this.reset()
+
+loadContracts()
+
+})
+
+loadContracts()
 
 </script>
 
