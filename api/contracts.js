@@ -1,33 +1,42 @@
-import { kv } from '@vercel/kv'
+import { kv } from "@vercel/kv";
 
 export default async function handler(req, res) {
+  try {
 
-if (req.method === "POST") {
+    if (req.method === "POST") {
 
-const { city, specialty, pay } = req.body
+      const { city, specialty, pay } = req.body;
 
-const entry = {
-id: Date.now(),
-city,
-specialty,
-pay,
-timestamp: new Date().toISOString()
-}
+      const entry = {
+        id: Date.now(),
+        city,
+        specialty,
+        pay,
+        timestamp: new Date().toISOString()
+      };
 
-await kv.lpush("contracts", JSON.stringify(entry))
+      await kv.lpush("contracts", JSON.stringify(entry));
 
-const latest = await kv.lrange("contracts", 0, 20)
+      const latest = await kv.lrange("contracts", 0, 20);
 
-res.status(200).json(latest.map(x => JSON.parse(x)))
+      res.status(200).json(latest.map(x => JSON.parse(x)));
 
-}
+    } else {
 
-else {
+      const latest = await kv.lrange("contracts", 0, 20);
 
-const latest = await kv.lrange("contracts", 0, 20)
+      res.status(200).json(latest.map(x => JSON.parse(x)));
 
-res.status(200).json(latest.map(x => JSON.parse(x)))
+    }
 
-}
+  } catch (error) {
 
+    console.error(error);
+
+    res.status(500).json({
+      error: "Server error",
+      message: error.message
+    });
+
+  }
 }
