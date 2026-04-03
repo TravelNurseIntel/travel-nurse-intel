@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Highest Paying Travel Nurse Contracts This Week (2026)</title>
+
+<meta name="description" content="Live travel nurse contract database showing the highest paying travel nurse contracts submitted this week across the United States.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-50 p-6">
+
+<!-- HEADER -->
+
+<header class="bg-white border-b shadow-sm mb-6">
+
+<div class="max-w-5xl mx-auto flex flex-col items-center p-4">
+
+<a href="/">
+<img src="/logo.png" alt="Travel Nurse Intel Logo" class="h-12 mb-3">
+</a>
+
+<nav class="flex flex-wrap justify-center gap-4 text-sm">
+
+<a href="/" class="text-blue-600 hover:underline font-semibold">
+Contract Analyzer
+</a>
+
+<a href="/highest-paying-travel-nurse-contracts-this-week.html" class="text-gray-700 hover:underline">
+Highest Paying Contracts
+</a>
+
+<a href="/travel-nurse-pay-by-specialty.html" class="text-gray-700 hover:underline">
+Pay by Specialty
+</a>
+
+<a href="/travel-nurse-pay-transparency.html" class="text-gray-700 hover:underline">
+Pay Transparency
+</a>
+
+<a href="/travel-nurse-salary-database.html" class="text-gray-700 hover:underline">
+Salary Database
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- MAIN -->
+
+<main class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
+
+<h1 class="text-3xl font-bold mb-6 text-center">
+Highest Paying Travel Nurse Contracts This Week
+</h1>
+
+<p class="text-gray-700 text-center mb-6">
+These are the highest paying travel nurse contracts submitted by nurses this week.
+</p>
+
+<table class="w-full border border-gray-300 text-sm mb-10 border-collapse">
+
+<thead class="bg-gray-100">
+<tr>
+<th class="p-2 text-left">City</th>
+<th class="p-2 text-left">Specialty</th>
+<th class="p-2 text-left">Weekly Pay</th>
+<th class="p-2 text-left">Contract Score</th>
+</tr>
+</thead>
+
+<tbody id="contractsTable">
+
+</tbody>
+
+</table>
+
+</main>
+
+<!-- STRIPE PRODUCTS -->
+
+<section class="text-center mt-10">
+
+<h2 class="text-xl font-bold mb-4">
+Advanced Travel Nurse Tools
+</h2>
+
+<div class="flex flex-col md:flex-row justify-center gap-4">
+
+<a href="https://buy.stripe.com/dRm14pfhUfUD5EQ32q3Je00"
+class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700">
+Contract Intelligence Report – $9.99
+</a>
+
+<a href="https://buy.stripe.com/00wfZj4Dg37R5EQ46u3Je03"
+class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+Negotiation Toolkit – $19.99
+</a>
+
+<a href="https://buy.stripe.com/eVqbJ3d9MfUD7MYfPc3Je02"
+class="bg-yellow-600 text-white px-6 py-3 rounded-lg hover:bg-yellow-700">
+Tax Compliance Protection – $49.99
+</a>
+
+<a href="https://buy.stripe.com/5kQ6oJc5IfUDebm32q3Je01"
+class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700">
+Pro Plan – $29.99/month
+</a>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="text-center text-xs text-gray-500 mt-10">
+
+<p>
+Travel Nurse Intel™<br>
+A registered fictitious name of Kingdom Come™, LLC
+</p>
+
+<p class="mt-1">
+Support:
+<a href="mailto:support@travelnurseintel.com" class="underline">
+support@travelnurseintel.com
+</a>
+</p>
+
+<p class="mt-2">
+© 2026 All rights reserved.
+</p>
+
+</footer>
+
+<!-- SCRIPT -->
+
+<script>
+
+async function loadContracts(){
+
+const response = await fetch("/api/contracts")
+const data = await response.json()
+
+const sorted = data.sort((a,b)=> b.pay - a.pay)
+
+const table = document.getElementById("contractsTable")
+table.innerHTML=""
+
+sorted.forEach(contract => {
+
+let scoreColor="text-red-600"
+if(contract.score >= 90) scoreColor="text-green-600"
+else if(contract.score >= 70) scoreColor="text-yellow-600"
+
+const row=document.createElement("tr")
+
+row.innerHTML=`
+<td class="p-2">${contract.city}</td>
+<td class="p-2">${contract.specialty}</td>
+<td class="p-2">$${contract.pay}</td>
+<td class="p-2 ${scoreColor} font-semibold">${contract.score}</td>
+`
+
+table.appendChild(row)
+
+})
+
+}
+
+loadContracts()
+
+</script>
+
+</body>
+</html>
