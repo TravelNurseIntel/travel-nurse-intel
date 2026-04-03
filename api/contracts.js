@@ -1,6 +1,7 @@
 import { kv } from "@vercel/kv";
 
 export default async function handler(req, res) {
+
   try {
 
     if (req.method === "POST") {
@@ -12,6 +13,7 @@ export default async function handler(req, res) {
         city,
         specialty,
         pay,
+        score: Math.floor(Math.random() * 40) + 60,
         timestamp: new Date().toISOString()
       };
 
@@ -19,14 +21,14 @@ export default async function handler(req, res) {
 
       const latest = await kv.lrange("contracts", 0, 20);
 
-      res.status(200).json(latest.map(x => JSON.parse(x)));
+      return res.status(200).json(latest.map(i => JSON.parse(i)));
+    }
 
-    } else {
+    if (req.method === "GET") {
 
       const latest = await kv.lrange("contracts", 0, 20);
 
-      res.status(200).json(latest.map(x => JSON.parse(x)));
-
+      return res.status(200).json(latest.map(i => JSON.parse(i)));
     }
 
   } catch (error) {
@@ -34,9 +36,10 @@ export default async function handler(req, res) {
     console.error(error);
 
     res.status(500).json({
-      error: "Server error",
+      error: "Database error",
       message: error.message
     });
 
   }
+
 }
