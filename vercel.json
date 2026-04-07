@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "https://www.travelnurseintel.com/:path*",
+      "destination": "https://travelnurseintel.com/:path*",
+      "permanent": true
+    }
+  ]
+}
