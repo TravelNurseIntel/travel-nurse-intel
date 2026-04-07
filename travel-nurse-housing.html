@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Travel Nurse Housing Finder | Travel Nurse Intel</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-50 p-6">
+
+<header class="bg-white border-b shadow-sm mb-6">
+
+<div class="max-w-5xl mx-auto text-center p-4">
+
+<a href="/">
+<img src="/logo.png" class="h-16 md:h-20 mx-auto mb-3">
+</a>
+
+</div>
+
+</header>
+
+<div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow">
+
+<h1 class="text-3xl font-bold mb-4 text-center">
+Travel Nurse Housing Finder
+</h1>
+
+<p class="text-gray-700 text-center mb-6">
+Find short-term furnished housing for your travel nurse assignment.
+</p>
+
+<input id="city" placeholder="Enter City (example: Phoenix)" 
+class="p-3 border rounded w-full mb-6">
+
+<button onclick="searchHousing()" 
+class="bg-blue-600 text-white w-full p-3 rounded-lg">
+
+Search Housing
+
+</button>
+
+</div>
+
+<div id="results" class="max-w-3xl mx-auto mt-8 grid gap-4"></div>
+
+<script>
+
+function searchHousing(){
+
+const city=document.getElementById("city").value
+
+const results=document.getElementById("results")
+
+results.innerHTML=`
+
+<a href="https://www.furnishedfinder.com/housing/${city}" target="_blank" class="bg-white p-4 rounded shadow block">
+FurnishedFinder Listings
+</a>
+
+<a href="https://www.airbnb.com/s/${city}/homes" target="_blank" class="bg-white p-4 rounded shadow block">
+Airbnb Short Term Rentals
+</a>
+
+<a href="https://www.apartments.com/${city}/" target="_blank" class="bg-white p-4 rounded shadow block">
+Apartments.com Rentals
+</a>
+
+<a href="https://www.zillow.com/homes/${city}_rb/" target="_blank" class="bg-white p-4 rounded shadow block">
+Zillow Rentals
+</a>
+
+`
+
+}
+
+</script>
+
+</body>
+</html>
