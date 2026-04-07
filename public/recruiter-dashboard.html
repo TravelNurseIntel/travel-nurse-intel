@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Recruiter Dashboard | Travel Nurse Intel</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-50 p-6">
+
+<div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
+
+<h1 class="text-3xl font-bold mb-6 text-center">
+Recruiter Dashboard
+</h1>
+
+<!-- SINGLE JOB POST -->
+
+<h2 class="text-xl font-bold mb-4">
+Post Travel Nurse Contract
+</h2>
+
+<form id="jobForm" class="grid grid-cols-2 gap-4">
+
+<input name="title" placeholder="Job Title" class="p-3 border rounded" required>
+
+<input name="hospital" placeholder="Hospital Name" class="p-3 border rounded">
+
+<input name="city" placeholder="City" class="p-3 border rounded" required>
+
+<input name="state" placeholder="State" class="p-3 border rounded">
+
+<input name="specialty" placeholder="Specialty" class="p-3 border rounded">
+
+<input name="pay" placeholder="Weekly Pay" class="p-3 border rounded" required>
+
+<button class="col-span-2 bg-blue-600 text-white p-3 rounded">
+Post Contract
+</button>
+
+</form>
+
+<!-- BULK UPLOAD -->
+
+<h2 class="text-xl font-bold mt-10 mb-4">
+Bulk Contract Upload (CSV)
+</h2>
+
+<input type="file" id="csvUpload" class="mb-4">
+
+<button onclick="uploadCSV()" class="bg-green-600 text-white p-3 rounded">
+Upload CSV
+</button>
+
+</div>
+
+<script>
+
+document.getElementById("jobForm").addEventListener("submit", async function(e){
+
+e.preventDefault()
+
+const formData = new FormData(this)
+
+const payload = {
+title: formData.get("title"),
+hospital: formData.get("hospital"),
+city: formData.get("city"),
+state: formData.get("state"),
+specialty: formData.get("specialty"),
+pay: formData.get("pay")
+}
+
+await fetch("/api/jobs",{
+method:"POST",
+headers:{ "Content-Type":"application/json" },
+body: JSON.stringify(payload)
+})
+
+alert("Job posted successfully")
+
+})
+
+async function uploadCSV(){
+
+const file = document.getElementById("csvUpload").files[0]
+
+const text = await file.text()
+
+await fetch("/api/jobs-upload",{
+method:"POST",
+headers:{ "Content-Type":"text/plain" },
+body:text
+})
+
+alert("Bulk upload complete")
+
+}
+
+</script>
+
+</body>
+
+</html>
