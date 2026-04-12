@@ -82,6 +82,34 @@ Enterprise
 
 </nav>
 
+<button id="menuToggle" class="md:hidden text-gray-700">
+
+☰
+
+</button> 
+
+<div id="mobileMenu" class="hidden flex flex-col space-y-3 mt-4 text-center">
+
+<a href="/">Contract Analyzer</a>
+<a href="/travel-nurse-salary-database.html">Salary Database</a>
+<a href="/travel-nurse-pay-transparency.html">Pay Transparency</a>
+<a href="/enterprise.html">Enterprise</a>
+
+</div>
+
+<script>
+
+document.getElementById("menuToggle")
+.addEventListener("click", function(){
+
+const menu = document.getElementById("mobileMenu")
+
+menu.classList.toggle("hidden")
+
+})
+
+</script>
+  
 </div>
 
 </div>
