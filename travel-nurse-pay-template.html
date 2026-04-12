@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title id="seoTitle">
+Travel Nurse Pay
+</title>
+
+<meta id="seoDescription" name="description" content="Travel nurse pay data">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-50">
+
+<div id="header"></div>
+<script src="/components/load-header.js"></script>
+
+<main class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow mt-6">
+
+<h1 id="pageTitle" class="text-3xl font-bold mb-4"></h1>
+
+<p id="pageText" class="text-gray-700 text-lg"></p>
+
+<div class="mt-8 text-center">
+
+<a href="/" class="bg-blue-600 text-white px-6 py-3 rounded-lg">
+Analyze Your Contract
+</a>
+
+</div>
+
+</main>
+
+<div id="footer"></div>
+<script src="/components/load-footer.js"></script>
+
+<script>
+
+function getParam(name){
+
+const url = new URL(window.location.href)
+return url.searchParams.get(name)
+
+}
+
+const city = getParam("city")
+const specialty = getParam("specialty")
+
+async function loadData(){
+
+const res = await fetch(`/api/pay-page?city=${city}&specialty=${specialty}`)
+
+const data = await res.json()
+
+document.getElementById("pageTitle").innerText =
+`Travel Nurse Pay in ${data.city} for ${data.specialty}`
+
+document.getElementById("pageText").innerHTML =
+`Average travel nurse pay in <strong>${data.city}</strong> for <strong>${data.specialty}</strong> is currently estimated at <strong>$${data.pay}</strong> per week.`
+
+document.getElementById("seoTitle").innerText =
+`Travel Nurse Pay ${data.city} ${data.specialty} (2026 Salary Guide)`
+
+document.getElementById("seoDescription").setAttribute(
+"content",
+`See the latest travel nurse pay in ${data.city} for ${data.specialty}. Compare weekly contract pay and market averages.`
+)
+
+}
+
+loadData()
+
+</script>
+
+</body>
+</html>
