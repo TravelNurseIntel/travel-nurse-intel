@@ -1,6 +1,6 @@
 <header class="sticky top-0 z-50 bg-white shadow">
-  
-<!-- TOP TRUST RIBBON -->
+
+<!-- TRUST RIBBON -->
 
 <div class="bg-blue-600 text-white py-2 overflow-hidden">
 
@@ -18,7 +18,6 @@
 </div>
 
 <style>
-
 @keyframes scroll {
 0% { transform: translateX(100%); }
 100% { transform: translateX(-100%); }
@@ -28,29 +27,23 @@
 display:inline-block;
 animation: scroll 25s linear infinite;
 }
-
 </style>
 
-<!-- MAIN NAVIGATION -->
+<!-- NAVIGATION -->
 
 <div class="max-w-6xl mx-auto px-4 py-4">
 
 <div class="flex flex-col items-center">
 
-<!-- LOGO -->
-
 <a href="/" class="mb-3">
-
-<img
-src="/travel-nurse-intel-logo.png"
+<img src="/travel-nurse-intel-logo.png"
 alt="Travel Nurse Intel"
 class="h-14 md:h-16">
-
 </a>
 
-<!-- NAV LINKS -->
+<!-- DESKTOP NAV -->
 
-<nav class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm font-medium text-gray-700">
+<nav class="hidden md:flex flex-wrap justify-center gap-6 text-sm font-medium text-gray-700">
 
 <a href="/" class="text-blue-600 hover:underline font-semibold">
 Contract Analyzer
@@ -82,36 +75,44 @@ Enterprise
 
 </nav>
 
-<button id="menuToggle" class="md:hidden text-gray-700">
+<!-- MOBILE MENU BUTTON -->
 
+<button id="menuToggle" class="md:hidden text-2xl mt-2">
 ☰
+</button>
 
-</button> 
+<!-- MOBILE NAV -->
 
-<div id="mobileMenu" class="hidden flex flex-col space-y-3 mt-4 text-center">
+<div id="mobileMenu" class="hidden flex flex-col space-y-3 mt-4 text-center text-gray-700 md:hidden">
 
 <a href="/">Contract Analyzer</a>
-<a href="/travel-nurse-salary-database.html">Salary Database</a>
+<a href="/highest-paying-travel-nurse-states.html">Highest Paying States</a>
+<a href="/travel-nurse-pay-by-specialty.html">Pay by Specialty</a>
 <a href="/travel-nurse-pay-transparency.html">Pay Transparency</a>
+<a href="/travel-nurse-salary-database.html">Salary Database</a>
 <a href="/enterprise.html">Enterprise</a>
+
+</div>
+
+</div>
 
 </div>
 
 <script>
 
-document.getElementById("menuToggle")
-.addEventListener("click", function(){
+document.addEventListener("DOMContentLoaded", () => {
 
+const toggle = document.getElementById("menuToggle")
 const menu = document.getElementById("mobileMenu")
 
+if(toggle && menu){
+toggle.addEventListener("click", () => {
 menu.classList.toggle("hidden")
+})
+}
 
 })
 
 </script>
-  
-</div>
-
-</div>
 
 </header>
