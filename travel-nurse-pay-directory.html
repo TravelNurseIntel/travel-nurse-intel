@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Travel Nurse Pay by City and Specialty (2026 Salary Guide)</title>
+
+<meta name="description" content="Explore travel nurse pay by city and specialty across the United States. Compare contract pay ranges, market averages, and highest paying travel nurse jobs.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-50">
+
+<!-- HEADER -->
+
+<div id="header"></div>
+<script src="/components/load-header.js"></script>
+
+<!-- MAIN CONTENT -->
+
+<main class="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow mt-6">
+
+<h1 class="text-3xl font-bold mb-4 text-center">
+Travel Nurse Pay by City and Specialty
+</h1>
+
+<p class="text-gray-700 text-center mb-8">
+
+Explore estimated travel nurse pay across major U.S. cities and specialties.  
+Select a city and specialty combination to see the latest contract pay trends and salary comparisons.
+
+</p>
+
+<!-- DIRECTORY GRID -->
+
+<div id="directoryGrid" class="grid md:grid-cols-3 gap-6 text-sm"></div>
+
+<!-- ANALYZER CTA -->
+
+<div class="bg-blue-50 border border-blue-200 p-6 rounded-xl mt-12 text-center">
+
+<h2 class="text-xl font-bold mb-3">
+Analyze Your Travel Nurse Contract
+</h2>
+
+<p class="text-gray-700 mb-4">
+
+Use the Travel Nurse Intel contract analyzer to compare your pay package against current market data.
+
+</p>
+
+<a href="/" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg inline-block">
+
+Analyze Your Contract
+
+</a>
+
+</div>
+
+<!-- DISCLAIMER -->
+
+<p class="text-xs text-gray-500 mt-10">
+
+Disclaimer: Travel nurse compensation ranges and market estimates shown on this page are based on publicly available data, aggregated industry reports, and contract submissions. Actual contract pay may vary depending on hospital system, specialty demand, agency margins, shift differentials, and experience level.
+
+This information is provided for educational and informational purposes only and should not be interpreted as financial, tax, legal, or employment advice.
+
+</p>
+
+</main>
+
+<!-- FOOTER -->
+
+<div id="footer"></div>
+<script src="/components/load-footer.js"></script>
+
+<script>
+
+const cities = [
+"phoenix",
+"houston",
+"seattle",
+"boston",
+"denver",
+"chicago",
+"los angeles",
+"san diego",
+"dallas",
+"miami",
+"atlanta",
+"minneapolis"
+]
+
+const specialties = [
+"icu",
+"er",
+"labor and delivery",
+"telemetry",
+"operating room",
+"med surg"
+]
+
+const grid = document.getElementById("directoryGrid")
+
+cities.forEach(city => {
+
+const container = document.createElement("div")
+
+container.className = "border rounded-lg p-4"
+
+container.innerHTML = `
+<h3 class="font-bold capitalize mb-2">${city}</h3>
+<ul class="space-y-1"></ul>
+`
+
+const ul = container.querySelector("ul")
+
+specialties.forEach(spec => {
+
+const li = document.createElement("li")
+
+li.innerHTML = `
+<a href="/travel-nurse-pay-template.html?city=${city}&specialty=${spec}"
+class="text-blue-600 hover:underline capitalize">
+
+${spec} Pay in ${city}
+
+</a>
+`
+
+ul.appendChild(li)
+
+})
+
+grid.appendChild(container)
+
+})
+
+</script>
+
+</body>
+</html>
