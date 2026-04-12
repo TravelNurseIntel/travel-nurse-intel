@@ -1,45 +1,63 @@
-import { kv } from "@vercel/kv";
-
 export default async function handler(req, res) {
 
-  try {
+if (!global.contracts) {
+global.contracts = []
+}
 
-    if (req.method === "POST") {
+if (req.method === "GET") {
 
-      const { city, specialty, pay } = req.body;
+return res.status(200).json(global.contracts)
 
-      const entry = {
-        id: Date.now(),
-        city,
-        specialty,
-        pay,
-        score: Math.floor(Math.random() * 40) + 60,
-        timestamp: new Date().toISOString()
-      };
+}
 
-      await kv.lpush("contracts", JSON.stringify(entry));
+if (req.method === "POST") {
 
-      const latest = await kv.lrange("contracts", 0, 20);
+try {
 
-      return res.status(200).json(latest.map(i => JSON.parse(i)));
-    }
+const {
+city,
+state,
+specialty,
+weeklyPay,
+contractLength,
+stipend,
+shiftType,
+hoursPerWeek,
+hospitalType
+} = req.body
 
-    if (req.method === "GET") {
+const newContract = {
 
-      const latest = await kv.lrange("contracts", 0, 20);
+city: city || "",
+state: state || "",
+specialty: specialty || "",
+weeklyPay: Number(weeklyPay) || 0,
+contractLength: Number(contractLength) || 13,
+stipend: Number(stipend) || 0,
+shiftType: shiftType || "day",
+hoursPerWeek: Number(hoursPerWeek) || 36,
+hospitalType: hospitalType || "hospital",
+submissionDate: new Date().toISOString()
 
-      return res.status(200).json(latest.map(i => JSON.parse(i)));
-    }
+}
 
-  } catch (error) {
+global.contracts.push(newContract)
 
-    console.error(error);
+return res.status(200).json({
+success: true,
+contract: newContract
+})
 
-    res.status(500).json({
-      error: "Database error",
-      message: error.message
-    });
+} catch (err) {
 
-  }
+return res.status(500).json({
+error: "Contract submission failed"
+})
+
+}
+
+}
+
+res.status(405).json({ error: "Method not allowed" })
 
 }
