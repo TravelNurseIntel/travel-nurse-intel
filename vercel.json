@@ -1,5 +1,6 @@
 {
   "cleanUrls": true,
+
   "routes": [
     {
       "src": "/api/(.*)",
@@ -8,6 +9,13 @@
     {
       "src": "/(.*)",
       "dest": "/$1"
+    }
+  ],
+
+  "crons": [
+    {
+      "path": "/api/process-market-data",
+      "schedule": "0 */6 * * *"
     }
   ]
 }
