@@ -16,6 +16,10 @@
     {
       "path": "/api/process-market-data",
       "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/save-market-snapshot",
+      "schedule": "0 */12 * * *"
     }
   ]
 }
