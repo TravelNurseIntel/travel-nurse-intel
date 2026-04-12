@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Travel Nurse Market Intelligence</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-50">
+
+<div id="header"></div>
+<script src="/components/load-header.js"></script>
+
+<div class="max-w-6xl mx-auto p-6">
+
+<h1 class="text-3xl font-bold mb-6 text-center">
+Travel Nurse Market Intelligence
+</h1>
+
+<!-- SHORTAGE INDEX -->
+
+<h2 class="text-xl font-bold mb-4">
+Regional Shortage Index
+</h2>
+
+<table class="w-full border text-sm mb-10">
+
+<thead class="bg-gray-100">
+<tr>
+<th class="p-2">City</th>
+<th class="p-2">Specialty</th>
+<th class="p-2">Shortage Index</th>
+</tr>
+</thead>
+
+<tbody id="shortageTable"></tbody>
+
+</table>
+
+<!-- FILL SPEED -->
+
+<h2 class="text-xl font-bold mb-4">
+Average Contract Fill Speed
+</h2>
+
+<table class="w-full border text-sm mb-10">
+
+<thead class="bg-gray-100">
+<tr>
+<th class="p-2">Specialty</th>
+<th class="p-2">Average Fill Days</th>
+</tr>
+</thead>
+
+<tbody id="fillTable"></tbody>
+
+</table>
+
+<!-- PAY COMPETITIVENESS -->
+
+<h2 class="text-xl font-bold mb-4">
+Average Pay by Market
+</h2>
+
+<table class="w-full border text-sm">
+
+<thead class="bg-gray-100">
+<tr>
+<th class="p-2">City</th>
+<th class="p-2">Specialty</th>
+<th class="p-2">Average Weekly Pay</th>
+</tr>
+</thead>
+
+<tbody id="payTable"></tbody>
+
+</table>
+
+</div>
+
+<div id="footer"></div>
+<script src="/components/load-footer.js"></script>
+
+<script>
+
+async function loadShortage(){
+
+const res = await fetch("/api/shortage-index")
+const data = await res.json()
+
+const table = document.getElementById("shortageTable")
+
+data.forEach(row=>{
+
+table.innerHTML += `
+<tr class="border-b">
+<td class="p-2">${row.city}</td>
+<td class="p-2">${row.specialty}</td>
+<td class="p-2">${row.shortageIndex}</td>
+</tr>
+`
+
+})
+
+}
+
+async function loadFillSpeed(){
+
+const res = await fetch("/api/fill-speed")
+const data = await res.json()
+
+const table = document.getElementById("fillTable")
+
+data.forEach(row=>{
+
+table.innerHTML += `
+<tr class="border-b">
+<td class="p-2">${row.specialty}</td>
+<td class="p-2">${row.avgFillDays}</td>
+</tr>
+`
+
+})
+
+}
+
+async function loadPay(){
+
+const res = await fetch("/api/pay-competitiveness")
+const data = await res.json()
+
+const table = document.getElementById("payTable")
+
+data.forEach(row=>{
+
+table.innerHTML += `
+<tr class="border-b">
+<td class="p-2">${row.city}</td>
+<td class="p-2">${row.specialty}</td>
+<td class="p-2">$${row.averagePay}</td>
+</tr>
+`
+
+})
+
+}
+
+loadShortage()
+loadFillSpeed()
+loadPay()
+
+</script>
+
+</body>
+</html>
