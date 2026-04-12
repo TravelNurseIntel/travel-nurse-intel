@@ -12,48 +12,45 @@
 
 </head>
 
-<body class="bg-gray-50 p-6">
+<body class="bg-gray-50">
 
-<div class="max-w-6xl mx-auto p-6">
+<div id="header"></div>
+<script src="/components/load-header.js"></script>
+
+<main class="max-w-6xl mx-auto p-6">
 
 <h1 class="text-3xl font-bold mb-6">
 Recruiter Dashboard
 </h1>
 
-<div class="grid md:grid-cols-3 gap-6">
+<!-- METRICS -->
+
+<div class="grid md:grid-cols-3 gap-6 mb-10">
 
 <div class="bg-white p-6 rounded-xl shadow">
-
 <h3 class="font-bold text-lg mb-2">Active Contracts</h3>
 <p class="text-4xl font-bold">42</p>
-
 </div>
 
 <div class="bg-white p-6 rounded-xl shadow">
-
 <h3 class="font-bold text-lg mb-2">Fill Probability</h3>
 <p class="text-4xl font-bold text-green-600">78%</p>
-
 </div>
 
 <div class="bg-white p-6 rounded-xl shadow">
-
 <h3 class="font-bold text-lg mb-2">Average Pay Rank</h3>
 <p class="text-4xl font-bold">Top 20%</p>
-
 </div>
 
 </div>
 
-</div>
-
-<!-- SINGLE JOB POST -->
+<!-- POST CONTRACT -->
 
 <h2 class="text-xl font-bold mb-4">
 Post Travel Nurse Contract
 </h2>
 
-<form id="jobForm" class="grid grid-cols-2 gap-4">
+<form id="jobForm" class="grid md:grid-cols-2 gap-4 mb-10">
 
 <input name="title" placeholder="Job Title" class="p-3 border rounded" required>
 
@@ -65,27 +62,30 @@ Post Travel Nurse Contract
 
 <input name="specialty" placeholder="Specialty" class="p-3 border rounded">
 
-<input name="pay" placeholder="Weekly Pay" class="p-3 border rounded" required>
+<input name="pay" type="number" placeholder="Weekly Pay" class="p-3 border rounded" required>
 
-<button class="col-span-2 bg-blue-600 text-white p-3 rounded">
+<button class="col-span-2 bg-blue-600 text-white p-3 rounded hover:bg-blue-700">
 Post Contract
 </button>
 
 </form>
 
-<!-- BULK UPLOAD -->
+<!-- BULK CSV UPLOAD -->
 
-<h2 class="text-xl font-bold mt-10 mb-4">
+<h2 class="text-xl font-bold mb-4">
 Bulk Contract Upload (CSV)
 </h2>
 
 <input type="file" id="csvUpload" class="mb-4">
 
-<button onclick="uploadCSV()" class="bg-green-600 text-white p-3 rounded">
+<button onclick="uploadCSV()" class="bg-green-600 text-white p-3 rounded hover:bg-green-700">
 Upload CSV
 </button>
 
-</div>
+</main>
+
+<div id="footer"></div>
+<script src="/components/load-footer.js"></script>
 
 <script>
 
@@ -118,6 +118,11 @@ async function uploadCSV(){
 
 const file = document.getElementById("csvUpload").files[0]
 
+if(!file){
+alert("Please select a CSV file")
+return
+}
+
 const text = await file.text()
 
 await fetch("/api/jobs-upload",{
@@ -133,5 +138,4 @@ alert("Bulk upload complete")
 </script>
 
 </body>
-
 </html>
