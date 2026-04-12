@@ -8,6 +8,8 @@
 
 <title>Enterprise Solutions | Travel Nurse Intel</title>
 
+<meta name="description" content="Enterprise workforce intelligence platform for hospitals and staffing firms. Predict travel nurse demand, pay trends, and contract competitiveness.">
+
 <link rel="canonical" href="https://travelnurseintel.com/enterprise.html">
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -18,47 +20,41 @@
 
 <!-- HEADER -->
 
-<header class="bg-white border-b shadow-sm">
+<div id="header"></div>
+<script src="/components/load-header.js"></script>
 
-<div class="max-w-6xl mx-auto flex flex-col items-center py-4">
+<!-- TRUST RIBBON -->
 
-<a href="/">
-<img src="/logo.png" alt="Travel Nurse Intel Logo" class="h-16 mb-3">
-</a>
+<div class="bg-blue-600 text-white py-3 overflow-hidden">
 
-<div class="flex flex-wrap justify-center gap-4 text-sm">
+<div class="whitespace-nowrap animate-scroll text-sm font-semibold">
 
-<a href="/" class="text-blue-600 hover:underline font-semibold">
-Contract Analyzer
-</a>
-
-<a href="/highest-paying-travel-nurse-states.html" class="text-gray-700 hover:underline">
-Highest Paying States
-</a>
-
-<a href="/travel-nurse-pay-by-specialty.html" class="text-gray-700 hover:underline">
-Pay by Specialty
-</a>
-
-<a href="/travel-nurse-pay-transparency.html" class="text-gray-700 hover:underline">
-Pay Transparency
-</a>
-
-<a href="/travel-nurse-salary-database.html" class="text-gray-700 hover:underline">
-Salary Database
-</a>
-
-<a href="/travel-nurse-tax-free-stipend-guide.html" class="text-gray-700 hover:underline">
-Tax Guide
-</a>
+<span class="mx-8">Trusted by Travel Nurses Nationwide</span>
+<span class="mx-8">Compare Pay</span>
+<span class="mx-8">Negotiate Contracts</span>
+<span class="mx-8">Maximize Earnings</span>
+<span class="mx-8">Real Contract Data</span>
+<span class="mx-8">Travel Nurse Pay Transparency</span>
 
 </div>
 
 </div>
 
-</header>
+<style>
 
-<!-- PAGE CONTENT -->
+@keyframes scroll {
+0% { transform: translateX(100%); }
+100% { transform: translateX(-100%); }
+}
+
+.animate-scroll {
+display:inline-block;
+animation: scroll 25s linear infinite;
+}
+
+</style>
+
+<!-- MAIN -->
 
 <main class="max-w-6xl mx-auto p-6">
 
@@ -72,18 +68,18 @@ Enterprise Solutions
 Travel Nurse Intel provides workforce intelligence and recruiting infrastructure for hospital systems and national staffing firms seeking deeper labor-market insights and faster contract fill times.
 </p>
 
-<!-- PLATFORM FEATURES -->
+<!-- PLATFORM CAPABILITIES -->
 
 <h2 class="text-2xl font-bold mb-4">
 Enterprise Platform Capabilities
 </h2>
 
-<ul class="list-disc ml-6 text-gray-700 space-y-2 mb-10">
+<ul class="list-disc ml-6 text-gray-700 space-y-2 mb-12">
 
 <li>Custom ATS integrations</li>
 <li>Unlimited recruiter seats</li>
 <li>Private market intelligence APIs</li>
-<li>Dedicated enterprise onboarding and priority support</li>
+<li>Dedicated enterprise onboarding</li>
 <li>Monthly workforce intelligence reports</li>
 <li>Custom analytics dashboards</li>
 <li>National contract marketplace access</li>
@@ -92,7 +88,7 @@ Enterprise Platform Capabilities
 
 </ul>
 
-<!-- PRICING TIERS -->
+<!-- PRICING -->
 
 <h2 class="text-2xl font-bold mb-6 text-center">
 Enterprise Platform Tiers
@@ -127,7 +123,7 @@ $14,999/month
 
 <!-- ENTERPRISE INTELLIGENCE -->
 
-<div class="border-2 border-blue-600 rounded-xl p-6">
+<div class="border-2 border-blue-600 rounded-xl p-6 bg-blue-50">
 
 <h3 class="text-xl font-bold mb-2">
 Enterprise Intelligence
@@ -150,7 +146,7 @@ $29,999/month
 
 </div>
 
-<!-- NATIONAL STAFFING PLATFORM -->
+<!-- NATIONAL PLATFORM -->
 
 <div class="border rounded-xl p-6">
 
@@ -180,6 +176,80 @@ $49,999/month
 
 </div>
 
+<!-- MARKET INTELLIGENCE -->
+
+<section class="mt-16">
+
+<h2 class="text-3xl font-bold text-center mb-8">
+Travel Nurse Market Intelligence
+</h2>
+
+<p class="text-center text-gray-600 mb-10 max-w-3xl mx-auto">
+Advanced labor market analytics helping hospitals and staffing firms understand national travel nurse demand and pay competitiveness.
+</p>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+<div class="border p-6 rounded-lg shadow-sm">
+
+<h3 class="font-bold text-lg mb-2">Pay Heatmaps</h3>
+<p class="text-gray-600 text-sm">
+Visualize travel nurse pay across U.S. cities and specialties to identify high-paying markets and emerging compensation trends.
+</p>
+
+</div>
+
+<div class="border p-6 rounded-lg shadow-sm">
+
+<h3 class="font-bold text-lg mb-2">Hospital Demand Tracking</h3>
+<p class="text-gray-600 text-sm">
+Analyze real-time demand signals from travel nurse job postings to identify staffing shortages and surge markets.
+</p>
+
+</div>
+
+<div class="border p-6 rounded-lg shadow-sm">
+
+<h3 class="font-bold text-lg mb-2">Recruiter Margin Intelligence</h3>
+<p class="text-gray-600 text-sm">
+Estimate staffing agency margins and contract markups using aggregated market pay data.
+</p>
+
+</div>
+
+<div class="border p-6 rounded-lg shadow-sm">
+
+<h3 class="font-bold text-lg mb-2">Predicted Contract Pay</h3>
+<p class="text-gray-600 text-sm">
+Forecast expected weekly contract pay ranges based on specialty, region, and hospital demand.
+</p>
+
+</div>
+
+<div class="border p-6 rounded-lg shadow-sm">
+
+<h3 class="font-bold text-lg mb-2">Shortage Forecasts</h3>
+<p class="text-gray-600 text-sm">
+Identify upcoming nurse shortages and high-demand specialties before pay spikes occur.
+</p>
+
+</div>
+
+<div class="border p-6 rounded-lg shadow-sm">
+
+<h3 class="font-bold text-lg mb-2">Weekly Market Reports</h3>
+<p class="text-gray-600 text-sm">
+Automated reports summarizing national travel nurse pay trends and hospital staffing demand.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
 <!-- ENTERPRISE CONTRACTS -->
 
 <div class="bg-blue-50 border border-blue-200 p-8 rounded-lg text-center mt-12">
@@ -189,11 +259,11 @@ Custom Enterprise Contracts
 </h3>
 
 <p class="text-gray-700 mb-4 max-w-3xl mx-auto">
-Large hospital systems and national staffing firms may qualify for custom enterprise agreements that include private integrations, expanded recruiter seats, and dedicated labor-market intelligence services.
+Large hospital systems and national staffing firms may qualify for custom enterprise agreements including private integrations, expanded recruiter seats, and advanced workforce intelligence analytics.
 </p>
 
 <p class="text-gray-700 mb-6">
-Enterprise agreements typically range from <strong>$180,000 to $1,000,000 annually</strong> depending on platform usage, integrations, and enterprise analytics requirements.
+Enterprise agreements typically range from <strong>$180,000 to $1,000,000 annually</strong> depending on integrations and platform usage.
 </p>
 
 <a href="mailto:enterprise@travelnurseintel.com"
@@ -205,38 +275,12 @@ Contact Enterprise Sales
 
 </div>
 
-</div>
-
 </main>
 
 <!-- FOOTER -->
 
-<footer class="text-center text-xs text-gray-500 mt-10 mb-6">
-
-<p>
-Travel Nurse Intel™<br>
-A registered fictitious name of Kingdom Come™, LLC
-</p>
-
-<p class="mt-1">
-Support:
-<a href="mailto:support@travelnurseintel.com" class="underline">
-support@travelnurseintel.com
-</a>
-</p>
-
-<p class="mt-2">
-© 2026 All rights reserved.
-</p>
-
-<p class="mt-2">
-<a href="/privacy.html" class="underline">Privacy Policy</a> •
-<a href="/terms.html" class="underline">Terms of Service</a> •
-<a href="/refund-policy.html" class="underline">Refund Policy</a> •
-<a href="/disclaimer.html" class="underline">Disclaimer</a>
-</p>
-
-</footer>
+<div id="footer"></div>
+<script src="/components/load-footer.js"></script>
 
 </body>
 </html>
