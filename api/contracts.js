@@ -5,9 +5,7 @@ global.contracts = []
 }
 
 if (req.method === "GET") {
-
 return res.status(200).json(global.contracts)
-
 }
 
 if (req.method === "POST") {
@@ -26,17 +24,32 @@ hoursPerWeek,
 hospitalType
 } = req.body
 
+const regions = {
+AZ:"Southwest",
+CA:"West",
+TX:"South",
+WA:"West",
+FL:"South",
+NY:"Northeast",
+MA:"Northeast",
+IL:"Midwest"
+}
+
 const newContract = {
 
 city: city || "",
 state: state || "",
+region: regions[state] || "Unknown",
+country: "USA",
 specialty: specialty || "",
+
 weeklyPay: Number(weeklyPay) || 0,
 contractLength: Number(contractLength) || 13,
 stipend: Number(stipend) || 0,
 shiftType: shiftType || "day",
 hoursPerWeek: Number(hoursPerWeek) || 36,
 hospitalType: hospitalType || "hospital",
+
 submissionDate: new Date().toISOString()
 
 }
@@ -48,7 +61,7 @@ success: true,
 contract: newContract
 })
 
-} catch (err) {
+} catch (error) {
 
 return res.status(500).json({
 error: "Contract submission failed"
@@ -58,6 +71,6 @@ error: "Contract submission failed"
 
 }
 
-res.status(405).json({ error: "Method not allowed" })
+return res.status(405).json({ error: "Method not allowed" })
 
 }
