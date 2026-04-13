@@ -1,17 +1,14 @@
-export default async function handler(req, res) {
+export default async function handler(req,res){
 
 const sources = [
-
-"https://api.vivian.com/jobs",
-"https://api.nomadhealth.com/jobs"
-
+"https://example-hospital-feed.com/jobs.json"
 ]
 
 let jobs = []
 
-for (const url of sources) {
+for(const url of sources){
 
-try {
+try{
 
 const response = await fetch(url)
 
@@ -19,9 +16,9 @@ const data = await response.json()
 
 jobs.push(...data)
 
-} catch(err){
+}catch(err){
 
-console.log("Feed failed:", url)
+console.log("Feed failed:",url)
 
 }
 
@@ -29,13 +26,13 @@ console.log("Feed failed:", url)
 
 const normalized = jobs.map(job => ({
 
-title: job.title || "Travel Nurse",
-hospital: job.company || "Hospital",
-city: job.city,
-state: job.state,
-specialty: job.specialty,
-pay: job.pay || 0,
-source: "external-feed"
+title:job.title || "Travel Nurse",
+hospital:job.hospital || "Hospital",
+city:job.city,
+state:job.state,
+specialty:job.specialty,
+pay:Number(job.pay || 0),
+source:"partner-feed"
 
 }))
 
