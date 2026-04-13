@@ -82,6 +82,26 @@ Average Pay by Market
 
 </table>
 
+<!-- FORECAST -->
+
+<h2 class="text-2xl font-bold mt-10 mb-4">
+AI Pay Forecast
+</h2>
+
+<table class="w-full border">
+
+<thead class="bg-gray-100">
+<tr>
+<th class="p-2">City</th>
+<th class="p-2">Specialty</th>
+<th class="p-2">Forecast Pay</th>
+</tr>
+</thead>
+
+<tbody id="forecastTable"></tbody>
+
+</table>
+
 </div>
 
 <div id="footer"></div>
@@ -95,6 +115,8 @@ const res = await fetch("/api/shortage-index")
 const data = await res.json()
 
 const table = document.getElementById("shortageTable")
+
+table.innerHTML = ""
 
 data.forEach(row=>{
 
@@ -117,6 +139,8 @@ const data = await res.json()
 
 const table = document.getElementById("fillTable")
 
+table.innerHTML = ""
+
 data.forEach(row=>{
 
 table.innerHTML += `
@@ -137,6 +161,8 @@ const data = await res.json()
 
 const table = document.getElementById("payTable")
 
+table.innerHTML = ""
+
 data.forEach(row=>{
 
 table.innerHTML += `
@@ -151,9 +177,28 @@ table.innerHTML += `
 
 }
 
+async function loadForecast(){
+
+const res = await fetch("/api/pay-forecast?city=Phoenix&specialty=ICU")
+
+const data = await res.json()
+
+const table = document.getElementById("forecastTable")
+
+table.innerHTML = `
+<tr>
+<td class="p-2">Phoenix</td>
+<td class="p-2">ICU</td>
+<td class="p-2">$${data.forecast || "N/A"}</td>
+</tr>
+`
+
+}
+
 loadShortage()
 loadFillSpeed()
 loadPay()
+loadForecast()
 
 </script>
 
