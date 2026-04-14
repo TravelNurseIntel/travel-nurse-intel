@@ -109,10 +109,31 @@ AI Pay Forecast
 
 <script>
 
+async function fetchData(url){
+
+try{
+
+const res = await fetch(url)
+
+if(!res.ok) throw new Error("API error")
+
+return await res.json()
+
+}catch(err){
+
+console.error("Fetch failed:", url)
+
+return []
+
+}
+
+}
+
+/* SHORTAGE */
+
 async function loadShortage(){
 
-const res = await fetch("/api/shortage-index")
-const data = await res.json()
+const data = await fetchData("/api/market?type=shortage")
 
 const table = document.getElementById("shortageTable")
 
@@ -122,9 +143,9 @@ data.forEach(row=>{
 
 table.innerHTML += `
 <tr class="border-b">
-<td class="p-2">${row.city}</td>
-<td class="p-2">${row.specialty}</td>
-<td class="p-2">${row.shortageIndex}</td>
+<td class="p-2">${row.city || "-"}</td>
+<td class="p-2">${row.specialty || "-"}</td>
+<td class="p-2">${row.shortageIndex ?? row.shortageindex ?? "-"}</td>
 </tr>
 `
 
@@ -132,10 +153,11 @@ table.innerHTML += `
 
 }
 
+/* FILL SPEED */
+
 async function loadFillSpeed(){
 
-const res = await fetch("/api/fill-speed")
-const data = await res.json()
+const data = await fetchData("/api/market?type=fill")
 
 const table = document.getElementById("fillTable")
 
@@ -145,8 +167,8 @@ data.forEach(row=>{
 
 table.innerHTML += `
 <tr class="border-b">
-<td class="p-2">${row.specialty}</td>
-<td class="p-2">${row.avgFillDays}</td>
+<td class="p-2">${row.specialty || "-"}</td>
+<td class="p-2">${row.avgFillDays ?? row.avgfilldays ?? "-"}</td>
 </tr>
 `
 
@@ -154,10 +176,11 @@ table.innerHTML += `
 
 }
 
+/* PAY */
+
 async function loadPay(){
 
-const res = await fetch("/api/pay-competitiveness")
-const data = await res.json()
+const data = await fetchData("/api/market?type=pay")
 
 const table = document.getElementById("payTable")
 
@@ -167,9 +190,9 @@ data.forEach(row=>{
 
 table.innerHTML += `
 <tr class="border-b">
-<td class="p-2">${row.city}</td>
-<td class="p-2">${row.specialty}</td>
-<td class="p-2">$${row.averagePay}</td>
+<td class="p-2">${row.city || "-"}</td>
+<td class="p-2">${row.specialty || "-"}</td>
+<td class="p-2">$${row.averagePay ?? row.averagepay ?? 0}</td>
 </tr>
 `
 
@@ -177,23 +200,31 @@ table.innerHTML += `
 
 }
 
+/* FORECAST */
+
 async function loadForecast(){
 
-const res = await fetch("/api/pay-forecast?city=Phoenix&specialty=ICU")
-
-const data = await res.json()
+const data = await fetchData("/api/market?type=forecast")
 
 const table = document.getElementById("forecastTable")
 
-table.innerHTML = `
-<tr>
-<td class="p-2">Phoenix</td>
-<td class="p-2">ICU</td>
-<td class="p-2">$${data.forecast || "N/A"}</td>
+table.innerHTML = ""
+
+data.forEach(row => {
+
+table.innerHTML += `
+<tr class="border-b">
+<td class="p-2">${row.city || "-"}</td>
+<td class="p-2">${row.specialty || "-"}</td>
+<td class="p-2">$${row.forecast ?? "-"}</td>
 </tr>
 `
 
+})
+
 }
+
+/* LOAD ALL */
 
 loadShortage()
 loadFillSpeed()
