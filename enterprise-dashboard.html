@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Dashboard | Travel Nurse Intel</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 pt-32">
+
+<div id="header"></div>
+<script src="/components/load-header.js"></script>
+
+<div class="max-w-7xl mx-auto p-6">
+
+<h1 class="text-3xl font-bold mb-6">
+Enterprise Market Intelligence Dashboard
+</h1>
+
+<!-- KPI CARDS -->
+<div class="grid md:grid-cols-4 gap-6 mb-10">
+
+<div class="bg-white p-5 rounded shadow">
+<p class="text-gray-500">Avg Market Pay</p>
+<p id="avgPay" class="text-2xl font-bold text-green-600"></p>
+</div>
+
+<div class="bg-white p-5 rounded shadow">
+<p class="text-gray-500">Active Contracts</p>
+<p id="totalContracts" class="text-2xl font-bold"></p>
+</div>
+
+<div class="bg-white p-5 rounded shadow">
+<p class="text-gray-500">High Demand Markets</p>
+<p id="demandMarkets" class="text-2xl font-bold"></p>
+</div>
+
+<div class="bg-white p-5 rounded shadow">
+<p class="text-gray-500">Recommended Pay Increase</p>
+<p id="recommendedIncrease" class="text-2xl font-bold text-blue-600"></p>
+</div>
+
+</div>
+
+<!-- PREDICTIVE PAY -->
+<h2 class="text-2xl font-bold mb-4">AI Pay Recommendation</h2>
+
+<div class="bg-white p-6 rounded shadow mb-10">
+
+<div class="grid md:grid-cols-3 gap-4 mb-4">
+<input id="city" placeholder="City" class="p-3 border rounded">
+<input id="specialty" placeholder="Specialty" class="p-3 border rounded">
+<button onclick="getPrediction()" class="bg-blue-600 text-white p-3 rounded">
+Get Pay Recommendation
+</button>
+</div>
+
+<p id="predictionResult" class="text-xl font-bold text-green-600"></p>
+
+</div>
+
+<!-- MARKET TABLE -->
+<h2 class="text-2xl font-bold mb-4">Top Competitive Markets</h2>
+<div id="marketTable"></div>
+
+</div>
+
+<div id="footer"></div>
+<script src="/components/load-footer.js"></script>
+
+<script>
+
+let contracts=[]
+
+async function load(){
+
+const res = await fetch("/api/contracts")
+contracts = await res.json()
+
+renderStats()
+renderMarkets()
+
+}
+
+function renderStats(){
+
+const avg = contracts.reduce((sum,c)=>sum+(c.weeklyPay||0),0) / (contracts.length||1)
+
+document.getElementById("avgPay").innerText = "$"+Math.round(avg)
+document.getElementById("totalContracts").innerText = contracts.length
+
+const uniqueMarkets = new Set(contracts.map(c=>c.city+"-"+c.state))
+document.getElementById("demandMarkets").innerText = uniqueMarkets.size
+
+document.getElementById("recommendedIncrease").innerText = "+$300"
+
+}
+
+function renderMarkets(){
+
+const map={}
+
+contracts.forEach(c=>{
+const key=c.city+"-"+c.state
+
+if(!map[key]) map[key]={city:c.city,state:c.state,count:0,pay:0}
+
+map[key].count++
+map[key].pay+=c.weeklyPay||0
+})
+
+const sorted = Object.values(map).map(m=>({
+...m,
+avg:Math.round(m.pay/m.count)
+})).sort((a,b)=>b.avg-a.avg)
+
+document.getElementById("marketTable").innerHTML =
+sorted.slice(0,10).map(m=>`
+<div class="bg-white p-4 mb-3 rounded shadow">
+<div class="font-bold">${m.city}, ${m.state}</div>
+<div>$${m.avg}/week avg</div>
+<div>${m.count} contracts</div>
+</div>
+`).join("")
+
+}
+
+async function getPrediction(){
+
+const city = document.getElementById("city").value
+const specialty = document.getElementById("specialty").value
+
+const res = await fetch(`/api/predict-pay?city=${city}&specialty=${specialty}`)
+const data = await res.json()
+
+document.getElementById("predictionResult").innerText =
+`Recommended Pay: $${data.recommendedPay}/week`
+
+}
+
+load()
+
+</script>
+
+</body>
+</html>
