@@ -47,6 +47,14 @@ class="p-3 border rounded">
 
 </div>
 
+<!-- TOP PAYING -->
+
+<h2 class="text-2xl font-bold mb-4">
+Top Paying Contracts Right Now
+</h2>
+
+<div id="topPaying" class="grid md:grid-cols-2 gap-4 mb-8"></div>
+
 <!-- TABLE -->
 
 <div class="overflow-x-auto">
@@ -54,7 +62,6 @@ class="p-3 border rounded">
 <table class="w-full border text-sm bg-white rounded-xl shadow">
 
 <thead class="bg-gray-100">
-
 <tr>
 <th class="p-3">City</th>
 <th class="p-3">State</th>
@@ -63,7 +70,6 @@ class="p-3 border rounded">
 <th class="p-3">Shift</th>
 <th class="p-3">Hours</th>
 </tr>
-
 </thead>
 
 <tbody id="contractsTable"></tbody>
@@ -104,17 +110,46 @@ try{
 
 const res = await fetch("/api/contracts")
 
+if(!res.ok) throw new Error("API error")
+
 contracts = await res.json()
 
+renderTopPaying()
 renderTable()
 
 }catch(err){
 
-console.error("Failed to load contracts")
+console.error("Failed to load contracts:", err)
 
 }
 
 }
+
+// TOP PAYING
+
+function renderTopPaying(){
+
+const container = document.getElementById("topPaying")
+
+container.innerHTML = ""
+
+const sorted = [...contracts].sort((a,b)=> (b.weeklyPay || 0) - (a.weeklyPay || 0))
+
+sorted.slice(0,6).forEach(c => {
+
+container.innerHTML += `
+<div class="bg-white p-4 rounded-xl shadow border">
+<div class="text-lg font-bold text-green-600">$${c.weeklyPay ?? 0}</div>
+<div>${c.specialty || "N/A"}</div>
+<div class="text-gray-500">${c.city || "-"}, ${c.state || "-"}</div>
+</div>
+`
+
+})
+
+}
+
+// TABLE
 
 function renderTable(){
 
@@ -132,8 +167,8 @@ let filtered = contracts.filter(c =>
 filtered.sort((a,b)=>{
 
 return sort === "high"
-? b.weeklyPay - a.weeklyPay
-: a.weeklyPay - b.weeklyPay
+? (b.weeklyPay || 0) - (a.weeklyPay || 0)
+: (a.weeklyPay || 0) - (b.weeklyPay || 0)
 
 })
 
@@ -148,7 +183,7 @@ table.innerHTML += `
 <td class="p-3">${c.city || "-"}</td>
 <td class="p-3">${c.state || "-"}</td>
 <td class="p-3">${c.specialty || "-"}</td>
-<td class="p-3 font-bold text-green-600">$${c.weeklyPay || 0}</td>
+<td class="p-3 font-bold text-green-600">$${c.weeklyPay ?? 0}</td>
 <td class="p-3">${c.shiftType || "-"}</td>
 <td class="p-3">${c.hoursPerWeek || "-"}</td>
 </tr>
@@ -158,13 +193,17 @@ table.innerHTML += `
 
 }
 
+// EVENTS
+
 document.getElementById("cityFilter").addEventListener("input", renderTable)
 document.getElementById("specialtyFilter").addEventListener("input", renderTable)
 document.getElementById("sortFilter").addEventListener("change", renderTable)
 
+// INIT
+
 loadContracts()
 
-// Auto refresh every 60 seconds
+// AUTO REFRESH
 setInterval(loadContracts, 60000)
 
 </script>
