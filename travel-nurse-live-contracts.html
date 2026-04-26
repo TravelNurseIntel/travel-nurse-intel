@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Live Travel Nurse Contracts (Updated Daily)</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-50 pt-32">
+
+<!-- HEADER -->
+<div id="header"></div>
+<script src="/components/load-header.js"></script>
+
+<!-- PAGE -->
+
+<div class="max-w-6xl mx-auto p-6">
+
+<h1 class="text-3xl font-bold text-center mb-4">
+Live Travel Nurse Contracts Nationwide
+</h1>
+
+<p class="text-center text-gray-600 mb-8">
+Real contract pay packages submitted by travel nurses across the United States. Updated continuously.
+</p>
+
+<!-- FILTERS -->
+
+<div class="grid md:grid-cols-3 gap-4 mb-6">
+
+<input id="cityFilter" placeholder="Filter by City"
+class="p-3 border rounded">
+
+<input id="specialtyFilter" placeholder="Filter by Specialty"
+class="p-3 border rounded">
+
+<select id="sortFilter" class="p-3 border rounded">
+<option value="high">Highest Pay</option>
+<option value="low">Lowest Pay</option>
+</select>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="overflow-x-auto">
+
+<table class="w-full border text-sm bg-white rounded-xl shadow">
+
+<thead class="bg-gray-100">
+
+<tr>
+<th class="p-3">City</th>
+<th class="p-3">State</th>
+<th class="p-3">Specialty</th>
+<th class="p-3">Weekly Pay</th>
+<th class="p-3">Shift</th>
+<th class="p-3">Hours</th>
+</tr>
+
+</thead>
+
+<tbody id="contractsTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- STICKY CTA -->
+
+<div class="fixed bottom-0 left-0 w-full bg-white border-t p-3 z-50 md:hidden">
+
+<button onclick="window.location.href='/'"
+class="w-full bg-blue-600 text-white p-4 rounded-lg text-lg font-bold">
+
+Analyze Your Contract
+
+</button>
+
+</div>
+
+<!-- FOOTER -->
+
+<div id="footer"></div>
+<script src="/components/load-footer.js"></script>
+
+<!-- SCRIPT -->
+
+<script>
+
+let contracts = []
+
+async function loadContracts(){
+
+try{
+
+const res = await fetch("/api/contracts")
+
+contracts = await res.json()
+
+renderTable()
+
+}catch(err){
+
+console.error("Failed to load contracts")
+
+}
+
+}
+
+function renderTable(){
+
+const city = document.getElementById("cityFilter").value.toLowerCase()
+const specialty = document.getElementById("specialtyFilter").value.toLowerCase()
+const sort = document.getElementById("sortFilter").value
+
+let filtered = contracts.filter(c =>
+
+(!city || c.city?.toLowerCase().includes(city)) &&
+(!specialty || c.specialty?.toLowerCase().includes(specialty))
+
+)
+
+filtered.sort((a,b)=>{
+
+return sort === "high"
+? b.weeklyPay - a.weeklyPay
+: a.weeklyPay - b.weeklyPay
+
+})
+
+const table = document.getElementById("contractsTable")
+
+table.innerHTML = ""
+
+filtered.slice(0,100).forEach(c => {
+
+table.innerHTML += `
+<tr class="border-b">
+<td class="p-3">${c.city || "-"}</td>
+<td class="p-3">${c.state || "-"}</td>
+<td class="p-3">${c.specialty || "-"}</td>
+<td class="p-3 font-bold text-green-600">$${c.weeklyPay || 0}</td>
+<td class="p-3">${c.shiftType || "-"}</td>
+<td class="p-3">${c.hoursPerWeek || "-"}</td>
+</tr>
+`
+
+})
+
+}
+
+document.getElementById("cityFilter").addEventListener("input", renderTable)
+document.getElementById("specialtyFilter").addEventListener("input", renderTable)
+document.getElementById("sortFilter").addEventListener("change", renderTable)
+
+loadContracts()
+
+// Auto refresh every 60 seconds
+setInterval(loadContracts, 60000)
+
+</script>
+
+</body>
+</html>
