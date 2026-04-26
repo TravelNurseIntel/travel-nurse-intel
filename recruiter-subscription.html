@@ -1,86 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Recruit Travel Nurses | Travel Nurse Intel</title>
-
 <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 
 <body class="bg-gray-50 p-6">
 
-<div class="max-w-4xl mx-auto bg-white p-10 rounded-xl shadow text-center">
+<div class="max-w-5xl mx-auto bg-white p-10 rounded-xl shadow text-center">
 
 <h1 class="text-3xl font-bold mb-4">
 Recruit Travel Nurses Directly
 </h1>
 
 <p class="text-gray-700 mb-8">
-Hospitals and staffing agencies can post high-pay travel nurse contracts directly to our platform.
+Access real-time market intelligence, pay recommendations, and fill contracts faster.
 </p>
 
 <div class="grid md:grid-cols-3 gap-6">
 
+<!-- STARTER -->
 <div class="border p-6 rounded-lg">
-
-<h2 class="text-xl font-bold mb-2">
-Starter
-</h2>
-
-<p class="text-gray-600 mb-4">
-Access real-time market intelligence and fill contracts faster
-</p>
-
-<p class="text-2xl font-bold mb-4">
-$599/mo
-</p>
-
-<button class="bg-blue-600 text-white px-5 py-3 rounded">
+<h2 class="text-xl font-bold mb-2">Starter</h2>
+<p class="text-gray-600 mb-4">Market insights + pay analytics</p>
+<p class="text-2xl font-bold mb-4">$599/mo</p>
+<button onclick="subscribe('starter')" class="bg-blue-600 text-white px-5 py-3 rounded">
 Subscribe
 </button>
-
 </div>
 
+<!-- STANDARD -->
 <div class="border p-6 rounded-lg">
-
-<h2 class="text-xl font-bold mb-2">
-Standard
-</h2>
-
-<p class="text-gray-600 mb-4">
-Unlimited contract postings
-</p>
-
-<p class="text-2xl font-bold mb-4">
-$999/mo
-</p>
-
-<button class="bg-blue-600 text-white px-5 py-3 rounded">
+<h2 class="text-xl font-bold mb-2">Standard</h2>
+<p class="text-gray-600 mb-4">Unlimited contract postings</p>
+<p class="text-2xl font-bold mb-4">$999/mo</p>
+<button onclick="subscribe('standard')" class="bg-blue-600 text-white px-5 py-3 rounded">
 Subscribe
 </button>
-
 </div>
 
+<!-- ENTERPRISE -->
 <div class="border p-6 rounded-lg">
+<h2 class="text-xl font-bold mb-2">Enterprise</h2>
+<p class="text-gray-600 mb-4">Full analytics + priority exposure</p>
+<p class="text-2xl font-bold mb-4">$3999/mo</p>
 
-<h2 class="text-xl font-bold mb-2">
-Enterprise
-</h2>
+<button onclick="subscribe('enterprise')" class="bg-blue-600 text-white p-3 rounded mb-3 w-full">
+Start Subscription
+</button>
 
-<p class="text-gray-600 mb-4">
-Featured listings + analytics
-</p>
-
-<p class="text-2xl font-bold mb-4">
-$3999/mo
-</p>
-
-<button class="bg-blue-600 text-white px-5 py-3 rounded">
+<button class="bg-gray-800 text-white px-5 py-3 rounded w-full">
 Contact Sales
 </button>
 
@@ -89,6 +60,44 @@ Contact Sales
 </div>
 
 </div>
+
+<script>
+
+async function subscribe(plan){
+
+const email = prompt("Enter your email")
+
+if(!email) return
+
+try{
+
+const res = await fetch("/api/create-key",{
+method:"POST",
+headers:{ "Content-Type":"application/json" },
+body: JSON.stringify({ email, plan })
+})
+
+const data = await res.json()
+
+if(!data.apiKey){
+alert("Subscription failed")
+return
+}
+
+localStorage.setItem("apiKey", data.apiKey)
+
+alert("Subscription activated")
+
+}catch(err){
+
+console.error(err)
+alert("Error creating subscription")
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
