@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recruiter Intelligence Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 p-6">
+
+<div class="max-w-6xl mx-auto">
+
+<h1 class="text-3xl font-bold mb-6">
+Recruiter Market Intelligence Dashboard
+</h1>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="bg-white p-6 rounded shadow">
+<h3 class="font-bold">Avg Market Pay</h3>
+<p id="avgPay" class="text-3xl font-bold text-green-600"></p>
+</div>
+
+<div class="bg-white p-6 rounded shadow">
+<h3 class="font-bold">High Demand Markets</h3>
+<p id="demandCount" class="text-3xl font-bold"></p>
+</div>
+
+<div class="bg-white p-6 rounded shadow">
+<h3 class="font-bold">Suggested Pay Increase</h3>
+<p id="suggestedPay" class="text-3xl font-bold text-blue-600"></p>
+</div>
+
+</div>
+
+<h2 class="text-2xl font-bold mt-10 mb-4">
+Top Competitive Markets
+</h2>
+
+<div id="marketTable"></div>
+
+</div>
+
+<script>
+
+let contracts=[]
+
+async function load(){
+
+const res = await fetch("/api/contracts")
+contracts = await res.json()
+
+renderStats()
+renderMarkets()
+
+}
+
+function renderStats(){
+
+const avg = contracts.reduce((sum,c)=>sum+(c.weeklyPay||0),0)/contracts.length
+
+document.getElementById("avgPay").innerText = "$"+Math.round(avg)
+
+const demandMarkets = new Set(contracts.map(c=>c.city+"-"+c.state))
+
+document.getElementById("demandCount").innerText = demandMarkets.size
+
+document.getElementById("suggestedPay").innerText = "+$300"
+
+}
+
+function renderMarkets(){
+
+const map={}
+
+contracts.forEach(c=>{
+const key=c.city+"-"+c.state
+
+if(!map[key]) map[key]={city:c.city,state:c.state,count:0,pay:0}
+
+map[key].count++
+map[key].pay+=c.weeklyPay||0
+})
+
+const sorted = Object.values(map).map(m=>({
+...m,
+avg:Math.round(m.pay/m.count)
+})).sort((a,b)=>b.avg-a.avg)
+
+document.getElementById("marketTable").innerHTML =
+sorted.slice(0,10).map(m=>`
+<div class="bg-white p-4 mb-3 rounded shadow">
+
+<div class="font-bold">${m.city}, ${m.state}</div>
+<div>$${m.avg}/week avg</div>
+<div>${m.count} contracts</div>
+
+</div>
+`).join("")
+
+}
+
+load()
+
+</script>
+
+</body>
+</html>
