@@ -26,8 +26,10 @@ Access real-time market intelligence, pay recommendations, and fill contracts fa
 <h2 class="text-xl font-bold mb-2">Starter</h2>
 <p class="text-gray-600 mb-4">Market insights + pay analytics</p>
 <p class="text-2xl font-bold mb-4">$599/mo</p>
-<button onclick="subscribe('starter')" class="bg-blue-600 text-white px-5 py-3 rounded">
-Subscribe
+
+<button onclick="subscribe('starter')" 
+class="bg-blue-600 text-white px-5 py-3 rounded hover:bg-blue-700 w-full">
+Start Starter Plan
 </button>
 </div>
 
@@ -36,8 +38,10 @@ Subscribe
 <h2 class="text-xl font-bold mb-2">Standard</h2>
 <p class="text-gray-600 mb-4">Unlimited contract postings</p>
 <p class="text-2xl font-bold mb-4">$999/mo</p>
-<button onclick="subscribe('standard')" class="bg-blue-600 text-white px-5 py-3 rounded">
-Subscribe
+
+<button onclick="subscribe('standard')" 
+class="bg-blue-600 text-white px-5 py-3 rounded hover:bg-blue-700 w-full">
+Start Standard Plan
 </button>
 </div>
 
@@ -47,12 +51,9 @@ Subscribe
 <p class="text-gray-600 mb-4">Full analytics + priority exposure</p>
 <p class="text-2xl font-bold mb-4">$3999/mo</p>
 
-<button onclick="subscribe('enterprise')" class="bg-blue-600 text-white p-3 rounded mb-3 w-full">
-Start Subscription
-</button>
-
-<button class="bg-gray-800 text-white px-5 py-3 rounded w-full">
-Contact Sales
+<button onclick="contactSales()" 
+class="bg-gray-800 text-white px-5 py-3 rounded hover:bg-gray-900 w-full">
+Contact Enterprise Sales
 </button>
 
 </div>
@@ -62,6 +63,8 @@ Contact Sales
 </div>
 
 <script>
+
+/* 🔐 SUBSCRIPTION */
 
 async function subscribe(plan){
 
@@ -76,6 +79,10 @@ method:"POST",
 headers:{ "Content-Type":"application/json" },
 body: JSON.stringify({ email, plan })
 })
+
+if(!res.ok){
+throw new Error("Request failed")
+}
 
 const data = await res.json()
 
@@ -94,6 +101,14 @@ console.error(err)
 alert("Error creating subscription")
 
 }
+
+}
+
+/* 📞 ENTERPRISE CONTACT */
+
+function contactSales(){
+
+alert("Enterprise sales team will contact you shortly. Please email support@travelnurseintel.com")
 
 }
 
