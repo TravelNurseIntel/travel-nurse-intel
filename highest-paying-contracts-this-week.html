@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Highest Paying Travel Nurse Contracts This Week</title>
+
+<meta name="description" content="Discover the highest paying travel nurse contracts this week. Real pay data from nurses across the U.S. Updated daily.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-50 pt-32">
+
+<!-- HEADER -->
+<div id="header"></div>
+<script src="/components/load-header.js"></script>
+
+<!-- PAGE -->
+
+<div class="max-w-6xl mx-auto p-6">
+
+<h1 class="text-3xl md:text-4xl font-bold text-center mb-4">
+Highest Paying Travel Nurse Contracts This Week
+</h1>
+
+<p class="text-center text-gray-600 mb-8">
+Updated daily using real contract submissions. See which cities and specialties are paying the most right now.
+</p>
+
+<!-- TOP 10 CARDS -->
+
+<div id="topContracts" class="grid md:grid-cols-2 gap-6 mb-10"></div>
+
+<!-- TABLE -->
+
+<h2 class="text-2xl font-bold mb-4">
+Top Paying Contracts Nationwide
+</h2>
+
+<div class="overflow-x-auto">
+
+<table class="w-full border text-sm bg-white rounded-xl shadow">
+
+<thead class="bg-gray-100">
+<tr>
+<th class="p-3">Rank</th>
+<th class="p-3">City</th>
+<th class="p-3">State</th>
+<th class="p-3">Specialty</th>
+<th class="p-3">Weekly Pay</th>
+<th class="p-3">Shift</th>
+<th class="p-3">Hours</th>
+</tr>
+</thead>
+
+<tbody id="contractsTable"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- STICKY CTA -->
+
+<div class="fixed bottom-0 left-0 w-full bg-white border-t p-3 z-50 md:hidden">
+<button onclick="window.location.href='/'"
+class="w-full bg-blue-600 text-white p-4 rounded-lg text-lg font-bold">
+Analyze Your Contract
+</button>
+</div>
+
+<!-- FOOTER -->
+
+<div id="footer"></div>
+<script src="/components/load-footer.js"></script>
+
+<!-- SCRIPT -->
+
+<script>
+
+let contracts = []
+
+async function loadContracts(){
+
+try{
+
+const res = await fetch("/api/contracts")
+contracts = await res.json()
+
+// Sort highest pay first
+contracts.sort((a,b)=> b.weeklyPay - a.weeklyPay)
+
+renderTopCards()
+renderTable()
+
+}catch(err){
+console.error("Failed to load contracts")
+}
+
+}
+
+// TOP CARDS
+
+function renderTopCards(){
+
+const container = document.getElementById("topContracts")
+container.innerHTML = ""
+
+contracts.slice(0,10).forEach((c, index)=>{
+
+container.innerHTML += `
+<div class="bg-white p-6 rounded-xl shadow border">
+<div class="text-sm text-gray-500 mb-1">#${index+1} Highest Paying</div>
+<div class="text-xl font-bold mb-2">$${c.weeklyPay}</div>
+<div class="text-gray-700">${c.specialty || "N/A"}</div>
+<div class="text-gray-500">${c.city || ""}, ${c.state || ""}</div>
+</div>
+`
+
+})
+
+}
+
+// TABLE
+
+function renderTable(){
+
+const table = document.getElementById("contractsTable")
+table.innerHTML = ""
+
+contracts.slice(0,50).forEach((c, index)=>{
+
+table.innerHTML += `
+<tr class="border-b">
+<td class="p-3 font-bold">#${index+1}</td>
+<td class="p-3">${c.city || "-"}</td>
+<td class="p-3">${c.state || "-"}</td>
+<td class="p-3">${c.specialty || "-"}</td>
+<td class="p-3 font-bold text-green-600">$${c.weeklyPay || 0}</td>
+<td class="p-3">${c.shiftType || "-"}</td>
+<td class="p-3">${c.hoursPerWeek || "-"}</td>
+</tr>
+`
+
+})
+
+}
+
+loadContracts()
+
+// Auto refresh every 60 seconds
+setInterval(loadContracts, 60000)
+
+</script>
+
+</body>
+</html>
