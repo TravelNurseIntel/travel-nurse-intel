@@ -38,6 +38,10 @@ Live Travel Nurse Market Intelligence
 <h2 class="text-2xl font-bold mb-4">📊 Demand Heatmap</h2>
 <div id="heatmap" class="grid md:grid-cols-5 gap-2 mb-10"></div>
 
+<!-- PAY GROWTH -->
+<h2 class="text-2xl font-bold mb-4">📈 Where Pay is Increasing Fastest</h2>
+<div id="payGrowth" class="grid md:grid-cols-3 gap-4 mb-10"></div>
+
 <!-- TABLE -->
 <h2 class="text-2xl font-bold mb-4">All Contracts</h2>
 <table class="w-full text-sm bg-white shadow rounded">
@@ -62,7 +66,13 @@ Live Travel Nurse Market Intelligence
 let contracts = []
 
 async function load(){
+
+try{
+
 const res = await fetch("/api/contracts")
+
+if(!res.ok) throw new Error("API failed")
+
 contracts = await res.json()
 
 renderHot()
@@ -70,104 +80,140 @@ renderStates()
 renderShortage()
 renderSpecialty()
 renderHeatmap()
+renderPayGrowth()
 renderTable()
+
+}catch(err){
+
+console.error("Load failed:", err)
+
 }
 
+}
+
+/* HOT MARKETS */
+
 function renderHot(){
+
 const map={}
+
 contracts.forEach(c=>{
-const key=c.city+"-"+c.state
-if(!map[key]) map[key]={city:c.city,state:c.state,count:0,pay:0}
+const key=(c.city||"-")+"-"+(c.state||"-")
+if(!map[key]) map[key]={city:c.city||"-",state:c.state||"-",count:0,pay:0}
 map[key].count++
-map[key].pay+=c.weeklyPay||0
+map[key].pay+=(c.weeklyPay||0)
 })
 
 const sorted=Object.values(map).map(m=>({
 ...m,
-avg:Math.round(m.pay/m.count),
+avg:Math.round((m.pay||0)/(m.count||1)),
 score:m.count*m.pay
 })).sort((a,b)=>b.score-a.score)
 
-document.getElementById("hotMarkets").innerHTML=
+document.getElementById("hotMarkets").innerHTML =
 sorted.slice(0,6).map(m=>`
 <div class="bg-white p-4 rounded shadow">
 <div class="font-bold">${m.city}, ${m.state}</div>
 <div>$${m.avg}/wk</div>
 <div>${m.count} jobs</div>
 </div>`).join("")
+
 }
 
+/* STATES */
+
 function renderStates(){
+
 const map={}
+
 contracts.forEach(c=>{
-if(!map[c.state]) map[c.state]={state:c.state,count:0,pay:0}
-map[c.state].count++
-map[c.state].pay+=c.weeklyPay||0
+const state=c.state||"-"
+if(!map[state]) map[state]={state,count:0,pay:0}
+map[state].count++
+map[state].pay+=(c.weeklyPay||0)
 })
 
 const sorted=Object.values(map).map(s=>({
 ...s,
-avg:Math.round(s.pay/s.count)
+avg:Math.round((s.pay||0)/(s.count||1))
 })).sort((a,b)=>b.avg-a.avg)
 
-document.getElementById("bestStates").innerHTML=
+document.getElementById("bestStates").innerHTML =
 sorted.slice(0,6).map(s=>`
 <div class="bg-white p-4 rounded shadow">
 <div class="font-bold">${s.state}</div>
 <div>$${s.avg}/wk avg</div>
 </div>`).join("")
+
 }
 
+/* SHORTAGE */
+
 function renderShortage(){
+
 const map={}
+
 contracts.forEach(c=>{
-const key=c.city+"-"+c.specialty
-if(!map[key]) map[key]={city:c.city,specialty:c.specialty,count:0}
+const key=(c.city||"-")+"-"+(c.specialty||"-")
+if(!map[key]) map[key]={city:c.city||"-",specialty:c.specialty||"-",count:0}
 map[key].count++
 })
 
 const sorted=Object.values(map).sort((a,b)=>b.count-a.count)
 
-document.getElementById("shortageIndex").innerHTML=
+document.getElementById("shortageIndex").innerHTML =
 sorted.slice(0,6).map(s=>`
 <div class="bg-white p-4 rounded shadow">
 <div>${s.city}</div>
 <div>${s.specialty}</div>
 <div class="font-bold">${s.count} openings</div>
 </div>`).join("")
+
 }
 
+/* SPECIALTY */
+
 function renderSpecialty(){
+
 const map={}
+
 contracts.forEach(c=>{
-if(!map[c.specialty]) map[c.specialty]={specialty:c.specialty,count:0,pay:0}
-map[c.specialty].count++
-map[c.specialty].pay+=c.weeklyPay||0
+const spec=c.specialty||"Unknown"
+if(!map[spec]) map[spec]={specialty:spec,count:0,pay:0}
+map[spec].count++
+map[spec].pay+=(c.weeklyPay||0)
 })
 
 const sorted=Object.values(map).map(s=>({
 ...s,
-avg:Math.round(s.pay/s.count)
+avg:Math.round((s.pay||0)/(s.count||1))
 })).sort((a,b)=>b.avg-a.avg)
 
-document.getElementById("topSpecialty").innerHTML=
+document.getElementById("topSpecialty").innerHTML =
 sorted.slice(0,6).map(s=>`
 <div class="bg-white p-4 rounded shadow">
 <div class="font-bold">${s.specialty}</div>
 <div>$${s.avg}/wk</div>
 </div>`).join("")
+
 }
 
+/* HEATMAP */
+
 function renderHeatmap(){
+
 const map={}
+
 contracts.forEach(c=>{
-if(!map[c.state]) map[c.state]=0
-map[c.state]++
+const state=c.state||"-"
+if(!map[state]) map[state]=0
+map[state]++
 })
 
-const max=Math.max(...Object.values(map))
+const values=Object.values(map)
+const max=values.length ? Math.max(...values) : 1
 
-document.getElementById("heatmap").innerHTML=
+document.getElementById("heatmap").innerHTML =
 Object.entries(map).map(([state,count])=>{
 const intensity=Math.round((count/max)*255)
 return `<div class="text-center p-2 rounded text-white"
@@ -175,17 +221,88 @@ style="background: rgb(${intensity},0,0)">
 ${state}
 </div>`
 }).join("")
+
 }
 
+/* PAY GROWTH */
+
+function renderPayGrowth(){
+
+const now=new Date()
+const cutoff=new Date(now.getTime()-7*24*60*60*1000)
+
+const oldData={}
+const newData={}
+
+contracts.forEach(c=>{
+
+if(!c.submissionDate) return
+
+const date=new Date(c.submissionDate)
+const key=(c.city||"-")+"-"+(c.state||"-")
+
+if(date>=cutoff){
+
+if(!newData[key]) newData[key]={city:c.city||"-",state:c.state||"-",total:0,count:0}
+newData[key].total+=(c.weeklyPay||0)
+newData[key].count++
+
+}else{
+
+if(!oldData[key]) oldData[key]={total:0,count:0}
+oldData[key].total+=(c.weeklyPay||0)
+oldData[key].count++
+
+}
+
+})
+
+let growth=[]
+
+Object.keys(newData).forEach(key=>{
+
+if(oldData[key]){
+
+const newAvg=newData[key].total/newData[key].count
+const oldAvg=oldData[key].total/oldData[key].count
+
+growth.push({
+city:newData[key].city,
+state:newData[key].state,
+increase:Math.round(newAvg-oldAvg),
+newAvg:Math.round(newAvg)
+})
+
+}
+
+})
+
+growth.sort((a,b)=>b.increase-a.increase)
+
+document.getElementById("payGrowth").innerHTML =
+growth.slice(0,6).map(g=>`
+<div class="bg-white p-4 rounded shadow border">
+<div class="font-bold">${g.city}, ${g.state}</div>
+<div class="text-green-600 font-bold">+ $${g.increase}/week</div>
+<div class="text-sm text-gray-500">Now averaging $${g.newAvg}</div>
+</div>
+`).join("")
+
+}
+
+/* TABLE */
+
 function renderTable(){
-document.getElementById("table").innerHTML=
+
+document.getElementById("table").innerHTML =
 contracts.slice(0,50).map(c=>`
 <tr>
-<td class="p-2">${c.city}</td>
-<td class="p-2">${c.state}</td>
-<td class="p-2">${c.specialty}</td>
-<td class="p-2">$${c.weeklyPay}</td>
+<td class="p-2">${c.city||"-"}</td>
+<td class="p-2">${c.state||"-"}</td>
+<td class="p-2">${c.specialty||"-"}</td>
+<td class="p-2">$${c.weeklyPay||0}</td>
 </tr>`).join("")
+
 }
 
 load()
