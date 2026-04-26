@@ -2,14 +2,12 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Recruiter Dashboard | Travel Nurse Intel</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-
 </head>
 
 <body class="bg-gray-50">
@@ -22,6 +20,25 @@
 <h1 class="text-3xl font-bold mb-6">
 Recruiter Dashboard
 </h1>
+
+<!-- 🔥 ACTION BAR (NEW - HIGH VALUE) -->
+
+<div class="grid md:grid-cols-3 gap-4 mb-10">
+
+<button onclick="getPrediction()" class="bg-blue-600 text-white p-4 rounded-lg font-semibold hover:bg-blue-700">
+Get Pay Recommendation
+</button>
+
+<a href="/travel-nurse-market-intelligence.html"
+class="bg-gray-800 text-white p-4 rounded-lg font-semibold text-center hover:bg-gray-900">
+View Market Insights
+</a>
+
+<button onclick="optimizePay()" class="bg-green-600 text-white p-4 rounded-lg font-semibold hover:bg-green-700">
+Optimize Contract Pay
+</button>
+
+</div>
 
 <!-- METRICS -->
 
@@ -41,6 +58,22 @@ Recruiter Dashboard
 <h3 class="font-bold text-lg mb-2">Average Pay Rank</h3>
 <p class="text-4xl font-bold">Top 20%</p>
 </div>
+
+</div>
+
+<!-- PAY PREDICTION RESULT -->
+
+<div class="bg-white p-6 rounded-xl shadow mb-10">
+<h2 class="text-xl font-bold mb-4">Pay Recommendation</h2>
+
+<div class="grid md:grid-cols-2 gap-4 mb-4">
+
+<input id="city" placeholder="City" class="p-3 border rounded">
+<input id="specialty" placeholder="Specialty" class="p-3 border rounded">
+
+</div>
+
+<p id="predictionResult" class="text-xl font-bold text-green-600"></p>
 
 </div>
 
@@ -89,6 +122,62 @@ Upload CSV
 
 <script>
 
+/* 🔥 PAY PREDICTION */
+
+async function getPrediction(){
+
+const city = document.getElementById("city").value.trim()
+const specialty = document.getElementById("specialty").value.trim()
+
+if(!city || !specialty){
+alert("Enter city and specialty")
+return
+}
+
+const apiKey = localStorage.getItem("apiKey")
+
+if(!apiKey){
+alert("Upgrade required")
+return
+}
+
+try{
+
+const res = await fetch(`/api/predict-pay?city=${encodeURIComponent(city)}&specialty=${encodeURIComponent(specialty)}`,{
+headers: {
+"x-api-key": apiKey
+}
+})
+
+if(res.status === 403){
+alert("Upgrade to access this feature")
+return
+}
+
+const data = await res.json()
+
+document.getElementById("predictionResult").innerText =
+`Recommended Pay: $${data.recommendedPay}/week`
+
+}catch(err){
+
+console.error(err)
+alert("Prediction failed")
+
+}
+
+}
+
+/* 🔥 OPTIMIZE PAY (SIMPLE UPGRADE HOOK) */
+
+function optimizePay(){
+
+alert("Optimization engine coming next — upgrade required")
+
+}
+
+/* 📄 POST CONTRACT */
+
 document.getElementById("jobForm").addEventListener("submit", async function(e){
 
 e.preventDefault()
@@ -101,8 +190,10 @@ hospital: formData.get("hospital"),
 city: formData.get("city"),
 state: formData.get("state"),
 specialty: formData.get("specialty"),
-pay: formData.get("pay")
+pay: Number(formData.get("pay")) || 0
 }
+
+try{
 
 await fetch("/api/jobs",{
 method:"POST",
@@ -112,7 +203,16 @@ body: JSON.stringify(payload)
 
 alert("Job posted successfully")
 
+}catch(err){
+
+console.error(err)
+alert("Failed to post job")
+
+}
+
 })
+
+/* 📊 CSV UPLOAD */
 
 async function uploadCSV(){
 
@@ -123,6 +223,8 @@ alert("Please select a CSV file")
 return
 }
 
+try{
+
 const text = await file.text()
 
 await fetch("/api/jobs-upload",{
@@ -132,6 +234,13 @@ body:text
 })
 
 alert("Bulk upload complete")
+
+}catch(err){
+
+console.error(err)
+alert("Upload failed")
+
+}
 
 }
 
