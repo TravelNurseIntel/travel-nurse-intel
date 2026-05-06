@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,7 +15,10 @@
 body{
 font-family:system-ui;
 background:#f8fafc;
+overflow-x:hidden;
 }
+
+/* SCORE */
 
 .score-circle{
 width:120px;
@@ -30,6 +34,69 @@ margin:auto;
 transition:0.3s ease;
 }
 
+/* RIBBON */
+
+.ribbon-wrapper{
+width:100%;
+overflow:hidden;
+background:#111827;
+color:white;
+white-space:nowrap;
+padding:10px 0;
+position:relative;
+}
+
+.ribbon{
+display:inline-block;
+padding-left:100%;
+animation:scrollRibbon 30s linear infinite;
+font-size:14px;
+font-weight:600;
+}
+
+@keyframes scrollRibbon{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-100%);
+}
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.mobile-grid{
+grid-template-columns:1fr 1fr !important;
+gap:10px !important;
+}
+
+.mobile-input{
+padding:10px !important;
+font-size:14px !important;
+}
+
+.mobile-label{
+font-size:12px !important;
+}
+
+.mobile-button{
+padding:14px !important;
+font-size:16px !important;
+}
+
+.sticky-analyze{
+position:sticky;
+bottom:0;
+background:white;
+padding-top:12px;
+padding-bottom:8px;
+z-index:40;
+}
+
+}
+
 </style>
 
 </head>
@@ -38,7 +105,7 @@ transition:0.3s ease;
 
 <!-- HEADER -->
 
-<div class="bg-white border-b shadow-sm mb-6">
+<div class="bg-white border-b shadow-sm">
 
 <div class="max-w-5xl mx-auto flex flex-col items-center p-3">
 
@@ -85,9 +152,26 @@ Enterprise
 
 </div>
 
+<!-- SCROLLING RIBBON -->
+
+<div class="ribbon-wrapper">
+
+<div class="ribbon">
+
+🔥 ICU contracts paying up to $4,800/week •
+🔥 California remains highest paying state •
+🔥 Phoenix ICU contracts increased 14% this month •
+🔥 Housing stipends rising nationwide •
+🔥 Compare recruiter pay packages instantly •
+🔥 Analyze your contract in 30 seconds •
+
+</div>
+
+</div>
+
 <!-- MAIN -->
 
-<div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow">
+<div class="max-w-4xl mx-auto bg-white p-4 md:p-6 rounded-xl shadow mt-6">
 
 <div class="max-w-3xl mx-auto">
 
@@ -118,72 +202,84 @@ Your Contract Pay Score
 <button
 onclick="shareScore()"
 class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg font-semibold">
+
 Share Your Contract Score
+
 </button>
 
 </div>
 
 <!-- ANALYZER -->
 
-<div class="bg-white p-6 rounded-xl border">
+<div class="bg-white p-4 rounded-xl border">
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="grid mobile-grid grid-cols-2 gap-3">
 
 <div>
-<label class="text-sm text-gray-600">
+
+<label class="mobile-label text-sm text-gray-600">
 Hourly Rate
 </label>
 
 <input
 id="hourly"
 type="number"
-class="p-3 border rounded w-full"
+class="mobile-input p-3 border rounded w-full"
 placeholder="85">
+
 </div>
 
 <div>
-<label class="text-sm text-gray-600">
+
+<label class="mobile-label text-sm text-gray-600">
 Weekly Hours
 </label>
 
 <input
 id="hours"
 type="number"
-class="p-3 border rounded w-full"
+class="mobile-input p-3 border rounded w-full"
 placeholder="36">
+
 </div>
 
 <div>
-<label class="text-sm text-gray-600">
+
+<label class="mobile-label text-sm text-gray-600">
 Weekly Stipend
 </label>
 
 <input
 id="stipend"
 type="number"
-class="p-3 border rounded w-full"
+class="mobile-input p-3 border rounded w-full"
 placeholder="1200">
+
 </div>
 
 <div>
-<label class="text-sm text-gray-600">
+
+<label class="mobile-label text-sm text-gray-600">
 Housing Cost
 </label>
 
 <input
 id="rent"
 type="number"
-class="p-3 border rounded w-full"
+class="mobile-input p-3 border rounded w-full"
 placeholder="1800">
-</div>
 
 </div>
 
-<div class="mt-6 flex justify-center">
+</div>
+
+<!-- STICKY ANALYZE BUTTON -->
+
+<div class="sticky-analyze mt-4">
 
 <button
 onclick="analyze()"
-class="w-full max-w-sm bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl shadow-lg font-semibold transition">
+class="mobile-button w-full bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl shadow-lg font-semibold transition">
 
 Analyze Your Contract
 
@@ -200,12 +296,13 @@ Free analysis • No signup required • Instant results
 <div class="mt-10 bg-gray-50 border rounded-xl p-6">
 
 <h2 class="text-xl font-bold mb-4">
-Pay Prediction Tool
+Get Pay Recommendation
 </h2>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
 <div>
+
 <label class="text-sm text-gray-600">
 City
 </label>
@@ -215,9 +312,11 @@ id="city"
 type="text"
 class="p-3 border rounded w-full"
 placeholder="Phoenix">
+
 </div>
 
 <div>
+
 <label class="text-sm text-gray-600">
 Specialty
 </label>
@@ -227,15 +326,16 @@ id="specialty"
 type="text"
 class="p-3 border rounded w-full"
 placeholder="ICU">
+
 </div>
 
 </div>
 
 <button
 onclick="getPrediction()"
-class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-semibold w-full md:w-auto">
+class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-semibold w-full">
 
-Get Pay Recommendation
+Optimize Contract Pay
 
 </button>
 
@@ -351,7 +451,7 @@ topchoice.gwendolyn@outlook.com
 
 </footer>
 
-<!-- MOBILE STICKY CTA -->
+<!-- MOBILE FLOATING CTA -->
 
 <div class="fixed bottom-0 left-0 w-full bg-white border-t p-3 z-50 md:hidden">
 
