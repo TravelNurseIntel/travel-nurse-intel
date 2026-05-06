@@ -16,6 +16,7 @@ body{
 font-family:system-ui;
 background:#f8fafc;
 overflow-x:hidden;
+padding-bottom:90px;
 }
 
 /* SCORE */
@@ -41,25 +42,31 @@ width:100%;
 overflow:hidden;
 background:#111827;
 color:white;
-white-space:nowrap;
-padding:10px 0;
+height:42px;
+display:flex;
+align-items:center;
 position:relative;
 }
 
-.ribbon{
-display:inline-block;
-padding-left:100%;
-animation:scrollRibbon 30s linear infinite;
+.ribbon-track{
+display:flex;
+width:max-content;
+animation:marquee 30s linear infinite;
+}
+
+.ribbon-text{
+white-space:nowrap;
+padding-right:80px;
 font-size:14px;
 font-weight:600;
 }
 
-@keyframes scrollRibbon{
+@keyframes marquee{
 0%{
 transform:translateX(0);
 }
 100%{
-transform:translateX(-100%);
+transform:translateX(-50%);
 }
 }
 
@@ -68,33 +75,50 @@ transform:translateX(-100%);
 @media(max-width:768px){
 
 .mobile-grid{
-grid-template-columns:1fr 1fr !important;
-gap:10px !important;
-}
-
-.mobile-input{
-padding:10px !important;
-font-size:14px !important;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
 }
 
 .mobile-label{
-font-size:12px !important;
+font-size:11px;
+line-height:1.1;
+}
+
+.mobile-input{
+padding:7px !important;
+font-size:13px !important;
+height:38px;
 }
 
 .mobile-button{
+padding:12px !important;
+font-size:15px !important;
+}
+
+.mobile-card{
 padding:14px !important;
-font-size:16px !important;
 }
 
-.sticky-analyze{
-position:sticky;
+h1{
+font-size:28px !important;
+line-height:1.15 !important;
+}
+
+}
+
+/* FIXED ANALYZE BUTTON */
+
+.mobile-fixed-cta{
+position:fixed;
 bottom:0;
+left:0;
+width:100%;
 background:white;
-padding-top:12px;
-padding-bottom:8px;
-z-index:40;
-}
-
+border-top:1px solid #e5e7eb;
+padding:10px;
+z-index:9999;
+box-shadow:0 -2px 10px rgba(0,0,0,0.08);
 }
 
 </style>
@@ -156,14 +180,25 @@ Enterprise
 
 <div class="ribbon-wrapper">
 
-<div class="ribbon">
+<div class="ribbon-track">
 
+<div class="ribbon-text">
 🔥 ICU contracts paying up to $4,800/week •
 🔥 California remains highest paying state •
 🔥 Phoenix ICU contracts increased 14% this month •
 🔥 Housing stipends rising nationwide •
 🔥 Compare recruiter pay packages instantly •
 🔥 Analyze your contract in 30 seconds •
+</div>
+
+<div class="ribbon-text">
+🔥 ICU contracts paying up to $4,800/week •
+🔥 California remains highest paying state •
+🔥 Phoenix ICU contracts increased 14% this month •
+🔥 Housing stipends rising nationwide •
+🔥 Compare recruiter pay packages instantly •
+🔥 Analyze your contract in 30 seconds •
+</div>
 
 </div>
 
@@ -171,7 +206,7 @@ Enterprise
 
 <!-- MAIN -->
 
-<div class="max-w-4xl mx-auto bg-white p-4 md:p-6 rounded-xl shadow mt-6">
+<div class="max-w-4xl mx-auto bg-white mobile-card p-4 md:p-6 rounded-xl shadow mt-6">
 
 <div class="max-w-3xl mx-auto">
 
@@ -211,85 +246,73 @@ Share Your Contract Score
 
 <!-- ANALYZER -->
 
-<div class="bg-white p-4 rounded-xl border">
+<div class="bg-white p-3 rounded-xl border">
 
-<div class="grid mobile-grid grid-cols-2 gap-3">
+<div class="mobile-grid">
 
 <div>
 
-<label class="mobile-label text-sm text-gray-600">
+<label class="mobile-label text-gray-600 block mb-1">
 Hourly Rate
 </label>
 
 <input
 id="hourly"
 type="number"
-class="mobile-input p-3 border rounded w-full"
+class="mobile-input border rounded w-full"
 placeholder="85">
 
 </div>
 
 <div>
 
-<label class="mobile-label text-sm text-gray-600">
+<label class="mobile-label text-gray-600 block mb-1">
 Weekly Hours
 </label>
 
 <input
 id="hours"
 type="number"
-class="mobile-input p-3 border rounded w-full"
+class="mobile-input border rounded w-full"
 placeholder="36">
 
 </div>
 
 <div>
 
-<label class="mobile-label text-sm text-gray-600">
+<label class="mobile-label text-gray-600 block mb-1">
 Weekly Stipend
 </label>
 
 <input
 id="stipend"
 type="number"
-class="mobile-input p-3 border rounded w-full"
+class="mobile-input border rounded w-full"
 placeholder="1200">
 
 </div>
 
 <div>
 
-<label class="mobile-label text-sm text-gray-600">
+<label class="mobile-label text-gray-600 block mb-1">
 Housing Cost
 </label>
 
 <input
 id="rent"
 type="number"
-class="mobile-input p-3 border rounded w-full"
+class="mobile-input border rounded w-full"
 placeholder="1800">
 
 </div>
 
 </div>
 
-<!-- STICKY ANALYZE BUTTON -->
-
-<div class="sticky-analyze mt-4">
-
-<button
-onclick="analyze()"
-class="mobile-button w-full bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl shadow-lg font-semibold transition">
-
-Analyze Your Contract
-
-</button>
-
-</div>
-
 <p class="text-center text-xs text-gray-500 mt-4">
 Free analysis • No signup required • Instant results
 </p>
+
+</div>
 
 <!-- PAY PREDICTION -->
 
@@ -346,118 +369,31 @@ class="mt-4 text-lg font-semibold text-center">
 
 </div>
 
-<!-- REPORT -->
-
-<div class="bg-blue-50 border border-blue-200 rounded-xl p-6 mt-8 text-center">
-
-<h2 class="text-xl font-bold mb-3">
-Unlock Your Full Contract Intelligence Report
-</h2>
-
-<p class="text-gray-700 mb-4">
-Get deeper pay comparison data, estimated lost income per contract, recruiter margin insights, and suggested negotiation ranges.
-</p>
-
-<a
-href="https://buy.stripe.com/dRm14pfhUfUD5EQ32q3Je00"
-target="_blank"
-class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg inline-block font-semibold">
-
-Unlock Full Report ($9.99)
-
-</a>
-
-<p class="text-xs text-gray-500 mt-3">
-Instant access after checkout
-</p>
-
-</div>
-
-<!-- PRO PLAN -->
-
-<div class="mt-10 bg-white p-6 rounded-xl border text-center">
-
-<h2 class="text-2xl font-bold mb-2">
-Find Higher Paying Travel Nurse Contracts Faster
-</h2>
-
-<p class="text-gray-600 mb-4">
-Unlock advanced salary databases, recruiter margin insights, and high-paying contract alerts.
-</p>
-
-<ul class="text-sm text-gray-700 mb-6 space-y-1">
-<li>✓ Full Salary Database</li>
-<li>✓ Recruiter Margin Comparison</li>
-<li>✓ Weekly High-Pay Alerts</li>
-<li>✓ Negotiation Intelligence</li>
-</ul>
-
-<a
-href="/recruiter-subscription.html"
-class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg inline-block">
-
-Upgrade to Pro
-
-</a>
-
-</div>
-
-<!-- DISCLAIMER -->
-
-<div class="mt-10 text-xs text-gray-500 text-center max-w-xl mx-auto">
-
-<strong>Disclaimer:</strong>
-
-Results generated by this tool are estimates based on user inputs and general market assumptions. This information is provided for educational and informational purposes only and should not be interpreted as financial, tax, legal, or employment advice.
-
-<p class="mt-2">
-<a href="/disclaimer.html" class="underline">
-View Full Legal Disclaimer
-</a>
-</p>
-
-</div>
-
 </div>
 
 </div>
 
 <!-- FOOTER -->
 
-<footer class="text-center text-xs text-gray-500 mt-10 pb-24">
+<footer class="text-center text-xs text-gray-500 mt-10">
 
 <p>
-Travel Nurse Intel™<br>
-A registered fictitious name of Kingdom Come™, LLC
-</p>
-
-<p class="mt-1">
-Support:
-<a href="mailto:topchoice.gwendolyn@outlook.com" class="underline">
-topchoice.gwendolyn@outlook.com
-</a>
+Travel Nurse Intel™
 </p>
 
 <p class="mt-2">
 © 2026 All rights reserved.
 </p>
 
-<p class="mt-2">
-<a href="/privacy.html" class="underline">Privacy Policy</a> •
-<a href="/terms.html" class="underline">Terms of Service</a> •
-<a href="/refunds.html" class="underline">Refund Policy</a> •
-<a href="/disclaimer.html" class="underline">Disclaimer</a>
-</p>
-
 </footer>
 
-<!-- MOBILE FLOATING CTA -->
+<!-- FIXED MOBILE BUTTON -->
 
-<div class="fixed bottom-0 left-0 w-full bg-white border-t p-3 z-50 md:hidden">
+<div class="mobile-fixed-cta md:hidden">
 
 <button
-onclick="window.scrollTo({top:0,behavior:'smooth'})"
-class="w-full bg-blue-600 text-white p-4 rounded-lg text-lg font-bold">
+onclick="analyze()"
+class="mobile-button w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-lg font-semibold transition">
 
 Analyze Your Contract
 
@@ -535,6 +471,11 @@ document.getElementById("verdict").innerText =
 
 document.getElementById("scoreSection")
 .classList.remove("hidden")
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+})
 
 }
 
