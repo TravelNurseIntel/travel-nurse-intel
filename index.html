@@ -4,7 +4,7 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>Travel Nurse Contract Analyzer | Travel Nurse Intel</title>
 
@@ -12,58 +12,60 @@
 
 <style>
 
+html,
 body{
+margin:0;
+padding:0;
+overflow-x:hidden;
 font-family:system-ui;
 background:#f8fafc;
-overflow-x:hidden;
-padding-bottom:90px;
 }
 
 /* SCORE */
 
 .score-circle{
-width:120px;
-height:120px;
+width:110px;
+height:110px;
 border-radius:50%;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:32px;
+font-size:30px;
 font-weight:bold;
 color:white;
 margin:auto;
 transition:0.3s ease;
 }
 
-/* RIBBON */
+/* SCROLLING RIBBON */
 
 .ribbon-wrapper{
 width:100%;
 overflow:hidden;
 background:#111827;
 color:white;
-height:42px;
+height:38px;
 display:flex;
 align-items:center;
 position:relative;
 }
 
-.ribbon-track{
+.ribbon-content{
 display:flex;
-width:max-content;
-animation:marquee 30s linear infinite;
-}
-
-.ribbon-text{
 white-space:nowrap;
-padding-right:80px;
-font-size:14px;
-font-weight:600;
+animation:scroll-left 22s linear infinite;
 }
 
-@keyframes marquee{
+.ribbon-item{
+padding-right:70px;
+font-size:13px;
+font-weight:600;
+flex-shrink:0;
+}
+
+@keyframes scroll-left{
 0%{
-transform:translateX(0);
+transform:translateX(0%);
 }
 100%{
 transform:translateX(-50%);
@@ -72,60 +74,81 @@ transform:translateX(-50%);
 
 /* MOBILE */
 
-@media(max-width:768px){
-
-.mobile-grid{
+.mobile-calculator{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:8px;
+gap:6px;
 }
 
-.mobile-label{
-font-size:11px;
-line-height:1.1;
+.mobile-field label{
+display:block;
+font-size:10px;
+margin-bottom:3px;
+color:#4b5563;
 }
 
-.mobile-input{
-padding:7px !important;
-font-size:13px !important;
-height:38px;
+.mobile-field input{
+width:100%;
+height:34px;
+padding:4px 8px;
+font-size:12px;
+border:1px solid #d1d5db;
+border-radius:8px;
+background:white;
 }
 
-.mobile-button{
-padding:12px !important;
-font-size:15px !important;
-}
-
-.mobile-card{
-padding:14px !important;
-}
-
-h1{
-font-size:28px !important;
-line-height:1.15 !important;
-}
-
-}
-
-/* FIXED ANALYZE BUTTON */
-
-.mobile-fixed-cta{
+.mobile-fixed-button{
 position:fixed;
 bottom:0;
 left:0;
-width:100%;
+right:0;
 background:white;
+padding:8px;
 border-top:1px solid #e5e7eb;
-padding:10px;
-z-index:9999;
+z-index:99999;
 box-shadow:0 -2px 10px rgba(0,0,0,0.08);
+}
+
+.mobile-fixed-button button{
+width:100%;
+background:#2563eb;
+color:white;
+font-size:15px;
+font-weight:700;
+padding:12px;
+border-radius:12px;
+border:none;
+}
+
+/* DESKTOP */
+
+@media(min-width:769px){
+
+.mobile-calculator{
+gap:14px;
+}
+
+.mobile-field label{
+font-size:14px;
+}
+
+.mobile-field input{
+height:46px;
+font-size:15px;
+padding:10px;
+}
+
+.mobile-fixed-button{
+display:none;
+}
+
 }
 
 </style>
 
 </head>
 
-<body class="p-2 md:p-4">
+<body>
 
 <!-- HEADER -->
 
@@ -140,9 +163,9 @@ alt="Travel Nurse Intel Logo"
 class="h-16 md:h-20 mb-3">
 </a>
 
-<div class="flex flex-wrap justify-center gap-4 text-sm">
+<div class="flex flex-wrap justify-center gap-4 text-sm pb-2">
 
-<a href="/" class="text-blue-600 hover:underline font-semibold">
+<a href="/" class="text-blue-600 font-semibold hover:underline">
 Contract Analyzer
 </a>
 
@@ -162,10 +185,6 @@ Highest Paying States
 Pay by Specialty
 </a>
 
-<a href="/travel-nurse-pay-transparency.html" class="text-gray-700 hover:underline">
-Pay Transparency
-</a>
-
 <a href="/enterprise.html" class="text-gray-700 hover:underline">
 Enterprise
 </a>
@@ -180,24 +199,46 @@ Enterprise
 
 <div class="ribbon-wrapper">
 
-<div class="ribbon-track">
+<div class="ribbon-content">
 
-<div class="ribbon-text">
-🔥 ICU contracts paying up to $4,800/week •
-🔥 California remains highest paying state •
-🔥 Phoenix ICU contracts increased 14% this month •
-🔥 Housing stipends rising nationwide •
-🔥 Compare recruiter pay packages instantly •
-🔥 Analyze your contract in 30 seconds •
+<div class="ribbon-item">
+🔥 ICU contracts paying up to $4,800/week
 </div>
 
-<div class="ribbon-text">
-🔥 ICU contracts paying up to $4,800/week •
-🔥 California remains highest paying state •
-🔥 Phoenix ICU contracts increased 14% this month •
-🔥 Housing stipends rising nationwide •
-🔥 Compare recruiter pay packages instantly •
-🔥 Analyze your contract in 30 seconds •
+<div class="ribbon-item">
+🔥 California remains highest paying state
+</div>
+
+<div class="ribbon-item">
+🔥 Phoenix ICU contracts increased 14% this month
+</div>
+
+<div class="ribbon-item">
+🔥 Housing stipends rising nationwide
+</div>
+
+<div class="ribbon-item">
+🔥 Compare recruiter pay packages instantly
+</div>
+
+<div class="ribbon-item">
+🔥 Analyze your contract in 30 seconds
+</div>
+
+<div class="ribbon-item">
+🔥 ICU contracts paying up to $4,800/week
+</div>
+
+<div class="ribbon-item">
+🔥 California remains highest paying state
+</div>
+
+<div class="ribbon-item">
+🔥 Phoenix ICU contracts increased 14% this month
+</div>
+
+<div class="ribbon-item">
+🔥 Housing stipends rising nationwide
 </div>
 
 </div>
@@ -206,7 +247,7 @@ Enterprise
 
 <!-- MAIN -->
 
-<div class="max-w-4xl mx-auto bg-white mobile-card p-4 md:p-6 rounded-xl shadow mt-6">
+<div class="max-w-4xl mx-auto bg-white p-3 md:p-6 rounded-xl shadow mt-4 mb-28">
 
 <div class="max-w-3xl mx-auto">
 
@@ -214,13 +255,13 @@ Enterprise
 Most Travel Nurses Are Underpaid by $3,000–$10,000 Per Contract
 </h1>
 
-<p class="text-lg text-center text-gray-700 mb-6">
+<p class="text-base md:text-lg text-center text-gray-700 mb-4">
 Analyze Your Travel Nurse Contract in 30 Seconds
 </p>
 
 <!-- SCORE -->
 
-<div id="scoreSection" class="hidden text-center mb-8">
+<div id="scoreSection" class="hidden text-center mb-6">
 
 <h2 class="text-xl font-bold mb-4">
 Your Contract Pay Score
@@ -232,8 +273,6 @@ Your Contract Pay Score
 
 <p id="verdict" class="mt-3 text-lg font-semibold"></p>
 
-<p id="lostIncome" class="text-red-500"></p>
-
 <button
 onclick="shareScore()"
 class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg font-semibold">
@@ -244,110 +283,88 @@ Share Your Contract Score
 
 </div>
 
-<!-- ANALYZER -->
+<!-- CALCULATOR -->
 
-<div class="bg-white p-3 rounded-xl border">
+<div class="bg-white border rounded-xl p-3">
 
-<div class="mobile-grid">
+<div class="mobile-calculator">
 
-<div>
-
-<label class="mobile-label text-gray-600 block mb-1">
-Hourly Rate
-</label>
-
-<input
-id="hourly"
-type="number"
-class="mobile-input border rounded w-full"
-placeholder="85">
-
+<div class="mobile-field">
+<label>Hourly Rate</label>
+<input id="hourly" type="number" placeholder="85">
 </div>
 
-<div>
-
-<label class="mobile-label text-gray-600 block mb-1">
-Weekly Hours
-</label>
-
-<input
-id="hours"
-type="number"
-class="mobile-input border rounded w-full"
-placeholder="36">
-
+<div class="mobile-field">
+<label>Weekly Hours</label>
+<input id="hours" type="number" placeholder="36">
 </div>
 
-<div>
-
-<label class="mobile-label text-gray-600 block mb-1">
-Weekly Stipend
-</label>
-
-<input
-id="stipend"
-type="number"
-class="mobile-input border rounded w-full"
-placeholder="1200">
-
+<div class="mobile-field">
+<label>Weekly Stipend</label>
+<input id="stipend" type="number" placeholder="1200">
 </div>
 
-<div>
-
-<label class="mobile-label text-gray-600 block mb-1">
-Housing Cost
-</label>
-
-<input
-id="rent"
-type="number"
-class="mobile-input border rounded w-full"
-placeholder="1800">
-
+<div class="mobile-field">
+<label>Housing Cost</label>
+<input id="rent" type="number" placeholder="1800">
 </div>
 
 </div>
 
-<p class="text-center text-xs text-gray-500 mt-4">
-Free analysis • No signup required • Instant results
+<p class="text-center text-xs text-gray-500 mt-3">
+Free analysis • No signup required
 </p>
+
+<!-- DESKTOP BUTTON -->
+
+<div class="hidden md:block mt-5">
+
+<button
+onclick="analyze()"
+class="w-full bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl text-lg font-bold">
+
+Analyze Your Contract
+
+</button>
+
+</div>
 
 </div>
 
 <!-- PAY PREDICTION -->
 
-<div class="mt-10 bg-gray-50 border rounded-xl p-6">
+<div class="mt-8 bg-gray-50 border rounded-xl p-5">
 
 <h2 class="text-xl font-bold mb-4">
-Get Pay Recommendation
+Optimize Contract Pay
 </h2>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
 <div>
 
-<label class="text-sm text-gray-600">
+<label class="text-sm text-gray-600 block mb-1">
 City
 </label>
 
 <input
 id="city"
 type="text"
-class="p-3 border rounded w-full"
+class="w-full p-3 border rounded-lg"
 placeholder="Phoenix">
 
 </div>
 
 <div>
 
-<label class="text-sm text-gray-600">
+<label class="text-sm text-gray-600 block mb-1">
 Specialty
 </label>
 
 <input
 id="specialty"
 type="text"
-class="p-3 border rounded w-full"
+class="w-full p-3 border rounded-lg"
 placeholder="ICU">
 
 </div>
@@ -356,15 +373,15 @@ placeholder="ICU">
 
 <button
 onclick="getPrediction()"
-class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-semibold w-full">
+class="mt-4 w-full bg-indigo-600 hover:bg-indigo-700 text-white p-3 rounded-xl font-semibold">
 
-Optimize Contract Pay
+Get Pay Recommendation
 
 </button>
 
 <p
 id="predictionResult"
-class="mt-4 text-lg font-semibold text-center">
+class="mt-4 text-center font-semibold">
 </p>
 
 </div>
@@ -375,7 +392,7 @@ class="mt-4 text-lg font-semibold text-center">
 
 <!-- FOOTER -->
 
-<footer class="text-center text-xs text-gray-500 mt-10">
+<footer class="text-center text-xs text-gray-500 pb-28">
 
 <p>
 Travel Nurse Intel™
@@ -389,14 +406,10 @@ Travel Nurse Intel™
 
 <!-- FIXED MOBILE BUTTON -->
 
-<div class="mobile-fixed-cta md:hidden">
+<div class="mobile-fixed-button">
 
-<button
-onclick="analyze()"
-class="mobile-button w-full bg-blue-600 hover:bg-blue-700 text-white rounded-xl shadow-lg font-semibold transition">
-
+<button onclick="analyze()">
 Analyze Your Contract
-
 </button>
 
 </div>
@@ -479,8 +492,6 @@ behavior:"smooth"
 
 }
 
-/* SHARE */
-
 async function shareScore(){
 
 const score =
@@ -493,17 +504,15 @@ try{
 
 await navigator.clipboard.writeText(text)
 
-alert("Score copied to clipboard!")
+alert("Score copied!")
 
 }catch(err){
 
-prompt("Copy your score:", text)
+prompt("Copy this:", text)
 
 }
 
 }
-
-/* PREDICTION */
 
 async function getPrediction(){
 
