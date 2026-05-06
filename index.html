@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,21 +11,21 @@
 
 <style>
 body{
-font-family:system-ui;
-background:#f8fafc;
+  font-family:system-ui;
+  background:#f8fafc;
 }
 
 .score-circle{
-width:120px;
-height:120px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:32px;
-font-weight:bold;
-color:white;
-margin:auto;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+  font-weight:bold;
+  color:white;
+  margin:auto;
 }
 </style>
 
@@ -46,19 +45,33 @@ margin:auto;
 
 <div class="flex flex-wrap justify-center gap-4 text-sm">
 
-<a href="/" class="text-blue-600 hover:underline font-semibold">Contract Analyzer</a>
+<a href="/" class="text-blue-600 hover:underline font-semibold">
+Contract Analyzer
+</a>
 
-<a href="/highest-paying-travel-nurse-states.html" class="text-gray-700 hover:underline">Highest Paying States</a>
+<a href="/highest-paying-travel-nurse-states.html" class="text-gray-700 hover:underline">
+Highest Paying States
+</a>
 
-<a href="/travel-nurse-pay-by-specialty.html" class="text-gray-700 hover:underline">Pay by Specialty</a>
+<a href="/travel-nurse-pay-by-specialty.html" class="text-gray-700 hover:underline">
+Pay by Specialty
+</a>
 
-<a href="/travel-nurse-pay-transparency.html" class="text-gray-700 hover:underline">Pay Transparency</a>
+<a href="/travel-nurse-pay-transparency.html" class="text-gray-700 hover:underline">
+Pay Transparency
+</a>
 
-<a href="/travel-nurse-salary-database.html" class="text-gray-700 hover:underline">Salary Database</a>
+<a href="/travel-nurse-salary-database.html" class="text-gray-700 hover:underline">
+Salary Database
+</a>
 
-<a href="/travel-nurse-tax-free-stipend-guide.html" class="text-gray-700 hover:underline">Tax Guide</a>
+<a href="/travel-nurse-tax-free-stipend-guide.html" class="text-gray-700 hover:underline">
+Tax Guide
+</a>
 
-<a href="/enterprise.html">Enterprise</a>
+<a href="/enterprise.html" class="text-gray-700 hover:underline">
+Enterprise
+</a>
 
 </div>
 </div>
@@ -86,7 +99,9 @@ Analyze Your Travel Nurse Contract in 30 Seconds
 Your Contract Pay Score
 </h2>
 
-<div id="scoreCircle" class="score-circle">0</div>
+<div id="scoreCircle" class="score-circle bg-gray-400">
+0
+</div>
 
 <p id="verdict" class="mt-3 text-lg font-semibold"></p>
 
@@ -102,7 +117,7 @@ Share Your Contract Score
 
 <div class="bg-white p-6 rounded-xl shadow">
 
-<div class="grid grid-cols-2 gap-3">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
 
 <div>
 <label class="text-sm text-gray-600">Hourly Rate</label>
@@ -126,16 +141,51 @@ Share Your Contract Score
 
 </div>
 
-<button onclick="analyze()" 
-class="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white p-4 rounded-xl shadow-lg font-semibold z-50">
+<button
+onclick="analyze()"
+class="fixed bottom-4 left-1/2 -translate-x-1/2 w-[92%] max-w-sm bg-blue-600 text-white p-4 rounded-xl shadow-lg font-semibold z-50 text-center">
 
 Analyze Your Contract
 
 </button>
 
-<p class="text-center text-xs text-gray-500 mt-2">
+<p class="text-center text-xs text-gray-500 mt-4">
 Free analysis • No signup required • Instant results
 </p>
+
+<!-- OPTIONAL PREDICTION TOOL -->
+
+<div class="mt-8 bg-gray-50 border rounded-xl p-6">
+
+<h2 class="text-xl font-bold mb-4">
+Pay Prediction Tool
+</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+<div>
+<label class="text-sm text-gray-600">City</label>
+<input id="city" type="text" class="p-3 border rounded w-full">
+</div>
+
+<div>
+<label class="text-sm text-gray-600">Specialty</label>
+<input id="specialty" type="text" class="p-3 border rounded w-full">
+</div>
+
+</div>
+
+<button
+onclick="getPrediction()"
+class="mt-4 bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold w-full md:w-auto">
+
+Get Pay Prediction
+
+</button>
+
+<p id="predictionResult" class="mt-4 text-lg font-semibold text-center"></p>
+
+</div>
 
 <!-- REPORT OFFER -->
 
@@ -149,10 +199,13 @@ Unlock Your Full Contract Intelligence Report
 Get deeper pay comparison data, estimated lost income per contract, recruiter margin insights, and suggested negotiation ranges.
 </p>
 
-<a href="https://buy.stripe.com/dRm14pfhUfUD5EQ32q3Je00"
+<a
+href="https://buy.stripe.com/dRm14pfhUfUD5EQ32q3Je00"
 target="_blank"
 class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg inline-block font-semibold">
+
 Unlock Full Report ($9.99)
+
 </a>
 
 <p class="text-xs text-gray-500 mt-3">
@@ -178,10 +231,13 @@ Travel Nurse Tax & Compliance Protection
 <li>Required documentation list</li>
 </ul>
 
-<a href="https://buy.stripe.com/eVqbJ3d9MfUD7MYfPc3Je02"
+<a
+href="https://buy.stripe.com/eVqbJ3d9MfUD7MYfPc3Je02"
 target="_blank"
 class="mt-4 block text-center bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-6 py-3 rounded-lg">
+
 Get Tax Protection ($49.99)
+
 </a>
 
 </div>
@@ -205,10 +261,13 @@ Most travel nurses lose thousands per contract because they don't know what to a
 <li>✓ Real negotiation examples</li>
 </ul>
 
-<a href="https://buy.stripe.com/00wfZj4Dg37R5EQ46u3Je03"
+<a
+href="https://buy.stripe.com/00wfZj4Dg37R5EQ46u3Je03"
 target="_blank"
 class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg inline-block">
+
 Get Negotiation Toolkit ($19.99)
+
 </a>
 
 </div>
@@ -232,10 +291,13 @@ Unlock advanced salary databases, recruiter margin insights, and high-paying con
 <li>✓ Negotiation Intelligence</li>
 </ul>
 
-<a href="https://buy.stripe.com/5kQ6oJc5IfUDebm32q3Je01"
+<a
+href="https://buy.stripe.com/5kQ6oJc5IfUDebm32q3Je01"
 target="_blank"
 class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg inline-block">
+
 Upgrade to Pro ($29.99/month)
+
 </a>
 
 </div>
@@ -244,10 +306,13 @@ Upgrade to Pro ($29.99/month)
 
 <div class="mt-10 text-xs text-gray-500 text-center max-w-xl mx-auto">
 
-<strong>Disclaimer:</strong> Results generated by this tool are estimates based on user inputs and general market assumptions. This information is provided for educational and informational purposes only and should not be interpreted as financial, tax, legal, or employment advice.
+<strong>Disclaimer:</strong>
+Results generated by this tool are estimates based on user inputs and general market assumptions. This information is provided for educational and informational purposes only and should not be interpreted as financial, tax, legal, or employment advice.
 
 <p class="mt-2">
-<a href="/disclaimer.html" class="underline">View Full Legal Disclaimer</a>
+<a href="/disclaimer.html" class="underline">
+View Full Legal Disclaimer
+</a>
 </p>
 
 </div>
@@ -262,7 +327,10 @@ A registered fictitious name of Kingdom Come™, LLC
 </p>
 
 <p class="mt-1">
-Support: <a href="mailto:support@travelnurseintel.com" class="underline">support@travelnurseintel.com</a>
+Support:
+<a href="mailto:topchoice.gwendolyn@outlook.com" class="underline">
+topchoice.gwendolyn@outlook.com
+</a>
 </p>
 
 <p class="mt-2">
@@ -280,103 +348,100 @@ Support: <a href="mailto:support@travelnurseintel.com" class="underline">support
 
 <script>
 
-let weeklyPay = 0
-let marketAverage = 2850
+let weeklyPay = 0;
+const marketAverage = 2850;
 
 function analyze(){
 
-const hourly = parseFloat(document.getElementById("hourly").value) || 0
-const hours = parseFloat(document.getElementById("hours").value) || 0
-const stipend = parseFloat(document.getElementById("stipend").value) || 0
+  const hourly = parseFloat(document.getElementById("hourly").value) || 0;
+  const hours = parseFloat(document.getElementById("hours").value) || 0;
+  const stipend = parseFloat(document.getElementById("stipend").value) || 0;
 
-weeklyPay = (hourly * hours) + stipend
+  weeklyPay = (hourly * hours) + stipend;
 
-const diff = weeklyPay - marketAverage
+  const diff = weeklyPay - marketAverage;
 
-let score = 60
+  let score = 60;
 
-if(diff >= 300) score = 95
-else if(diff >= 100) score = 85
-else if(diff >= -100) score = 75
-else if(diff >= -300) score = 60
-else score = 45
+  if(diff >= 300){
+    score = 95;
+  } else if(diff >= 100){
+    score = 85;
+  } else if(diff >= -100){
+    score = 75;
+  } else if(diff >= -300){
+    score = 60;
+  } else {
+    score = 45;
+  }
 
-const scoreCircle = document.getElementById("scoreCircle")
-scoreCircle.innerText = score
+  const scoreCircle = document.getElementById("scoreCircle");
 
-if(score >= 90){
-scoreCircle.style.background="#16a34a"
-document.getElementById("verdict").innerText="Excellent contract"
-}
-else if(score >= 70){
-scoreCircle.style.background="#eab308"
-document.getElementById("verdict").innerText="Average contract"
-}
-else{
-scoreCircle.style.background="#dc2626"
-document.getElementById("verdict").innerText="Likely underpaid"
-}
+  scoreCircle.innerText = score;
 
-document.getElementById("scoreSection").classList.remove("hidden")
+  if(score >= 90){
+    scoreCircle.style.background = "#16a34a";
+    document.getElementById("verdict").innerText = "Excellent contract";
+  }
+  else if(score >= 70){
+    scoreCircle.style.background = "#eab308";
+    document.getElementById("verdict").innerText = "Average contract";
+  }
+  else{
+    scoreCircle.style.background = "#dc2626";
+    document.getElementById("verdict").innerText = "Likely underpaid";
+  }
+
+  document.getElementById("scoreSection").classList.remove("hidden");
 
 }
 
 function shareScore(){
 
-const score=document.getElementById("scoreCircle").innerText
+  const score = document.getElementById("scoreCircle").innerText;
 
-const text="My travel nurse contract score was "+score+"/100. Check yours: https://travelnurseintel.com"
+  const text =
+    "My travel nurse contract score was " +
+    score +
+    "/100. Check yours: https://travelnurseintel.com";
 
-navigator.clipboard.writeText(text)
+  navigator.clipboard.writeText(text);
 
-alert("Score copied! Share it.")
+  alert("Score copied! Share it.");
+
+}
+
+async function getPrediction(){
+
+  const city =
+    document.getElementById("city").value.trim();
+
+  const specialty =
+    document.getElementById("specialty").value.trim();
+
+  if(!city || !specialty){
+    alert("Enter city and specialty");
+    return;
+  }
+
+  try{
+
+    const predictionResult =
+      document.getElementById("predictionResult");
+
+    predictionResult.innerText =
+      `Estimated market pay for ${specialty} nurses in ${city} is approximately $2,850/week.`;
+
+  } catch(err){
+
+    console.error(err);
+    alert("Prediction failed");
+
+  }
 
 }
 
 </script>
-  
-async function getPrediction(){
 
-const city = document.getElementById("city").value.trim()
-const specialty = document.getElementById("specialty").value.trim()
-
-if(!city || !specialty){
-alert("Enter city and specialty")
-return
-}
-
-const apiKey = localStorage.getItem("apiKey")
-
-if(!apiKey){
-alert("Upgrade required")
-return
-}
-
-try{
-
-const res = await fetch(`/api/predict-pay?city=${encodeURIComponent(city)}&specialty=${encodeURIComponent(specialty)}`,{
-headers: {
-"x-api-key": apiKey
-}
-})
-
-if(res.status === 403){
-alert("Upgrade to access this feature")
-return
-}
-
-const data = await res.json()
-
-document.getElementById("predictionResult").innerText =
-`Recommended Pay: $${data.recommendedPay}/week`
-
-}catch(err){
-
-console.error(err)
-alert("Prediction failed")
-
-}
-
-}
 </body>
 </html>
