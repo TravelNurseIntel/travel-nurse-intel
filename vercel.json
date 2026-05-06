@@ -1,19 +1,11 @@
 {
-  "cleanUrls": true,
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
-  "crons": [
-    {
-      "path": "/api/process-market-data",
-      "schedule": "0 0 * * *"
-    }
-  ]
+  "name": "travel-nurse-intel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@vercel/kv": "^1.0.1",
+    "stripe": "^18.0.0",
+    "pg": "^8.11.5"
+  }
 }
