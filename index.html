@@ -10,43 +10,57 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
+
 body{
-  font-family:system-ui;
-  background:#f8fafc;
+font-family:system-ui;
+background:#f8fafc;
 }
 
 .score-circle{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:32px;
-  font-weight:bold;
-  color:white;
-  margin:auto;
+width:120px;
+height:120px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+font-weight:bold;
+color:white;
+margin:auto;
+transition:0.3s ease;
 }
+
 </style>
 
 </head>
 
-<body class="p-2">
+<body class="p-2 md:p-4">
 
 <!-- HEADER -->
 
 <div class="bg-white border-b shadow-sm mb-6">
 
-<div class="max-w-5xl mx-auto flex flex-col items-center p-2">
+<div class="max-w-5xl mx-auto flex flex-col items-center p-3">
 
 <a href="/">
-<img src="/logo.png" alt="Travel Nurse Intel Logo" class="h-16 md:h-20 mb-3">
+<img
+src="/logo.png"
+alt="Travel Nurse Intel Logo"
+class="h-16 md:h-20 mb-3">
 </a>
 
 <div class="flex flex-wrap justify-center gap-4 text-sm">
 
 <a href="/" class="text-blue-600 hover:underline font-semibold">
 Contract Analyzer
+</a>
+
+<a href="/travel-nurse-live-contracts.html" class="text-gray-700 hover:underline">
+Live Contracts
+</a>
+
+<a href="/travel-nurse-market-intelligence.html" class="text-gray-700 hover:underline">
+Market Intelligence
 </a>
 
 <a href="/highest-paying-travel-nurse-states.html" class="text-gray-700 hover:underline">
@@ -61,20 +75,14 @@ Pay by Specialty
 Pay Transparency
 </a>
 
-<a href="/travel-nurse-salary-database.html" class="text-gray-700 hover:underline">
-Salary Database
-</a>
-
-<a href="/travel-nurse-tax-free-stipend-guide.html" class="text-gray-700 hover:underline">
-Tax Guide
-</a>
-
 <a href="/enterprise.html" class="text-gray-700 hover:underline">
 Enterprise
 </a>
 
 </div>
+
 </div>
+
 </div>
 
 <!-- MAIN -->
@@ -83,7 +91,7 @@ Enterprise
 
 <div class="max-w-3xl mx-auto">
 
-<h1 class="text-3xl md:text-4xl font-bold text-center mb-2">
+<h1 class="text-3xl md:text-4xl font-bold text-center mb-2 leading-tight">
 Most Travel Nurses Are Underpaid by $3,000–$10,000 Per Contract
 </h1>
 
@@ -107,36 +115,66 @@ Your Contract Pay Score
 
 <p id="lostIncome" class="text-red-500"></p>
 
-<button onclick="shareScore()" class="mt-4 bg-indigo-600 text-white px-5 py-2 rounded-lg">
+<button
+onclick="shareScore()"
+class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg font-semibold">
 Share Your Contract Score
 </button>
 
 </div>
 
-<!-- CALCULATOR -->
+<!-- ANALYZER -->
 
-<div class="bg-white p-6 rounded-xl shadow">
+<div class="bg-white p-6 rounded-xl border">
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
 <div>
-<label class="text-sm text-gray-600">Hourly Rate</label>
-<input id="hourly" type="number" class="p-3 border rounded w-full">
+<label class="text-sm text-gray-600">
+Hourly Rate
+</label>
+
+<input
+id="hourly"
+type="number"
+class="p-3 border rounded w-full"
+placeholder="85">
 </div>
 
 <div>
-<label class="text-sm text-gray-600">Weekly Hours</label>
-<input id="hours" type="number" class="p-3 border rounded w-full">
+<label class="text-sm text-gray-600">
+Weekly Hours
+</label>
+
+<input
+id="hours"
+type="number"
+class="p-3 border rounded w-full"
+placeholder="36">
 </div>
 
 <div>
-<label class="text-sm text-gray-600">Weekly Stipend</label>
-<input id="stipend" type="number" class="p-3 border rounded w-full">
+<label class="text-sm text-gray-600">
+Weekly Stipend
+</label>
+
+<input
+id="stipend"
+type="number"
+class="p-3 border rounded w-full"
+placeholder="1200">
 </div>
 
 <div>
-<label class="text-sm text-gray-600">Housing Cost</label>
-<input id="rent" type="number" class="p-3 border rounded w-full">
+<label class="text-sm text-gray-600">
+Housing Cost
+</label>
+
+<input
+id="rent"
+type="number"
+class="p-3 border rounded w-full"
+placeholder="1800">
 </div>
 
 </div>
@@ -145,7 +183,7 @@ Share Your Contract Score
 
 <button
 onclick="analyze()"
-class="w-full max-w-sm bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl shadow-lg font-semibold text-center transition">
+class="w-full max-w-sm bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl shadow-lg font-semibold transition">
 
 Analyze Your Contract
 
@@ -157,41 +195,58 @@ Analyze Your Contract
 Free analysis • No signup required • Instant results
 </p>
 
-<!-- OPTIONAL PREDICTION TOOL -->
+<!-- PAY PREDICTION -->
 
-<div class="mt-8 bg-gray-50 border rounded-xl p-6">
+<div class="mt-10 bg-gray-50 border rounded-xl p-6">
 
 <h2 class="text-xl font-bold mb-4">
 Pay Prediction Tool
 </h2>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
 <div>
-<label class="text-sm text-gray-600">City</label>
-<input id="city" type="text" class="p-3 border rounded w-full">
+<label class="text-sm text-gray-600">
+City
+</label>
+
+<input
+id="city"
+type="text"
+class="p-3 border rounded w-full"
+placeholder="Phoenix">
 </div>
 
 <div>
-<label class="text-sm text-gray-600">Specialty</label>
-<input id="specialty" type="text" class="p-3 border rounded w-full">
+<label class="text-sm text-gray-600">
+Specialty
+</label>
+
+<input
+id="specialty"
+type="text"
+class="p-3 border rounded w-full"
+placeholder="ICU">
 </div>
 
 </div>
 
 <button
 onclick="getPrediction()"
-class="mt-4 bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold w-full md:w-auto">
+class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-semibold w-full md:w-auto">
 
-Get Pay Prediction
+Get Pay Recommendation
 
 </button>
 
-<p id="predictionResult" class="mt-4 text-lg font-semibold text-center"></p>
+<p
+id="predictionResult"
+class="mt-4 text-lg font-semibold text-center">
+</p>
 
 </div>
 
-<!-- REPORT OFFER -->
+<!-- REPORT -->
 
 <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 mt-8 text-center">
 
@@ -218,67 +273,9 @@ Instant access after checkout
 
 </div>
 
-</div>
-
-<!-- TAX PROTECTION -->
-
-<div class="mt-8 bg-yellow-50 p-6 rounded-xl border">
-
-<h3 class="text-xl font-bold">
-Travel Nurse Tax & Compliance Protection
-</h3>
-
-<ul class="mt-3 text-sm text-gray-600 list-disc ml-5">
-<li>Tax home compliance checklist</li>
-<li>IRS stipend protection guide</li>
-<li>Audit risk indicators</li>
-<li>Required documentation list</li>
-</ul>
-
-<a
-href="https://buy.stripe.com/eVqbJ3d9MfUD7MYfPc3Je02"
-target="_blank"
-class="mt-4 block text-center bg-yellow-600 hover:bg-yellow-700 text-white font-semibold px-6 py-3 rounded-lg">
-
-Get Tax Protection ($49.99)
-
-</a>
-
-</div>
-
-<!-- NEGOTIATION TOOLKIT -->
-
-<div class="mt-10 bg-white p-6 rounded-xl shadow text-center">
-
-<h2 class="text-xl font-bold mb-3">
-Travel Nurse Contract Negotiation Toolkit
-</h2>
-
-<p class="text-gray-600 mb-4">
-Most travel nurses lose thousands per contract because they don't know what to ask recruiters.
-</p>
-
-<ul class="text-sm text-gray-700 mb-6 space-y-1">
-<li>✓ Recruiter negotiation scripts</li>
-<li>✓ Contract red flag checklist</li>
-<li>✓ Pay leverage strategies</li>
-<li>✓ Real negotiation examples</li>
-</ul>
-
-<a
-href="https://buy.stripe.com/00wfZj4Dg37R5EQ46u3Je03"
-target="_blank"
-class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg inline-block">
-
-Get Negotiation Toolkit ($19.99)
-
-</a>
-
-</div>
-
 <!-- PRO PLAN -->
 
-<div class="mt-10 bg-white p-6 rounded-xl shadow text-center">
+<div class="mt-10 bg-white p-6 rounded-xl border text-center">
 
 <h2 class="text-2xl font-bold mb-2">
 Find Higher Paying Travel Nurse Contracts Faster
@@ -296,11 +293,10 @@ Unlock advanced salary databases, recruiter margin insights, and high-paying con
 </ul>
 
 <a
-href="https://buy.stripe.com/5kQ6oJc5IfUDebm32q3Je01"
-target="_blank"
+href="/recruiter-subscription.html"
 class="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg inline-block">
 
-Upgrade to Pro ($29.99/month)
+Upgrade to Pro
 
 </a>
 
@@ -311,6 +307,7 @@ Upgrade to Pro ($29.99/month)
 <div class="mt-10 text-xs text-gray-500 text-center max-w-xl mx-auto">
 
 <strong>Disclaimer:</strong>
+
 Results generated by this tool are estimates based on user inputs and general market assumptions. This information is provided for educational and informational purposes only and should not be interpreted as financial, tax, legal, or employment advice.
 
 <p class="mt-2">
@@ -323,7 +320,11 @@ View Full Legal Disclaimer
 
 </div>
 
-<footer class="text-center text-xs text-gray-500 mt-10">
+</div>
+
+<!-- FOOTER -->
+
+<footer class="text-center text-xs text-gray-500 mt-10 pb-24">
 
 <p>
 Travel Nurse Intel™<br>
@@ -344,104 +345,169 @@ topchoice.gwendolyn@outlook.com
 <p class="mt-2">
 <a href="/privacy.html" class="underline">Privacy Policy</a> •
 <a href="/terms.html" class="underline">Terms of Service</a> •
-<a href="/refund-policy.html" class="underline">Refund Policy</a> •
+<a href="/refunds.html" class="underline">Refund Policy</a> •
 <a href="/disclaimer.html" class="underline">Disclaimer</a>
 </p>
 
 </footer>
 
+<!-- MOBILE STICKY CTA -->
+
+<div class="fixed bottom-0 left-0 w-full bg-white border-t p-3 z-50 md:hidden">
+
+<button
+onclick="window.scrollTo({top:0,behavior:'smooth'})"
+class="w-full bg-blue-600 text-white p-4 rounded-lg text-lg font-bold">
+
+Analyze Your Contract
+
+</button>
+
+</div>
+
 <script>
 
-let weeklyPay = 0;
-const marketAverage = 2850;
+let weeklyPay = 0
+const marketAverage = 2850
 
 function analyze(){
 
-  const hourly = parseFloat(document.getElementById("hourly").value) || 0;
-  const hours = parseFloat(document.getElementById("hours").value) || 0;
-  const stipend = parseFloat(document.getElementById("stipend").value) || 0;
+const hourly =
+parseFloat(document.getElementById("hourly").value) || 0
 
-  weeklyPay = (hourly * hours) + stipend;
+const hours =
+parseFloat(document.getElementById("hours").value) || 0
 
-  const diff = weeklyPay - marketAverage;
+const stipend =
+parseFloat(document.getElementById("stipend").value) || 0
 
-  let score = 60;
+weeklyPay = (hourly * hours) + stipend
 
-  if(diff >= 300){
-    score = 95;
-  } else if(diff >= 100){
-    score = 85;
-  } else if(diff >= -100){
-    score = 75;
-  } else if(diff >= -300){
-    score = 60;
-  } else {
-    score = 45;
-  }
+const diff = weeklyPay - marketAverage
 
-  const scoreCircle = document.getElementById("scoreCircle");
+let score = 60
 
-  scoreCircle.innerText = score;
+if(diff >= 300){
+score = 95
+}
+else if(diff >= 100){
+score = 85
+}
+else if(diff >= -100){
+score = 75
+}
+else if(diff >= -300){
+score = 60
+}
+else{
+score = 45
+}
 
-  if(score >= 90){
-    scoreCircle.style.background = "#16a34a";
-    document.getElementById("verdict").innerText = "Excellent contract";
-  }
-  else if(score >= 70){
-    scoreCircle.style.background = "#eab308";
-    document.getElementById("verdict").innerText = "Average contract";
-  }
-  else{
-    scoreCircle.style.background = "#dc2626";
-    document.getElementById("verdict").innerText = "Likely underpaid";
-  }
+const scoreCircle =
+document.getElementById("scoreCircle")
 
-  document.getElementById("scoreSection").classList.remove("hidden");
+scoreCircle.innerText = score
+
+if(score >= 90){
+
+scoreCircle.style.background = "#16a34a"
+
+document.getElementById("verdict").innerText =
+"Excellent contract"
+
+}
+else if(score >= 70){
+
+scoreCircle.style.background = "#eab308"
+
+document.getElementById("verdict").innerText =
+"Average contract"
+
+}
+else{
+
+scoreCircle.style.background = "#dc2626"
+
+document.getElementById("verdict").innerText =
+"Likely underpaid"
 
 }
 
-function shareScore(){
-
-  const score = document.getElementById("scoreCircle").innerText;
-
-  const text =
-    "My travel nurse contract score was " +
-    score +
-    "/100. Check yours: https://travelnurseintel.com";
-
-  navigator.clipboard.writeText(text);
-
-  alert("Score copied! Share it.");
+document.getElementById("scoreSection")
+.classList.remove("hidden")
 
 }
+
+/* SHARE */
+
+async function shareScore(){
+
+const score =
+document.getElementById("scoreCircle").innerText
+
+const text =
+`Your Travel Nurse Contract Score: ${score}/100 — Check yours at https://travelnurseintel.com`
+
+try{
+
+await navigator.clipboard.writeText(text)
+
+alert("Score copied to clipboard!")
+
+}catch(err){
+
+prompt("Copy your score:", text)
+
+}
+
+}
+
+/* PREDICTION */
 
 async function getPrediction(){
 
-  const city =
-    document.getElementById("city").value.trim();
+const city =
+document.getElementById("city").value.trim()
 
-  const specialty =
-    document.getElementById("specialty").value.trim();
+const specialty =
+document.getElementById("specialty").value.trim()
 
-  if(!city || !specialty){
-    alert("Enter city and specialty");
-    return;
-  }
+if(!city || !specialty){
 
-  try{
+alert("Enter city and specialty")
 
-    const predictionResult =
-      document.getElementById("predictionResult");
+return
 
-    predictionResult.innerText =
-      `Estimated market pay for ${specialty} nurses in ${city} is approximately $2,850/week.`;
+}
 
-  } catch(err){
+const result =
+document.getElementById("predictionResult")
 
-    console.error(err);
-    alert("Prediction failed");
+result.innerText = "Loading prediction..."
 
-  }
+try{
+
+const res = await fetch(
+`/api/core?type=predict&city=${encodeURIComponent(city)}&specialty=${encodeURIComponent(specialty)}`
+)
+
+if(!res.ok){
+throw new Error("Prediction failed")
+}
+
+const data = await res.json()
+
+result.innerText =
+`Recommended market pay for ${specialty} nurses in ${city}: $${data.recommendedPay}/week`
+
+}catch(err){
+
+console.error(err)
+
+result.innerText =
+"Unable to load prediction"
+
+}
 
 }
 
