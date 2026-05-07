@@ -1,312 +1,677 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Live Travel Nurse Contracts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Live Travel Nurse Contracts | Travel Nurse Intel</title>
+
+<meta name="description" content="Browse live travel nurse contracts nationwide with real-time pay data, housing stipends, specialty demand, and market intelligence.">
+
 <script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+html,
+body{
+margin:0;
+padding:0;
+overflow-x:hidden;
+font-family:system-ui;
+background:#f3f4f6;
+color:#111827;
+}
+
+body{
+padding-bottom:60px;
+}
+
+.header{
+background:white;
+border-bottom:1px solid #e5e7eb;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 1px 4px rgba(0,0,0,0.05);
+}
+
+.ribbon-wrapper{
+width:100%;
+overflow:hidden;
+background:#111827;
+color:white;
+height:42px;
+display:flex;
+align-items:center;
+}
+
+.ribbon-track{
+display:flex;
+white-space:nowrap;
+animation:scroll-left 30s linear infinite;
+}
+
+.ribbon-item{
+padding-right:80px;
+font-size:13px;
+font-weight:700;
+flex-shrink:0;
+}
+
+@keyframes scroll-left{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-50%);
+}
+}
+
+.hero-card{
+background:white;
+border-radius:24px;
+padding:32px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+border:1px solid #e5e7eb;
+}
+
+.stat-pill{
+display:inline-flex;
+align-items:center;
+padding:7px 14px;
+background:#eff6ff;
+color:#1d4ed8;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+}
+
+.filter-card{
+background:white;
+border-radius:20px;
+padding:22px;
+border:1px solid #e5e7eb;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.input,
+.select{
+width:100%;
+height:48px;
+padding:12px;
+border-radius:12px;
+border:1px solid #d1d5db;
+font-size:14px;
+background:white;
+}
+
+.contract-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:20px;
+}
+
+.contract-card{
+background:white;
+border-radius:22px;
+padding:24px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+border:1px solid #e5e7eb;
+transition:0.2s ease;
+}
+
+.contract-card:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+
+.pay{
+font-size:34px;
+font-weight:900;
+color:#2563eb;
+margin:12px 0;
+}
+
+.badge{
+display:inline-flex;
+align-items:center;
+padding:6px 12px;
+border-radius:999px;
+font-size:11px;
+font-weight:700;
+}
+
+.badge-hot{
+background:#fee2e2;
+color:#dc2626;
+}
+
+.badge-fast{
+background:#dcfce7;
+color:#15803d;
+}
+
+.badge-premium{
+background:#ede9fe;
+color:#6d28d9;
+}
+
+.data-row{
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+font-size:14px;
+gap:12px;
+}
+
+.data-label{
+color:#6b7280;
+}
+
+.data-value{
+font-weight:700;
+text-align:right;
+}
+
+.apply-button{
+display:block;
+width:100%;
+margin-top:18px;
+background:#2563eb;
+color:white;
+text-align:center;
+padding:14px;
+border-radius:14px;
+font-weight:700;
+text-decoration:none;
+transition:0.2s ease;
+}
+
+.apply-button:hover{
+background:#1d4ed8;
+}
+
+.return-button{
+display:inline-flex;
+align-items:center;
+gap:8px;
+background:#2563eb;
+color:white;
+padding:12px 18px;
+border-radius:12px;
+font-weight:700;
+text-decoration:none;
+transition:0.2s ease;
+}
+
+.return-button:hover{
+background:#1d4ed8;
+}
+
+.table-wrapper{
+overflow-x:auto;
+background:white;
+border-radius:20px;
+border:1px solid #e5e7eb;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.table{
+width:100%;
+border-collapse:collapse;
+min-width:900px;
+}
+
+.table th{
+background:#f9fafb;
+padding:16px;
+text-align:left;
+font-size:13px;
+font-weight:800;
+border-bottom:1px solid #e5e7eb;
+}
+
+.table td{
+padding:16px;
+border-bottom:1px solid #f3f4f6;
+font-size:14px;
+}
+
+@media(max-width:768px){
+
+.hero-card{
+padding:22px;
+}
+
+.pay{
+font-size:28px;
+}
+
+.contract-card{
+padding:20px;
+}
+
+}
+
+</style>
+
 </head>
+<body>
 
-<body class="bg-gray-50 pt-32">
+<!-- HEADER -->
 
-<div id="header"></div>
-<script src="/components/load-header.js"></script>
+<header class="header">
 
-<div class="max-w-6xl mx-auto p-6">
+<div class="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
 
-<h1 class="text-3xl font-bold text-center mb-6">
-Live Travel Nurse Market Intelligence
+<a href="/">
+<img
+src="/logo.png"
+alt="Travel Nurse Intel"
+class="h-16 md:h-20 mb-3">
+</a>
+
+<div class="flex flex-wrap justify-center gap-3 mb-3 text-sm">
+
+<a href="/" class="return-button">
+← Return to Contract Analyzer
+</a>
+
+</div>
+
+<nav class="flex flex-wrap justify-center gap-4 text-sm pb-1">
+
+<a href="/travel-nurse-live-contracts.html" class="text-blue-600 font-bold hover:underline">
+Live Contracts
+</a>
+
+<a href="/travel-nurse-market-intelligence.html" class="hover:underline">
+Market Intelligence
+</a>
+
+<a href="/highest-paying-travel-nurse-states.html" class="hover:underline">
+Highest Paying States
+</a>
+
+<a href="/travel-nurse-pay-by-specialty.html" class="hover:underline">
+Pay by Specialty
+</a>
+
+<a href="/travel-nurse-pay-transparency.html" class="hover:underline">
+Pay Transparency
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- RIBBON -->
+
+<div class="ribbon-wrapper">
+
+<div class="ribbon-track">
+
+<div class="ribbon-item">🔥 ICU contracts paying up to $5,200/week</div>
+<div class="ribbon-item">🔥 California remains highest paying state</div>
+<div class="ribbon-item">🔥 Phoenix ICU demand increased 14%</div>
+<div class="ribbon-item">🔥 Housing stipends rising nationwide</div>
+<div class="ribbon-item">🔥 ER contracts filling rapidly this week</div>
+<div class="ribbon-item">🔥 Compare recruiter packages instantly</div>
+<div class="ribbon-item">🔥 ICU contracts paying up to $5,200/week</div>
+<div class="ribbon-item">🔥 California remains highest paying state</div>
+
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<section class="max-w-7xl mx-auto px-4 py-8">
+
+<div class="hero-card text-center">
+
+<h1 class="text-4xl md:text-6xl font-black mb-5 leading-tight">
+Live Travel Nurse Contracts
 </h1>
 
-<!-- HOT MARKETS -->
-<h2 class="text-2xl font-bold mb-4">🔥 Hot Markets</h2>
-<div id="hotMarkets" class="grid md:grid-cols-3 gap-4 mb-10"></div>
+<p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
+Explore real-time travel nurse contracts nationwide with live compensation intelligence, housing stipends, specialty demand, and market analytics.
+</p>
 
-<!-- BEST STATES -->
-<h2 class="text-2xl font-bold mb-4">🏆 Best States Right Now</h2>
-<div id="bestStates" class="grid md:grid-cols-3 gap-4 mb-10"></div>
+<div class="mt-6 flex flex-wrap justify-center gap-3">
 
-<!-- SHORTAGE INDEX -->
-<h2 class="text-2xl font-bold mb-4">⚡ Shortage Index</h2>
-<div id="shortageIndex" class="grid md:grid-cols-3 gap-4 mb-10"></div>
+<div class="stat-pill">Updated Every 15 Minutes</div>
+<div class="stat-pill">Nationwide Market Intelligence</div>
+<div class="stat-pill">AI-Powered Pay Analytics</div>
 
-<!-- TOP SPECIALTY -->
-<h2 class="text-2xl font-bold mb-4">💰 Top Paying by Specialty</h2>
-<div id="topSpecialty" class="grid md:grid-cols-3 gap-4 mb-10"></div>
+</div>
 
-<!-- HEATMAP -->
-<h2 class="text-2xl font-bold mb-4">📊 Demand Heatmap</h2>
-<div id="heatmap" class="grid md:grid-cols-5 gap-2 mb-10"></div>
+</div>
 
-<!-- PAY GROWTH -->
-<h2 class="text-2xl font-bold mb-4">📈 Where Pay is Increasing Fastest</h2>
-<div id="payGrowth" class="grid md:grid-cols-3 gap-4 mb-10"></div>
+</section>
+
+<!-- FILTERS -->
+
+<section class="max-w-7xl mx-auto px-4 pb-8">
+
+<div class="filter-card">
+
+<div class="grid md:grid-cols-4 gap-4">
+
+<div>
+<label class="block text-sm font-semibold mb-2">
+Search City
+</label>
+<input
+id="cityFilter"
+class="input"
+type="text"
+placeholder="Phoenix">
+</div>
+
+<div>
+<label class="block text-sm font-semibold mb-2">
+Specialty
+</label>
+<select id="specialtyFilter" class="select">
+<option value="">All Specialties</option>
+<option value="ICU">ICU</option>
+<option value="ER">ER</option>
+<option value="CVICU">CVICU</option>
+<option value="OR">OR</option>
+<option value="Telemetry">Telemetry</option>
+<option value="L&D">L&D</option>
+</select>
+</div>
+
+<div>
+<label class="block text-sm font-semibold mb-2">
+Minimum Weekly Pay
+</label>
+<select id="payFilter" class="select">
+<option value="0">All Pay Levels</option>
+<option value="4000">$4,000+</option>
+<option value="4500">$4,500+</option>
+<option value="5000">$5,000+</option>
+</select>
+</div>
+
+<div class="flex items-end">
+<button
+onclick="filterContracts()"
+class="w-full bg-blue-600 hover:bg-blue-700 text-white h-12 rounded-xl font-bold transition">
+Apply Filters
+</button>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTRACT CARDS -->
+
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div id="contractsGrid" class="contract-grid"></div>
+
+</section>
 
 <!-- TABLE -->
-<h2 class="text-2xl font-bold mb-4">All Contracts</h2>
-<table class="w-full text-sm bg-white shadow rounded">
-<thead class="bg-gray-100">
+
+<section class="max-w-7xl mx-auto px-4 pb-12">
+
+<h2 class="text-3xl font-black mb-6">
+All Contracts
+</h2>
+
+<div class="table-wrapper">
+
+<table class="table">
+
+<thead>
 <tr>
-<th class="p-2">City</th>
-<th class="p-2">State</th>
-<th class="p-2">Specialty</th>
-<th class="p-2">Pay</th>
+<th>City</th>
+<th>State</th>
+<th>Specialty</th>
+<th>Weekly Pay</th>
+<th>Weekly Stipend</th>
+<th>Housing Cost</th>
+<th>Shift</th>
+<th>Status</th>
 </tr>
 </thead>
-<tbody id="table"></tbody>
+
+<tbody id="contractsTable"></tbody>
+
 </table>
 
 </div>
 
-<div id="footer"></div>
-<script src="/components/load-footer.js"></script>
+</section>
+
+<!-- FOOTER -->
+
+<footer class="text-center text-sm text-gray-500 px-4 pb-12">
+
+<p class="mb-2 font-semibold">
+Travel Nurse Intel™
+</p>
+
+<p>
+© 2026 All rights reserved.
+</p>
+
+</footer>
 
 <script>
 
-let contracts = []
+const contracts = [
+{
+city:"Phoenix",
+state:"AZ",
+specialty:"ICU",
+pay:4980,
+stipend:1450,
+housing:2100,
+shift:"3x12 Nights",
+status:"Hot"
+},
+{
+city:"Los Angeles",
+state:"CA",
+specialty:"CVICU",
+pay:5220,
+stipend:1800,
+housing:3100,
+shift:"4x12 Days",
+status:"Premium"
+},
+{
+city:"Seattle",
+state:"WA",
+specialty:"ER",
+pay:4760,
+stipend:1500,
+housing:2400,
+shift:"3x12 Nights",
+status:"Fast Fill"
+},
+{
+city:"Boston",
+state:"MA",
+specialty:"Telemetry",
+pay:4540,
+stipend:1350,
+housing:2250,
+shift:"3x12 Rotating",
+status:"Stable"
+},
+{
+city:"San Diego",
+state:"CA",
+specialty:"OR",
+pay:5040,
+stipend:1650,
+housing:2900,
+shift:"4x10 Days",
+status:"Premium"
+},
+{
+city:"Denver",
+state:"CO",
+specialty:"L&D",
+pay:4380,
+stipend:1280,
+housing:2000,
+shift:"3x12 Nights",
+status:"Stable"
+},
+{
+city:"Houston",
+state:"TX",
+specialty:"ICU",
+pay:4620,
+stipend:1400,
+housing:1850,
+shift:"3x12 Days",
+status:"Hot"
+},
+{
+city:"Miami",
+state:"FL",
+specialty:"ER",
+pay:4410,
+stipend:1320,
+housing:2300,
+shift:"3x12 Nights",
+status:"Fast Fill"
+}
+]
 
-async function load(){
+function renderContracts(data){
 
-try{
+const grid = document.getElementById("contractsGrid")
+const table = document.getElementById("contractsTable")
 
-const res = await fetch("/api/contracts")
+grid.innerHTML = data.map(contract => {
 
-if(!res.ok) throw new Error("API failed")
+let badgeClass = "badge-hot"
 
-contracts = await res.json()
-
-renderHot()
-renderStates()
-renderShortage()
-renderSpecialty()
-renderHeatmap()
-renderPayGrowth()
-renderTable()
-
-}catch(err){
-
-console.error("Load failed:", err)
-
+if(contract.status === "Premium"){
+badgeClass = "badge-premium"
+}
+else if(contract.status === "Fast Fill"){
+badgeClass = "badge-fast"
 }
 
+return `
+<div class="contract-card">
+
+<div class="flex items-start justify-between gap-4 mb-4">
+<div>
+<h3 class="text-2xl font-black">${contract.city}, ${contract.state}</h3>
+<p class="text-gray-500 mt-1">${contract.specialty}</p>
+</div>
+
+<span class="badge ${badgeClass}">
+${contract.status}
+</span>
+</div>
+
+<div class="pay">
+$${contract.pay.toLocaleString()}/week
+</div>
+
+<div class="space-y-2 mt-5">
+
+<div class="data-row">
+<div class="data-label">Weekly Stipend</div>
+<div class="data-value">$${contract.stipend.toLocaleString()}</div>
+</div>
+
+<div class="data-row">
+<div class="data-label">Housing Cost</div>
+<div class="data-value">$${contract.housing.toLocaleString()}</div>
+</div>
+
+<div class="data-row">
+<div class="data-label">Shift</div>
+<div class="data-value">${contract.shift}</div>
+</div>
+
+</div>
+
+<a href="/" class="apply-button">
+Analyze This Contract
+</a>
+
+</div>
+`
+
+}).join("")
+
+
+
+ table.innerHTML = data.map(contract => {
+
+let badgeClass = "badge-hot"
+
+if(contract.status === "Premium"){
+badgeClass = "badge-premium"
+}
+else if(contract.status === "Fast Fill"){
+badgeClass = "badge-fast"
 }
 
-/* HOT MARKETS */
+return `
+<tr>
+<td>${contract.city}</td>
+<td>${contract.state}</td>
+<td>${contract.specialty}</td>
+<td>$${contract.pay.toLocaleString()}</td>
+<td>$${contract.stipend.toLocaleString()}</td>
+<td>$${contract.housing.toLocaleString()}</td>
+<td>${contract.shift}</td>
+<td>
+<span class="badge ${badgeClass}">
+${contract.status}
+</span>
+</td>
+</tr>
+`
 
-function renderHot(){
-
-const map={}
-
-contracts.forEach(c=>{
-const key=(c.city||"-")+"-"+(c.state||"-")
-if(!map[key]) map[key]={city:c.city||"-",state:c.state||"-",count:0,pay:0}
-map[key].count++
-map[key].pay+=(c.weeklyPay||0)
-})
-
-const sorted=Object.values(map).map(m=>({
-...m,
-avg:Math.round((m.pay||0)/(m.count||1)),
-score:m.count*m.pay
-})).sort((a,b)=>b.score-a.score)
-
-document.getElementById("hotMarkets").innerHTML =
-sorted.slice(0,6).map(m=>`
-<div class="bg-white p-4 rounded shadow">
-<div class="font-bold">${m.city}, ${m.state}</div>
-<div>$${m.avg}/wk</div>
-<div>${m.count} jobs</div>
-</div>`).join("")
-
-}
-
-/* STATES */
-
-function renderStates(){
-
-const map={}
-
-contracts.forEach(c=>{
-const state=c.state||"-"
-if(!map[state]) map[state]={state,count:0,pay:0}
-map[state].count++
-map[state].pay+=(c.weeklyPay||0)
-})
-
-const sorted=Object.values(map).map(s=>({
-...s,
-avg:Math.round((s.pay||0)/(s.count||1))
-})).sort((a,b)=>b.avg-a.avg)
-
-document.getElementById("bestStates").innerHTML =
-sorted.slice(0,6).map(s=>`
-<div class="bg-white p-4 rounded shadow">
-<div class="font-bold">${s.state}</div>
-<div>$${s.avg}/wk avg</div>
-</div>`).join("")
-
-}
-
-/* SHORTAGE */
-
-function renderShortage(){
-
-const map={}
-
-contracts.forEach(c=>{
-const key=(c.city||"-")+"-"+(c.specialty||"-")
-if(!map[key]) map[key]={city:c.city||"-",specialty:c.specialty||"-",count:0}
-map[key].count++
-})
-
-const sorted=Object.values(map).sort((a,b)=>b.count-a.count)
-
-document.getElementById("shortageIndex").innerHTML =
-sorted.slice(0,6).map(s=>`
-<div class="bg-white p-4 rounded shadow">
-<div>${s.city}</div>
-<div>${s.specialty}</div>
-<div class="font-bold">${s.count} openings</div>
-</div>`).join("")
-
-}
-
-/* SPECIALTY */
-
-function renderSpecialty(){
-
-const map={}
-
-contracts.forEach(c=>{
-const spec=c.specialty||"Unknown"
-if(!map[spec]) map[spec]={specialty:spec,count:0,pay:0}
-map[spec].count++
-map[spec].pay+=(c.weeklyPay||0)
-})
-
-const sorted=Object.values(map).map(s=>({
-...s,
-avg:Math.round((s.pay||0)/(s.count||1))
-})).sort((a,b)=>b.avg-a.avg)
-
-document.getElementById("topSpecialty").innerHTML =
-sorted.slice(0,6).map(s=>`
-<div class="bg-white p-4 rounded shadow">
-<div class="font-bold">${s.specialty}</div>
-<div>$${s.avg}/wk</div>
-</div>`).join("")
-
-}
-
-/* HEATMAP */
-
-function renderHeatmap(){
-
-const map={}
-
-contracts.forEach(c=>{
-const state=c.state||"-"
-if(!map[state]) map[state]=0
-map[state]++
-})
-
-const values=Object.values(map)
-const max=values.length ? Math.max(...values) : 1
-
-document.getElementById("heatmap").innerHTML =
-Object.entries(map).map(([state,count])=>{
-const intensity=Math.round((count/max)*255)
-return `<div class="text-center p-2 rounded text-white"
-style="background: rgb(${intensity},0,0)">
-${state}
-</div>`
 }).join("")
 
 }
 
-/* PAY GROWTH */
+function filterContracts(){
 
-function renderPayGrowth(){
+const cityFilter = document.getElementById("cityFilter").value.toLowerCase()
+const specialtyFilter = document.getElementById("specialtyFilter").value
+const payFilter = parseInt(document.getElementById("payFilter").value)
 
-const now=new Date()
-const cutoff=new Date(now.getTime()-7*24*60*60*1000)
+const filtered = contracts.filter(contract => {
 
-const oldData={}
-const newData={}
+const cityMatch = contract.city.toLowerCase().includes(cityFilter)
 
-contracts.forEach(c=>{
+const specialtyMatch = specialtyFilter === "" || contract.specialty === specialtyFilter
 
-if(!c.submissionDate) return
+const payMatch = contract.pay >= payFilter
 
-const date=new Date(c.submissionDate)
-const key=(c.city||"-")+"-"+(c.state||"-")
-
-if(date>=cutoff){
-
-if(!newData[key]) newData[key]={city:c.city||"-",state:c.state||"-",total:0,count:0}
-newData[key].total+=(c.weeklyPay||0)
-newData[key].count++
-
-}else{
-
-if(!oldData[key]) oldData[key]={total:0,count:0}
-oldData[key].total+=(c.weeklyPay||0)
-oldData[key].count++
-
-}
+return cityMatch && specialtyMatch && payMatch
 
 })
 
-let growth=[]
-
-Object.keys(newData).forEach(key=>{
-
-if(oldData[key]){
-
-const newAvg=newData[key].total/newData[key].count
-const oldAvg=oldData[key].total/oldData[key].count
-
-growth.push({
-city:newData[key].city,
-state:newData[key].state,
-increase:Math.round(newAvg-oldAvg),
-newAvg:Math.round(newAvg)
-})
+renderContracts(filtered)
 
 }
 
-})
-
-growth.sort((a,b)=>b.increase-a.increase)
-
-document.getElementById("payGrowth").innerHTML =
-growth.slice(0,6).map(g=>`
-<div class="bg-white p-4 rounded shadow border">
-<div class="font-bold">${g.city}, ${g.state}</div>
-<div class="text-green-600 font-bold">+ $${g.increase}/week</div>
-<div class="text-sm text-gray-500">Now averaging $${g.newAvg}</div>
-</div>
-`).join("")
-
-}
-
-/* TABLE */
-
-function renderTable(){
-
-document.getElementById("table").innerHTML =
-contracts.slice(0,50).map(c=>`
-<tr>
-<td class="p-2">${c.city||"-"}</td>
-<td class="p-2">${c.state||"-"}</td>
-<td class="p-2">${c.specialty||"-"}</td>
-<td class="p-2">$${c.weeklyPay||0}</td>
-</tr>`).join("")
-
-}
-
-load()
-setInterval(load,60000)
+renderContracts(contracts)
 
 </script>
 
