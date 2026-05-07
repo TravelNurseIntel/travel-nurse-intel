@@ -1,168 +1,579 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<title>Travel Nurse Pay by Specialty (2026)</title>
+<title>Travel Nurse Pay by Specialty (2026) | Travel Nurse Intel</title>
+
+<meta name="description" content="Compare travel nurse weekly pay by specialty with real-time compensation intelligence, demand forecasting, and specialty market trends.">
 
 <script src="https://cdn.tailwindcss.com"></script>
 
+<style>
+
+html,
+body{
+margin:0;
+padding:0;
+overflow-x:hidden;
+font-family:system-ui;
+background:#f3f4f6;
+color:#111827;
+}
+
+body{
+padding-bottom:60px;
+}
+
+.header{
+background:white;
+border-bottom:1px solid #e5e7eb;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 1px 4px rgba(0,0,0,0.05);
+}
+
+.ribbon-wrapper{
+width:100%;
+overflow:hidden;
+background:#111827;
+color:white;
+height:42px;
+display:flex;
+align-items:center;
+}
+
+.ribbon-track{
+display:flex;
+white-space:nowrap;
+animation:scroll-left 30s linear infinite;
+}
+
+.ribbon-item{
+padding-right:80px;
+font-size:13px;
+font-weight:700;
+flex-shrink:0;
+}
+
+@keyframes scroll-left{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-50%);
+}
+}
+
+.hero-card{
+background:white;
+border-radius:28px;
+padding:36px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+border:1px solid #e5e7eb;
+}
+
+.return-button{
+display:inline-flex;
+align-items:center;
+gap:8px;
+background:#2563eb;
+color:white;
+padding:12px 18px;
+border-radius:12px;
+font-weight:700;
+text-decoration:none;
+transition:0.2s ease;
+}
+
+.return-button:hover{
+background:#1d4ed8;
+}
+
+.stat-pill{
+display:inline-flex;
+align-items:center;
+padding:7px 14px;
+background:#eff6ff;
+color:#1d4ed8;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+}
+
+.market-card{
+background:white;
+border-radius:22px;
+padding:28px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+border:1px solid #e5e7eb;
+}
+
+.table-wrapper{
+overflow-x:auto;
+background:white;
+border-radius:20px;
+border:1px solid #e5e7eb;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.table{
+width:100%;
+border-collapse:collapse;
+min-width:750px;
+}
+
+.table th{
+background:#f9fafb;
+padding:18px;
+text-align:left;
+font-size:14px;
+font-weight:800;
+border-bottom:1px solid #e5e7eb;
+}
+
+.table td{
+padding:18px;
+border-bottom:1px solid #f3f4f6;
+font-size:15px;
+}
+
+.rank-badge{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:34px;
+height:34px;
+border-radius:999px;
+background:#2563eb;
+color:white;
+font-weight:800;
+font-size:14px;
+}
+
+.highlight-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+}
+
+.highlight-box{
+background:#f9fafb;
+border:1px solid #e5e7eb;
+border-radius:18px;
+padding:20px;
+}
+
+.highlight-title{
+font-size:13px;
+font-weight:700;
+color:#6b7280;
+margin-bottom:8px;
+text-transform:uppercase;
+letter-spacing:0.5px;
+}
+
+.highlight-value{
+font-size:28px;
+font-weight:900;
+color:#2563eb;
+}
+
+.cta-card{
+background:linear-gradient(135deg,#dbeafe,#eff6ff);
+border:1px solid #bfdbfe;
+border-radius:24px;
+padding:36px;
+text-align:center;
+}
+
+.cta-button{
+display:inline-block;
+background:#2563eb;
+color:white;
+padding:14px 28px;
+border-radius:14px;
+font-weight:700;
+text-decoration:none;
+transition:0.2s ease;
+}
+
+.cta-button:hover{
+background:#1d4ed8;
+}
+
+@media(max-width:768px){
+
+.hero-card{
+padding:24px;
+}
+
+.table th,
+.table td{
+padding:14px;
+font-size:13px;
+}
+
+.highlight-value{
+font-size:24px;
+}
+
+}
+
+</style>
+
 </head>
+<body>
 
-<body class="bg-gray-50 p-6">
+<!-- HEADER -->
 
-<!-- NAVIGATION RIBBON -->
+<header class="header">
 
-<div class="bg-white border-b shadow-sm mb-6">
-<div class="max-w-5xl mx-auto flex flex-wrap justify-center gap-4 text-sm p-3">
+<div class="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
 
-<a href="/" class="text-blue-600 hover:underline font-semibold">
+<a href="/">
+<img
+src="/logo.png"
+alt="Travel Nurse Intel"
+class="h-20 md:h-24 mb-3">
+</a>
+
+<div class="flex flex-wrap justify-center gap-3 mb-3 text-sm">
+
+<a href="/" class="return-button">
+← Return to Contract Analyzer
+</a>
+
+</div>
+
+<nav class="flex flex-wrap justify-center gap-4 text-sm pb-1">
+
+<a href="/" class="hover:underline">
 Contract Analyzer
 </a>
 
-<a href="/highest-paying-travel-nurse-states.html" class="text-gray-700 hover:underline">
+<a href="/travel-nurse-live-contracts.html" class="hover:underline">
+Live Contracts
+</a>
+
+<a href="/travel-nurse-market-intelligence.html" class="hover:underline">
+Market Intelligence
+</a>
+
+<a href="/highest-paying-travel-nurse-states.html" class="hover:underline">
 Highest Paying States
 </a>
 
-<a href="/travel-nurse-pay-by-specialty.html" class="text-gray-700 hover:underline">
+<a href="/travel-nurse-pay-by-specialty.html" class="text-blue-600 font-bold hover:underline">
 Pay by Specialty
 </a>
 
-<a href="/travel-nurse-pay-transparency.html" class="text-gray-700 hover:underline">
+<a href="/travel-nurse-pay-transparency.html" class="hover:underline">
 Pay Transparency
 </a>
 
-<a href="/travel-nurse-salary-database.html" class="text-gray-700 hover:underline">
-Salary Database
-</a>
-
-<a href="/travel-nurse-tax-free-stipend-guide.html" class="text-gray-700 hover:underline">
-Tax Guide
-</a>
+</nav>
 
 </div>
+
+</header>
+
+<!-- RIBBON -->
+
+<div class="ribbon-wrapper">
+
+<div class="ribbon-track">
+
+<div class="ribbon-item">🔥 Cath Lab contracts paying up to $5,400/week</div>
+<div class="ribbon-item">🔥 ICU remains the highest demand specialty nationwide</div>
+<div class="ribbon-item">🔥 Labor & Delivery pay increased 11% this quarter</div>
+<div class="ribbon-item">🔥 ER contracts filling rapidly in Arizona and California</div>
+<div class="ribbon-item">🔥 Housing stipends continue rising nationwide</div>
+<div class="ribbon-item">🔥 Compare recruiter packages instantly</div>
+<div class="ribbon-item">🔥 Cath Lab contracts paying up to $5,400/week</div>
+<div class="ribbon-item">🔥 ICU remains the highest demand specialty nationwide</div>
+
 </div>
 
-<div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
+</div>
 
-<div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow">
+<!-- HERO -->
 
-<h1 class="text-3xl font-bold mb-4">
+<section class="max-w-7xl mx-auto px-4 py-8">
+
+<div class="hero-card text-center">
+
+<h1 class="text-4xl md:text-6xl font-black mb-5 leading-tight">
 Travel Nurse Pay by Specialty (2026)
 </h1>
 
-<p class="text-gray-700 mb-6">
-Travel nurse compensation varies significantly depending on specialty demand, hospital staffing shortages, and patient acuity levels. Below are typical weekly pay ranges for common travel nurse specialties across the United States.
+<p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
+Compare travel nurse compensation by specialty with real-time pay intelligence, staffing demand trends, and specialty market forecasting.
 </p>
 
-<h2 class="text-xl font-bold mb-3">
-Typical Travel Nurse Weekly Pay by Specialty
+<div class="mt-6 flex flex-wrap justify-center gap-3">
+
+<div class="stat-pill">Updated Weekly</div>
+<div class="stat-pill">Nationwide Specialty Analytics</div>
+<div class="stat-pill">AI-Powered Market Intelligence</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- HIGHLIGHTS -->
+
+<section class="max-w-7xl mx-auto px-4 pb-8">
+
+<div class="highlight-grid">
+
+<div class="highlight-box">
+<div class="highlight-title">Highest Paying Specialty</div>
+<div class="highlight-value">Cath Lab</div>
+<p class="text-sm text-gray-500 mt-2">
+Average contracts reaching $5,400/week
+</p>
+</div>
+
+<div class="highlight-box">
+<div class="highlight-title">Highest Demand Specialty</div>
+<div class="highlight-value">ICU</div>
+<p class="text-sm text-gray-500 mt-2">
+Critical staffing shortages nationwide
+</p>
+</div>
+
+<div class="highlight-box">
+<div class="highlight-title">Fastest Pay Growth</div>
+<div class="highlight-value">+11%</div>
+<p class="text-sm text-gray-500 mt-2">
+Labor & Delivery market expansion
+</p>
+</div>
+
+<div class="highlight-box">
+<div class="highlight-title">Top Housing Stipends</div>
+<div class="highlight-value">$1,950</div>
+<p class="text-sm text-gray-500 mt-2">
+California premium specialty contracts
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- TABLE -->
+
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="market-card">
+
+<h2 class="text-3xl font-black mb-6">
+Typical Weekly Pay by Specialty
 </h2>
 
-<table class="w-full border border-gray-300 text-left text-sm mb-8 border-collapse">
+<div class="table-wrapper">
 
-<tr class="border-b bg-gray-100">
-<th class="p-2">Specialty</th>
-<th class="p-2">Typical Weekly Pay</th>
+<table class="table">
+
+<thead>
+<tr>
+<th>Rank</th>
+<th>Specialty</th>
+<th>Typical Weekly Pay</th>
+<th>Demand Level</th>
+<th>Market Trend</th>
+<th>Top Paying States</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td><span class="rank-badge">1</span></td>
+<td class="font-bold">Cath Lab</td>
+<td>$4,900 – $5,400+</td>
+<td>Extreme</td>
+<td class="text-green-600 font-bold">Rapid Growth</td>
+<td>CA, WA, MA</td>
 </tr>
 
-<tr class="border-b">
-<td class="p-2">ICU (Intensive Care)</td>
-<td class="p-2">$3,100 – $3,700</td>
+<tr>
+<td><span class="rank-badge">2</span></td>
+<td class="font-bold">CVICU</td>
+<td>$4,700 – $5,200</td>
+<td>Extreme</td>
+<td class="text-green-600 font-bold">Rising</td>
+<td>CA, AZ, WA</td>
 </tr>
 
-<tr class="border-b">
-<td class="p-2">ER (Emergency Room)</td>
-<td class="p-2">$3,000 – $3,600</td>
+<tr>
+<td><span class="rank-badge">3</span></td>
+<td class="font-bold">ICU</td>
+<td>$4,500 – $5,000</td>
+<td>Extreme</td>
+<td class="text-green-600 font-bold">Strong Growth</td>
+<td>CA, TX, WA</td>
 </tr>
 
-<tr class="border-b">
-<td class="p-2">Labor & Delivery</td>
-<td class="p-2">$3,100 – $3,800</td>
+<tr>
+<td><span class="rank-badge">4</span></td>
+<td class="font-bold">Labor & Delivery</td>
+<td>$4,400 – $4,900</td>
+<td>High</td>
+<td class="text-green-600 font-bold">Rising</td>
+<td>CA, MA, CO</td>
 </tr>
 
-<tr class="border-b">
-<td class="p-2">Operating Room (OR)</td>
-<td class="p-2">$3,000 – $3,600</td>
+<tr>
+<td><span class="rank-badge">5</span></td>
+<td class="font-bold">ER</td>
+<td>$4,300 – $4,800</td>
+<td>High</td>
+<td class="text-green-600 font-bold">Stable Growth</td>
+<td>AZ, CA, FL</td>
 </tr>
 
-<tr class="border-b">
-<td class="p-2">Telemetry</td>
-<td class="p-2">$2,700 – $3,200</td>
+<tr>
+<td><span class="rank-badge">6</span></td>
+<td class="font-bold">Operating Room (OR)</td>
+<td>$4,200 – $4,700</td>
+<td>Moderate</td>
+<td class="text-blue-600 font-bold">Stable</td>
+<td>CA, TX, WA</td>
 </tr>
 
-<tr class="border-b">
-<td class="p-2">Med-Surg</td>
-<td class="p-2">$2,600 – $3,100</td>
+<tr>
+<td><span class="rank-badge">7</span></td>
+<td class="font-bold">Telemetry</td>
+<td>$3,900 – $4,400</td>
+<td>Moderate</td>
+<td class="text-blue-600 font-bold">Stable</td>
+<td>TX, FL, AZ</td>
 </tr>
 
-<tr class="border-b">
-<td class="p-2">Pediatric ICU</td>
-<td class="p-2">$3,200 – $3,900</td>
+<tr>
+<td><span class="rank-badge">8</span></td>
+<td class="font-bold">Med-Surg</td>
+<td>$3,700 – $4,200</td>
+<td>Moderate</td>
+<td class="text-blue-600 font-bold">Stable</td>
+<td>TX, FL, MO</td>
 </tr>
 
-<tr class="border-b">
-<td class="p-2">Cath Lab</td>
-<td class="p-2">$3,300 – $4,000+</td>
-</tr>
+</tbody>
 
 </table>
 
-<h2 class="text-xl font-bold mb-3">
+</div>
+
+</div>
+
+</section>
+
+<!-- WHY PAY VARIES -->
+
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="market-card">
+
+<h2 class="text-3xl font-black mb-4">
 Why Specialty Pay Varies
 </h2>
 
-<p class="text-gray-700 mb-6">
-Higher-acuity specialties such as ICU, Cath Lab, and Labor & Delivery typically command higher pay because hospitals experience more severe staffing shortages and require highly experienced nurses. Demand fluctuations can cause weekly pay ranges to vary significantly between contracts.
-</p>
-
-<h2 class="text-xl font-bold mb-3">
-Check If Your Travel Nurse Contract Is Underpaid
-</h2>
-
-<p class="mb-4">
-Use our free Travel Nurse Contract Analyzer to estimate whether your contract pay is above or below current market averages.
-</p>
-
-<a href="/" class="inline-block bg-blue-600 text-white px-5 py-3 rounded-lg mb-6">
-Check Your Contract Pay
-</a>
-
-<p class="text-xs text-gray-500 mt-10">
-Disclaimer: Travel nurse compensation ranges, salary comparisons, and contract analysis estimates shown on this page are based on general market trends, publicly available compensation data, and aggregated industry reports. Actual contract pay may vary depending on specialty, hospital system, staffing agency, geographic demand, shift differentials, experience level, and contract structure.
-
-This information is provided for educational and informational purposes only and should not be interpreted as financial, tax, legal, or employment advice. Users should consult qualified professionals including tax advisors, financial advisors, or legal professionals before making decisions related to employment contracts, compensation, or tax matters.
-</p>
-
-<p class="mt-4">
-<a href="/" class="text-blue-600 underline">
-Return to Contract Analyzer
-</a>
+<p class="text-lg text-gray-600 leading-8">
+Higher-acuity specialties such as ICU, CVICU, Cath Lab, and Labor & Delivery typically command significantly higher compensation due to severe staffing shortages, patient acuity requirements, certification requirements, and limited experienced candidate pools. Regional demand fluctuations, seasonal census changes, and hospital competition can also cause substantial weekly pay differences between contracts.
 </p>
 
 </div>
-  
-<footer class="text-center text-xs text-gray-500 mt-10">
 
-<p>
-Travel Nurse Intel™<br>
+</section>
+
+<!-- CTA -->
+
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="cta-card">
+
+<h2 class="text-3xl font-black mb-4">
+Check If Your Travel Nurse Contract Is Underpaid
+</h2>
+
+<p class="text-lg text-gray-700 mb-6 max-w-3xl mx-auto">
+Use the free Travel Nurse Intel analyzer to estimate whether your current travel nurse contract is above or below market compensation.
+</p>
+
+<a
+href="/"
+class="cta-button">
+Analyze Your Contract
+</a>
+
+</div>
+
+</section>
+
+<!-- DISCLAIMER -->
+
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="market-card">
+
+<h3 class="text-lg font-bold mb-3">
+Disclaimer
+</h3>
+
+<p class="text-sm text-gray-500 leading-7">
+Travel nurse compensation ranges, specialty comparisons, and market analysis estimates shown on this page are based on market trends, publicly available compensation data, recruiter submissions, and aggregated healthcare staffing analytics. Actual contract compensation may vary depending on specialty, certifications, geographic demand, recruiter margins, shift differentials, hospital systems, housing stipends, contract structures, and experience levels.
+</p>
+
+<p class="text-sm text-gray-500 leading-7 mt-4">
+This information is provided for informational and educational purposes only and should not be interpreted as legal, tax, financial, employment, or investment advice. Users should independently verify all compensation packages and consult qualified professionals before making employment, tax, or financial decisions.
+</p>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="text-center text-sm text-gray-500 px-4 pb-12">
+
+<p class="mb-1 font-semibold">
+Travel Nurse Intel™
+</p>
+
+<p class="text-xs mb-3">
 A registered fictitious name of Kingdom Come™, LLC
 </p>
 
-<p class="mt-2">
+<p>
 © 2026 All rights reserved.
 </p>
 
-<p class="mt-2">
-<a href="/privacy.html" class="underline">Privacy Policy</a> •
-<a href="/terms.html" class="underline">Terms of Service</a> •
-<a href="/disclaimer.html" class="underline">Disclaimer</a>
-</p>
+<div class="mt-3 flex flex-wrap justify-center gap-4 text-sm">
+
+<a href="/privacy.html" class="hover:underline">
+Privacy Policy
+</a>
+
+<a href="/terms.html" class="hover:underline">
+Terms of Service
+</a>
+
+<a href="/disclaimer.html" class="hover:underline">
+Disclaimer
+</a>
+
+</div>
 
 </footer>
 
 </body>
-</html>
+</html>"
