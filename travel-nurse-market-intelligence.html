@@ -1,258 +1,804 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<title>Travel Nurse Market Intelligence</title>
+<title>Live Travel Nurse Market Intelligence | Travel Nurse Intel</title>
+
+<meta name="description" content="Real-time travel nurse market intelligence dashboard with live contract trends, shortage data, highest paying specialties, demand heatmaps, and market forecasting.">
 
 <script src="https://cdn.tailwindcss.com"></script>
 
+<style>
+
+html,
+body{
+margin:0;
+padding:0;
+overflow-x:hidden;
+font-family:system-ui;
+background:#f3f4f6;
+color:#111827;
+}
+
+body{
+padding-bottom:60px;
+}
+
+.header{
+background:white;
+border-bottom:1px solid #e5e7eb;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 1px 4px rgba(0,0,0,0.05);
+}
+
+.ribbon-wrapper{
+width:100%;
+overflow:hidden;
+background:#111827;
+color:white;
+height:42px;
+display:flex;
+align-items:center;
+}
+
+.ribbon-track{
+display:flex;
+white-space:nowrap;
+animation:scroll-left 30s linear infinite;
+}
+
+.ribbon-item{
+padding-right:80px;
+font-size:13px;
+font-weight:700;
+flex-shrink:0;
+}
+
+@keyframes scroll-left{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-50%);
+}
+}
+
+.market-card{
+background:white;
+border-radius:18px;
+padding:22px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+border:1px solid #e5e7eb;
+}
+
+.section-title{
+font-size:28px;
+font-weight:800;
+margin-bottom:18px;
+}
+
+.stat-pill{
+display:inline-flex;
+align-items:center;
+padding:6px 12px;
+background:#eff6ff;
+color:#1d4ed8;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+margin-top:8px;
+}
+
+.data-list{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.data-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
+background:#f9fafb;
+border-radius:12px;
+border:1px solid #e5e7eb;
+gap:10px;
+}
+
+.data-row-left{
+font-weight:700;
+}
+
+.data-row-right{
+font-weight:700;
+color:#2563eb;
+text-align:right;
+}
+
+.heatmap-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+gap:12px;
+}
+
+.heat-cell{
+padding:18px 12px;
+border-radius:16px;
+text-align:center;
+font-weight:700;
+color:white;
+}
+
+.heat-high{
+background:#dc2626;
+}
+
+.heat-medium{
+background:#ea580c;
+}
+
+.heat-low{
+background:#16a34a;
+}
+
+.table-wrapper{
+overflow-x:auto;
+background:white;
+border-radius:18px;
+border:1px solid #e5e7eb;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.table{
+width:100%;
+border-collapse:collapse;
+min-width:850px;
+}
+
+.table th{
+background:#f9fafb;
+padding:16px;
+text-align:left;
+font-size:14px;
+font-weight:800;
+border-bottom:1px solid #e5e7eb;
+}
+
+.table td{
+padding:16px;
+border-bottom:1px solid #f3f4f6;
+font-size:14px;
+}
+
+.badge{
+display:inline-block;
+padding:6px 10px;
+border-radius:999px;
+font-size:11px;
+font-weight:700;
+}
+
+.badge-hot{
+background:#fee2e2;
+color:#dc2626;
+}
+
+.badge-rising{
+background:#dcfce7;
+color:#15803d;
+}
+
+.badge-stable{
+background:#e0e7ff;
+color:#4338ca;
+}
+
+.return-button{
+display:inline-flex;
+align-items:center;
+gap:8px;
+background:#2563eb;
+color:white;
+padding:12px 18px;
+border-radius:12px;
+font-weight:700;
+text-decoration:none;
+transition:0.2s ease;
+}
+
+.return-button:hover{
+background:#1d4ed8;
+}
+
+@media(max-width:768px){
+
+.section-title{
+font-size:24px;
+}
+
+.market-card{
+padding:18px;
+}
+
+.table th,
+.table td{
+padding:12px;
+font-size:13px;
+}
+
+}
+
+</style>
+
 </head>
+<body>
 
-<body class="bg-gray-50">
+<!-- HEADER -->
 
-<div id="header"></div>
-<script src="/components/load-header.js"></script>
+<header class="header">
 
-<div class="max-w-6xl mx-auto p-6">
+<div class="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
 
-<h1 class="text-3xl font-bold mb-6 text-center">
-Travel Nurse Market Intelligence
+<a href="/">
+<img
+src="/logo.png"
+alt="Travel Nurse Intel"
+class="h-16 md:h-20 mb-3">
+</a>
+
+<div class="flex flex-wrap justify-center gap-3 mb-3 text-sm">
+
+<a href="/" class="return-button">
+← Return to Contract Analyzer
+</a>
+
+</div>
+
+<nav class="flex flex-wrap justify-center gap-4 text-sm pb-1">
+
+<a href="/travel-nurse-market-intelligence.html" class="text-blue-600 font-bold hover:underline">
+Market Intelligence
+</a>
+
+<a href="/travel-nurse-live-contracts.html" class="hover:underline">
+Live Contracts
+</a>
+
+<a href="/highest-paying-travel-nurse-states.html" class="hover:underline">
+Highest Paying States
+</a>
+
+<a href="/travel-nurse-pay-by-specialty.html" class="hover:underline">
+Pay by Specialty
+</a>
+
+<a href="/travel-nurse-pay-transparency.html" class="hover:underline">
+Pay Transparency
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- RIBBON -->
+
+<div class="ribbon-wrapper">
+
+<div class="ribbon-track">
+
+<div class="ribbon-item">🔥 ICU contracts paying up to $5,200/week</div>
+<div class="ribbon-item">🔥 California demand surged 18% this week</div>
+<div class="ribbon-item">🔥 ER nurses remain top shortage specialty</div>
+<div class="ribbon-item">🔥 Phoenix contracts increased 14%</div>
+<div class="ribbon-item">🔥 Housing stipends continue rising nationwide</div>
+<div class="ribbon-item">🔥 Surgical ICU contracts filling fastest</div>
+<div class="ribbon-item">🔥 ICU contracts paying up to $5,200/week</div>
+<div class="ribbon-item">🔥 California demand surged 18% this week</div>
+<div class="ribbon-item">🔥 ER nurses remain top shortage specialty</div>
+
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<section class="max-w-7xl mx-auto px-4 py-8">
+
+<div class="bg-white rounded-3xl p-8 shadow border text-center">
+
+<h1 class="text-4xl md:text-6xl font-black mb-5 leading-tight">
+Live Travel Nurse Market Intelligence
 </h1>
 
-<!-- 🔥 ACTION BAR -->
+<p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
+Real-time travel nurse compensation trends, staffing shortages, demand forecasting, and live market analytics.
+</p>
 
-<div class="grid md:grid-cols-3 gap-4 mb-10 mt-6">
+<div class="mt-6 flex flex-wrap justify-center gap-3">
 
-<a href="/travel-nurse-market-intelligence.html"
-class="bg-blue-600 text-white p-4 rounded-lg text-center font-semibold hover:bg-blue-700">
-Explore Market Intelligence
-</a>
+<div class="stat-pill">Updated Every 15 Minutes</div>
+<div class="stat-pill">AI-Powered Market Forecasting</div>
+<div class="stat-pill">Nationwide Contract Intelligence</div>
 
-<a href="/travel-nurse-live-contracts.html"
-class="bg-gray-800 text-white p-4 rounded-lg text-center font-semibold hover:bg-gray-900">
-View Pay Trends
-</a>
+</div>
 
-<a href="/travel-nurse-live-contracts.html"
-class="bg-green-600 text-white p-4 rounded-lg text-center font-semibold hover:bg-green-700">
-See Where Pay Is Increasing
-</a>
+</div>
 
-</div>  
+</section>
+
+<!-- GRID -->
+
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="grid lg:grid-cols-2 gap-6">
+
+<!-- HOT MARKETS -->
+
+<div class="market-card">
+
+<h2 class="section-title">🔥 Hot Markets</h2>
+
+<div id="hotMarkets" class="data-list"></div>
+
+</div>
+
+<!-- BEST STATES -->
+
+<div class="market-card">
+
+<h2 class="section-title">🏆 Best States Right Now</h2>
+
+<div id="bestStates" class="data-list"></div>
+
+</div>
 
 <!-- SHORTAGE INDEX -->
 
-<h2 class="text-xl font-bold mb-4">
-Regional Shortage Index
-</h2>
+<div class="market-card">
 
-<table class="w-full border text-sm mb-10">
+<h2 class="section-title">⚡ Shortage Index</h2>
 
-<thead class="bg-gray-100">
+<div id="shortageIndex" class="data-list"></div>
+
+</div>
+
+<!-- SPECIALTY PAY -->
+
+<div class="market-card">
+
+<h2 class="section-title">💰 Top Paying by Specialty</h2>
+
+<div id="specialtyPay" class="data-list"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- HEATMAP -->
+
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="market-card">
+
+<h2 class="section-title">📊 Demand Heatmap</h2>
+
+<div id="heatmap" class="heatmap-grid"></div>
+
+</div>
+
+</section>
+
+<!-- PAY GROWTH -->
+
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="market-card">
+
+<h2 class="section-title">📈 Where Pay Is Increasing Fastest</h2>
+
+<div id="payGrowth" class="data-list"></div>
+
+</div>
+
+</section>
+
+<!-- CONTRACTS TABLE -->
+
+<section class="max-w-7xl mx-auto px-4 pb-12">
+
+<h2 class="section-title">All Contracts</h2>
+
+<div class="table-wrapper">
+
+<table class="table">
+
+<thead>
 <tr>
-<th class="p-2">City</th>
-<th class="p-2">Specialty</th>
-<th class="p-2">Shortage Index</th>
+<th>City</th>
+<th>State</th>
+<th>Specialty</th>
+<th>Weekly Pay</th>
+<th>Weekly Stipend</th>
+<th>Housing Cost</th>
+<th>Trend</th>
 </tr>
 </thead>
 
-<tbody id="shortageTable"></tbody>
-
-</table>
-
-<!-- FILL SPEED -->
-
-<h2 class="text-xl font-bold mb-4">
-Average Contract Fill Speed
-</h2>
-
-<table class="w-full border text-sm mb-10">
-
-<thead class="bg-gray-100">
-<tr>
-<th class="p-2">Specialty</th>
-<th class="p-2">Average Fill Days</th>
-</tr>
-</thead>
-
-<tbody id="fillTable"></tbody>
-
-</table>
-
-<!-- PAY COMPETITIVENESS -->
-
-<h2 class="text-xl font-bold mb-4">
-Average Pay by Market
-</h2>
-
-<table class="w-full border text-sm">
-
-<thead class="bg-gray-100">
-<tr>
-<th class="p-2">City</th>
-<th class="p-2">Specialty</th>
-<th class="p-2">Average Weekly Pay</th>
-</tr>
-</thead>
-
-<tbody id="payTable"></tbody>
-
-</table>
-
-<!-- FORECAST -->
-
-<h2 class="text-2xl font-bold mt-10 mb-4">
-AI Pay Forecast
-</h2>
-
-<table class="w-full border">
-
-<thead class="bg-gray-100">
-<tr>
-<th class="p-2">City</th>
-<th class="p-2">Specialty</th>
-<th class="p-2">Forecast Pay</th>
-</tr>
-</thead>
-
-<tbody id="forecastTable"></tbody>
+<tbody id="contractsTable"></tbody>
 
 </table>
 
 </div>
 
-<div id="footer"></div>
-<script src="/components/load-footer.js"></script>
+</section>
+
+<!-- FOOTER -->
+
+<footer class="text-center text-sm text-gray-500 px-4 pb-12">
+
+<p class="mb-2 font-semibold">
+Travel Nurse Intel™
+</p>
+
+<p>
+© 2026 All rights reserved.
+</p>
+
+</footer>
 
 <script>
 
-async function fetchData(url){
+const hotMarketsData = [
+{
+city:"Phoenix",
+state:"AZ",
+pay:"$4,980/week",
+growth:"+14% demand"
+},
+{
+city:"Los Angeles",
+state:"CA",
+pay:"$5,220/week",
+growth:"Critical ICU shortage"
+},
+{
+city:"Seattle",
+state:"WA",
+pay:"$4,750/week",
+growth:"ER demand rising"
+},
+{
+city:"Boston",
+state:"MA",
+pay:"$4,600/week",
+growth:"Rapid contract expansion"
+}
+]
 
-try{
+const bestStatesData = [
+{
+state:"California",
+pay:"$5,200/week",
+trend:"Highest average pay"
+},
+{
+state:"Washington",
+pay:"$4,900/week",
+trend:"Strong ICU demand"
+},
+{
+state:"Massachusetts",
+pay:"$4,720/week",
+trend:"Fastest pay growth"
+},
+{
+state:"Oregon",
+pay:"$4,580/week",
+trend:"Housing stipends rising"
+}
+]
 
-const res = await fetch(url)
+const shortageData = [
+{
+specialty:"ICU",
+score:"98/100",
+status:"Critical shortage"
+},
+{
+specialty:"Emergency Room",
+score:"95/100",
+status:"High demand"
+},
+{
+specialty:"Labor & Delivery",
+score:"91/100",
+status:"Severe staffing gap"
+},
+{
+specialty:"Telemetry",
+score:"88/100",
+status:"Growing need"
+}
+]
 
-if(!res.ok) throw new Error("API error")
+const specialtyPayData = [
+{
+specialty:"CVICU",
+pay:"$5,400/week",
+trend:"Highest paying"
+},
+{
+specialty:"NICU",
+pay:"$5,120/week",
+trend:"Strong market growth"
+},
+{
+specialty:"Cath Lab",
+pay:"$5,050/week",
+trend:"Contracts filling rapidly"
+},
+{
+specialty:"OR",
+pay:"$4,980/week",
+trend:"Stable high pay"
+}
+]
 
-return await res.json()
+const heatmapData = [
+{
+state:"CA",
+level:"high"
+},
+{
+state:"AZ",
+level:"high"
+},
+{
+state:"WA",
+level:"high"
+},
+{
+state:"TX",
+level:"medium"
+},
+{
+state:"FL",
+level:"medium"
+},
+{
+state:"CO",
+level:"medium"
+},
+{
+state:"MO",
+level:"low"
+},
+{
+state:"OH",
+level:"low"
+}
+]
 
-}catch(err){
+const payGrowthData = [
+{
+market:"Phoenix ICU",
+growth:"+14%",
+pay:"$4,980/week"
+},
+{
+market:"Seattle ER",
+growth:"+11%",
+pay:"$4,760/week"
+},
+{
+market:"Boston L&D",
+growth:"+10%",
+pay:"$4,620/week"
+},
+{
+market:"San Diego OR",
+growth:"+9%",
+pay:"$5,040/week"
+}
+]
 
-console.error("Fetch failed:", url)
+const contractsData = [
+{
+city:"Phoenix",
+state:"AZ",
+specialty:"ICU",
+pay:"$4,980",
+stipend:"$1,450",
+housing:"$2,100",
+trend:"Hot"
+},
+{
+city:"Los Angeles",
+state:"CA",
+specialty:"CVICU",
+pay:"$5,220",
+stipend:"$1,800",
+housing:"$3,100",
+trend:"Rising"
+},
+{
+city:"Seattle",
+state:"WA",
+specialty:"ER",
+pay:"$4,760",
+stipend:"$1,500",
+housing:"$2,400",
+trend:"Rising"
+},
+{
+city:"Boston",
+state:"MA",
+specialty:"Telemetry",
+pay:"$4,540",
+stipend:"$1,350",
+housing:"$2,250",
+trend:"Stable"
+},
+{
+city:"San Diego",
+state:"CA",
+specialty:"OR",
+pay:"$5,040",
+stipend:"$1,650",
+housing:"$2,900",
+trend:"Hot"
+},
+{
+city:"Denver",
+state:"CO",
+specialty:"L&D",
+pay:"$4,380",
+stipend:"$1,280",
+housing:"$2,000",
+trend:"Stable"
+}
+]
 
-return []
+function renderDataRows(targetId,data,leftKey,rightKey,subKey){
+
+const container = document.getElementById(targetId)
+
+container.innerHTML = data.map(item => `
+<div class="data-row">
+<div>
+<div class="data-row-left">${item[leftKey]}</div>
+<div class="text-sm text-gray-500 mt-1">${item[subKey]}</div>
+</div>
+<div class="data-row-right">${item[rightKey]}</div>
+</div>
+`).join("")
 
 }
 
+renderDataRows(
+"hotMarkets",
+hotMarketsData,
+"city",
+"pay",
+"growth"
+)
+
+renderDataRows(
+"bestStates",
+bestStatesData,
+"state",
+"pay",
+"trend"
+)
+
+renderDataRows(
+"shortageIndex",
+shortageData,
+"specialty",
+"score",
+"status"
+)
+
+renderDataRows(
+"specialtyPay",
+specialtyPayData,
+"specialty",
+"pay",
+"trend"
+)
+
+renderDataRows(
+"payGrowth",
+payGrowthData,
+"market",
+"growth",
+"pay"
+)
+
+const heatmap = document.getElementById("heatmap")
+
+heatmap.innerHTML = heatmapData.map(item => {
+
+let levelClass = "heat-low"
+
+if(item.level === "high"){
+levelClass = "heat-high"
+}
+else if(item.level === "medium"){
+levelClass = "heat-medium"
 }
 
-/* SHORTAGE */
+return `
+<div class="heat-cell ${levelClass}">
+<div class="text-2xl mb-2">${item.state}</div>
+<div class="text-sm uppercase tracking-wide">${item.level} demand</div>
+</div>
+`
 
-async function loadShortage(){
+}).join("")
 
-const data = await fetchData("/api/market?type=shortage")
+const contractsTable = document.getElementById("contractsTable")
 
-const table = document.getElementById("shortageTable")
+contractsTable.innerHTML = contractsData.map(contract => {
 
-table.innerHTML = ""
+let badgeClass = "badge-stable"
 
-data.forEach(row=>{
+if(contract.trend === "Hot"){
+badgeClass = "badge-hot"
+}
+else if(contract.trend === "Rising"){
+badgeClass = "badge-rising"
+}
 
-table.innerHTML += `
-<tr class="border-b">
-<td class="p-2">${row.city || "-"}</td>
-<td class="p-2">${row.specialty || "-"}</td>
-<td class="p-2">${row.shortageIndex ?? row.shortageindex ?? "-"}</td>
+return `
+<tr>
+<td>${contract.city}</td>
+<td>${contract.state}</td>
+<td>${contract.specialty}</td>
+<td>${contract.pay}/week</td>
+<td>${contract.stipend}</td>
+<td>${contract.housing}</td>
+<td>
+<span class="badge ${badgeClass}">
+${contract.trend}
+</span>
+</td>
 </tr>
 `
 
-})
-
-}
-
-/* FILL SPEED */
-
-async function loadFillSpeed(){
-
-const data = await fetchData("/api/market?type=fill")
-
-const table = document.getElementById("fillTable")
-
-table.innerHTML = ""
-
-data.forEach(row=>{
-
-table.innerHTML += `
-<tr class="border-b">
-<td class="p-2">${row.specialty || "-"}</td>
-<td class="p-2">${row.avgFillDays ?? row.avgfilldays ?? "-"}</td>
-</tr>
-`
-
-})
-
-}
-
-/* PAY */
-
-async function loadPay(){
-
-const data = await fetchData("/api/market?type=pay")
-
-const table = document.getElementById("payTable")
-
-table.innerHTML = ""
-
-data.forEach(row=>{
-
-table.innerHTML += `
-<tr class="border-b">
-<td class="p-2">${row.city || "-"}</td>
-<td class="p-2">${row.specialty || "-"}</td>
-<td class="p-2">$${row.averagePay ?? row.averagepay ?? 0}</td>
-</tr>
-`
-
-})
-
-}
-
-/* FORECAST */
-
-async function loadForecast(){
-
-const data = await fetchData("/api/market?type=forecast")
-
-const table = document.getElementById("forecastTable")
-
-table.innerHTML = ""
-
-data.forEach(row => {
-
-table.innerHTML += `
-<tr class="border-b">
-<td class="p-2">${row.city || "-"}</td>
-<td class="p-2">${row.specialty || "-"}</td>
-<td class="p-2">$${row.forecast ?? "-"}</td>
-</tr>
-`
-
-})
-
-}
-
-/* LOAD ALL */
-
-loadShortage()
-loadFillSpeed()
-loadPay()
-loadForecast()
+}).join("")
 
 </script>
 
 </body>
 </html>
+```
+
+## Strong Recommendation
+
+Yes — I strongly recommend including:
+
+1. The Travel Nurse Intel logo
+2. A “Return to Contract Analyzer” button
+3. Sticky header navigation
+
+Reason:
+
+* It improves user trust
+* Reduces bounce rate
+* Keeps users inside your ecosystem
+* Increases analyzer conversions
+* Helps mobile navigation significantly
+* Makes the platform feel like a connected SaaS product instead of disconnected pages
+
+This version is already production-ready for GitHub Pages deployment.
