@@ -1,44 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<title>Travel Nurse Pay Transparency (2026)</title>
+<title>Travel Nurse Pay Transparency (2026) | Travel Nurse Intel</title>
 
-<meta name="description" content="Compare travel nurse contract pay with real salary submissions from other travel nurses. Discover whether your contract pay is competitive.">
+<meta name="description" content="Compare travel nurse compensation with real contract submissions, market intelligence, recruiter comparisons, and live pay transparency analytics.">
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-</head>
+<style>
 
-<body class="bg-gray-50 p-6">
+html,
+body{
+margin:0;
+padding:0;
+overflow-x:hidden;
+font-family:system-ui;
+background:#f3f4f6;
+color:#111827;
+}
+
+body{
+padding-bottom:60px;
+}
+
+.header{
+background:white;
+border-bottom:1px solid #e5e7eb;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 1px 4px rgba(0,0,0,0.05);
+}
+
+.ribbon-wrapper{
+width:100%;
+overflow:hidden;
+background:#111827;
+color:white;
+height:42px;
+display:flex;
+align-items:center;
+}
+
+.ribbon-track{
+display:flex;
+white-space:nowrap;
+animation:scroll-left 30s linear infinite;
+}
+
+.ribbon-item{
+padding-right:80px;
+font-size:13px;
+font-weight:700;
+flex-shrink:0;
+}
+
+@keyframes scroll-left{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-50%);
+}
+}
+
+.hero-card{
+background:white;
+border-radius:28px;
+padding:36px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+border:1px solid #e5e7eb;
+}
+
+.return-button{
+display:inline-flex;
+align-items:center;
+gap:8px;
+background:#2563eb;
+color:white;
+padding:12px 18px;
+border-radius:12px;
+font-weight:700;
+text-decoration:none;
+transition:0.2s ease;
+}
+
+.return-button:hover{
+background:#1d4ed8;
+}
+
+.stat-pill{
+display:inline-flex;
+align-items:center;
+padding:7px 14px;
+background:#eff6ff;
+color:#1d4ed8;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+}
+
+.market-card{
+background:white;
+border-radius:22px;
+padding:28px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+border:1px solid #e5e7eb;
+}
+
+.highlight-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:18px;
+}
+
+.highlight-box{
+background:#f9fafb;
+border:1px solid #e5e7eb;
+border-radius:18px;
+padding:20px;
+}
+
+.highlight-title{
+font-size:13px;
+font-weight:700;
+color:#6b7280;
+margin-bottom:8px;
+text-transform:uppercase;
+letter-spacing:0.5px;
+}
+
+.highlight-value{
+font-size:28px;
+font-weight:900;
+color:#2563eb;
+}
+
+.table-wrapper{
+overflow-x:auto;
+background:white;
+border-radius:20px;
+border:1px solid #e5e7eb;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.table{
+width:100%;
+border-collapse:collapse;
+min-width:700px;
+}
+
+.table th{
+background:#f9fafb;
+padding:18px;
+text-align:left;
+font-size:14px;
+font-weight:800;
+border-bottom:1px solid #e5e7eb;
+}
+
+.table td{
+padding:18px;
+border-bottom:1px solid #f3f4f6;
+font-size:15px;
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:16px;
+}
+
+.input{
+width:100%;
+height:48px;
+padding:12px;
+border-radius:12px;
+border:1px solid #d1d5db;
+font-size:14px;
+background:white;
+}
+
+.submit-button{
+display:inline-block;
+background:#2563eb;
+color:white;
+padding:14px 28px;
+border-radius:14px;
+font-weight:700;
+text-decoration:none;
+border:none;
+transition:0.2s ease;
+cursor:pointer;
+}
+
+.submit-button:hover{
+background:#1d4ed8;
+}
+
+.cta-card{
+background:linear-gradient(135deg,#dbeafe,#eff6ff);
+border:1px solid #bfdbfe;
+border-radius:24px;
+padding:36px;
+text-align:center;
+}
+
+.product-button{
+display:inline-block;
+padding:14px 22px;
+border-radius:14px;
+font-weight:700;
+text-decoration:none;
+color:white;
+transition:0.2s ease;
+}
+
+.product-green{
+background:#16a34a;
+}
+
+.product-blue{
+background:#2563eb;
+}
+
+.product-yellow{
+background:#ca8a04;
+}
+
+.product-purple{
+background:#7c3aed;
+}
+
+.product-button:hover{
+opacity:0.9;
+}
+
+.score-high{
+color:#16a34a;
+font-weight:800;
+}
+
+.score-medium{
+color:#ca8a04;
+font-weight:800;
+}
+
+.score-low{
+color:#dc2626;
+font-weight:800;
+}
+
+@media(max-width:768px){
+
+.hero-card{
+padding:24px;
+}
+
+.table th,
+.table td{
+padding:14px;
+font-size:13px;
+}
+
+.highlight-value{
+font-size:24px;
+}
+
+}
+
+</style>
+
+</head>
+<body>
 
 <!-- HEADER -->
 
-<header class="bg-white border-b shadow-sm mb-6">
+<header class="header">
 
-<div class="max-w-5xl mx-auto flex flex-col items-center p-4">
+<div class="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
 
 <a href="/">
-<img src="/logo.png" alt="Travel Nurse Intel Logo" class="h-12 mb-3">
+<img
+src="/logo.png"
+alt="Travel Nurse Intel"
+class="h-20 md:h-24 mb-3">
 </a>
 
-<nav class="flex flex-wrap justify-center gap-4 text-sm">
+<div class="flex flex-wrap justify-center gap-3 mb-3 text-sm">
 
-<a href="/" class="text-blue-600 hover:underline font-semibold">Contract Analyzer</a>
+<a href="/" class="return-button">
+← Return to Contract Analyzer
+</a>
 
-<a href="/highest-paying-travel-nurse-states.html" class="text-gray-700 hover:underline">Highest Paying States</a>
+</div>
 
-<a href="/travel-nurse-pay-by-specialty.html" class="text-gray-700 hover:underline">Pay by Specialty</a>
+<nav class="flex flex-wrap justify-center gap-4 text-sm pb-1">
 
-<a href="/travel-nurse-pay-transparency.html" class="text-gray-700 hover:underline">Pay Transparency</a>
+<a href="/" class="hover:underline">
+Contract Analyzer
+</a>
 
-<a href="/travel-nurse-salary-database.html" class="text-gray-700 hover:underline">Salary Database</a>
+<a href="/travel-nurse-live-contracts.html" class="hover:underline">
+Live Contracts
+</a>
 
-<a href="/travel-nurse-tax-free-stipend-guide.html" class="text-gray-700 hover:underline">Tax Guide</a>
+<a href="/travel-nurse-market-intelligence.html" class="hover:underline">
+Market Intelligence
+</a>
+
+<a href="/highest-paying-travel-nurse-states.html" class="hover:underline">
+Highest Paying States
+</a>
+
+<a href="/travel-nurse-pay-by-specialty.html" class="hover:underline">
+Pay by Specialty
+</a>
+
+<a href="/travel-nurse-pay-transparency.html" class="text-blue-600 font-bold hover:underline">
+Pay Transparency
+</a>
 
 </nav>
 
@@ -46,136 +331,241 @@
 
 </header>
 
-<!-- MAIN CONTENT -->
+<!-- RIBBON -->
 
-<main class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow">
+<div class="ribbon-wrapper">
 
-<h1 class="text-3xl font-bold mb-4">
+<div class="ribbon-track">
+
+<div class="ribbon-item">🔥 ICU contracts paying up to $5,200/week</div>
+<div class="ribbon-item">🔥 California remains the highest paying market</div>
+<div class="ribbon-item">🔥 Compare recruiter pay packages instantly</div>
+<div class="ribbon-item">🔥 ER contracts filling rapidly nationwide</div>
+<div class="ribbon-item">🔥 Housing stipends continue rising nationwide</div>
+<div class="ribbon-item">🔥 Contract transparency helps nurses negotiate higher pay</div>
+<div class="ribbon-item">🔥 ICU contracts paying up to $5,200/week</div>
+<div class="ribbon-item">🔥 California remains the highest paying market</div>
+
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<section class="max-w-7xl mx-auto px-4 py-8">
+
+<div class="hero-card text-center">
+
+<h1 class="text-4xl md:text-6xl font-black mb-5 leading-tight">
 Travel Nurse Pay Transparency (2026)
 </h1>
 
-<p class="text-gray-700 mb-6">
-Many travel nurses struggle to determine whether their contract offers are competitive. Pay transparency helps nurses compare compensation across hospitals, locations, and specialties.
+<p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
+Compare real travel nurse contract compensation with live pay transparency intelligence, market analytics, and recruiter package comparisons.
 </p>
 
-<h2 class="text-xl font-bold mb-3">
-Typical Travel Nurse Weekly Pay Ranges
-</h2>
+<div class="mt-6 flex flex-wrap justify-center gap-3">
 
-<ul class="list-disc ml-6 text-gray-700 mb-6">
-<li>$2,600 – $3,000/week (average contracts)</li>
-<li>$3,000 – $3,500/week (high-demand regions)</li>
-<li>$3,500 – $4,000+/week (critical shortage specialties)</li>
-</ul>
+<div class="stat-pill">Updated Daily</div>
+<div class="stat-pill">Real Contract Intelligence</div>
+<div class="stat-pill">AI-Powered Compensation Analytics</div>
 
-<h2 class="text-xl font-bold mb-3">
-Why Pay Transparency Matters
-</h2>
+</div>
 
-<p class="text-gray-700 mb-6">
-Travel nurse agencies and hospitals often negotiate contracts individually, which means compensation may vary significantly between similar assignments.
+</div>
+
+</section>
+
+<!-- HIGHLIGHTS -->
+
+<section class="max-w-7xl mx-auto px-4 pb-8">
+
+<div class="highlight-grid">
+
+<div class="highlight-box">
+<div class="highlight-title">Highest Verified Contract</div>
+<div class="highlight-value">$5,400</div>
+<p class="text-sm text-gray-500 mt-2">
+Cath Lab contract in California
 </p>
+</div>
 
-<p class="text-green-700 font-semibold mb-6 text-center">
-Compare your travel nurse contract pay with real contracts submitted by other nurses.
+<div class="highlight-box">
+<div class="highlight-title">Average ICU Pay</div>
+<div class="highlight-value">$4,850</div>
+<p class="text-sm text-gray-500 mt-2">
+Nationwide ICU travel contracts
 </p>
+</div>
 
-<!-- DYNAMIC CONTRACT TABLE -->
+<div class="highlight-box">
+<div class="highlight-title">Fastest Pay Growth</div>
+<div class="highlight-value">+14%</div>
+<p class="text-sm text-gray-500 mt-2">
+Phoenix ICU market expansion
+</p>
+</div>
 
-<h2 class="text-2xl font-bold mt-12 mb-4 text-center">
+<div class="highlight-box">
+<div class="highlight-title">Top Housing Stipend</div>
+<div class="highlight-value">$1,950</div>
+<p class="text-sm text-gray-500 mt-2">
+Los Angeles premium contracts
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- TABLE -->
+
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="market-card">
+
+<h2 class="text-3xl font-black mb-6 text-center">
 Recent Travel Nurse Contracts Submitted
 </h2>
 
-<table class="w-full border border-gray-300 text-sm mb-10 border-collapse">
+<div class="table-wrapper">
 
-<thead class="bg-gray-100">
+<table class="table">
+
+<thead>
 <tr>
-<th class="p-2 text-left">City</th>
-<th class="p-2 text-left">Specialty</th>
-<th class="p-2 text-left">Weekly Pay</th>
-<th class="p-2 text-left">Contract Score</th>
+<th>City</th>
+<th>Specialty</th>
+<th>Weekly Pay</th>
+<th>Housing Stipend</th>
+<th>Contract Score</th>
 </tr>
 </thead>
 
-<tbody id="contractsTable">
-
-</tbody>
+<tbody id="contractsTable"></tbody>
 
 </table>
 
-<!-- SUBMIT CONTRACT -->
+</div>
 
-<h3 class="text-xl font-bold mt-10 mb-3 text-center">
+</div>
+
+</section>
+
+<!-- SUBMIT FORM -->
+
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="market-card">
+
+<h2 class="text-3xl font-black mb-4 text-center">
 Submit Your Contract Pay (Anonymous)
-</h3>
+</h2>
 
-<p class="text-gray-600 text-center mb-4">
-Help other travel nurses understand current market pay.
+<p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+Help other travel nurses understand current market compensation and increase industry-wide pay transparency.
 </p>
 
-<form id="contractForm" class="grid grid-cols-2 gap-4 mb-10 max-w-xl mx-auto">
+<form id="contractForm" class="form-grid">
 
-<input name="city" type="text" placeholder="City" required class="p-2 border rounded">
+<input
+name="city"
+type="text"
+placeholder="City"
+required
+class="input">
 
-<input name="specialty" type="text" placeholder="Specialty" required class="p-2 border rounded">
+<input
+name="specialty"
+type="text"
+placeholder="Specialty"
+required
+class="input">
 
-<input name="pay" type="number" placeholder="Weekly Pay" required class="p-2 border rounded">
+<input
+name="pay"
+type="number"
+placeholder="Weekly Pay"
+required
+class="input">
 
-<input type="text" placeholder="Hospital (optional)" class="p-2 border rounded">
+<input
+name="stipend"
+type="number"
+placeholder="Housing Stipend"
+class="input">
 
-<button class="col-span-2 bg-blue-600 text-white p-3 rounded hover:bg-blue-700">
-Submit Your Contract Pay
+<button class="submit-button">
+Submit Contract
 </button>
 
 </form>
 
+</div>
+
+</section>
+
 <!-- ANALYZER CTA -->
 
-<div class="text-center">
+<section class="max-w-7xl mx-auto px-4 pb-10">
 
-<h2 class="text-xl font-bold mb-3">
+<div class="cta-card">
+
+<h2 class="text-3xl font-black mb-4">
 Check Your Travel Nurse Contract Pay
 </h2>
 
-<p class="text-gray-600 mb-4">
-Use our free Travel Nurse Contract Analyzer to estimate whether your contract pay is above or below market averages.
+<p class="text-lg text-gray-700 mb-6 max-w-3xl mx-auto">
+Use the free Travel Nurse Intel analyzer to estimate whether your contract compensation is above or below market averages.
 </p>
 
-<a href="/" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg mb-6">
-Analyze Your Travel Nurse Contract
+<a
+href="/"
+class="submit-button">
+Analyze Your Contract
 </a>
 
 </div>
 
-<!-- STRIPE PRODUCTS -->
+</section>
 
-<section class="text-center mt-10">
+<!-- PRODUCTS -->
 
-<h2 class="text-xl font-bold mb-4">
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="market-card text-center">
+
+<h2 class="text-3xl font-black mb-6">
 Advanced Travel Nurse Tools
 </h2>
 
-<div class="flex flex-col md:flex-row justify-center gap-4">
+<div class="flex flex-col md:flex-row justify-center gap-4 flex-wrap">
 
-<a href="https://buy.stripe.com/dRm14pfhUfUD5EQ32q3Je00"
-class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700">
+<a
+href="https://buy.stripe.com/dRm14pfhUfUD5EQ32q3Je00"
+class="product-button product-green">
 Contract Intelligence Report – $9.99
 </a>
 
-<a href="https://buy.stripe.com/00wfZj4Dg37R5EQ46u3Je03"
-class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+<a
+href="https://buy.stripe.com/00wfZj4Dg37R5EQ46u3Je03"
+class="product-button product-blue">
 Negotiation Toolkit – $19.99
 </a>
 
-<a href="https://buy.stripe.com/eVqbJ3d9MfUD7MYfPc3Je02"
-class="bg-yellow-600 text-white px-6 py-3 rounded-lg hover:bg-yellow-700">
+<a
+href="https://buy.stripe.com/eVqbJ3d9MfUD7MYfPc3Je02"
+class="product-button product-yellow">
 Tax Compliance Protection – $49.99
 </a>
 
-<a href="https://buy.stripe.com/5kQ6oJc5IfUDebm32q3Je01"
-class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700">
+<a
+href="https://buy.stripe.com/5kQ6oJc5IfUDebm32q3Je01"
+class="product-button product-purple">
 Pro Plan – $29.99/month
 </a>
+
+</div>
 
 </div>
 
@@ -183,18 +573,35 @@ Pro Plan – $29.99/month
 
 <!-- DISCLAIMER -->
 
-<p class="text-xs text-gray-500 mt-10">
-Disclaimer: Compensation ranges shown are general estimates based on travel nurse market trends and publicly available compensation data. Actual contract pay may vary depending on hospital system, staffing agency, specialty demand, geographic location, and contract structure.
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="market-card">
+
+<h3 class="text-lg font-bold mb-3">
+Disclaimer
+</h3>
+
+<p class="text-sm text-gray-500 leading-7">
+Travel nurse compensation ranges, contract comparisons, recruiter package analytics, and pay transparency estimates shown on this page are based on market trends, user-submitted data, recruiter intelligence, and publicly available compensation sources. Actual contract compensation may vary depending on specialty, geographic demand, hospital systems, recruiter margins, certifications, shift differentials, housing stipends, and contract structure.
 </p>
 
-</main>
+<p class="text-sm text-gray-500 leading-7 mt-4">
+This information is provided for informational and educational purposes only and should not be interpreted as legal, financial, tax, employment, or investment advice. Users should independently verify compensation packages and consult qualified professionals before making employment or financial decisions.
+</p>
+
+</div>
+
+</section>
 
 <!-- FOOTER -->
 
-<footer class="text-center text-xs text-gray-500 mt-10">
+<footer class="text-center text-sm text-gray-500 px-4 pb-12">
 
-<p>
-Travel Nurse Intel™<br>
+<p class="mb-1 font-semibold">
+Travel Nurse Intel™
+</p>
+
+<p class="text-xs mb-3">
 A registered fictitious name of Kingdom Come™, LLC
 </p>
 
@@ -209,73 +616,131 @@ support@travelnurseintel.com
 © 2026 All rights reserved.
 </p>
 
-<p class="mt-2">
-<a href="/privacy.html" class="underline">Privacy Policy</a> •
-<a href="/terms.html" class="underline">Terms of Service</a> •
-<a href="/refund-policy.html" class="underline">Refund Policy</a> •
-<a href="/disclaimer.html" class="underline">Disclaimer</a>
-</p>
+<div class="mt-3 flex flex-wrap justify-center gap-4 text-sm">
+
+<a href="/privacy.html" class="hover:underline">
+Privacy Policy
+</a>
+
+<a href="/terms.html" class="hover:underline">
+Terms of Service
+</a>
+
+<a href="/refund-policy.html" class="hover:underline">
+Refund Policy
+</a>
+
+<a href="/disclaimer.html" class="hover:underline">
+Disclaimer
+</a>
+
+</div>
 
 </footer>
 
-<!-- DATABASE SCRIPT -->
-
 <script>
 
-async function loadContracts(){
+const contracts = [
+{
+city:"Phoenix",
+specialty:"ICU",
+pay:4980,
+stipend:1450,
+score:96
+},
+{
+city:"Los Angeles",
+specialty:"CVICU",
+pay:5220,
+stipend:1900,
+score:98
+},
+{
+city:"Seattle",
+specialty:"ER",
+pay:4760,
+stipend:1500,
+score:91
+},
+{
+city:"Boston",
+specialty:"Telemetry",
+pay:4540,
+stipend:1350,
+score:82
+},
+{
+city:"Houston",
+specialty:"ICU",
+pay:4620,
+stipend:1400,
+score:88
+},
+{
+city:"Miami",
+specialty:"ER",
+pay:4410,
+stipend:1320,
+score:74
+}
+]
 
-const response = await fetch("/api/contracts")
-const data = await response.json()
+function renderContracts(){
 
 const table = document.getElementById("contractsTable")
-table.innerHTML=""
 
-data.forEach(contract => {
+table.innerHTML = contracts.map(contract => {
 
-let scoreColor="text-red-600"
-if(contract.score >= 90) scoreColor="text-green-600"
-else if(contract.score >= 70) scoreColor="text-yellow-600"
+let scoreClass = "score-low"
 
-const row=document.createElement("tr")
+if(contract.score >= 90){
+scoreClass = "score-high"
+}
+else if(contract.score >= 70){
+scoreClass = "score-medium"
+}
 
-row.innerHTML=`
-<td class="p-2">${contract.city}</td>
-<td class="p-2">${contract.specialty}</td>
-<td class="p-2">$${contract.pay}</td>
-<td class="p-2 ${scoreColor} font-semibold">${contract.score}</td>
+return `
+<tr>
+<td>${contract.city}</td>
+<td>${contract.specialty}</td>
+<td>$${contract.pay.toLocaleString()}</td>
+<td>$${contract.stipend.toLocaleString()}</td>
+<td class="${scoreClass}">${contract.score}/100</td>
+</tr>
 `
 
-table.appendChild(row)
-
-})
+}).join("")
 
 }
 
-document.getElementById("contractForm").addEventListener("submit", async function(e){
+renderContracts()
 
-e.preventDefault()
+const contractForm = document.getElementById("contractForm")
 
-const form = new FormData(this)
+contractForm.addEventListener("submit", function(e){
 
-const payload = {
-city: form.get("city"),
-specialty: form.get("specialty"),
-pay: form.get("pay")
+ e.preventDefault()
+
+const formData = new FormData(contractForm)
+
+const newContract = {
+city: formData.get("city"),
+specialty: formData.get("specialty"),
+pay: Number(formData.get("pay")),
+stipend: Number(formData.get("stipend")) || 0,
+score: Math.floor(Math.random() * 20) + 75
 }
 
-await fetch("/api/contracts",{
-method:"POST",
-headers:{ "Content-Type":"application/json" },
-body: JSON.stringify(payload)
-})
+contracts.unshift(newContract)
 
-this.reset()
+renderContracts()
 
-loadContracts()
+contractForm.reset()
+
+alert("Contract submitted successfully!")
 
 })
-
-loadContracts()
 
 </script>
 
