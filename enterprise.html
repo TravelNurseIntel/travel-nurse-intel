@@ -20,21 +20,72 @@
 
 <!-- HEADER -->
 
-<div id="header"></div>
-<script src="/components/load-header.js"></script>
+<header class="bg-white border-b shadow-sm sticky top-0 z-50">
 
-<!-- TRUST RIBBON -->
+<div class="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
 
-<div class="bg-blue-600 text-white py-3 overflow-hidden">
+<a href="/">
+<img
+src="/logo.png"
+alt="Travel Nurse Intel"
+class="h-20 md:h-24 mb-3">
+</a>
 
-<div class="whitespace-nowrap animate-scroll text-sm font-semibold">
+<a
+href="/"
+class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold transition mb-4">
+← Return to Contract Analyzer
+</a>
 
-<span class="mx-8">Trusted by Travel Nurses Nationwide</span>
-<span class="mx-8">Compare Pay</span>
-<span class="mx-8">Negotiate Contracts</span>
-<span class="mx-8">Maximize Earnings</span>
-<span class="mx-8">Real Contract Data</span>
-<span class="mx-8">Travel Nurse Pay Transparency</span>
+<nav class="flex flex-wrap justify-center gap-4 text-sm">
+
+<a href="/" class="hover:underline">
+Contract Analyzer
+</a>
+
+<a href="/travel-nurse-live-contracts.html" class="hover:underline">
+Live Contracts
+</a>
+
+<a href="/travel-nurse-market-intelligence.html" class="hover:underline">
+Market Intelligence
+</a>
+
+<a href="/enterprise.html" class="text-blue-600 font-bold hover:underline">
+Enterprise
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- RIBBON -->
+
+<div class="bg-gray-900 text-white overflow-hidden h-10 flex items-center">
+
+<div class="whitespace-nowrap flex animate-marquee">
+
+<span class="mx-10 text-sm font-semibold">
+🔥 National staffing demand increasing nationwide
+</span>
+
+<span class="mx-10 text-sm font-semibold">
+🔥 Predictive pay intelligence for hospitals & staffing firms
+</span>
+
+<span class="mx-10 text-sm font-semibold">
+🔥 Enterprise workforce analytics updated daily
+</span>
+
+<span class="mx-10 text-sm font-semibold">
+🔥 Real-time recruiter competitiveness intelligence
+</span>
+
+<span class="mx-10 text-sm font-semibold">
+🔥 National staffing demand increasing nationwide
+</span>
 
 </div>
 
@@ -42,14 +93,17 @@
 
 <style>
 
-@keyframes scroll {
-0% { transform: translateX(100%); }
-100% { transform: translateX(-100%); }
+@keyframes marquee{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-50%);
+}
 }
 
-.animate-scroll {
-display:inline-block;
-animation: scroll 25s linear infinite;
+.animate-marquee{
+animation:marquee 30s linear infinite;
 }
 
 </style>
@@ -96,66 +150,20 @@ Enterprise Platform Tiers
 
 <div class="grid md:grid-cols-3 gap-6">
 
-<!-- ENTERPRISE -->
+<!-- NATIONAL STAFFING PLATFORM -->
 
-<div class="border rounded-xl p-6">
+<div class="border rounded-2xl p-6 bg-white shadow-sm">
 
-<h3 class="text-xl font-bold mb-2">
-Enterprise
-</h3>
-
-<p class="text-3xl font-bold mb-4">
-$14,999/month
-</p>
-
-<ul class="text-gray-700 space-y-2 text-sm">
-
-<li>Unlimited contract postings</li>
-<li>Recruiter analytics dashboard</li>
-<li>Contract competitiveness scoring</li>
-<li>Regional demand heatmaps</li>
-<li>Weekly market reports</li>
-<li>ATS integrations</li>
-
-</ul>
-
+<div class="mb-3 inline-block bg-black text-white text-xs font-bold px-3 py-1 rounded-full">
+ENTERPRISE ELITE
 </div>
 
-<!-- ENTERPRISE INTELLIGENCE -->
-
-<div class="border-2 border-blue-600 rounded-xl p-6 bg-blue-50">
-
-<h3 class="text-xl font-bold mb-2">
-Enterprise Intelligence
-</h3>
-
-<p class="text-3xl font-bold mb-4">
-$29,999/month
-</p>
-
-<ul class="text-gray-700 space-y-2 text-sm">
-
-<li>Everything in Enterprise</li>
-<li>Predictive demand modeling</li>
-<li>National pay intelligence</li>
-<li>Workforce forecasting</li>
-<li>Fill probability predictions</li>
-<li>Recruiter margin analysis</li>
-
-</ul>
-
-</div>
-
-<!-- NATIONAL PLATFORM -->
-
-<div class="border rounded-xl p-6">
-
-<h3 class="text-xl font-bold mb-2">
+<h3 class="text-2xl font-black mb-2">
 National Staffing Platform
 </h3>
 
-<p class="text-3xl font-bold mb-4">
-$49,999/month
+<p class="text-4xl font-black mb-5">
+$49,999<span class="text-lg font-medium">/month</span>
 </p>
 
 <ul class="text-gray-700 space-y-2 text-sm">
@@ -171,6 +179,62 @@ $49,999/month
 <li>Dedicated success manager</li>
 
 </ul>
+
+</div>
+
+<!-- ENTERPRISE INTELLIGENCE -->
+
+<div class="border-2 border-blue-600 rounded-2xl p-6 bg-blue-50 shadow-lg scale-105 relative">
+
+<div class="absolute -top-3 right-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+MOST POPULAR
+</div>
+
+<h3 class="text-2xl font-black mb-2">
+Enterprise Intelligence
+</h3>
+
+<p class="text-4xl font-black mb-5">
+$29,999<span class="text-lg font-medium">/month</span>
+</p>
+
+<ul class="text-gray-700 space-y-2 text-sm">
+
+<li>Everything in Enterprise</li>
+<li>Predictive demand modeling</li>
+<li>National pay intelligence</li>
+<li>Workforce forecasting</li>
+<li>Fill probability predictions</li>
+<li>Recruiter margin analysis</li>
+
+</ul>
+
+</div>
+
+<!-- ENTERPRISE -->
+
+<div class="border rounded-2xl p-6 bg-white shadow-sm">
+
+<h3 class="text-2xl font-black mb-2">
+Enterprise
+</h3>
+
+<p class="text-4xl font-black mb-5">
+$14,999<span class="text-lg font-medium">/month</span>
+</p>
+
+<ul class="text-gray-700 space-y-2 text-sm">
+
+<li>Unlimited contract postings</li>
+<li>Recruiter analytics dashboard</li>
+<li>Contract competitiveness scoring</li>
+<li>Regional demand heatmaps</li>
+<li>Weekly market reports</li>
+<li>ATS integrations</li>
+
+</ul>
+
+</div>
 
 </div>
 
@@ -275,12 +339,78 @@ Contact Enterprise Sales
 
 </div>
 
+<!-- DISCLAIMER -->
+
+<section class="max-w-6xl mx-auto px-6 pb-10">
+
+<div class="bg-white rounded-2xl p-7 shadow border border-gray-200">
+
+<h3 class="text-lg font-bold mb-3">
+Disclaimer
+</h3>
+
+<p class="text-sm text-gray-500 leading-7">
+Travel Nurse Intel enterprise analytics, staffing forecasts, recruiter intelligence, compensation analytics, and workforce market predictions are based on aggregated market trends, publicly available compensation data, user submissions, recruiter intelligence, and generalized healthcare staffing analytics. Actual staffing conditions, compensation structures, contract fill rates, and workforce outcomes may vary significantly depending on hospital systems, staffing agencies, regional demand, labor shortages, recruiter strategies, economic conditions, and operational factors.
+</p>
+
+<p class="text-sm text-gray-500 leading-7 mt-4">
+This platform provides informational and analytical tools only and should not be interpreted as legal, financial, investment, healthcare, employment, staffing, or operational advice. Organizations should independently validate all workforce intelligence and operational decisions.
+</p>
+
+</div>
+
+</section>  
+
 </main>
 
 <!-- FOOTER -->
 
-<div id="footer"></div>
-<script src="/components/load-footer.js"></script>
+<footer class="text-center text-sm text-gray-500 px-4 pb-20">
 
-</body>
-</html>
+<p class="mb-1 font-semibold">
+Travel Nurse Intel™
+</p>
+
+<p class="text-xs mb-3">
+A registered fictitious name of Kingdom Come™, LLC
+</p>
+
+<p class="mt-1">
+Enterprise:
+<a href="mailto:enterprise@travelnurseintel.com" class="underline">
+enterprise@travelnurseintel.com
+</a>
+</p>
+
+<p class="mt-1">
+Support:
+<a href="mailto:support@travelnurseintel.com" class="underline">
+support@travelnurseintel.com
+</a>
+</p>
+
+<p class="mt-2">
+© 2026 All rights reserved.
+</p>
+
+<div class="mt-3 flex flex-wrap justify-center gap-4 text-sm">
+
+<a href="/privacy.html" class="hover:underline">
+Privacy Policy
+</a>
+
+<a href="/terms.html" class="hover:underline">
+Terms of Service
+</a>
+
+<a href="/refund-policy.html" class="hover:underline">
+Refund Policy
+</a>
+
+<a href="/disclaimer.html" class="hover:underline">
+Disclaimer
+</a>
+
+</div>
+
+</footer>
