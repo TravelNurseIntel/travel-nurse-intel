@@ -1,60 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<title>Highest Paying Travel Nurse Contracts This Week</title>
+<title>Highest Paying Travel Nurse Contracts This Week | Travel Nurse Intel</title>
 
-<meta name="description" content="Discover the highest paying travel nurse contracts this week. Real pay data from nurses across the U.S. Updated daily.">
+<meta name="description" content="Discover the highest paying travel nurse contracts this week with real-time compensation intelligence, market trends, and live contract analytics.">
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-</head>
+<style>
 
-<body class="bg-gray-50 pt-32">
+html,
+body{
+margin:0;
+padding:0;
+overflow-x:hidden;
+font-family:system-ui;
+background:#f3f4f6;
+color:#111827;
+}
+
+body{
+padding-bottom:80px;
+}
+
+.header{
+background:white;
+border-bottom:1px solid #e5e7eb;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 1px 4px rgba(0,0,0,0.05);
+}
+
+.return-button{
+display:inline-flex;
+align-items:center;
+gap:8px;
+background:#2563eb;
+color:white;
+padding:12px 18px;
+border-radius:12px;
+font-weight:700;
+text-decoration:none;
+transition:0.2s ease;
+}
+
+.return-button:hover{
+background:#1d4ed8;
+}
+
+.ribbon-wrapper{
+width:100%;
+overflow:hidden;
+background:#111827;
+color:white;
+height:42px;
+display:flex;
+align-items:center;
+}
+
+.ribbon-track{
+display:flex;
+white-space:nowrap;
+animation:scroll-left 30s linear infinite;
+}
+
+.ribbon-item{
+padding-right:80px;
+font-size:13px;
+font-weight:700;
+flex-shrink:0;
+}
+
+@keyframes scroll-left{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-50%);
+}
+}
+
+.hero-card{
+background:white;
+border-radius:28px;
+padding:36px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+border:1px solid #e5e7eb;
+}
+
+.contract-card{
+background:white;
+border-radius:22px;
+padding:24px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+border:1px solid #e5e7eb;
+transition:0.2s ease;
+}
+
+.contract-card:hover{
+transform:translateY(-2px);
+}
+
+.market-card{
+background:white;
+border-radius:22px;
+padding:28px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+border:1px solid #e5e7eb;
+}
+
+.table-wrapper{
+overflow-x:auto;
+background:white;
+border-radius:20px;
+border:1px solid #e5e7eb;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
+
+.table{
+width:100%;
+border-collapse:collapse;
+min-width:850px;
+}
+
+.table th{
+background:#f9fafb;
+padding:18px;
+text-align:left;
+font-size:14px;
+font-weight:800;
+border-bottom:1px solid #e5e7eb;
+}
+
+.table td{
+padding:18px;
+border-bottom:1px solid #f3f4f6;
+font-size:15px;
+}
+
+.sticky-cta{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:white;
+border-top:1px solid #e5e7eb;
+padding:12px;
+z-index:999;
+}
+
+@media(min-width:768px){
+.sticky-cta{
+display:none;
+}
+}
+
+</style>
+
+</head>
+<body>
 
 <!-- HEADER -->
-<div id="header"></div>
-<script src="/components/load-header.js"></script>
 
-<!-- PAGE -->
+<header class="header">
 
-<div class="max-w-6xl mx-auto p-6">
+<div class="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
 
-<h1 class="text-3xl md:text-4xl font-bold text-center mb-4">
+<a href="/">
+<img
+src="/logo.png"
+alt="Travel Nurse Intel Logo"
+class="h-20 md:h-24 mb-3">
+</a>
+
+<div class="flex flex-wrap justify-center gap-3 mb-3 text-sm">
+
+<a href="/" class="return-button">
+← Return to Contract Analyzer
+</a>
+
+</div>
+
+<nav class="flex flex-wrap justify-center gap-4 text-sm pb-1">
+
+<a href="/" class="text-blue-600 hover:underline font-semibold">
+Contract Analyzer
+</a>
+
+<a href="/highest-paying-travel-nurse-contracts.html" class="font-bold hover:underline">
+Highest Paying Contracts
+</a>
+
+<a href="/travel-nurse-market-intelligence.html" class="hover:underline">
+Market Intelligence
+</a>
+
+<a href="/travel-nurse-pay-by-specialty.html" class="hover:underline">
+Pay by Specialty
+</a>
+
+<a href="/travel-nurse-pay-transparency.html" class="hover:underline">
+Pay Transparency
+</a>
+
+<a href="/travel-nurse-salary-database.html" class="hover:underline">
+Salary Database
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- RIBBON -->
+
+<div class="ribbon-wrapper">
+<div class="ribbon-track">
+<div class="ribbon-item">🔥 ICU contracts paying up to $5,200/week</div>
+<div class="ribbon-item">🔥 California remains highest paying market</div>
+<div class="ribbon-item">🔥 Housing stipends rising nationwide</div>
+<div class="ribbon-item">🔥 Compare recruiter compensation instantly</div>
+<div class="ribbon-item">🔥 Anonymous contract submissions updated daily</div>
+<div class="ribbon-item">🔥 ICU contracts paying up to $5,200/week</div>
+<div class="ribbon-item">🔥 California remains highest paying market</div>
+</div>
+</div>
+
+<!-- HERO -->
+
+<section class="max-w-7xl mx-auto px-4 py-8">
+
+<div class="hero-card text-center">
+
+<h1 class="text-4xl md:text-6xl font-black mb-5 leading-tight">
 Highest Paying Travel Nurse Contracts This Week
 </h1>
 
-<p class="text-center text-gray-600 mb-8">
-Updated daily using real contract submissions. See which cities and specialties are paying the most right now.
+<p class="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
+Updated daily using real contract submissions. Discover which cities, specialties, and hospitals are paying the most right now.
 </p>
 
-<!-- TOP 10 CARDS -->
+</div>
 
-<div id="topContracts" class="grid md:grid-cols-2 gap-6 mb-10"></div>
+</section>
+
+<!-- TOP CARDS -->
+
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div id="topContracts" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+</section>
 
 <!-- TABLE -->
 
-<h2 class="text-2xl font-bold mb-4">
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="market-card">
+
+<h2 class="text-3xl font-black mb-6">
 Top Paying Contracts Nationwide
 </h2>
 
-<div class="overflow-x-auto">
+<div class="table-wrapper">
 
-<table class="w-full border text-sm bg-white rounded-xl shadow">
+<table class="table">
 
-<thead class="bg-gray-100">
+<thead>
 <tr>
-<th class="p-3">Rank</th>
-<th class="p-3">City</th>
-<th class="p-3">State</th>
-<th class="p-3">Specialty</th>
-<th class="p-3">Weekly Pay</th>
-<th class="p-3">Shift</th>
-<th class="p-3">Hours</th>
+<th>Rank</th>
+<th>City</th>
+<th>State</th>
+<th>Specialty</th>
+<th>Weekly Pay</th>
+<th>Shift</th>
+<th>Hours</th>
 </tr>
 </thead>
 
@@ -66,19 +292,84 @@ Top Paying Contracts Nationwide
 
 </div>
 
-<!-- STICKY CTA -->
+</section>
 
-<div class="fixed bottom-0 left-0 w-full bg-white border-t p-3 z-50 md:hidden">
-<button onclick="window.location.href='/'"
-class="w-full bg-blue-600 text-white p-4 rounded-lg text-lg font-bold">
-Analyze Your Contract
-</button>
+<!-- DISCLAIMER -->
+
+<section class="max-w-7xl mx-auto px-4 pb-10">
+
+<div class="market-card">
+
+<h3 class="text-lg font-bold mb-3">
+Disclaimer
+</h3>
+
+<p class="text-sm text-gray-500 leading-7">
+Travel nurse compensation ranges, recruiter package estimates, contract comparisons, housing stipend estimates, and salary intelligence shown on this page are based on aggregated market trends, anonymous user submissions, recruiter intelligence, publicly available compensation data, and generalized healthcare staffing analytics. Actual contract compensation and employment terms may vary significantly depending on specialty, certifications, geographic demand, hospital systems, staffing agencies, recruiter margins, housing stipends, shift differentials, and contract structure.
+</p>
+
+<p class="text-sm text-gray-500 leading-7 mt-4">
+This information is provided for informational and educational purposes only and should not be interpreted as legal, financial, tax, employment, healthcare, or investment advice. Users should independently verify all compensation packages and employment terms before making financial or employment decisions.
+</p>
+
 </div>
+
+</section>
 
 <!-- FOOTER -->
 
-<div id="footer"></div>
-<script src="/components/load-footer.js"></script>
+<footer class="text-center text-sm text-gray-500 px-4 pb-12">
+
+<p class="mb-1 font-semibold">
+Travel Nurse Intel™
+</p>
+
+<p class="text-xs mb-3">
+A registered fictitious name of Kingdom Come™, LLC
+</p>
+
+<p class="mt-1">
+Support:
+<a href="mailto:support@travelnurseintel.com" class="underline">
+support@travelnurseintel.com
+</a>
+</p>
+
+<p class="mt-2">
+© 2026 All rights reserved.
+</p>
+
+<div class="mt-3 flex flex-wrap justify-center gap-4 text-sm">
+
+<a href="/privacy.html" class="hover:underline">
+Privacy Policy
+</a>
+
+<a href="/terms.html" class="hover:underline">
+Terms of Service
+</a>
+
+<a href="/refund-policy.html" class="hover:underline">
+Refund Policy
+</a>
+
+<a href="/disclaimer.html" class="hover:underline">
+Disclaimer
+</a>
+
+</div>
+
+</footer>
+
+<!-- MOBILE CTA -->
+
+<div class="sticky-cta">
+<button
+onclick="window.location.href='/'"
+class="w-full bg-blue-600 text-white p-4 rounded-lg text-lg font-bold hover:bg-blue-700 transition">
+Analyze Your Contract
+</button>
+</div>
 
 <!-- SCRIPT -->
 
@@ -90,36 +381,42 @@ async function loadContracts(){
 
 try{
 
-const res = await fetch("/api/contracts")
+const res = await fetch('/api/contracts')
+
+if(!res.ok){
+throw new Error('API error')
+}
+
 contracts = await res.json()
 
-// Sort highest pay first
-contracts.sort((a,b)=> b.weeklyPay - a.weeklyPay)
+contracts.sort((a,b)=> (b.weeklyPay || 0) - (a.weeklyPay || 0))
 
 renderTopCards()
 renderTable()
 
 }catch(err){
-console.error("Failed to load contracts")
+console.error('Failed to load contracts:', err)
 }
 
 }
-
-// TOP CARDS
 
 function renderTopCards(){
 
-const container = document.getElementById("topContracts")
-container.innerHTML = ""
+const container = document.getElementById('topContracts')
 
-contracts.slice(0,10).forEach((c, index)=>{
+container.innerHTML = ''
+
+contracts.slice(0,9).forEach((c, index)=>{
 
 container.innerHTML += `
-<div class="bg-white p-6 rounded-xl shadow border">
-<div class="text-sm text-gray-500 mb-1">#${index+1} Highest Paying</div>
-<div class="text-xl font-bold mb-2">$${c.weeklyPay}</div>
-<div class="text-gray-700">${c.specialty || "N/A"}</div>
-<div class="text-gray-500">${c.city || ""}, ${c.state || ""}</div>
+<div class="contract-card">
+<div class="text-sm text-gray-500 mb-1">#${index + 1} Highest Paying</div>
+<div class="text-3xl font-black text-blue-600 mb-2">$${(c.weeklyPay || 0).toLocaleString()}/week</div>
+<div class="font-bold text-lg">${c.specialty || 'N/A'}</div>
+<div class="text-gray-500 mt-1">${c.city || ''}, ${c.state || ''}</div>
+<div class="mt-4 text-sm text-gray-600">
+${c.shiftType || 'Shift TBD'} • ${c.hoursPerWeek || '36'} hrs/week
+</div>
 </div>
 `
 
@@ -127,24 +424,23 @@ container.innerHTML += `
 
 }
 
-// TABLE
-
 function renderTable(){
 
-const table = document.getElementById("contractsTable")
-table.innerHTML = ""
+const table = document.getElementById('contractsTable')
+
+table.innerHTML = ''
 
 contracts.slice(0,50).forEach((c, index)=>{
 
 table.innerHTML += `
-<tr class="border-b">
-<td class="p-3 font-bold">#${index+1}</td>
-<td class="p-3">${c.city || "-"}</td>
-<td class="p-3">${c.state || "-"}</td>
-<td class="p-3">${c.specialty || "-"}</td>
-<td class="p-3 font-bold text-green-600">$${c.weeklyPay || 0}</td>
-<td class="p-3">${c.shiftType || "-"}</td>
-<td class="p-3">${c.hoursPerWeek || "-"}</td>
+<tr>
+<td class="font-bold">#${index + 1}</td>
+<td>${c.city || '-'}</td>
+<td>${c.state || '-'}</td>
+<td>${c.specialty || '-'}</td>
+<td class="font-bold text-green-600">$${(c.weeklyPay || 0).toLocaleString()}</td>
+<td>${c.shiftType || '-'}</td>
+<td>${c.hoursPerWeek || '-'}</td>
 </tr>
 `
 
@@ -154,7 +450,6 @@ table.innerHTML += `
 
 loadContracts()
 
-// Auto refresh every 60 seconds
 setInterval(loadContracts, 60000)
 
 </script>
