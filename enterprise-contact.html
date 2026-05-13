@@ -45,7 +45,7 @@ Enterprise Contact
 </h1>
 
 <p class="text-gray-700 text-center max-w-3xl mx-auto mb-8">
-Tell us about your staffing, recruiting, and workforce intelligence needs. Our team will review your requirements and respond within one business day.
+Select the enterprise options that best match your staffing and workforce intelligence needs. We will review your selections and contact you within one business day.
 </p>
 
 <form action="/thank-you.html" method="GET" class="space-y-6">
@@ -90,12 +90,34 @@ Tell us about your staffing, recruiting, and workforce intelligence needs. Our t
 </div>
 </div>
 
+<div class="grid md:grid-cols-2 gap-6">
 <div>
-<label class="block font-semibold mb-2">Tell Us About Your Needs</label>
+<label class="block font-semibold mb-2">Preferred Plan</label>
+<select name="plan" class="w-full p-3 border rounded-xl">
+<option>Enterprise Essentials — $14,999/month</option>
+<option>Enterprise Intelligence — $29,999/month</option>
+<option>National Staffing Platform — $49,999/month</option>
+<option>Custom Enterprise Agreement</option>
+</select>
+</div>
+
+<div>
+<label class="block font-semibold mb-2">Implementation Timeline</label>
+<select name="timeline" class="w-full p-3 border rounded-xl">
+<option>Immediately</option>
+<option>Within 30 Days</option>
+<option>Within 90 Days</option>
+<option>Exploring Options</option>
+</select>
+</div>
+</div>
+
+<div>
+<label class="block font-semibold mb-2">Optional Message</label>
 <textarea
 name="message"
-rows="6"
-placeholder="Describe your staffing challenges, integrations, and analytics requirements."
+rows="4"
+placeholder="Additional notes (optional)"
 class="w-full p-3 border rounded-xl"></textarea>
 </div>
 
