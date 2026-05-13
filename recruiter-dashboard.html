@@ -186,7 +186,7 @@ Access recruiter margin analytics, predictive fill forecasting, market competiti
 href="/enterprise.html"
 class="inline-block bg-white text-blue-700 px-6 py-4 rounded-xl font-bold hover:bg-gray-100 transition">
 
-Upgrade Recruiter Access
+Unlock Advanced Recruiter Analytics
 
 </a>
 
@@ -229,7 +229,7 @@ Post Travel Nurse Contract
 <input name="pay" type="number" placeholder="Weekly Pay" class="p-3 border rounded" required>
 
 <button class="col-span-2 bg-blue-600 text-white p-3 rounded hover:bg-blue-700">
-Post Contract
+Post Your Contract
 </button>
 
 </form>
@@ -289,13 +289,6 @@ support@travelnurseintel.com
 </a>
 </p>
 
-<p class="mt-1">
-Support:
-<a href="mailto:support@travelnurseintel.com" class="underline">
-support@travelnurseintel.com
-</a>
-</p>
-
 <p class="mt-2">
 © 2026 All rights reserved.
 </p>
@@ -332,8 +325,8 @@ const city = document.getElementById("city").value.trim()
 const specialty = document.getElementById("specialty").value.trim()
 
 if(!city || !specialty){
-alert("Enter city and specialty")
-return
+  alert("Please enter both City and Specialty.");
+  return;
 }
 
 const apiKey = localStorage.getItem("apiKey")
