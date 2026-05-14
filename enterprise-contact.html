@@ -5,6 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Enterprise Contact | Travel Nurse Intel</title>
 <script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+.ribbon-wrapper {
+  background: #0f172a;
+  color: white;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.ribbon-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollRibbon 45s linear infinite;
+}
+
+.ribbon-item {
+  display: inline-block;
+  margin-right: 60px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+@keyframes scrollRibbon {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+</style>
+
 </head>
 
 <body class="bg-gray-50">
