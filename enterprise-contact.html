@@ -1,45 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Enterprise Contact | Travel Nurse Intel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>Travel Nurse Contract Analyzer | Travel Nurse Intel</title>
+
+<meta name="description" content="Analyze your travel nurse contract instantly. Compare pay packages, stipends, monthly housing costs, market demand, and real-time salary intelligence nationwide.">
+
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-.ribbon-wrapper {
-  background: #0f172a;
-  color: white;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 100%;
-  padding: 8px 0;
+
+html,
+body{
+margin:0;
+padding:0;
+overflow-x:hidden;
+font-family:system-ui;
+background:#f8fafc;
+color:#111827;
 }
 
-.ribbon-track {
-  display: inline-block;
-  white-space: nowrap;
-  animation: scrollRibbon 18s linear infinite;
-  will-change: transform;
+body{
+padding-bottom:90px;
 }
 
-.ribbon-item {
-  display: inline-block;
-  margin-right: 60px;
-  font-size: 0.875rem;
-  font-weight: 600;
+.header{
+background:white;
+border-bottom:1px solid #e5e7eb;
+box-shadow:0 1px 3px rgba(0,0,0,0.05);
+position:sticky;
+top:0;
+z-index:1000;
 }
 
-@keyframes scrollRibbon {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+.ribbon-wrapper{
+width:100%;
+overflow:hidden;
+background:#111827;
+color:white;
+height:38px;
+display:flex;
+align-items:center;
 }
+
+.ribbon-track{
+display:flex;
+white-space:nowrap;
+animation:scroll-left 25s linear infinite;
+}
+
+.ribbon-item{
+padding-right:70px;
+font-size:13px;
+font-weight:600;
+flex-shrink:0;
+}
+
+@keyframes scroll-left{
+0%{
+transform:translateX(0%);
+}
+100%{
+transform:translateX(-50%);
+}
+}
+
+.score-circle{
+width:120px;
+height:120px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:34px;
+font-weight:700;
+color:white;
+margin:auto;
+transition:0.3s ease;
+}
+
+.mobile-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.mobile-field label{
+display:block;
+font-size:11px;
+margin-bottom:4px;
+color:#4b5563;
+}
+
+.mobile-field input{
+width:100%;
+height:36px;
+padding:6px 8px;
+font-size:12px;
+border:1px solid #d1d5db;
+border-radius:8px;
+background:white;
+}
+
+.market-card{
+background:white;
+padding:24px;
+border-radius:22px;
+box-shadow:0 2px 10px rgba(0,0,0,0.05);
+border:1px solid #e5e7eb;
+}
+
+.mobile-fixed-button{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:white;
+padding:8px;
+border-top:1px solid #e5e7eb;
+z-index:99999;
+box-shadow:0 -2px 10px rgba(0,0,0,0.08);
+}
+
+.mobile-fixed-button button{
+width:100%;
+background:#2563eb;
+color:white;
+font-size:15px;
+font-weight:700;
+padding:13px;
+border:none;
+border-radius:12px;
+}
+
+@media(min-width:768px){
+
+.mobile-fixed-button{
+display:none;
+}
+
+.mobile-grid{
+gap:16px;
+}
+
+.mobile-field label{
+font-size:14px;
+}
+
+.mobile-field input{
+height:48px;
+font-size:15px;
+padding:12px;
+}
+
+}
+
 </style>
 
+</head>
+<body>
 </head>
 
 <body class="bg-gray-50">
