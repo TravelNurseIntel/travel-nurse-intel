@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Subscriber Login | Travel Nurse Intel</title>
+
+<meta name="description" content="Secure subscriber login for Travel Nurse Intel premium dashboards and analytics.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Supabase JavaScript Client -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+body {
+  background: #f8fafc;
+}
+.ribbon-wrapper {
+  width: 100%;
+  overflow: hidden;
+  background: #111827;
+  color: white;
+  height: 38px;
+  display: flex;
+  align-items: center;
+}
+.ribbon-track {
+  display: flex;
+  white-space: nowrap;
+  animation: scroll-left 20s linear infinite;
+}
+.ribbon-item {
+  padding-right: 70px;
+  font-size: 13px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+@keyframes scroll-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+</style>
+</head>
+
+<body class="bg-gray-50">
+
+<!-- HEADER -->
+<header class="bg-white border-b shadow-sm">
+  <div class="max-w-5xl mx-auto flex flex-col items-center p-4">
+
+    <a href="/">
+      <img
+        src="/logo.png"
+        alt="Travel Nurse Intel"
+        class="h-20 md:h-24 mb-3">
+    </a>
+
+    <a
+      href="/"
+      class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold transition mb-4">
+      ← Return to Contract Analyzer
+    </a>
+
+    <nav class="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+      <a href="/" class="hover:text-blue-600">Contract Analyzer</a>
+      <a href="/recruiter-subscription.html" class="hover:text-blue-600">Pricing</a>
+      <a href="/enterprise.html" class="hover:text-blue-600">Enterprise</a>
+      <a href="/login.html" class="text-blue-600 font-semibold">Login</a>
+    </nav>
+
+  </div>
+</header>
+
+<!-- RIBBON -->
+<div class="ribbon-wrapper">
+  <div class="ribbon-track">
+    <div class="ribbon-item">🔒 Secure subscriber login for premium analytics</div>
+    <div class="ribbon-item">📈 Access recruiter dashboards and market intelligence</div>
+    <div class="ribbon-item">💳 Manage your subscription anytime</div>
+    <div class="ribbon-item">🔒 Secure subscriber login for premium analytics</div>
+    <div class="ribbon-item">📈 Access recruiter dashboards and market intelligence</div>
+    <div class="ribbon-item">💳 Manage your subscription anytime</div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="max-w-md mx-auto px-6 py-12">
+  <div class="bg-white rounded-2xl shadow-lg p-8">
+
+    <h1 class="text-3xl font-bold text-center mb-4">
+      Subscriber Login
+    </h1>
+
+    <p class="text-gray-600 text-center mb-8">
+      Sign in to access your premium dashboards, reports, and subscription resources.
+    </p>
+
+    <form id="loginForm" class="space-y-6">
+
+      <div>
+        <label class="block font-semibold mb-2">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          required
+          class="w-full p-3 border rounded-xl"
+          placeholder="you@company.com">
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-2">Password</label>
+        <input
+          type="password"
+          id="password"
+          required
+          class="w-full p-3 border rounded-xl"
+          placeholder="Enter your password">
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl font-semibold text-lg transition">
+        Sign In
+      </button>
+
+    </form>
+
+    <div id="message" class="mt-6 text-center text-sm"></div>
+
+    <p class="text-center text-gray-600 mt-8">
+      Don't have an account?
+      <a href="/signup.html" class="text-blue-600 underline font-semibold">
+        Create Your Account
+      </a>
+    </p>
+
+    <p class="text-center text-gray-600 mt-4">
+      Need assistance?
+      <a href="mailto:support@travelnurseintel.com" class="text-blue-600 underline">
+        support@travelnurseintel.com
+      </a>
+    </p>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="text-center text-xs text-gray-500 py-10">
+  <p>
+    Travel Nurse Intel™<br>
+    A registered fictitious name of Kingdom Come™, LLC
+  </p>
+
+  <p class="mt-2">
+    Enterprise &amp; Support:
+    <a href="mailto:support@travelnurseintel.com" class="underline">
+      support@travelnurseintel.com
+    </a>
+  </p>
+
+  <p class="mt-2">
+    © 2026 All rights reserved.
+  </p>
+
+  <p class="mt-2">
+    <a href="/privacy.html" class="underline">Privacy Policy</a> •
+    <a href="/terms.html" class="underline">Terms of Service</a> •
+    <a href="/refund-policy.html" class="underline">Refund Policy</a> •
+    <a href="/disclaimer.html" class="underline">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+// Supabase Configuration
+const supabaseUrl = 'https://tkxtdxopdwjaauwmhlkg.supabase.co';
+const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY_HERE';
+
+// Initialize Supabase
+const supabase = window.supabase.createClient(
+  supabaseUrl,
+  supabaseAnonKey
+);
+
+// UI Elements
+const loginForm = document.getElementById('loginForm');
+const message = document.getElementById('message');
+
+// Handle Login
+loginForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  message.className = 'mt-6 text-center text-sm text-gray-600';
+  message.textContent = 'Signing in...';
+
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    message.className = 'mt-6 text-center text-sm text-red-600';
+    message.textContent = error.message;
+    return;
+  }
+
+  message.className = 'mt-6 text-center text-sm text-green-600';
+  message.textContent = 'Login successful. Redirecting...';
+
+  window.location.href = '/subscriber-dashboard.html';
+});
+</script>
+
+</body>
+</html>
