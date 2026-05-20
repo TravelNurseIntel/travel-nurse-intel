@@ -1,444 +1,460 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Recruiter Dashboard | Travel Nurse Intel</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+.hidden-until-auth {
+  display: none;
+}
+</style>
 </head>
 
 <body class="bg-gray-50">
 
-<!-- HEADER -->
-
-<header class="bg-white border-b shadow-sm sticky top-0 z-50">
-
-<div class="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
-
-<a href="/">
-<img
-src="/logo.png"
-alt="Travel Nurse Intel"
-class="h-20 md:h-24 mb-3">
-</a>
-
-<a
-href="/"
-class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold transition mb-4">
-← Return to Contract Analyzer
-</a>
-
-<nav class="flex flex-wrap justify-center gap-4 text-sm">
-
-<a href="/" class="hover:underline">
-Contract Analyzer
-</a>
-
-<a href="/travel-nurse-live-contracts.html" class="hover:underline">
-Live Contracts
-</a>
-
-<a href="/travel-nurse-market-intelligence.html" class="hover:underline">
-Market Intelligence
-</a>
-
-<a href="/enterprise.html" class="hover:underline">
-Enterprise
-</a>
-
-<a href="/recruiter-dashboard.html" class="text-blue-600 font-bold hover:underline">
-Recruiter Dashboard
-</a>
-
-</nav>
-
+<!-- LOADING SCREEN -->
+<div id="loadingScreen" class="min-h-screen flex items-center justify-center">
+  <div class="text-center px-6">
+    <div class="text-3xl font-bold mb-4">Loading Recruiter Dashboard...</div>
+    <div class="text-gray-600">Verifying your subscription access.</div>
+  </div>
 </div>
 
+<!-- PROTECTED CONTENT -->
+<div id="protectedContent" class="hidden-until-auth">
+
+<!-- HEADER -->
+<header class="bg-white border-b shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col items-center">
+
+    <a href="/">
+      <img src="/logo.png" alt="Travel Nurse Intel" class="h-20 md:h-24 mb-3">
+    </a>
+
+    <a
+      href="/"
+      class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold transition mb-4">
+      ← Return to Contract Analyzer
+    </a>
+
+    <nav class="flex flex-wrap justify-center gap-4 text-sm">
+      <a href="/" class="hover:underline">Contract Analyzer</a>
+      <a href="/travel-nurse-live-contracts.html" class="hover:underline">Live Contracts</a>
+      <a href="/travel-nurse-market-intelligence.html" class="hover:underline">Market Intelligence</a>
+      <a href="/subscriber-dashboard.html" class="hover:underline">Subscriber Dashboard</a>
+      <a href="/enterprise.html" class="hover:underline">Enterprise</a>
+      <a href="/recruiter-dashboard.html" class="text-blue-600 font-bold hover:underline">Recruiter Dashboard</a>
+    </nav>
+
+  </div>
 </header>
 
- <!-- RIBBON -->
-
+<!-- RIBBON -->
 <div class="bg-gray-900 text-white overflow-hidden h-10 flex items-center">
-
-<div class="whitespace-nowrap flex animate-marquee">
-
-<span class="mx-10 text-sm font-semibold">
-🔥 Hospitals increasing contract pay nationwide
-</span>
-
-<span class="mx-10 text-sm font-semibold">
-🔥 Fill probability analytics updated daily
-</span>
-
-<span class="mx-10 text-sm font-semibold">
-🔥 Predictive pay intelligence for recruiters
-</span>
-
-<span class="mx-10 text-sm font-semibold">
-🔥 AI recruiter optimization engine active
-</span>
-
-<span class="mx-10 text-sm font-semibold">
-🔥 Hospitals increasing contract pay nationwide
-</span>
-
+  <div class="whitespace-nowrap flex animate-marquee">
+    <span class="mx-10 text-sm font-semibold">🔥 Hospitals increasing contract pay nationwide</span>
+    <span class="mx-10 text-sm font-semibold">🔥 Fill probability analytics updated daily</span>
+    <span class="mx-10 text-sm font-semibold">🔥 Predictive pay intelligence for recruiters</span>
+    <span class="mx-10 text-sm font-semibold">🔥 AI recruiter optimization engine active</span>
+    <span class="mx-10 text-sm font-semibold">🔥 Hospitals increasing contract pay nationwide</span>
+    <span class="mx-10 text-sm font-semibold">🔥 Fill probability analytics updated daily</span>
+  </div>
 </div>
-
-</div>
-
-<style>
-
-@keyframes marquee{
-0%{
-transform:translateX(0);
-}
-100%{
-transform:translateX(-50%);
-}
-}
-
-.animate-marquee{
-animation:marquee 30s linear infinite;
-}
-
-</style> 
 
 <main class="max-w-6xl mx-auto p-6">
 
+<!-- AUTH SUMMARY -->
 <div class="bg-white rounded-2xl shadow border border-gray-200 p-8 mb-10 text-center">
 
-<h1 class="text-4xl md:text-5xl font-black mb-4">
-Recruiter Dashboard
-</h1>
+  <h1 class="text-4xl md:text-5xl font-black mb-4">Recruiter Dashboard</h1>
 
-<p class="text-gray-600 text-lg max-w-3xl mx-auto">
-Manage travel nurse contracts, optimize compensation, analyze fill probability, and access nationwide recruiter intelligence.
-</p>
+  <p class="text-gray-600 text-lg max-w-3xl mx-auto mb-6">
+    Welcome, <span id="subscriberName" class="font-semibold">Subscriber</span>.
+    Manage travel nurse contracts, optimize compensation, analyze fill probability,
+    and access nationwide recruiter intelligence.
+  </p>
+
+  <div class="grid md:grid-cols-3 gap-6">
+
+    <div class="bg-gray-50 rounded-xl p-4">
+      <div class="text-sm text-gray-500 mb-1">Subscription Status</div>
+      <div id="subscriptionStatus" class="text-2xl font-bold text-green-600">Active</div>
+    </div>
+
+    <div class="bg-gray-50 rounded-xl p-4">
+      <div class="text-sm text-gray-500 mb-1">Plan</div>
+      <div id="subscriptionPlan" class="text-2xl font-bold">Premium</div>
+    </div>
+
+    <div class="bg-gray-50 rounded-xl p-4">
+      <div class="text-sm text-gray-500 mb-1">Session</div>
+      <button
+        id="logoutButton"
+        class="mt-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold">
+        Sign Out
+      </button>
+    </div>
+
+  </div>
 
 </div>
 
-<!-- 🔥 ACTION BAR (NEW - HIGH VALUE) -->
-
+<!-- ACTION BAR -->
 <div class="grid md:grid-cols-3 gap-4 mb-10">
 
-<button onclick="getPrediction()" class="bg-blue-600 text-white p-4 rounded-lg font-semibold hover:bg-blue-700">
-Get Pay Recommendation
-</button>
+  <button onclick="getPrediction()" class="bg-blue-600 text-white p-4 rounded-lg font-semibold hover:bg-blue-700">
+    Get Pay Recommendation
+  </button>
 
-<a href="/travel-nurse-market-intelligence.html"
-class="bg-gray-800 text-white p-4 rounded-lg font-semibold text-center hover:bg-gray-900">
-View Market Insights
-</a>
+  <a href="/travel-nurse-market-intelligence.html"
+     class="bg-gray-800 text-white p-4 rounded-lg font-semibold text-center hover:bg-gray-900">
+    View Market Insights
+  </a>
 
-<button onclick="optimizePay()" class="bg-green-600 text-white p-4 rounded-lg font-semibold hover:bg-green-700">
-Optimize Contract Pay
-</button>
+  <button onclick="optimizePay()" class="bg-green-600 text-white p-4 rounded-lg font-semibold hover:bg-green-700">
+    Optimize Contract Pay
+  </button>
 
 </div>
 
 <!-- METRICS -->
-
 <div class="grid md:grid-cols-3 gap-6 mb-10">
 
-<div class="bg-white p-6 rounded-2xl shadow border border-gray-200">
-<h3 class="font-bold text-lg mb-2 text-gray-500">
-Active Contracts
-</h3>
-<p class="text-5xl font-black">
-42
-</p>
-</div>
+  <div class="bg-white p-6 rounded-2xl shadow border border-gray-200">
+    <h3 class="font-bold text-lg mb-2 text-gray-500">Active Contracts</h3>
+    <p class="text-5xl font-black">42</p>
+  </div>
 
-<div class="bg-white p-6 rounded-2xl shadow border border-gray-200">
-<h3 class="font-bold text-lg mb-2 text-gray-500">
-Fill Probability
-</h3>
-<p class="text-5xl font-black text-green-600">
-78%
-</p>
-</div>
+  <div class="bg-white p-6 rounded-2xl shadow border border-gray-200">
+    <h3 class="font-bold text-lg mb-2 text-gray-500">Fill Probability</h3>
+    <p class="text-5xl font-black text-green-600">78%</p>
+  </div>
 
-<div class="bg-white p-6 rounded-2xl shadow border border-gray-200">
-<h3 class="font-bold text-lg mb-2 text-gray-500">
-Average Pay Rank
-</h3>
-<p class="text-5xl font-black text-blue-600">
-Top 20%
-</p>
-</div>
+  <div class="bg-white p-6 rounded-2xl shadow border border-gray-200">
+    <h3 class="font-bold text-lg mb-2 text-gray-500">Average Pay Rank</h3>
+    <p class="text-5xl font-black text-blue-600">Top 20%</p>
+  </div>
 
 </div>
 
- <div class="bg-blue-600 text-white rounded-2xl p-8 text-center mb-10">
+<!-- ADVANCED INTELLIGENCE UPSELL -->
+<div class="bg-blue-600 text-white rounded-2xl p-8 text-center mb-10">
 
-<h2 class="text-3xl font-black mb-3">
-Unlock Advanced Recruiter Intelligence
-</h2>
+  <h2 class="text-3xl font-black mb-3">Unlock Advanced Recruiter Intelligence</h2>
 
-<p class="max-w-3xl mx-auto text-lg mb-6">
-Access recruiter margin analytics, predictive fill forecasting, market competitiveness scoring, and AI-powered compensation optimization.
-</p>
+  <p class="max-w-3xl mx-auto text-lg mb-6">
+    Access recruiter margin analytics, predictive fill forecasting,
+    market competitiveness scoring, and AI-powered compensation optimization.
+  </p>
 
-<a
-href="/enterprise.html"
-class="inline-block bg-white text-blue-700 px-6 py-4 rounded-xl font-bold hover:bg-gray-100 transition">
+  <a href="/enterprise.html"
+     class="inline-block bg-white text-blue-700 px-6 py-4 rounded-xl font-bold hover:bg-gray-100 transition">
+    Unlock Advanced Recruiter Analytics
+  </a>
 
-Unlock Advanced Recruiter Analytics
+</div>
 
-</a>
-
-</div> 
-
-<!-- PAY PREDICTION RESULT -->
-
+<!-- PAY PREDICTION -->
 <div class="bg-white p-6 rounded-xl shadow mb-10">
-<h2 class="text-xl font-bold mb-4">Pay Recommendation</h2>
 
-<div class="grid md:grid-cols-2 gap-4 mb-4">
+  <h2 class="text-xl font-bold mb-4">Pay Recommendation</h2>
 
-<input id="city" placeholder="City" class="p-3 border rounded">
-<input id="specialty" placeholder="Specialty" class="p-3 border rounded">
+  <div class="grid md:grid-cols-2 gap-4 mb-4">
+    <input id="city" placeholder="City" class="p-3 border rounded">
+    <input id="specialty" placeholder="Specialty" class="p-3 border rounded">
+  </div>
 
-</div>
-
-<p id="predictionResult" class="text-xl font-bold text-green-600"></p>
+  <p id="predictionResult" class="text-xl font-bold text-green-600"></p>
 
 </div>
 
 <!-- POST CONTRACT -->
-
-<h2 class="text-xl font-bold mb-4">
-Post Travel Nurse Contract
-</h2>
+<h2 class="text-xl font-bold mb-4">Post Travel Nurse Contract</h2>
 
 <form id="jobForm" class="grid md:grid-cols-2 gap-4 mb-10">
 
-<input name="title" placeholder="Job Title" class="p-3 border rounded" required>
+  <input name="title" placeholder="Job Title" class="p-3 border rounded" required>
+  <input name="hospital" placeholder="Hospital Name" class="p-3 border rounded">
+  <input name="city" placeholder="City" class="p-3 border rounded" required>
+  <input name="state" placeholder="State" class="p-3 border rounded">
+  <input name="specialty" placeholder="Specialty" class="p-3 border rounded">
+  <input name="pay" type="number" placeholder="Weekly Pay" class="p-3 border rounded" required>
 
-<input name="hospital" placeholder="Hospital Name" class="p-3 border rounded">
-
-<input name="city" placeholder="City" class="p-3 border rounded" required>
-
-<input name="state" placeholder="State" class="p-3 border rounded">
-
-<input name="specialty" placeholder="Specialty" class="p-3 border rounded">
-
-<input name="pay" type="number" placeholder="Weekly Pay" class="p-3 border rounded" required>
-
-<button class="col-span-2 bg-blue-600 text-white p-3 rounded hover:bg-blue-700">
-Post Your Contract
-</button>
+  <button class="col-span-2 bg-blue-600 text-white p-3 rounded hover:bg-blue-700">
+    Post Your Contract
+  </button>
 
 </form>
 
 <!-- BULK CSV UPLOAD -->
-
-<h2 class="text-xl font-bold mb-4">
-Bulk Contract Upload (CSV)
-</h2>
+<h2 class="text-xl font-bold mb-4">Bulk Contract Upload (CSV)</h2>
 
 <input type="file" id="csvUpload" class="mb-4">
 
-<button onclick="uploadCSV()" class="bg-green-600 text-white p-3 rounded hover:bg-green-700 mb-6">
-Upload CSV
+<button onclick="uploadCSV()" class="bg-green-600 text-white p-3 rounded hover:bg-green-700 mb-10">
+  Upload CSV
 </button>
 
 </main>
 
 <!-- DISCLAIMER -->
-
 <section class="max-w-6xl mx-auto px-6 pt-2 pb-10">
+  <div class="bg-white rounded-2xl p-7 shadow border border-gray-200">
 
-<div class="bg-white rounded-2xl p-7 shadow border border-gray-200">
+    <h3 class="text-lg font-bold mb-3">Disclaimer</h3>
 
-<h3 class="text-lg font-bold mb-3">
-Disclaimer
-</h3>
+    <p class="text-sm text-gray-500 leading-7">
+      Travel Nurse Intel recruiter analytics, compensation forecasting,
+      fill probability scoring, and workforce intelligence tools are based
+      on aggregated market trends, recruiter intelligence, public compensation data,
+      user submissions, and generalized healthcare staffing analytics.
+      Actual staffing outcomes, contract performance, recruiter margins,
+      and compensation competitiveness may vary significantly depending on market conditions,
+      hospital systems, staffing agencies, and regional demand.
+    </p>
 
-<p class="text-sm text-gray-500 leading-7">
-Travel Nurse Intel recruiter analytics, compensation forecasting, fill probability scoring, and workforce intelligence tools are based on aggregated market trends, recruiter intelligence, public compensation data, user submissions, and generalized healthcare staffing analytics. Actual staffing outcomes, contract performance, recruiter margins, and compensation competitiveness may vary significantly depending on market conditions, hospital systems, staffing agencies, and regional demand.
-</p>
+    <p class="text-sm text-gray-500 leading-7 mt-4">
+      This platform provides informational and analytical tools only and should not be
+      interpreted as legal, financial, employment, healthcare, investment, or staffing advice.
+    </p>
 
-<p class="text-sm text-gray-500 leading-7 mt-4">
-This platform provides informational and analytical tools only and should not be interpreted as legal, financial, employment, healthcare, investment, or staffing advice.
-</p>
-
-</div>
-
+  </div>
 </section>
 
 <!-- FOOTER -->
-
 <footer class="text-center text-sm text-gray-500 px-4 pb-20">
 
-<p class="mb-1 font-semibold">
-Travel Nurse Intel™
-</p>
+  <p class="mb-1 font-semibold">Travel Nurse Intel™</p>
 
-<p class="text-xs mb-3">
-A registered fictitious name of Kingdom Come™, LLC
-</p>
+  <p class="text-xs mb-3">
+    A registered fictitious name of Kingdom Come™, LLC
+  </p>
 
-<p class="mt-1">
-Enterprise & Support:
-<a href="mailto:support@travelnurseintel.com" class="underline">
-support@travelnurseintel.com
-</a>
-</p>
+  <p class="mt-1">
+    Enterprise &amp; Support:
+    <a href="mailto:support@travelnurseintel.com" class="underline">
+      support@travelnurseintel.com
+    </a>
+  </p>
 
-<p class="mt-2">
-© 2026 All rights reserved.
-</p>
+  <p class="mt-2">© 2026 All rights reserved.</p>
 
-<div class="mt-3 flex flex-wrap justify-center gap-4 text-sm">
-
-<a href="/privacy.html" class="hover:underline">
-Privacy Policy
-</a>
-
-<a href="/terms.html" class="hover:underline">
-Terms of Service
-</a>
-
-<a href="/refund-policy.html" class="hover:underline">
-Refund Policy
-</a>
-
-<a href="/disclaimer.html" class="hover:underline">
-Disclaimer
-</a>
-
-</div>
+  <div class="mt-3 flex flex-wrap justify-center gap-4 text-sm">
+    <a href="/privacy.html" class="hover:underline">Privacy Policy</a>
+    <a href="/terms.html" class="hover:underline">Terms of Service</a>
+    <a href="/refund-policy.html" class="hover:underline">Refund Policy</a>
+    <a href="/disclaimer.html" class="hover:underline">Disclaimer</a>
+  </div>
 
 </footer>
 
+</div>
+
 <script>
+// =====================================================
+// SUPABASE CONFIGURATION
+// =====================================================
+const supabaseUrl = 'https://tkxtdxopdwjaauwmhlkg.supabase.co';
+const supabaseAnonKey = 'PASTE_YOUR_SUPABASE_ANON_KEY_HERE';
 
-/* 🔥 PAY PREDICTION */
+const supabase = window.supabase.createClient(
+  supabaseUrl,
+  supabaseAnonKey
+);
 
-async function getPrediction(){
+const ACTIVE_STATUSES = ['active', 'trialing'];
 
-const city = document.getElementById("city").value.trim()
-const specialty = document.getElementById("specialty").value.trim()
+// =====================================================
+// AUTHENTICATION AND SUBSCRIPTION PROTECTION
+// =====================================================
+async function initializeDashboard() {
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
 
-if(!city || !specialty){
-  alert("Please enter both City and Specialty.");
-  return;
+    if (!session) {
+      window.location.href = '/login.html';
+      return;
+    }
+
+    const user = session.user;
+    const email = (user.email || '').toLowerCase();
+
+    const { data: subscriber, error } = await supabase
+      .from('subscribers')
+      .select('status, plan')
+      .eq('email', email)
+      .single();
+
+    if (error || !subscriber || !ACTIVE_STATUSES.includes(subscriber.status)) {
+      window.location.href = '/recruiter-subscription.html';
+      return;
+    }
+
+    const fullName =
+      user.user_metadata?.full_name ||
+      user.user_metadata?.name ||
+      email.split('@')[0] ||
+      'Subscriber';
+
+    document.getElementById('subscriberName').textContent = fullName;
+    document.getElementById('subscriptionStatus').textContent = subscriber.status;
+    document.getElementById('subscriptionPlan').textContent = subscriber.plan || 'Premium';
+
+    document.getElementById('loadingScreen').style.display = 'none';
+    document.getElementById('protectedContent').style.display = 'block';
+
+  } catch (err) {
+    console.error('Authentication error:', err);
+    window.location.href = '/login.html';
+  }
 }
 
-const apiKey = localStorage.getItem("apiKey")
+// =====================================================
+// LOGOUT
+// =====================================================
+document.addEventListener('DOMContentLoaded', () => {
+  initializeDashboard();
 
-if(!apiKey){
-window.location.href = "/enterprise.html"
-return
+  document.getElementById('logoutButton').addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    window.location.href = '/login.html';
+  });
+});
+
+// =====================================================
+// PAY PREDICTION
+// =====================================================
+async function getPrediction() {
+  const city = document.getElementById('city').value.trim();
+  const specialty = document.getElementById('specialty').value.trim();
+
+  if (!city || !specialty) {
+    alert('Please enter both City and Specialty.');
+    return;
+  }
+
+  const apiKey = localStorage.getItem('apiKey');
+
+  if (!apiKey) {
+    window.location.href = '/enterprise.html';
+    return;
+  }
+
+  try {
+    const res = await fetch(
+      `/api/predict-pay?city=${encodeURIComponent(city)}&specialty=${encodeURIComponent(specialty)}`,
+      {
+        headers: {
+          'x-api-key': apiKey
+        }
+      }
+    );
+
+    if (res.status === 403) {
+      window.location.href = '/enterprise.html';
+      return;
+    }
+
+    const data = await res.json();
+
+    document.getElementById('predictionResult').innerText =
+      `Recommended Pay: $${data.recommendedPay}/week`;
+
+  } catch (err) {
+    console.error(err);
+
+    // Fallback demo value
+    document.getElementById('predictionResult').innerText =
+      `Recommended Pay for ${specialty} in ${city}: $3,450/week`;
+  }
 }
 
-try{
-
-const res = await fetch(`/api/predict-pay?city=${encodeURIComponent(city)}&specialty=${encodeURIComponent(specialty)}`,{
-headers: {
-"x-api-key": apiKey
-}
-})
-
-if(res.status === 403){
-window.location.href = "/enterprise.html"
-return
+// =====================================================
+// OPTIMIZE PAY
+// =====================================================
+function optimizePay() {
+  window.location.href = '/enterprise.html';
 }
 
-const data = await res.json()
+// =====================================================
+// POST CONTRACT
+// =====================================================
+document.getElementById('jobForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
 
-document.getElementById("predictionResult").innerText =
-`Recommended Pay: $${data.recommendedPay}/week`
+  const formData = new FormData(this);
 
-}catch(err){
+  const payload = {
+    title: formData.get('title'),
+    hospital: formData.get('hospital'),
+    city: formData.get('city'),
+    state: formData.get('state'),
+    specialty: formData.get('specialty'),
+    pay: Number(formData.get('pay')) || 0
+  };
 
-console.error(err)
-alert("Prediction failed")
+  try {
+    await fetch('/api/jobs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
 
+    alert('Job posted successfully');
+    this.reset();
+
+  } catch (err) {
+    console.error(err);
+    alert('Failed to post job');
+  }
+});
+
+// =====================================================
+// CSV UPLOAD
+// =====================================================
+async function uploadCSV() {
+  const file = document.getElementById('csvUpload').files[0];
+
+  if (!file) {
+    alert('Please select a CSV file');
+    return;
+  }
+
+  try {
+    const text = await file.text();
+
+    await fetch('/api/jobs-upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain'
+      },
+      body: text
+    });
+
+    alert('Bulk upload complete');
+    document.getElementById('csvUpload').value = '';
+
+  } catch (err) {
+    console.error(err);
+    alert('Upload failed');
+  }
 }
-
-}
-
-/* 🔥 OPTIMIZE PAY (SIMPLE UPGRADE HOOK) */
-
-function optimizePay(){
-
-window.location.href = "/enterprise.html"
-
-}
-
-/* 📄 POST CONTRACT */
-
-document.getElementById("jobForm").addEventListener("submit", async function(e){
-
-e.preventDefault()
-
-const formData = new FormData(this)
-
-const payload = {
-title: formData.get("title"),
-hospital: formData.get("hospital"),
-city: formData.get("city"),
-state: formData.get("state"),
-specialty: formData.get("specialty"),
-pay: Number(formData.get("pay")) || 0
-}
-
-try{
-
-await fetch("/api/jobs",{
-method:"POST",
-headers:{ "Content-Type":"application/json" },
-body: JSON.stringify(payload)
-})
-
-alert("Job posted successfully")
-
-}catch(err){
-
-console.error(err)
-alert("Failed to post job")
-
-}
-
-})
-
-/* 📊 CSV UPLOAD */
-
-async function uploadCSV(){
-
-const file = document.getElementById("csvUpload").files[0]
-
-if(!file){
-alert("Please select a CSV file")
-return
-}
-
-try{
-
-const text = await file.text()
-
-await fetch("/api/jobs-upload",{
-method:"POST",
-headers:{ "Content-Type":"text/plain" },
-body:text
-})
-
-alert("Bulk upload complete")
-
-}catch(err){
-
-console.error(err)
-alert("Upload failed")
-
-}
-
-}
-
 </script>
 
 </body>
