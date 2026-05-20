@@ -72,6 +72,26 @@ Search Housing
 
 </div>
 
+<!-- SEARCH -->
+<div class="space-y-4">
+
+<input
+id="city"
+type="text"
+placeholder="Enter city (e.g., Phoenix, San Diego, Seattle)"
+class="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+<button
+onclick="searchHousing()"
+class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold p-4 rounded-xl transition">
+Search Housing
+</button>
+
+</div>
+
+<!-- RESULTS (Moved Here So They Appear Immediately on Mobile) -->
+<div id="results" class="mt-6 grid gap-4"></div>
+
 <!-- QUICK LINKS -->
 <div class="mt-8 grid md:grid-cols-3 gap-4 text-sm">
 
@@ -91,11 +111,6 @@ Search Housing
 </div>
 
 </div>
-
-</div>
-
-<!-- RESULTS -->
-<div id="results" class="mt-8 grid gap-4"></div>
 
 <!-- DISCLAIMER -->
 <div class="bg-white p-6 rounded-2xl shadow mt-10">
