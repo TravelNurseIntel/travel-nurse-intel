@@ -1,41 +1,42 @@
 // api/stripe-webhook.js
 //
-// Travel Nurse Intel - Stripe Webhook Handler
-//
-// This Vercel serverless function receives webhook events from Stripe and
-// provides the automation foundation for:
-//
-// - New subscription purchases
-// - Subscription updates
-// - Subscription cancellations
-// - Failed payments
-//
-// Future integrations can extend this file to:
-// - Create user accounts in Supabase
-// - Send onboarding emails via Resend
-// - Grant access to premium dashboards
-// - Revoke access when subscriptions end
+// Travel Nurse Intel™
+// Stripe Webhook + Supabase Subscriber Synchronization
 //
 // Required Vercel Environment Variables:
 // - STRIPE_SECRET_KEY
 // - STRIPE_WEBHOOK_SECRET
-//
-// Webhook Endpoint URL:
-// https://travel-nurse-intel.vercel.app/api/stripe-webhook
+// - NEXT_PUBLIC_SUPABASE_URL
+// - SUPABASE_SERVICE_ROLE_KEY
 
 const Stripe = require('stripe');
+const { createClient } = require('@supabase/supabase-js');
 
-// Initialize Stripe using your secret key
+// -------------------------------------
+// Stripe Initialization
+// -------------------------------------
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// Disable Vercel's default body parsing so Stripe can verify the raw payload
+// -------------------------------------
+// Supabase Initialization
+// -------------------------------------
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+// -------------------------------------
+// Disable Body Parsing for Stripe
+// -------------------------------------
 export const config = {
   api: {
     bodyParser: false,
   },
 };
 
-// Read the raw request body into a Buffer
+// -------------------------------------
+// Read Raw Request Body
+// -------------------------------------
 async function readBuffer(readable) {
   const chunks = [];
 
@@ -46,40 +47,154 @@ async function readBuffer(readable) {
   return Buffer.concat(chunks);
 }
 
-// Main webhook handler
+// -------------------------------------
+// Get Customer Email from Stripe
+// -------------------------------------
+async function getCustomerEmail(customerId) {
+  if (!customerId) return null;
+
+  try {
+    const customer = await stripe.customers.retrieve(customerId);
+    return customer.email || null;
+  } catch (error) {
+    console.error('Unable to retrieve customer email:', error.message);
+    return null;
+  }
+}
+
+// -------------------------------------
+// Get Plan Name from Stripe Subscription
+// -------------------------------------
+function getPlanName(subscription) {
+  try {
+    return (
+      subscription.items?.data?.[0]?.price?.product_data?.name ||
+      subscription.items?.data?.[0]?.price?.nickname ||
+      subscription.items?.data?.[0]?.price?.id ||
+      'Unknown Plan'
+    );
+  } catch {
+    return 'Unknown Plan';
+  }
+}
+
+// -------------------------------------
+// Upsert Subscriber Record
+// -------------------------------------
+async function upsertSubscriber({
+  email,
+  stripeCustomerId,
+  stripeSubscriptionId,
+  plan,
+  status,
+}) {
+  if (!email) {
+    console.log('No email provided. Skipping Supabase update.');
+    return;
+  }
+
+  const { error } = await supabase
+    .from('subscribers')
+    .upsert(
+      {
+        email: email.toLowerCase(),
+        stripe_customer_id: stripeCustomerId,
+        stripe_subscription_id: stripeSubscriptionId,
+        plan,
+        status,
+        updated_at: new Date().toISOString(),
+      },
+      {
+        onConflict: 'email',
+      }
+    );
+
+  if (error) {
+    throw error;
+  }
+
+  console.log('Subscriber record synchronized:', {
+    email,
+    plan,
+    status,
+  });
+}
+
+// -------------------------------------
+// Handle Subscription Events
+// -------------------------------------
+async function syncSubscription(subscription) {
+  const customerId = subscription.customer;
+  const subscriptionId = subscription.id;
+  const status = subscription.status;
+  const plan = getPlanName(subscription);
+  const email = await getCustomerEmail(customerId);
+
+  await upsertSubscriber({
+    email,
+    stripeCustomerId: customerId,
+    stripeSubscriptionId: subscriptionId,
+    plan,
+    status,
+  });
+}
+
+// -------------------------------------
+// Handle Checkout Completion
+// -------------------------------------
+async function handleCheckoutCompleted(session) {
+  const email =
+    session.customer_details?.email ||
+    (await getCustomerEmail(session.customer));
+
+  await upsertSubscriber({
+    email,
+    stripeCustomerId: session.customer,
+    stripeSubscriptionId: session.subscription,
+    plan: 'Pending Activation',
+    status: 'active',
+  });
+
+  console.log('Checkout completed:', {
+    email,
+    customerId: session.customer,
+    subscriptionId: session.subscription,
+  });
+}
+
+// -------------------------------------
+// Main Webhook Handler
+// -------------------------------------
 module.exports = async function handler(req, res) {
-  // Allow only POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({
       error: 'Method not allowed. Stripe webhooks must use POST.',
     });
   }
 
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-
-  if (!webhookSecret) {
-    console.error('Missing STRIPE_WEBHOOK_SECRET environment variable.');
-
+  // Validate environment variables
+  if (!process.env.STRIPE_SECRET_KEY) {
     return res.status(500).json({
-      error: 'Webhook secret is not configured.',
+      error: 'Missing STRIPE_SECRET_KEY.',
     });
   }
 
-  if (!process.env.STRIPE_SECRET_KEY) {
-    console.error('Missing STRIPE_SECRET_KEY environment variable.');
-
+  if (!process.env.STRIPE_WEBHOOK_SECRET) {
     return res.status(500).json({
-      error: 'Stripe secret key is not configured.',
+      error: 'Missing STRIPE_WEBHOOK_SECRET.',
+    });
+  }
+
+  if (!supabaseUrl || !supabaseServiceKey) {
+    return res.status(500).json({
+      error: 'Supabase environment variables are missing.',
     });
   }
 
   let event;
 
   try {
-    // Read the raw body
     const rawBody = await readBuffer(req);
-
-    // Get the Stripe signature header
     const signature = req.headers['stripe-signature'];
 
     if (!signature) {
@@ -88,128 +203,73 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // Verify and construct the Stripe event
     event = stripe.webhooks.constructEvent(
       rawBody,
       signature,
-      webhookSecret
+      process.env.STRIPE_WEBHOOK_SECRET
     );
-  } catch (err) {
-    console.error('Webhook signature verification failed:', err.message);
+  } catch (error) {
+    console.error('Webhook signature verification failed:', error.message);
 
     return res.status(400).json({
-      error: `Webhook Error: ${err.message}`,
+      error: `Webhook Error: ${error.message}`,
     });
   }
 
-  // Handle specific Stripe events
   try {
     switch (event.type) {
-      // Customer completed checkout successfully
-      case 'checkout.session.completed': {
-        const session = event.data.object;
-
-        console.log('Checkout completed:', {
-          customerId: session.customer,
-          customerEmail: session.customer_details?.email,
-          subscriptionId: session.subscription,
-        });
-
-        // FUTURE AUTOMATION:
-        // 1. Create user account in Supabase
-        // 2. Save subscription metadata
-        // 3. Send onboarding email
-        // 4. Grant dashboard access
-
+      case 'checkout.session.completed':
+        await handleCheckoutCompleted(event.data.object);
         break;
-      }
 
-      // New subscription created
-      case 'customer.subscription.created': {
-        const subscription = event.data.object;
-
-        console.log('Subscription created:', {
-          subscriptionId: subscription.id,
-          customerId: subscription.customer,
-          status: subscription.status,
-        });
-
+      case 'customer.subscription.created':
+      case 'customer.subscription.updated':
+        await syncSubscription(event.data.object);
         break;
-      }
 
-      // Subscription updated (plan changes, renewals, etc.)
-      case 'customer.subscription.updated': {
-        const subscription = event.data.object;
-
-        console.log('Subscription updated:', {
-          subscriptionId: subscription.id,
-          customerId: subscription.customer,
-          status: subscription.status,
-        });
-
-        break;
-      }
-
-      // Subscription canceled
       case 'customer.subscription.deleted': {
         const subscription = event.data.object;
 
-        console.log('Subscription canceled:', {
-          subscriptionId: subscription.id,
-          customerId: subscription.customer,
+        await syncSubscription({
+          ...subscription,
+          status: 'canceled',
         });
 
-        // FUTURE AUTOMATION:
-        // 1. Mark user inactive in database
-        // 2. Revoke dashboard access
-        // 3. Disable API keys
-
+        console.log('Subscription canceled:', subscription.id);
         break;
       }
 
-      // Payment failed
       case 'invoice.payment_failed': {
         const invoice = event.data.object;
 
-        console.log('Payment failed:', {
-          customerId: invoice.customer,
-          subscriptionId: invoice.subscription,
-          invoiceId: invoice.id,
-        });
+        if (invoice.subscription) {
+          await upsertSubscriber({
+            email: await getCustomerEmail(invoice.customer),
+            stripeCustomerId: invoice.customer,
+            stripeSubscriptionId: invoice.subscription,
+            plan: 'Payment Issue',
+            status: 'past_due',
+          });
+        }
 
-        // FUTURE AUTOMATION:
-        // 1. Notify customer by email
-        // 2. Grace-period logic
-        // 3. Suspend access if payment remains unresolved
-
+        console.log('Payment failed:', invoice.id);
         break;
       }
 
-      // Optional additional event: successful recurring payment
-      case 'invoice.paid': {
-        const invoice = event.data.object;
-
-        console.log('Invoice paid:', {
-          customerId: invoice.customer,
-          subscriptionId: invoice.subscription,
-          invoiceId: invoice.id,
-        });
-
+      case 'invoice.paid':
+        console.log('Invoice paid:', event.data.object.id);
         break;
-      }
 
-      // Ignore all other events
       default:
         console.log(`Unhandled event type: ${event.type}`);
     }
 
-    // Acknowledge receipt to Stripe
     return res.status(200).json({
       received: true,
       eventType: event.type,
     });
-  } catch (err) {
-    console.error('Error processing webhook:', err);
+  } catch (error) {
+    console.error('Error processing webhook:', error);
 
     return res.status(500).json({
       error: 'Internal server error while processing webhook.',
