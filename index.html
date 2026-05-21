@@ -621,80 +621,138 @@ Analyze Your Contract
 
 </div>
 
+<!-- CONTRACT ANALYSIS RESULTS -->
+<div id="results" class="mt-8"></div>
+
+<!-- PREMIUM UPSELL CTA (Hidden Until Analysis Completes) -->
+<div id="premiumUpsell" class="hidden mt-8"></div>
+
 <script>
 
 let weeklyPay = 0
 const marketAverage = 2850
 
-function analyze(){
+function analyze() {
+  const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+  const weeklyHours = parseFloat(document.getElementById('weeklyHours').value) || 36;
+  const weeklyStipend = parseFloat(document.getElementById('weeklyStipend').value) || 0;
+  const monthlyHousing = parseFloat(document.getElementById('monthlyHousing').value) || 0;
 
-const hourly = parseFloat(document.getElementById('hourly').value) || 0
-const hours = parseFloat(document.getElementById('hours').value) || 0
-const stipend = parseFloat(document.getElementById('stipend').value) || 0
+  if (hourlyRate <= 0 || weeklyHours <= 0) {
+    alert('Please enter valid compensation values.');
+    return;
+  }
 
-weeklyPay = (hourly * hours) + stipend
+  // Core Compensation Calculations
+  const weeklyTaxable = hourlyRate * weeklyHours;
+  const weeklyTotal = weeklyTaxable + weeklyStipend;
+  const contract13WeekValue = weeklyTotal * 13;
 
-const diff = weeklyPay - marketAverage
+  // Market Benchmark (Estimated National Fair Value)
+  const fairMarketWeekly = 4500;
+  const fairMarket13Week = fairMarketWeekly * 13;
 
-let score = 60
+  // Underpayment Analysis
+  const weeklyUnderpayment = Math.max(0, fairMarketWeekly - weeklyTotal);
+  const contractUnderpayment = weeklyUnderpayment * 13;
 
-if(diff >= 300){
-score = 95
-}
-else if(diff >= 100){
-score = 85
-}
-else if(diff >= -100){
-score = 75
-}
-else if(diff >= -300){
-score = 60
-}
-else{
-score = 45
-}
+  // Recruiter Margin Estimate
+  const recruiterMargin = weeklyTotal * 0.15;
 
-const scoreCircle = document.getElementById('scoreCircle')
-const verdict = document.getElementById('verdict')
-const scoreSection = document.getElementById('scoreSection')
+  // Negotiation Opportunity
+  const negotiationLow = contractUnderpayment * 0.60;
+  const negotiationHigh = contractUnderpayment;
 
-scoreCircle.innerText = score
+  // Contract Score (0–100)
+  let score = Math.round((weeklyTotal / fairMarketWeekly) * 100);
+  score = Math.max(35, Math.min(score, 99));
 
-if(score >= 90){
-scoreCircle.style.background = '#16a34a'
-verdict.innerText = 'Excellent contract'
-}
-else if(score >= 70){
-scoreCircle.style.background = '#eab308'
-verdict.innerText = 'Average contract'
-}
-else{
-scoreCircle.style.background = '#dc2626'
-verdict.innerText = 'Likely underpaid'
-}
+  // Score Rating
+  let rating = 'Excellent';
+  let scoreColor = 'text-green-600';
 
-scoreSection.classList.remove('hidden')
+  if (score < 60) {
+    rating = 'Significantly Underpaid';
+    scoreColor = 'text-red-600';
+  } else if (score < 75) {
+    rating = 'Below Market';
+    scoreColor = 'text-orange-600';
+  } else if (score < 90) {
+    rating = 'Competitive';
+    scoreColor = 'text-blue-600';
+  }
 
-window.scrollTo({
-top:0,
-behavior:'smooth'
-})
+  // Results HTML
+  document.getElementById('results').innerHTML = `
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
+      <h2 class="text-3xl font-bold text-center mb-6">Your Contract Analysis Results</h2>
 
-}
+      <div class="text-center mb-8">
+        <div class="text-6xl font-bold ${scoreColor}">${score}</div>
+        <div class="text-lg font-semibold mt-2">${rating}</div>
+      </div>
 
-async function shareScore(){
+      <div class="grid md:grid-cols-2 gap-4 text-sm md:text-base">
 
-const score = document.getElementById('scoreCircle').innerText
+        <div class="bg-blue-50 p-4 rounded-xl">
+          <div class="text-gray-600">Weekly Compensation</div>
+          <div class="text-2xl font-bold">$${weeklyTotal.toLocaleString()}</div>
+        </div>
 
-const text = `Your Travel Nurse Contract Score: ${score}/100 — Check yours at https://travelnurseintel.com`
+        <div class="bg-indigo-50 p-4 rounded-xl">
+          <div class="text-gray-600">13-Week Contract Value</div>
+          <div class="text-2xl font-bold">$${contract13WeekValue.toLocaleString()}</div>
+        </div>
 
-try{
-await navigator.clipboard.writeText(text)
-alert('Score copied to clipboard!')
-}catch(err){
-prompt('Copy your score:', text)
-}
+        <div class="bg-green-50 p-4 rounded-xl">
+          <div class="text-gray-600">Fair Market Value</div>
+          <div class="text-2xl font-bold">$${fairMarket13Week.toLocaleString()}</div>
+        </div>
 
+        <div class="bg-red-50 p-4 rounded-xl">
+          <div class="text-gray-600">Potential Underpayment</div>
+          <div class="text-2xl font-bold text-red-600">$${contractUnderpayment.toLocaleString()}</div>
+        </div>
+
+        <div class="bg-yellow-50 p-4 rounded-xl">
+          <div class="text-gray-600">Estimated Recruiter Margin</div>
+          <div class="text-2xl font-bold">$${Math.round(recruiterMargin).toLocaleString()}/wk</div>
+        </div>
+
+        <div class="bg-purple-50 p-4 rounded-xl">
+          <div class="text-gray-600">Negotiation Opportunity</div>
+          <div class="text-xl font-bold">$${Math.round(negotiationLow).toLocaleString()}–$${Math.round(negotiationHigh).toLocaleString()}</div>
+        </div>
+
+      </div>
+    </div>
+  `;
+
+  // Premium Upsell
+  document.getElementById('premiumUpsell').classList.remove('hidden');
+  document.getElementById('premiumUpsell').innerHTML = `
+    <div class="bg-blue-600 text-white rounded-2xl shadow-lg p-8 text-center">
+      <h3 class="text-3xl font-bold mb-4">
+        You May Be Leaving $${contractUnderpayment.toLocaleString()} on the Table
+      </h3>
+      <p class="text-lg mb-6">
+        Unlock specialty benchmarks, negotiation recommendations, salary databases,
+        and premium dashboards to maximize your compensation.
+      </p>
+      <a href="/recruiter-subscription.html"
+         class="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-xl hover:bg-gray-100 transition">
+        Upgrade to Travel Nurse Intel Pro
+      </a>
+    </div>
+  `;
+
+  // Scroll to Results
+  setTimeout(() => {
+    document.getElementById('results').scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }, 100);
 }
 
 </script>
