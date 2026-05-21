@@ -633,10 +633,10 @@ let weeklyPay = 0
 const marketAverage = 2850
 
 function analyze() {
-  const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
-  const weeklyHours = parseFloat(document.getElementById('weeklyHours').value) || 36;
-  const weeklyStipend = parseFloat(document.getElementById('weeklyStipend').value) || 0;
-  const monthlyHousing = parseFloat(document.getElementById('monthlyHousing').value) || 0;
+  const hourlyRate = parseFloat(document.getElementById('hourly').value) || 0;
+  const weeklyHours = parseFloat(document.getElementById('hours').value) || 36;
+  const weeklyStipend = parseFloat(document.getElementById('stipend').value) || 0;
+  const monthlyHousing = parseFloat(document.getElementById('rent').value) || 0;
 
   if (hourlyRate <= 0 || weeklyHours <= 0) {
     alert('Please enter valid compensation values.');
@@ -739,7 +739,7 @@ function analyze() {
         Unlock specialty benchmarks, negotiation recommendations, salary databases,
         and premium dashboards to maximize your compensation.
       </p>
-      <a href="/recruiter-subscription.html"
+      <a href="/subscriber-dashboard.html">
          class="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-xl hover:bg-gray-100 transition">
         Upgrade to Travel Nurse Intel Pro
       </a>
