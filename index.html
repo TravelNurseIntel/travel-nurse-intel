@@ -286,26 +286,29 @@ Share Your Contract Score
   type="number"
   inputmode="decimal"
   enterkeyhint="next"
+  autocomplete="off"
   placeholder="85">
 </div>
 
 <div class="mobile-field">
 <label>Weekly Hours</label>
 <input
-  id="hourly"
+  id="hours"
   type="number"
   inputmode="decimal"
   enterkeyhint="next"
+  autocomplete="off"
   placeholder="36">
 </div>
 
 <div class="mobile-field">
 <label>Weekly Stipend</label>
 <input
-  id="hourly"
+  id="stipend"
   type="number"
   inputmode="decimal"
   enterkeyhint="next"
+  autocomplete="off"
   placeholder="1200">
 </div>
 
@@ -316,6 +319,7 @@ Share Your Contract Score
   type="number"
   inputmode="decimal"
   enterkeyhint="go"
+  autocomplete="off"
   placeholder="1800">
 </div>
 
@@ -776,19 +780,41 @@ let weeklyPay = 0
 const marketAverage = 2850
 
 // MOBILE ENTER / GO SUPPORT
-['hourly', 'hours', 'stipend', 'rent'].forEach(id => {
+['hourly', 'hours', 'stipend', 'rent'].forEach((id, index, arr) => {
 
   const input = document.getElementById(id);
 
-  // Trigger Analyze when pressing Enter / Go
+  // ENTER / GO behavior
   input.addEventListener('keydown', function(e) {
+
     if (e.key === 'Enter') {
+
       e.preventDefault();
-      analyze();
+
+      // Move to next field
+      if (index < arr.length - 1) {
+
+        const nextInput = document.getElementById(arr[index + 1]);
+
+        if (nextInput) {
+          nextInput.focus();
+        }
+
+      } else {
+
+        // Last field = Analyze
+        analyze();
+
+        // Close mobile keyboard
+        input.blur();
+
+      }
+
     }
+
   });
 
-  // Mobile numeric keyboards sometimes fire change instead
+  // Mobile numeric keyboards sometimes trigger change instead
   input.addEventListener('change', function() {
 
     const allFieldsFilled =
@@ -798,7 +824,12 @@ const marketAverage = 2850
       document.getElementById('rent').value;
 
     if (allFieldsFilled) {
+
       analyze();
+
+      // Close mobile keyboard
+      input.blur();
+
     }
 
   });
