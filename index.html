@@ -404,7 +404,7 @@ Use AI-powered insights to negotiate higher compensation.
 <section class="max-w-7xl mx-auto px-6 py-12">
 
 <h2 class="text-4xl font-bold text-center mb-4">
-Travel Nurse Pro Pricing
+Travel Nurse Premium Plans
 </h2>
 
 <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">
@@ -755,6 +755,15 @@ Analyze Your Contract
 let weeklyPay = 0
 const marketAverage = 2850
 
+// Trigger Analyze on Enter / Go key
+['hourly', 'hours', 'stipend', 'rent'].forEach(id => {
+  document.getElementById(id).addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      analyze();
+    }
+  });
+});
+
 function analyze() {
   const hourlyRate = parseFloat(document.getElementById('hourly').value) || 0;
   const weeklyHours = parseFloat(document.getElementById('hours').value) || 36;
@@ -926,10 +935,10 @@ Create Your Account
 
   // Scroll to Results
   setTimeout(() => {
-    document.getElementById('results').scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
+    document.getElementById('scoreSection').scrollIntoView({
+  behavior: 'smooth',
+  block: 'center'
+});
   }, 100);
 }
 
