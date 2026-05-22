@@ -779,56 +779,57 @@ Analyze Your Contract
 let weeklyPay = 0
 const marketAverage = 2850
 
-// MOBILE ENTER / GO SUPPORT
-['hourly', 'hours', 'stipend', 'rent'].forEach((id, index, arr) => {
+// MOBILE NEXT / GO SUPPORT
+const fieldOrder = ['hourly', 'hours', 'stipend', 'rent'];
+
+fieldOrder.forEach((id, index) => {
 
   const input = document.getElementById(id);
 
-  // ENTER / GO behavior
+  // NEXT / GO behavior
   input.addEventListener('keydown', function(e) {
 
     if (e.key === 'Enter') {
 
       e.preventDefault();
 
-      // Move to next field
-      if (index < arr.length - 1) {
-
-        const nextInput = document.getElementById(arr[index + 1]);
-
-        if (nextInput) {
-          nextInput.focus();
-        }
-
-      } else {
-
-        // Last field = Analyze
-        analyze();
-
-        // Close mobile keyboard
-        input.blur();
-
-      }
+      handleFieldAdvance(index);
 
     }
 
   });
 
-  // Mobile numeric keyboards sometimes trigger change instead
-  input.addEventListener('change', function() {
+  // iPhone Safari support
+  input.addEventListener('keyup', function(e) {
 
-    const allFieldsFilled =
-      document.getElementById('hourly').value &&
-      document.getElementById('hours').value &&
-      document.getElementById('stipend').value &&
-      document.getElementById('rent').value;
+    if (e.key === 'Enter') {
 
-    if (allFieldsFilled) {
+      e.preventDefault();
 
-      analyze();
+      handleFieldAdvance(index);
 
-      // Close mobile keyboard
-      input.blur();
+    }
+
+  });
+
+  // Android numeric keyboard support
+  input.addEventListener('input', function() {
+
+    const allFilled = fieldOrder.every(field =>
+      document.getElementById(field).value.trim() !== ''
+    );
+
+    // Auto-analyze only on last field
+    if (id === 'rent' && allFilled) {
+
+      setTimeout(() => {
+
+        analyze();
+
+        // Close keyboard
+        input.blur();
+
+      }, 150);
 
     }
 
@@ -836,6 +837,29 @@ const marketAverage = 2850
 
 });
 
+function handleFieldAdvance(index) {
+
+  // Move to next field
+  if (index < fieldOrder.length - 1) {
+
+    const nextField =
+      document.getElementById(fieldOrder[index + 1]);
+
+    if (nextField) {
+      nextField.focus();
+    }
+
+  } else {
+
+    // Last field = analyze
+    analyze();
+
+    // Close mobile keyboard
+    document.getElementById('rent').blur();
+
+  }
+
+}
 function analyze() {
   const hourlyRate = parseFloat(document.getElementById('hourly').value) || 0;
   const weeklyHours = parseFloat(document.getElementById('hours').value) || 36;
