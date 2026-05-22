@@ -812,28 +812,28 @@ fieldOrder.forEach((id, index) => {
 
   });
 
-  // Android numeric keyboard support
-  input.addEventListener('input', function() {
+// Mobile keyboard support
+input.addEventListener('change', function() {
 
-    const allFilled = fieldOrder.every(field =>
-      document.getElementById(field).value.trim() !== ''
-    );
+  const allFilled = fieldOrder.every(field =>
+    document.getElementById(field).value.trim() !== ''
+  );
 
-    // Auto-analyze only on last field
-    if (id === 'rent' && allFilled) {
+  // ONLY analyze when leaving last field
+  if (id === 'rent' && allFilled) {
 
-      setTimeout(() => {
+    setTimeout(() => {
 
-        analyze();
+      analyze();
 
-        // Close keyboard
-        input.blur();
+      // Close keyboard
+      input.blur();
 
-      }, 150);
+    }, 150);
 
-    }
+  }
 
-  });
+});
 
 });
 
