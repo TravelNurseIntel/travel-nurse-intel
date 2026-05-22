@@ -281,22 +281,42 @@ Share Your Contract Score
 
 <div class="mobile-field">
 <label>Hourly Rate</label>
-<input id="hourly" type="number" placeholder="85">
+<input
+  id="hourly"
+  type="number"
+  inputmode="decimal"
+  enterkeyhint="next"
+  placeholder="85">
 </div>
 
 <div class="mobile-field">
 <label>Weekly Hours</label>
-<input id="hours" type="number" placeholder="36">
+<input
+  id="hourly"
+  type="number"
+  inputmode="decimal"
+  enterkeyhint="next"
+  placeholder="85">
 </div>
 
 <div class="mobile-field">
 <label>Weekly Stipend</label>
-<input id="stipend" type="number" placeholder="1200">
+<input
+  id="hourly"
+  type="number"
+  inputmode="decimal"
+  enterkeyhint="next"
+  placeholder="85">
 </div>
 
 <div class="mobile-field">
 <label>Monthly Housing Cost</label>
-<input id="rent" type="number" placeholder="1800">
+<input
+  id="rent"
+  type="number"
+  inputmode="decimal"
+  enterkeyhint="go"
+  placeholder="1800">
 </div>
 
 </div>
@@ -755,13 +775,34 @@ Analyze Your Contract
 let weeklyPay = 0
 const marketAverage = 2850
 
-// Trigger Analyze on Enter / Go key
+// MOBILE ENTER / GO SUPPORT
 ['hourly', 'hours', 'stipend', 'rent'].forEach(id => {
-  document.getElementById(id).addEventListener('keypress', function(e) {
+
+  const input = document.getElementById(id);
+
+  // Trigger Analyze when pressing Enter / Go
+  input.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
+      e.preventDefault();
       analyze();
     }
   });
+
+  // Mobile numeric keyboards sometimes fire change instead
+  input.addEventListener('change', function() {
+
+    const allFieldsFilled =
+      document.getElementById('hourly').value &&
+      document.getElementById('hours').value &&
+      document.getElementById('stipend').value &&
+      document.getElementById('rent').value;
+
+    if (allFieldsFilled) {
+      analyze();
+    }
+
+  });
+
 });
 
 function analyze() {
