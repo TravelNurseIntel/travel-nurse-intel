@@ -750,12 +750,6 @@ Analyze Your Contract
 
 </div>
 
-<!-- CONTRACT ANALYSIS RESULTS -->
-<div id="results" class="mt-8"></div>
-
-<!-- PREMIUM UPSELL CTA (Hidden Until Analysis Completes) -->
-<div id="premiumUpsell" class="hidden mt-8"></div>
-
 <script>
 
 let weeklyPay = 0
@@ -796,7 +790,22 @@ function analyze() {
   let score = Math.round((weeklyTotal / fairMarketWeekly) * 100);
   score = Math.max(35, Math.min(score, 99));
 
-  // SHOW SCORE SECTION
+  // Score Rating
+  let rating = 'Excellent';
+  let scoreColor = 'text-green-600';
+
+  if (score < 60) {
+    rating = 'Significantly Underpaid';
+    scoreColor = 'text-red-600';
+  } else if (score < 75) {
+    rating = 'Below Market';
+    scoreColor = 'text-orange-600';
+  } else if (score < 90) {
+    rating = 'Competitive';
+    scoreColor = 'text-blue-600';
+  }
+
+    // SHOW SCORE SECTION
 document.getElementById('scoreSection').classList.remove('hidden');
 
 const scoreCircle = document.getElementById('scoreCircle');
@@ -814,32 +823,12 @@ if (score < 60) {
 
 verdict.innerText = rating;
 
-  // Score Rating
-  let rating = 'Excellent';
-  let scoreColor = 'text-green-600';
-
-  if (score < 60) {
-    rating = 'Significantly Underpaid';
-    scoreColor = 'text-red-600';
-  } else if (score < 75) {
-    rating = 'Below Market';
-    scoreColor = 'text-orange-600';
-  } else if (score < 90) {
-    rating = 'Competitive';
-    scoreColor = 'text-blue-600';
-  }
-
   // Results HTML
   document.getElementById('results').innerHTML = `
     <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
       <h2 class="text-3xl font-bold text-center mb-6">Your Contract Analysis Results</h2>
 
-      <div class="text-center mb-8">
-        <div class="text-6xl font-bold ${scoreColor}">${score}</div>
-        <div class="text-lg font-semibold mt-2">${rating}</div>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-4 text-sm md:text-base">
+        <div class="grid md:grid-cols-2 gap-4 text-sm md:text-base">
 
         <div class="bg-blue-50 p-4 rounded-xl">
           <div class="text-gray-600">Weekly Compensation</div>
