@@ -319,6 +319,12 @@ Free analysis • No signup required • Instant results
 
 </section>
 
+<!-- CONTRACT ANALYSIS RESULTS -->
+<div id="results" class="mt-8"></div>
+
+<!-- PREMIUM UPSELL CTA (Hidden Until Analysis Completes) -->
+<div id="premiumUpsell" class="hidden mt-8"></div>
+
 <!-- MARKET INTELLIGENCE -->
 
 <section class="max-w-6xl mx-auto grid md:grid-cols-3 gap-6 px-4 mb-10">
@@ -387,6 +393,129 @@ Benchmark against real travel nurse contracts.
 <p class="text-gray-600">
 Use AI-powered insights to negotiate higher compensation.
 </p>
+</div>
+
+</div>
+
+</section>
+
+<!-- NURSE SUBSCRIPTION PRICING -->
+
+<section class="max-w-7xl mx-auto px-6 py-12">
+
+<h2 class="text-4xl font-bold text-center mb-4">
+Travel Nurse Pro Pricing
+</h2>
+
+<p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">
+Unlock premium compensation intelligence, salary databases,
+negotiation tools, and nationwide pay analytics.
+</p>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<!-- BASIC -->
+<div class="bg-white border rounded-3xl shadow-lg p-8">
+
+<h3 class="text-3xl font-bold text-center mb-3">
+Basic
+</h3>
+
+<p class="text-center text-gray-600 mb-6">
+Contract analysis + pay transparency
+</p>
+
+<div class="text-center text-5xl font-bold mb-8">
+$9.99<span class="text-2xl">/mo</span>
+</div>
+
+<ul class="space-y-3 text-gray-700 mb-8 text-sm">
+<li>✓ Contract pay analysis</li>
+<li>✓ Salary comparison tools</li>
+<li>✓ Nationwide pay transparency</li>
+<li>✓ Housing cost tools</li>
+<li>✓ Weekly market updates</li>
+</ul>
+
+<a
+href="https://buy.stripe.com/YOUR_BASIC_LINK"
+target="_blank"
+class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition">
+Start Basic Plan
+</a>
+
+</div>
+
+<!-- PRO -->
+<div class="bg-white border-2 border-blue-600 rounded-3xl shadow-xl p-8 relative">
+
+<div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-xs font-bold px-4 py-1 rounded-full">
+MOST POPULAR
+</div>
+
+<h3 class="text-3xl font-bold text-center mb-3">
+Pro
+</h3>
+
+<p class="text-center text-gray-600 mb-6">
+Advanced compensation intelligence
+</p>
+
+<div class="text-center text-5xl font-bold mb-8">
+$29.99<span class="text-2xl">/mo</span>
+</div>
+
+<ul class="space-y-3 text-gray-700 mb-8 text-sm">
+<li>✓ Everything in Basic</li>
+<li>✓ Premium salary database</li>
+<li>✓ Specialty pay benchmarks</li>
+<li>✓ Recruiter margin analysis</li>
+<li>✓ Underpayment detection</li>
+<li>✓ Negotiation recommendations</li>
+<li>✓ Premium subscriber dashboard</li>
+</ul>
+
+<a
+href="https://buy.stripe.com/YOUR_PRO_LINK"
+target="_blank"
+class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition">
+Upgrade to Pro
+</a>
+
+</div>
+
+<!-- ELITE -->
+<div class="bg-white border rounded-3xl shadow-lg p-8">
+
+<h3 class="text-3xl font-bold text-center mb-3">
+Elite
+</h3>
+
+<p class="text-center text-gray-600 mb-6">
+Full intelligence suite + forecasting
+</p>
+
+<div class="text-center text-5xl font-bold mb-8">
+$49.99<span class="text-2xl">/mo</span>
+</div>
+
+<ul class="space-y-3 text-gray-700 mb-8 text-sm">
+<li>✓ Everything in Pro</li>
+<li>✓ Predictive pay forecasting</li>
+<li>✓ Highest-paying hospitals</li>
+<li>✓ Real-time contract alerts</li>
+<li>✓ AI compensation optimization</li>
+<li>✓ Premium market intelligence</li>
+<li>✓ Early access features</li>
+</ul>
+
+<a
+href="https://buy.stripe.com/YOUR_ELITE_LINK"
+target="_blank"
+class="block w-full text-center bg-slate-900 hover:bg-black text-white px-6 py-4 rounded-xl font-semibold transition">
+Start Elite Plan
+</a>
+
 </div>
 
 </div>
@@ -667,6 +796,24 @@ function analyze() {
   let score = Math.round((weeklyTotal / fairMarketWeekly) * 100);
   score = Math.max(35, Math.min(score, 99));
 
+  // SHOW SCORE SECTION
+document.getElementById('scoreSection').classList.remove('hidden');
+
+const scoreCircle = document.getElementById('scoreCircle');
+const verdict = document.getElementById('verdict');
+
+scoreCircle.innerText = score;
+
+if (score < 60) {
+  scoreCircle.style.background = '#dc2626';
+} else if (score < 75) {
+  scoreCircle.style.background = '#f59e0b';
+} else {
+  scoreCircle.style.background = '#16a34a';
+}
+
+verdict.innerText = rating;
+
   // Score Rating
   let rating = 'Excellent';
   let scoreColor = 'text-green-600';
@@ -732,18 +879,60 @@ function analyze() {
   document.getElementById('premiumUpsell').classList.remove('hidden');
   document.getElementById('premiumUpsell').innerHTML = `
     <div class="bg-blue-600 text-white rounded-2xl shadow-lg p-8 text-center">
-      <h3 class="text-3xl font-bold mb-4">
-        You May Be Leaving $${contractUnderpayment.toLocaleString()} on the Table
-      </h3>
-      <p class="text-lg mb-6">
-        Unlock specialty benchmarks, negotiation recommendations, salary databases,
-        and premium dashboards to maximize your compensation.
-      </p>
-     <a href="/signup.html"
-   class="inline-block bg-white text-blue-600 font-bold px-8 py-4 rounded-xl hover:bg-gray-100 transition">
-  Upgrade to Travel Nurse Intel Pro
+
+<h3 class="text-4xl font-bold mb-4">
+You May Be Leaving $${contractUnderpayment.toLocaleString()} on the Table
+</h3>
+
+<p class="text-xl mb-8 max-w-3xl mx-auto">
+Unlock premium compensation intelligence, recruiter margin visibility,
+specialty pay benchmarks, underpayment detection,
+salary databases, negotiation tools, and predictive market forecasting.
+</p>
+
+<div class="grid md:grid-cols-3 gap-6 text-left mb-10">
+
+<div class="bg-white text-gray-900 rounded-2xl p-6">
+<h4 class="text-2xl font-bold mb-3">Basic</h4>
+<div class="text-4xl font-bold mb-4">$9.99/mo</div>
+<ul class="space-y-2 text-sm">
+<li>✓ Pay transparency tools</li>
+<li>✓ Contract analysis</li>
+<li>✓ Salary comparison</li>
+<li>✓ Housing tools</li>
+</ul>
+</div>
+
+<div class="bg-white text-gray-900 rounded-2xl p-6 border-4 border-yellow-400">
+<h4 class="text-2xl font-bold mb-3">Pro</h4>
+<div class="text-4xl font-bold mb-4">$29.99/mo</div>
+<ul class="space-y-2 text-sm">
+<li>✓ Recruiter margin analysis</li>
+<li>✓ Underpayment detection</li>
+<li>✓ Premium dashboards</li>
+<li>✓ Negotiation recommendations</li>
+</ul>
+</div>
+
+<div class="bg-white text-gray-900 rounded-2xl p-6">
+<h4 class="text-2xl font-bold mb-3">Elite</h4>
+<div class="text-4xl font-bold mb-4">$49.99/mo</div>
+<ul class="space-y-2 text-sm">
+<li>✓ Predictive forecasting</li>
+<li>✓ Real-time contract alerts</li>
+<li>✓ AI compensation optimization</li>
+<li>✓ Premium intelligence suite</li>
+</ul>
+</div>
+
+</div>
+
+<a href="/signup.html"
+class="inline-block bg-white text-blue-600 font-bold px-10 py-5 rounded-xl hover:bg-gray-100 transition text-xl">
+Create Your Account
 </a>
-    </div>
+
+</div>
   `;
 
   // Scroll to Results
