@@ -87,6 +87,7 @@ async function upsertSubscriber({
   stripeSubscriptionId,
   plan,
   status,
+  current_period_end: currentPeriodEnd,
 }) {
   if (!email) {
     console.log('No email provided. Skipping Supabase update.');
