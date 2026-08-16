@@ -201,65 +201,233 @@ body {
 </footer>
 
 <script>
-// Supabase Configuration
-const supabaseUrl = 'https://tkxtdxopdwjaauwmhlkg.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRreHRkeG9wZHdqYWF1d21obGtnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzMDcxNzksImV4cCI6MjA5NDg4MzE3OX0.Es3VlbTsSTvSU5FJ1edNLjiuSC30wsHUEzwi0jNRAG4';
+// ============================================
+// Travel Nurse Intel™
+// Supabase Client Configuration
+// ============================================
 
-// Initialize Supabase
+const SUPABASE_URL =
+  'https://tkxtdxopdwjaauwmhlkg.supabase.co';
+
+/*
+ * Use the Supabase PUBLISHABLE key.
+ *
+ * NEVER place SUPABASE_SECRET_KEY here.
+ */
+const SUPABASE_PUBLISHABLE_KEY =
+  'YOUR_SUPABASE_PUBLISHABLE_KEY_HERE';
+
 const supabase = window.supabase.createClient(
-  supabaseUrl,
-  supabaseAnonKey
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
 );
 
+// ============================================
 // UI Elements
-const signupForm = document.getElementById('signupForm');
-const message = document.getElementById('message');
+// ============================================
 
+const signupForm =
+  document.getElementById('signupForm');
+
+const message =
+  document.getElementById('message');
+
+// ============================================
 // Handle Signup
-signupForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
+// ============================================
 
-  const fullName = document.getElementById('fullName').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-  const confirmPassword = document.getElementById('confirmPassword').value;
+signupForm.addEventListener(
+  'submit',
+  async (event) => {
 
-  // Validate passwords
-  if (password !== confirmPassword) {
-    message.className = 'mt-6 text-center text-sm text-red-600';
-    message.textContent = 'Passwords do not match.';
-    return;
-  }
+    event.preventDefault();
 
-  message.className = 'mt-6 text-center text-sm text-gray-600';
-  message.textContent = 'Creating your account...';
+    const fullName =
+      document
+        .getElementById('fullName')
+        .value
+        .trim();
 
-  // Create Supabase user
-  const { error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      data: {
-        full_name: fullName
-      },
-      emailRedirectTo: 'https://www.travelnurseintel.com/subscriber-dashboard.html'
+    const email =
+      document
+        .getElementById('email')
+        .value
+        .trim()
+        .toLowerCase();
+
+    const password =
+      document
+        .getElementById('password')
+        .value;
+
+    const confirmPassword =
+      document
+        .getElementById('confirmPassword')
+        .value;
+
+    // ----------------------------------------
+    // Validate Full Name
+    // ----------------------------------------
+
+    if (!fullName) {
+
+      message.className =
+        'mt-6 text-center text-sm text-red-600';
+
+      message.textContent =
+        'Please enter your full name.';
+
+      return;
+
     }
-  });
 
-  if (error) {
-    message.className = 'mt-6 text-center text-sm text-red-600';
-    message.textContent = error.message;
-    return;
+    // ----------------------------------------
+    // Validate Passwords
+    // ----------------------------------------
+
+    if (password.length < 8) {
+
+      message.className =
+        'mt-6 text-center text-sm text-red-600';
+
+      message.textContent =
+        'Password must contain at least 8 characters.';
+
+      return;
+
+    }
+
+    if (password !== confirmPassword) {
+
+      message.className =
+        'mt-6 text-center text-sm text-red-600';
+
+      message.textContent =
+        'Passwords do not match.';
+
+      return;
+
+    }
+
+    // ----------------------------------------
+    // Status
+    // ----------------------------------------
+
+    message.className =
+      'mt-6 text-center text-sm text-gray-600';
+
+    message.textContent =
+      'Creating your account...';
+
+    // ----------------------------------------
+    // Create Supabase Account
+    // ----------------------------------------
+
+    const {
+      data,
+      error
+    } =
+      await supabase.auth.signUp({
+
+        email,
+
+        password,
+
+        options: {
+
+          data: {
+            full_name: fullName
+          },
+
+          /*
+           * After email confirmation, send the
+           * user to LOGIN rather than directly
+           * into a protected subscriber page.
+           */
+          emailRedirectTo:
+            'https://www.travelnurseintel.com/login.html'
+
+        }
+
+      });
+
+    // ----------------------------------------
+    // Handle Signup Error
+    // ----------------------------------------
+
+    if (error) {
+
+      message.className =
+        'mt-6 text-center text-sm text-red-600';
+
+      message.textContent =
+        error.message;
+
+      return;
+
+    }
+
+    // ----------------------------------------
+    // Email Confirmation Required
+    // ----------------------------------------
+
+    if (
+      data.user &&
+      !data.session
+    ) {
+
+      message.className =
+        'mt-6 text-center text-sm text-green-600';
+
+      message.innerHTML = `
+        Account created successfully.<br><br>
+        Please check your email and click the
+        confirmation link before signing in.
+      `;
+
+      signupForm.reset();
+
+      return;
+
+    }
+
+    // ----------------------------------------
+    // If Email Confirmation Is Disabled
+    // ----------------------------------------
+
+    if (data.session) {
+
+      message.className =
+        'mt-6 text-center text-sm text-green-600';
+
+      message.textContent =
+        'Account created successfully. Redirecting to login...';
+
+      setTimeout(
+        () => {
+          window.location.replace(
+            '/login.html'
+          );
+        },
+        1000
+      );
+
+      return;
+
+    }
+
+    // ----------------------------------------
+    // Unexpected State
+    // ----------------------------------------
+
+    message.className =
+      'mt-6 text-center text-sm text-red-600';
+
+    message.textContent =
+      'Your account could not be completed. Please contact support if the problem continues.';
+
   }
-
-  message.className = 'mt-6 text-center text-sm text-green-600';
-  message.innerHTML = `
-    Account created successfully.<br>
-    Please check your email to confirm your account before signing in.
-  `;
-
-  signupForm.reset();
-});
+);
 </script>
 
 </body>
