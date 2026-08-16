@@ -173,47 +173,134 @@ body {
 </footer>
 
 <script>
-// Supabase Configuration
-const supabaseUrl = 'https://tkxtdxopdwjaauwmhlkg.supabase.co';
-const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY_HERE';
+// ============================================
+// Travel Nurse Intel™
+// Supabase Client Configuration
+// ============================================
 
-// Initialize Supabase
+const SUPABASE_URL =
+  'https://tkxtdxopdwjaauwmhlkg.supabase.co';
+
+/*
+ * IMPORTANT:
+ * Use the Supabase PUBLISHABLE key here.
+ *
+ * NEVER use SUPABASE_SECRET_KEY in browser code.
+ */
+const SUPABASE_PUBLISHABLE_KEY =
+  'YOUR_SUPABASE_PUBLISHABLE_KEY_HERE';
+
 const supabase = window.supabase.createClient(
-  supabaseUrl,
-  supabaseAnonKey
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
 );
 
+// ============================================
 // UI Elements
-const loginForm = document.getElementById('loginForm');
-const message = document.getElementById('message');
+// ============================================
 
+const loginForm =
+  document.getElementById('loginForm');
+
+const message =
+  document.getElementById('message');
+
+// ============================================
 // Handle Login
-loginForm.addEventListener('submit', async (event) => {
-  event.preventDefault();
+// ============================================
 
-  message.className = 'mt-6 text-center text-sm text-gray-600';
-  message.textContent = 'Signing in...';
+loginForm.addEventListener(
+  'submit',
+  async (event) => {
 
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
+    event.preventDefault();
 
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-  });
+    message.className =
+      'mt-6 text-center text-sm text-gray-600';
 
-  if (error) {
-    message.className = 'mt-6 text-center text-sm text-red-600';
-    message.textContent = error.message;
-    return;
+    message.textContent =
+      'Signing in...';
+
+    const email =
+      document
+        .getElementById('email')
+        .value
+        .trim()
+        .toLowerCase();
+
+    const password =
+      document
+        .getElementById('password')
+        .value;
+
+    const {
+      data,
+      error
+    } =
+      await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+
+    if (error) {
+
+      message.className =
+        'mt-6 text-center text-sm text-red-600';
+
+      message.textContent =
+        error.message;
+
+      return;
+    }
+
+    if (!data.session) {
+
+      message.className =
+        'mt-6 text-center text-sm text-red-600';
+
+      message.textContent =
+        'Login succeeded, but no active session was created. Please try again.';
+
+      return;
+    }
+
+    message.className =
+      'mt-6 text-center text-sm text-green-600';
+
+    message.textContent =
+      'Login successful. Redirecting...';
+
+    /*
+     * Preserve an optional protected-page redirect.
+     * Otherwise go to the subscriber dashboard.
+     */
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    const redirect =
+      params.get('redirect');
+
+    if (
+      redirect &&
+      redirect.startsWith('/')
+    ) {
+
+      window.location.replace(
+        redirect
+      );
+
+    } else {
+
+      window.location.replace(
+        '/subscriber-dashboard.html'
+      );
+
+    }
+
   }
-
-  message.className = 'mt-6 text-center text-sm text-green-600';
-  message.textContent = 'Login successful. Redirecting...';
-
-  window.location.href = '/subscriber-dashboard.html';
-});
+);
 </script>
-
 </body>
 </html>
