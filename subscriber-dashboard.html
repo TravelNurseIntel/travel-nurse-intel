@@ -295,68 +295,314 @@ html, body {
 </div>
 
 <script>
-// Supabase Configuration
-const supabaseUrl = 'https://tkxtdxopdwjaauwmhlkg.supabase.co';
-const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY_HERE';
+<script>
+/*
+ * ============================================
+ * Travel Nurse Intel™
+ * Subscriber Dashboard
+ * ============================================
+ *
+ * Authentication and subscription authorization
+ * are handled by premium-guard.js.
+ *
+ * This script only:
+ *
+ * 1. Reads the authenticated Supabase session.
+ * 2. Uses the subscriber record already authorized
+ *    by the premium guard.
+ * 3. Personalizes the dashboard.
+ * 4. Displays subscription information.
+ * 5. Handles logout.
+ * ============================================
+ */
 
-// Initialize Supabase
-const supabase = window.supabase.createClient(
-  supabaseUrl,
-  supabaseAnonKey
-);
+(function () {
 
-// Main Authentication Check
-async function initializeDashboard() {
-  const { data: { session } } = await supabase.auth.getSession();
+  'use strict';
 
-  // Redirect if not logged in
-  if (!session) {
-    window.location.href = '/login.html';
-    return;
+  // ==========================================
+  // Supabase Configuration
+  // ==========================================
+
+  const SUPABASE_URL =
+    'https://tkxtdxopdwjaauwmhlkg.supabase.co';
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    'sb_publishable_snRG3SmdO6umSUzutdWodQ_j76RCZ0B';
+
+  const supabase =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+  // ==========================================
+  // Format Renewal Date
+  // ==========================================
+
+  function formatRenewalDate(
+    timestamp
+  ) {
+
+    if (!timestamp) {
+
+      return '—';
+
+    }
+
+    const date =
+      new Date(timestamp);
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+
+      return '—';
+
+    }
+
+    return date.toLocaleDateString(
+      'en-US',
+      {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric'
+      }
+    );
+
   }
 
-  const user = session.user;
-  const email = user.email || 'Subscriber';
+  // ==========================================
+  // Initialize Dashboard
+  // ==========================================
 
-  // Display user name if available
-  const fullName =
-    user.user_metadata?.full_name ||
-    email.split('@')[0];
+  async function initializeDashboard() {
 
-  document.getElementById('subscriberName').textContent = fullName;
+    try {
 
-  // Retrieve subscription record
-  const { data: subscriber } = await supabase
-    .from('subscribers')
-    .select('status, plan')
-    .eq('email', email.toLowerCase())
-    .single();
+      // ----------------------------------------
+      // Get Current Session
+      // ----------------------------------------
 
-  // Update metrics if a subscriber record exists
-  if (subscriber) {
-    document.getElementById('subscriptionStatus').textContent =
-      subscriber.status || 'Active';
+      const {
+        data: {
+          session
+        },
+        error: sessionError
+      } =
+        await supabase.auth.getSession();
 
-    document.getElementById('subscriptionPlan').textContent =
-      subscriber.plan || 'Premium';
+      if (
+        sessionError ||
+        !session
+      ) {
+
+        window.location.replace(
+          '/login.html?redirect=/subscriber-dashboard.html'
+        );
+
+        return;
+
+      }
+
+      // ----------------------------------------
+      // User Information
+      // ----------------------------------------
+
+      const user =
+        session.user;
+
+      const email =
+        (
+          user.email ||
+          ''
+        )
+          .trim()
+          .toLowerCase();
+
+      const fullName =
+        user.user_metadata?.full_name ||
+        email.split('@')[0] ||
+        'Subscriber';
+
+      // ----------------------------------------
+      // Subscriber Record
+      // ----------------------------------------
+
+      const {
+        data: subscriber,
+        error: subscriberError
+      } =
+        await supabase
+          .from('subscribers')
+          .select(`
+            status,
+            plan,
+            current_period_end
+          `)
+          .eq(
+            'email',
+            email
+          )
+          .maybeSingle();
+
+      if (subscriberError) {
+
+        console.error(
+          'Unable to retrieve subscriber record:',
+          subscriberError
+        );
+
+        window.location.replace(
+          '/recruiter-subscription.html'
+        );
+
+        return;
+
+      }
+
+      if (!subscriber) {
+
+        window.location.replace(
+          '/recruiter-subscription.html'
+        );
+
+        return;
+
+      }
+
+      // ----------------------------------------
+      // Display Subscriber Information
+      // ----------------------------------------
+
+      document.getElementById(
+        'subscriberName'
+      ).textContent =
+        fullName;
+
+      document.getElementById(
+        'subscriptionStatus'
+      ).textContent =
+        subscriber.status ||
+        'Active';
+
+      document.getElementById(
+        'subscriptionPlan'
+      ).textContent =
+        subscriber.plan ||
+        'Premium';
+
+      // ----------------------------------------
+      // Optional Renewal Display
+      // ----------------------------------------
+
+      const renewalElement =
+        document.getElementById(
+          'subscriptionRenewal'
+        );
+
+      if (renewalElement) {
+
+        renewalElement.textContent =
+          formatRenewalDate(
+            subscriber.current_period_end
+          );
+
+      }
+
+      // ----------------------------------------
+      // Reveal Protected Content
+      // ----------------------------------------
+
+      document.getElementById(
+        'loadingScreen'
+      ).style.display =
+        'none';
+
+      document.getElementById(
+        'protectedContent'
+      ).style.display =
+        'block';
+
+    } catch (error) {
+
+      console.error(
+        'Subscriber dashboard initialization failed:',
+        error
+      );
+
+      window.location.replace(
+        '/recruiter-subscription.html'
+      );
+
+    }
+
   }
 
-  // Show protected content
-  document.getElementById('loadingScreen').style.display = 'none';
-  document.getElementById('protectedContent').style.display = 'block';
-}
+  // ==========================================
+  // Logout
+  // ==========================================
 
-// Logout Handler
-document.addEventListener('DOMContentLoaded', () => {
-  initializeDashboard();
+  document.addEventListener(
+    'DOMContentLoaded',
+    () => {
 
-  document
-    .getElementById('logoutButton')
-    .addEventListener('click', async () => {
-      await supabase.auth.signOut();
-      window.location.href = '/login.html';
-    });
-});
+      initializeDashboard();
+
+      const logoutButton =
+        document.getElementById(
+          'logoutButton'
+        );
+
+      if (!logoutButton) {
+        return;
+      }
+
+      logoutButton.addEventListener(
+        'click',
+        async () => {
+
+          logoutButton.disabled =
+            true;
+
+          logoutButton.textContent =
+            'Signing Out...';
+
+          const {
+            error
+          } =
+            await supabase.auth.signOut();
+
+          if (error) {
+
+            console.error(
+              'Logout failed:',
+              error
+            );
+
+            logoutButton.disabled =
+              false;
+
+            logoutButton.textContent =
+              'Sign Out';
+
+            return;
+
+          }
+
+          window.location.replace(
+            '/login.html'
+          );
+
+        }
+      );
+
+    }
+  );
+
+})();
 </script>
 
 </body>
