@@ -1,97 +1,179 @@
 /*
- * Travel Nurse Intel
+ * ============================================
+ * Travel Nurse Intel™
  * Premium Page Access Guard
+ * ============================================
  *
  * Plans:
- * BASIC  = $9.99/mo
- * PRO    = $29.99/mo
- * ELITE  = $49.99/mo
+ *
+ * BASIC = $9.99/month
+ * PRO   = $29.99/month
+ * ELITE = $49.99/month
+ *
+ * Stripe Price IDs:
+ *
+ * BASIC:
+ * price_1U4U7tPDubW3gyakFjNhmxfS
+ *
+ * PRO:
+ * price_1THWqsPDubW3gyak56HoB3sp
+ *
+ * ELITE:
+ * price_1U4UEnPDubW3gyakD3KyF0Ed
  *
  * Allowed subscription statuses:
+ *
  * active
  * trialing
+ *
+ * ============================================
  */
 
 (function () {
+
   'use strict';
+
+  // ==========================================
+  // Supabase Configuration
+  // ==========================================
 
   const SUPABASE_URL =
     'https://tkxtdxopdwjaauwmhlkg.supabase.co';
 
-  const SUPABASE_ANON_KEY =
-    'YOUR_SUPABASE_ANON_KEY_HERE';
-
-  const ACTIVE_STATUSES = ['active', 'trialing'];
-
   /*
-   * Configure the required minimum plan for each page.
+   * Browser-safe Supabase key.
    *
-   * basic:
-   *   Basic, Pro, or Elite
-   *
-   * pro:
-   *   Pro or Elite
-   *
-   * elite:
-   *   Elite only
+   * NEVER use SUPABASE_SECRET_KEY here.
    */
+  const SUPABASE_PUBLISHABLE_KEY =
+    'sb_publishable_snRG3SmdO6umSUzutdWodQ_j76RCZ0B';
+
+  // ==========================================
+  // Subscription Statuses
+  // ==========================================
+
+  const ACTIVE_STATUSES = [
+    'active',
+    'trialing'
+  ];
+
+  // ==========================================
+  // Plan Levels
+  // ==========================================
+
   const PLAN_LEVELS = {
+
     basic: 1,
+
     pro: 2,
+
     elite: 3
+
   };
+
+  // ==========================================
+  // Page Requirements
+  // ==========================================
 
   const PAGE_REQUIREMENTS = {
 
+    // ----------------------------------------
     // BASIC
-    'travel-nurse-pay-transparency.html': 'basic',
-    'travel-nurse-pay-comparison.html': 'basic',
-    'travel-nurse-pay-directory.html': 'basic',
+    // Basic + Pro + Elite
+    // ----------------------------------------
 
+    'travel-nurse-pay-transparency.html':
+      'basic',
+
+    'travel-nurse-pay-comparison.html':
+      'basic',
+
+    'travel-nurse-pay-directory.html':
+      'basic',
+
+    'subscriber-dashboard.html':
+      'basic',
+
+    'recruiter-dashboard.html':
+      'basic',
+
+    // ----------------------------------------
     // PRO
-    'travel-nurse-market-intelligence.html': 'pro',
-    'travel-nurse-pay-by-specialty.html': 'pro',
-    'travel-nurse-salary-database.html': 'pro',
-    'travel-nurse-pay-by-hospital.html': 'pro',
-    'travel-nurse-national-market.html': 'pro',
+    // Pro + Elite
+    // ----------------------------------------
 
+    'travel-nurse-market-intelligence.html':
+      'pro',
+
+    'travel-nurse-pay-by-specialty.html':
+      'pro',
+
+    'travel-nurse-salary-database.html':
+      'pro',
+
+    'travel-nurse-pay-by-hospital.html':
+      'pro',
+
+    'travel-nurse-national-market.html':
+      'pro',
+
+    // ----------------------------------------
     // ELITE
-    'travel-nurse-live-contracts.html': 'elite',
-    'travel-nurse-demand-heatmap.html': 'elite',
-    'travel-nurse-pay-heatmap.html': 'elite',
-    'travel-nurse-pay-houston.html': 'elite',
-    'travel-nurse-pay-phoenix.html': 'elite',
-    'travel-nurse-pay-san-diego.html': 'elite',
-    'contract-intelligence-report.html': 'elite',
+    // Elite only
+    // ----------------------------------------
 
-    // Dashboard
-    'subscriber-dashboard.html': 'basic',
+    'travel-nurse-live-contracts.html':
+      'elite',
 
-    // Recruiter system
-    'recruiter-dashboard.html': 'basic',
-    'recruiter-subscription.html': null,
+    'travel-nurse-demand-heatmap.html':
+      'elite',
 
-    // Enterprise
-    'enterprise-dashboard.html': 'elite'
+    'travel-nurse-pay-heatmap.html':
+      'elite',
+
+    'travel-nurse-pay-houston.html':
+      'elite',
+
+    'travel-nurse-pay-phoenix.html':
+      'elite',
+
+    'travel-nurse-pay-san-diego.html':
+      'elite',
+
+    'contract-intelligence-report.html':
+      'elite',
+
+    // ----------------------------------------
+    // Public
+    // ----------------------------------------
+
+    'recruiter-subscription.html':
+      null
+
   };
 
-  /*
-   * Redirect destination for unauthorized users.
-   */
-  const LOGIN_URL = '/login.html';
+  // ==========================================
+  // Redirect URLs
+  // ==========================================
 
-  const UPGRADE_URL = '/#plans';
+  const LOGIN_URL =
+    '/login.html';
 
-  /*
-   * Determine current filename.
-   */
+  const UPGRADE_URL =
+    '/recruiter-subscription.html';
+
+  // ==========================================
+  // Determine Current Page
+  // ==========================================
+
   const filename =
     window.location.pathname
       .split('/')
       .pop()
       .toLowerCase();
 
-  const requiredPlan = PAGE_REQUIREMENTS[filename];
+  const requiredPlan =
+    PAGE_REQUIREMENTS[filename];
 
   /*
    * Pages not listed above are public.
@@ -100,69 +182,90 @@
     return;
   }
 
-  /*
-   * Create the Supabase client.
-   */
+  // ==========================================
+  // Load Supabase
+  // ==========================================
+
   function loadSupabase() {
 
     if (window.supabase) {
+
       return Promise.resolve(
         window.supabase.createClient(
           SUPABASE_URL,
-          SUPABASE_ANON_KEY
+          SUPABASE_PUBLISHABLE_KEY
         )
       );
+
     }
 
-    return new Promise(function (resolve, reject) {
+    return new Promise(
+      function (resolve, reject) {
 
-      const script = document.createElement('script');
+        const script =
+          document.createElement('script');
 
-      script.src =
-        'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+        script.src =
+          'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
 
-      script.onload = function () {
+        script.onload =
+          function () {
 
-        if (!window.supabase) {
-          reject(
-            new Error('Supabase failed to load.')
-          );
-          return;
-        }
+            if (!window.supabase) {
 
-        resolve(
-          window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-          )
+              reject(
+                new Error(
+                  'Supabase failed to load.'
+                )
+              );
+
+              return;
+
+            }
+
+            resolve(
+              window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_PUBLISHABLE_KEY
+              )
+            );
+
+          };
+
+        script.onerror =
+          function () {
+
+            reject(
+              new Error(
+                'Unable to load Supabase.'
+              )
+            );
+
+          };
+
+        document.head.appendChild(
+          script
         );
 
-      };
-
-      script.onerror = function () {
-        reject(
-          new Error('Unable to load Supabase.')
-        );
-      };
-
-      document.head.appendChild(script);
-
-    });
+      }
+    );
 
   }
 
-  /*
-   * Display a full-page loading screen while access
-   * is being verified.
-   */
+  // ==========================================
+  // Loading Screen
+  // ==========================================
+
   function showLoading() {
 
     document.documentElement.style.visibility =
       'hidden';
 
-    const loading = document.createElement('div');
+    const loading =
+      document.createElement('div');
 
-    loading.id = 'premiumAccessLoading';
+    loading.id =
+      'premiumAccessLoading';
 
     loading.style.cssText = `
       position:fixed;
@@ -176,10 +279,12 @@
     `;
 
     loading.innerHTML = `
+
       <div style="
         text-align:center;
         padding:32px;
       ">
+
         <div style="
           width:42px;
           height:42px;
@@ -205,6 +310,7 @@
         ">
           Travel Nurse Intel
         </div>
+
       </div>
 
       <style>
@@ -214,14 +320,19 @@
           }
         }
       </style>
+
     `;
 
-    document.body.prepend(loading);
+    document.body.prepend(
+      loading
+    );
+
   }
 
-  /*
-   * Restore page visibility.
-   */
+  // ==========================================
+  // Restore Page Visibility
+  // ==========================================
+
   function showPage() {
 
     document.documentElement.style.visibility =
@@ -238,9 +349,10 @@
 
   }
 
-  /*
-   * Redirect unauthenticated users.
-   */
+  // ==========================================
+  // Require Login
+  // ==========================================
+
   function requireLogin() {
 
     window.location.replace(
@@ -253,9 +365,10 @@
 
   }
 
-  /*
-   * Redirect users whose plan is insufficient.
-   */
+  // ==========================================
+  // Require Upgrade
+  // ==========================================
+
   function requireUpgrade() {
 
     window.location.replace(
@@ -264,9 +377,10 @@
 
   }
 
-  /*
-   * Normalize plan names.
-   */
+  // ==========================================
+  // Normalize Plan
+  // ==========================================
+
   function normalizePlan(plan) {
 
     if (!plan) {
@@ -282,7 +396,9 @@
       value === 'basic' ||
       value === 'starter'
     ) {
+
       return 'basic';
+
     }
 
     if (
@@ -290,23 +406,28 @@
       value === 'professional' ||
       value === 'standard'
     ) {
+
       return 'pro';
+
     }
 
     if (
       value === 'elite' ||
       value === 'premium'
     ) {
+
       return 'elite';
+
     }
 
     return null;
+
   }
 
-  /*
-   * Determine whether a user's plan satisfies
-   * the required plan.
-   */
+  // ==========================================
+  // Check Plan Level
+  // ==========================================
+
   function hasRequiredPlan(
     userPlan,
     requiredPlan
@@ -318,8 +439,13 @@
     const required =
       normalizePlan(requiredPlan);
 
-    if (!actual || !required) {
+    if (
+      !actual ||
+      !required
+    ) {
+
       return false;
+
     }
 
     return (
@@ -329,9 +455,10 @@
 
   }
 
-  /*
-   * Main access check.
-   */
+  // ==========================================
+  // Verify Subscription Access
+  // ==========================================
+
   async function verifyAccess() {
 
     showLoading();
@@ -340,6 +467,10 @@
 
       const supabase =
         await loadSupabase();
+
+      // --------------------------------------
+      // Get Authentication Session
+      // --------------------------------------
 
       const {
         data: {
@@ -355,9 +486,14 @@
       ) {
 
         requireLogin();
+
         return;
 
       }
+
+      // --------------------------------------
+      // User
+      // --------------------------------------
 
       const user =
         session.user;
@@ -373,9 +509,14 @@
       if (!email) {
 
         requireLogin();
+
         return;
 
       }
+
+      // --------------------------------------
+      // Subscriber Record
+      // --------------------------------------
 
       const {
         data: subscriber,
@@ -383,18 +524,22 @@
       } =
         await supabase
           .from('subscribers')
-          .select(
-            'status, plan'
-          )
+          .select(`
+            status,
+            plan,
+            current_period_end
+          `)
           .eq(
             'email',
             email
           )
           .maybeSingle();
 
-      if (
-        subscriberError
-      ) {
+      // --------------------------------------
+      // Database Error
+      // --------------------------------------
+
+      if (subscriberError) {
 
         console.error(
           'Subscriber access check failed:',
@@ -402,9 +547,14 @@
         );
 
         requireUpgrade();
+
         return;
 
       }
+
+      // --------------------------------------
+      // No Subscriber / Inactive
+      // --------------------------------------
 
       if (
         !subscriber ||
@@ -416,9 +566,14 @@
       ) {
 
         requireUpgrade();
+
         return;
 
       }
+
+      // --------------------------------------
+      // Plan Verification
+      // --------------------------------------
 
       if (
         !hasRequiredPlan(
@@ -428,19 +583,30 @@
       ) {
 
         requireUpgrade();
+
         return;
 
       }
 
-      /*
-       * Access approved.
-       */
+      // --------------------------------------
+      // Access Approved
+      // --------------------------------------
+
       window.TNI_SUBSCRIBER = {
-        email: email,
-        status: subscriber.status,
-        plan: normalizePlan(
-          subscriber.plan
-        )
+
+        email,
+
+        status:
+          subscriber.status,
+
+        plan:
+          normalizePlan(
+            subscriber.plan
+          ),
+
+        current_period_end:
+          subscriber.current_period_end || null
+
       };
 
       showPage();
@@ -468,9 +634,10 @@
 
   }
 
-  /*
-   * Run immediately.
-   */
+  // ==========================================
+  // Start Verification
+  // ==========================================
+
   if (
     document.readyState ===
     'loading'
