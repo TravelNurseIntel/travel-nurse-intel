@@ -190,7 +190,7 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
   'sb_publishable_snRG3SmdO6umSUzutdWodQ_j76RCZ0B';
 
-const supabase = window.supabase.createClient(
+const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_PUBLISHABLE_KEY
 );
@@ -237,7 +237,7 @@ loginForm.addEventListener(
       data,
       error
     } =
-      await supabase.auth.signInWithPassword({
+      await supabaseClient.auth.signInWithPassword({
         email,
         password
       });
