@@ -327,7 +327,7 @@ signupForm.addEventListener(
       data,
       error
     } =
-      await supabase.auth.signUp({
+      await supabaseClient.auth.signUp({
 
         email,
 
