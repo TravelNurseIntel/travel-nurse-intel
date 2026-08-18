@@ -1,1046 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<title>Travel Nurse Contract Analyzer | Travel Nurse Intel</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Analyze your travel nurse contract instantly. Compare pay packages, stipends, monthly housing costs, market demand, and real-time salary intelligence nationwide.">
+<meta name="robots"
+      content="noindex,nofollow,noarchive">
+
+<title>
+Travel Nurse Intel™ — Coming Soon
+</title>
+
+<meta
+  name="description"
+  content="Travel Nurse Intel™ is being upgraded to deliver personalized travel-nurse contract intelligence."
+>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
-
-html,
-body{
-margin:0;
-padding:0;
-overflow-x:hidden;
-font-family:system-ui;
-background:#f8fafc;
-color:#111827;
-}
-
-body{
-padding-bottom:90px;
-}
-
-.header{
-background:white;
-border-bottom:1px solid #e5e7eb;
-box-shadow:0 1px 3px rgba(0,0,0,0.05);
-position:sticky;
-top:0;
-z-index:1000;
-}
-
-.ribbon-wrapper{
-width:100%;
-overflow:hidden;
-background:#111827;
-color:white;
-height:38px;
-display:flex;
-align-items:center;
-}
-
-.ribbon-track{
-display:flex;
-white-space:nowrap;
-animation:scroll-left 25s linear infinite;
-}
-
-.ribbon-item{
-padding-right:70px;
-font-size:13px;
-font-weight:600;
-flex-shrink:0;
-}
-
-@keyframes scroll-left{
-0%{
-transform:translateX(0%);
-}
-100%{
-transform:translateX(-50%);
-}
-}
-
-.score-circle{
-width:120px;
-height:120px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:34px;
-font-weight:700;
-color:white;
-margin:auto;
-transition:0.3s ease;
-}
-
-.mobile-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px;
-}
-
-.mobile-field label{
-display:block;
-font-size:11px;
-margin-bottom:4px;
-color:#4b5563;
-}
-
-.mobile-field input{
-width:100%;
-height:36px;
-padding:6px 8px;
-font-size:12px;
-border:1px solid #d1d5db;
-border-radius:8px;
-background:white;
-}
-
-.market-card{
-background:white;
-padding:24px;
-border-radius:22px;
-box-shadow:0 2px 10px rgba(0,0,0,0.05);
-border:1px solid #e5e7eb;
-}
-
-.mobile-fixed-button{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:white;
-padding:8px;
-border-top:1px solid #e5e7eb;
-z-index:99999;
-box-shadow:0 -2px 10px rgba(0,0,0,0.08);
-}
-
-.mobile-fixed-button button{
-width:100%;
-background:#2563eb;
-color:white;
-font-size:15px;
-font-weight:700;
-padding:13px;
-border:none;
-border-radius:12px;
-}
-
-@media(min-width:768px){
-
-.mobile-fixed-button{
-display:none;
-}
-
-.mobile-grid{
-gap:16px;
-}
-
-.mobile-field label{
-font-size:14px;
-}
-
-.mobile-field input{
-height:48px;
-font-size:15px;
-padding:12px;
-}
-
-}
-
-</style>
-
 </head>
-<body>
 
-<!-- HEADER -->
+<body class="bg-gray-50 min-h-screen">
 
-<header class="header">
+<main
+  class="min-h-screen flex items-center justify-center px-6 py-12">
 
-<div class="max-w-6xl mx-auto p-4 flex flex-col items-center">
+  <section
+    class="w-full max-w-2xl bg-white rounded-3xl shadow-xl p-8 md:p-12 text-center">
 
-<a href="/">
-<img
-src="/logo.png"
-alt="Travel Nurse Intel"
-class="h-20 md:h-24 mb-3">
-</a>
+    <h1
+      class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
 
-<nav class="flex flex-wrap justify-center gap-4 text-sm pb-2">
+      Travel Nurse Intel™
 
-<a href="/" class="text-blue-600 font-semibold hover:underline">
-Contract Analyzer
-</a>
+    </h1>
 
-<a href="/travel-nurse-live-contracts.html" class="hover:underline">
-Live Contracts
-</a>
+    <p
+      class="text-2xl md:text-3xl font-bold text-blue-600 mb-6">
 
-<a href="/travel-nurse-market-intelligence.html" class="hover:underline">
-Market Intelligence
-</a>
+      We're upgrading.
 
-<a href="/highest-paying-travel-nurse-states.html" class="hover:underline">
-Highest Paying States
-</a>
-
-<a href="/travel-nurse-pay-by-specialty.html" class="hover:underline">
-Pay by Specialty
-</a>
-
-<a href="/travel-nurse-pay-transparency.html" class="hover:underline">
-Pay Transparency
-</a>
-
-<a href="/travel-nurse-housing.html" class="hover:underline">
-Housing
-</a>
-
-<a href="/travel-nurse-tax-free-stipend-guide.html" class="hover:underline">
-Tax Guide
-</a>  
-
-<a href="/enterprise.html" class="hover:underline">
-Enterprise
-</a>
-
-</nav>
-
-</div>
-
-</header>
-
-<!-- RIBBON -->
-
-<div class="ribbon-wrapper">
-
-<div class="ribbon-track">
-
-<div class="ribbon-item">🔥 ICU contracts paying up to $4,800/week</div>
-<div class="ribbon-item">🔥 California remains highest paying state</div>
-<div class="ribbon-item">🔥 Phoenix ICU contracts increased 14% this month</div>
-<div class="ribbon-item">🔥 Housing stipends rising nationwide</div>
-<div class="ribbon-item">🔥 Compare recruiter pay packages instantly</div>
-<div class="ribbon-item">🔥 Analyze your contract in 30 seconds</div>
-<div class="ribbon-item">🔥 ICU contracts paying up to $4,800/week</div>
-<div class="ribbon-item">🔥 California remains highest paying state</div>
-
-</div>
-
-</div>
-
-<!-- HERO -->
-
-<section class="max-w-4xl mx-auto bg-white p-4 md:p-8 rounded-xl shadow mt-5 mb-8 border border-gray-200">
-
-<h1 class="text-3xl md:text-5xl font-black text-center leading-tight mb-3">
-Most Travel Nurses Are Underpaid by $3,000–$10,000 Per Contract
-</h1>
-
-<p class="text-center text-gray-700 text-lg mb-6">
-Analyze Your Travel Nurse Contract in 30 Seconds
-</p>
-
-<!-- SCORE -->
-
-<div id="scoreSection" class="hidden text-center mb-8">
-
-<h2 class="text-2xl font-bold mb-4">
-Your Contract Pay Score
-</h2>
-
-<div id="scoreCircle" class="score-circle bg-gray-400">
-0
-</div>
-
-<p id="verdict" class="mt-3 text-lg font-semibold"></p>
-
-<button
-onclick="shareScore()"
-class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold transition">
-Share Your Contract Score
-</button>
-
-</div>
-
-<!-- CALCULATOR -->
-
-<div class="bg-gray-50 border rounded-xl p-4">
-
-<div class="mobile-grid">
-
-<div class="mobile-field">
-<label>Hourly Rate</label>
-<input
-  id="hourly"
-  type="number"
-  inputmode="decimal"
-  enterkeyhint="next"
-  autocomplete="off"
-  placeholder="85">
-</div>
-
-<div class="mobile-field">
-<label>Weekly Hours</label>
-<input
-  id="hours"
-  type="number"
-  inputmode="decimal"
-  enterkeyhint="next"
-  autocomplete="off"
-  placeholder="36">
-</div>
-
-<div class="mobile-field">
-<label>Weekly Stipend</label>
-<input
-  id="stipend"
-  type="number"
-  inputmode="decimal"
-  enterkeyhint="next"
-  autocomplete="off"
-  placeholder="1200">
-</div>
-
-<div class="mobile-field">
-<label>Monthly Housing Cost</label>
-<input
-  id="rent"
-  type="number"
-  inputmode="decimal"
-  enterkeyhint="go"
-  autocomplete="off"
-  placeholder="1800">
-</div>
-
-</div>
-
-<div class="hidden md:block mt-5">
-
-<button
-onclick="analyze()"
-class="w-full bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl text-lg font-bold transition">
-Analyze Your Contract
-</button>
-
-</div>
-
-<p class="text-center text-xs text-gray-500 mt-4">
-Free analysis • No signup required • Instant results
-</p>
-
-</div>
-
-<!-- CONTRACT ANALYSIS RESULTS -->
-<div id="results" class="mt-8 max-w-4xl mx-auto"></div>
-
-<!-- PREMIUM UPSELL CTA (Hidden Until Analysis Completes) -->
-<div id="premiumUpsell" class="hidden mt-8 max-w-6xl mx-auto"></div>  
-
-</section>
-
-<!-- MARKET INTELLIGENCE -->
-
-<section class="max-w-6xl mx-auto grid md:grid-cols-3 gap-6 px-4 mb-10">
-
-<div class="market-card">
-<h3 class="text-xl font-bold mb-3">Explore Market Intelligence</h3>
-<p class="text-gray-600 mb-4">
-See where demand is rising fastest nationwide.
-</p>
-<a href="/travel-nurse-market-intelligence.html" class="text-blue-600 font-semibold hover:underline">
-Explore Market Intelligence →
-</a>
-</div>
-
-<div class="market-card">
-<h3 class="text-xl font-bold mb-3">View Pay Trends</h3>
-<p class="text-gray-600 mb-4">
-Track pay changes across specialties and states.
-</p>
-<a href="/travel-nurse-pay-transparency.html" class="text-blue-600 font-semibold hover:underline">
-View Pay Trends →
-</a>
-</div>
-
-<div class="market-card">
-<h3 class="text-xl font-bold mb-3">See Where Pay Is Increasing</h3>
-<p class="text-gray-600 mb-4">
-AI-powered projections for future pay growth.
-</p>
-<a href="/travel-nurse-pay-by-specialty.html" class="text-blue-600 font-semibold hover:underline">
-See Pay Growth →
-</a>
-</div>
-
-</section>
-
-<!-- HOW IT WORKS -->
-
-<section class="max-w-6xl mx-auto px-4 mb-10">
-
-<h2 class="text-3xl font-bold text-center mb-8">
-How It Works
-</h2>
-
-<div class="grid md:grid-cols-3 gap-6">
-
-<div class="market-card text-center">
-<div class="text-4xl mb-3">1️⃣</div>
-<h3 class="font-bold text-xl mb-2">Enter Contract Details</h3>
-<p class="text-gray-600">
-Input your hourly rate, stipends, and monthly housing costs.
-</p>
-</div>
-
-<div class="market-card text-center">
-<div class="text-4xl mb-3">2️⃣</div>
-<h3 class="font-bold text-xl mb-2">Compare Nationwide</h3>
-<p class="text-gray-600">
-Benchmark against real travel nurse contracts.
-</p>
-</div>
-
-<div class="market-card text-center">
-<div class="text-4xl mb-3">3️⃣</div>
-<h3 class="font-bold text-xl mb-2">Optimize Your Pay</h3>
-<p class="text-gray-600">
-Use AI-powered insights to negotiate higher compensation.
-</p>
-</div>
-
-</div>
-
-</section>
-
-<!-- NURSE SUBSCRIPTION PRICING -->
-
-<section
-  id="plans"
-  class="max-w-7xl mx-auto px-6 py-12">
-
-<h2 class="text-4xl font-bold text-center mb-4">
-Travel Nurse Premium Plans
-</h2>
-
-<p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">
-Unlock premium compensation intelligence, salary databases,
-negotiation tools, and nationwide pay analytics.
-</p>
-
-<div class="grid md:grid-cols-3 gap-8">
-
-<!-- BASIC -->
-<div class="bg-white border rounded-3xl shadow-lg p-8">
-
-<h3 class="text-3xl font-bold text-center mb-3">
-Basic
-</h3>
-
-<p class="text-center text-gray-600 mb-6">
-Contract analysis + pay transparency
-</p>
-
-<div class="text-center text-5xl font-bold mb-8">
-$9.99<span class="text-2xl">/mo</span>
-</div>
-
-<ul class="space-y-3 text-gray-700 mb-8 text-sm">
-<li>✓ Contract pay analysis</li>
-<li>✓ Salary comparison tools</li>
-<li>✓ Nationwide pay transparency</li>
-<li>✓ Housing cost tools</li>
-<li>✓ Weekly market updates</li>
-</ul>
-
-<a
-href="https://buy.stripe.com/YOUR_BASIC_LINK"
-target="_blank"
-class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition">
-Start Basic Plan
-</a>
-
-</div>
-
-<!-- PRO -->
-<div class="bg-white border-2 border-blue-600 rounded-3xl shadow-xl p-8 relative">
-
-<div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-xs font-bold px-4 py-1 rounded-full">
-MOST POPULAR
-</div>
-
-<h3 class="text-3xl font-bold text-center mb-3">
-Pro
-</h3>
-
-<p class="text-center text-gray-600 mb-6">
-Advanced compensation intelligence
-</p>
-
-<div class="text-center text-5xl font-bold mb-8">
-$29.99<span class="text-2xl">/mo</span>
-</div>
-
-<ul class="space-y-3 text-gray-700 mb-8 text-sm">
-<li>✓ Everything in Basic</li>
-<li>✓ Premium salary database</li>
-<li>✓ Specialty pay benchmarks</li>
-<li>✓ Recruiter margin analysis</li>
-<li>✓ Underpayment detection</li>
-<li>✓ Negotiation recommendations</li>
-<li>✓ Premium subscriber dashboard</li>
-</ul>
-
-<a
-href="https://buy.stripe.com/YOUR_PRO_LINK"
-target="_blank"
-class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition">
-Upgrade to Pro
-</a>
-
-</div>
-
-<!-- ELITE -->
-<div class="bg-white border rounded-3xl shadow-lg p-8">
-
-<h3 class="text-3xl font-bold text-center mb-3">
-Elite
-</h3>
-
-<p class="text-center text-gray-600 mb-6">
-Full intelligence suite + forecasting
-</p>
-
-<div class="text-center text-5xl font-bold mb-8">
-$49.99<span class="text-2xl">/mo</span>
-</div>
-
-<ul class="space-y-3 text-gray-700 mb-8 text-sm">
-<li>✓ Everything in Pro</li>
-<li>✓ Predictive pay forecasting</li>
-<li>✓ Highest-paying hospitals</li>
-<li>✓ Real-time contract alerts</li>
-<li>✓ AI compensation optimization</li>
-<li>✓ Premium market intelligence</li>
-<li>✓ Early access features</li>
-</ul>
-
-<a
-href="https://buy.stripe.com/YOUR_ELITE_LINK"
-target="_blank"
-class="block w-full text-center bg-slate-900 hover:bg-black text-white px-6 py-4 rounded-xl font-semibold transition">
-Start Elite Plan
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- PRICING -->
-
-<section class="max-w-7xl mx-auto px-6 py-16">
-
-<h2 class="text-4xl font-bold text-center mb-4">
-Recruiter & Enterprise Pricing
-</h2>
-
-<p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">
-Unlock premium recruiter margin analytics, predictive workforce intelligence, private APIs, and enterprise dashboards.
-</p>
-
-<div class="grid md:grid-cols-3 gap-8">
-
-  <!-- STARTER PLAN -->
-  <div class="bg-white border border-gray-200 rounded-3xl shadow-lg p-8">
-
-    <h3 class="text-3xl font-bold text-center mb-3">Starter</h3>
-
-    <p class="text-center text-gray-600 mb-6">
-      Market insights + pay analytics
     </p>
 
-    <div class="text-center text-5xl font-bold text-gray-900 mb-8">
-      $599<span class="text-2xl">/mo</span>
-    </div>
+    <p
+      class="text-lg md:text-xl text-gray-700 leading-relaxed mb-8">
 
-    <ul class="space-y-3 text-gray-700 mb-8 text-sm">
-      <li>✓ Real-time travel nurse pay analytics</li>
-      <li>✓ State and specialty benchmarking</li>
-      <li>✓ Recruiter margin visibility</li>
-      <li>✓ Fill probability scoring</li>
-      <li>✓ Weekly market intelligence summaries</li>
-      <li>✓ Contract pay recommendation engine</li>
-      <li>✓ Subscriber-only recruiter dashboard</li>
-    </ul>
+      Travel Nurse Intel is being rebuilt to deliver
+      personalized travel-nurse contract intelligence.
 
-    <a
-      href="https://buy.stripe.com/6oU5kFedQ37Rgju46u3Je04"
-      target="_blank"
-      class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition">
-      Start Starter Plan
-    </a>
-
-  </div>
-
-  <!-- STANDARD PLAN -->
-  <div class="bg-white border-2 border-blue-600 rounded-3xl shadow-xl p-8 relative">
-
-    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-xs font-bold px-4 py-1 rounded-full">
-      MOST POPULAR
-    </div>
-
-    <h3 class="text-3xl font-bold text-center mb-3">Standard</h3>
-
-    <p class="text-center text-gray-600 mb-6">
-      Unlimited contract postings
     </p>
 
-    <div class="text-center text-5xl font-bold text-gray-900 mb-8">
-      $999<span class="text-2xl">/mo</span>
+    <div
+      class="border border-blue-100 bg-blue-50 rounded-2xl p-6 mb-8">
+
+      <p
+        class="text-sm font-semibold uppercase tracking-wide text-blue-700 mb-2">
+
+        Coming Soon
+
+      </p>
+
+      <h2
+        class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+
+        Contract Intelligence Report™
+
+      </h2>
+
+      <p
+        class="text-3xl font-bold text-blue-600 mb-4">
+
+        $29.99
+
+      </p>
+
+      <p
+        class="text-gray-700 leading-relaxed">
+
+        Analyze your travel contract.<br>
+        Understand your compensation.<br>
+        Identify negotiation opportunities.
+
+      </p>
+
     </div>
 
-    <ul class="space-y-3 text-gray-700 mb-8 text-sm">
-      <li>✓ Everything in Starter</li>
-      <li>✓ Unlimited contract postings</li>
-      <li>✓ Bulk CSV upload</li>
-      <li>✓ Team performance dashboards</li>
-      <li>✓ Enhanced competitive analytics</li>
-      <li>✓ Automated weekly reports</li>
-      <li>✓ Priority support</li>
-    </ul>
+    <button
+      type="button"
+      disabled
+      class="w-full md:w-auto px-8 py-4 rounded-xl
+             bg-gray-300 text-gray-600
+             font-bold text-lg cursor-not-allowed">
 
-    <a
-      href="https://buy.stripe.com/8x27sN1r45fZebm1Ym3Je05"
-      target="_blank"
-      class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition">
-      Start Standard Plan
-    </a>
+      Coming Soon
 
-  </div>
+    </button>
 
-  <!-- ENTERPRISE PLAN -->
-  <div class="bg-white border border-gray-200 rounded-3xl shadow-lg p-8">
+    <p
+      class="text-xs text-gray-500 mt-8">
 
-    <h3 class="text-3xl font-bold text-center mb-3">Enterprise</h3>
-
-    <p class="text-center text-gray-600 mb-6">
-      Hospital intelligence + API access
+      Travel Nurse Intel™
     </p>
 
-    <div class="text-center text-5xl font-bold text-gray-900 mb-8">
-      Custom
-    </div>
+  </section>
 
-    <ul class="space-y-3 text-gray-700 mb-8 text-sm">
-      <li>✓ Everything in Standard</li>
-      <li>✓ Private market intelligence APIs</li>
-      <li>✓ Custom ATS integrations</li>
-      <li>✓ Predictive demand modeling</li>
-      <li>✓ Workforce forecasting & shortage detection</li>
-      <li>✓ Monthly executive intelligence reports</li>
-      <li>✓ Custom analytics dashboards</li>
-      <li>✓ Dedicated onboarding support</li>
-    </ul>
-
-    <a
-      href="/enterprise-contact.html"
-      class="block w-full text-center bg-slate-900 hover:bg-black text-white px-6 py-4 rounded-xl font-semibold transition">
-      Contact Enterprise Sales
-    </a>
-
-  </div>
-
-</div>
-
-<!-- FREEMIUM NOTICE -->
-<div class="mt-12 bg-blue-50 border border-blue-200 rounded-2xl p-8 text-center">
-
-  <h3 class="text-2xl font-bold mb-3">
-    Free Tools + Premium Intelligence
-  </h3>
-
-  <p class="text-gray-700 max-w-4xl mx-auto leading-relaxed">
-    Public tools provide contract analysis, market previews, housing resources, and educational content.
-    Paid subscriptions unlock recruiter margin analytics, private dashboards, automated reports,
-    predictive forecasting, and enterprise APIs.
-  </p>
-
-</div>
-
-</section>
-  
-<!-- RECRUITER CTA -->
-
-<section class="max-w-5xl mx-auto bg-blue-600 text-white p-8 rounded-2xl shadow mb-12 text-center">
-
-<h2 class="text-3xl font-bold mb-4">
-Recruit Travel Nurses Faster
-</h2>
-
-<p class="text-lg mb-6">
-Access predictive market intelligence, pay optimization, and real-time contract analytics.
-</p>
-
-<a href="/recruiter-dashboard.html" class="inline-block bg-white text-blue-700 px-6 py-4 rounded-xl font-bold hover:bg-gray-100 transition">
-Open Recruiter Dashboard
-</a>
-
-</section>
-
-<!-- DISCLAIMER -->
-
-<section class="max-w-6xl mx-auto px-4 pb-10">
-
-<div class="market-card">
-
-<h3 class="text-lg font-bold mb-3">
-Disclaimer
-</h3>
-
-<p class="text-sm text-gray-500 leading-7">
-Travel Nurse Intel provides informational compensation estimates, contract analysis tools, staffing trend analytics, recruiter package comparisons, and market intelligence only. Compensation estimates and market analytics shown throughout the platform are based on aggregated market trends, user submissions, publicly available compensation data, and generalized healthcare staffing intelligence. Actual contract compensation, housing stipends, and employment terms may vary significantly depending on specialty, certifications, geographic demand, hospital systems, staffing agencies, recruiter margins, shift differentials, and contract structure.
-</p>
-
-<p class="text-sm text-gray-500 leading-7 mt-4">
-This information is provided for informational and educational purposes only and should not be interpreted as legal, tax, financial, healthcare, investment, or employment advice. Users should independently verify all contract details and consult qualified professionals before making employment or financial decisions.
-</p>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer class="text-center text-sm text-gray-500 px-4 pb-28">
-
-<p class="mb-1 font-semibold">
-Travel Nurse Intel™
-</p>
-
-<p class="text-xs mb-3">
-A registered fictitious name of Kingdom Come™, LLC
-</p>
-
-<p class="mt-1">
-Support:
-<a href="mailto:support@travelnurseintel.com" class="underline">
-support@travelnurseintel.com
-</a>
-</p>
-
-<p class="mt-2">
-© 2026 All rights reserved.
-</p>
-
-<div class="mt-3 flex flex-wrap gap-4 justify-center text-sm">
-
-<a href="/privacy.html" class="hover:underline">
-Privacy Policy
-</a>
-
-<a href="/terms.html" class="hover:underline">
-Terms of Service
-</a>
-
-<a href="/refund-policy.html" class="hover:underline">
-Refund Policy
-</a>
-
-<a href="/disclaimer.html" class="hover:underline">
-Disclaimer
-</a>
-
-</div>
-
-</footer>
-
-<!-- MOBILE FIXED BUTTON -->
-
-<div class="mobile-fixed-button">
-
-<button onclick="analyze()">
-Analyze Your Contract
-</button>
-
-</div>
-
-<script>
-
-let weeklyPay = 0
-const marketAverage = 2850
-
-// MOBILE NEXT / GO SUPPORT
-const fieldOrder = ['hourly', 'hours', 'stipend', 'rent'];
-
-fieldOrder.forEach((id, index) => {
-
-  const input = document.getElementById(id);
-
-  // NEXT / GO behavior
-  input.addEventListener('keydown', function(e) {
-
-    if (e.key === 'Enter') {
-
-      e.preventDefault();
-
-      handleFieldAdvance(index);
-
-    }
-
-  });
-
-  // iPhone Safari support
-  input.addEventListener('keyup', function(e) {
-
-    if (e.key === 'Enter') {
-
-      e.preventDefault();
-
-      handleFieldAdvance(index);
-
-    }
-
-  });
-
-// Mobile keyboard support
-input.addEventListener('change', function() {
-
-  const allFilled = fieldOrder.every(field =>
-    document.getElementById(field).value.trim() !== ''
-  );
-
-  // ONLY analyze when leaving last field
-  if (id === 'rent' && allFilled) {
-
-    setTimeout(() => {
-
-      analyze();
-
-      // Close keyboard
-      input.blur();
-
-    }, 150);
-
-  }
-
-});
-
-});
-
-function handleFieldAdvance(index) {
-
-  // Move to next field
-  if (index < fieldOrder.length - 1) {
-
-    const nextField =
-      document.getElementById(fieldOrder[index + 1]);
-
-    if (nextField) {
-      nextField.focus();
-    }
-
-  } else {
-
-    // Last field = analyze
-    analyze();
-
-    // Close mobile keyboard
-    document.getElementById('rent').blur();
-
-  }
-
-}
-function analyze() {
-  const hourlyRate = parseFloat(document.getElementById('hourly').value) || 0;
-  const weeklyHours = parseFloat(document.getElementById('hours').value) || 36;
-  const weeklyStipend = parseFloat(document.getElementById('stipend').value) || 0;
-  const monthlyHousing = parseFloat(document.getElementById('rent').value) || 0;
-
-  if (hourlyRate <= 0 || weeklyHours <= 0) {
-    alert('Please enter valid compensation values.');
-    return;
-  }
-
-  // Core Compensation Calculations
-  const weeklyTaxable = hourlyRate * weeklyHours;
-  const weeklyTotal = weeklyTaxable + weeklyStipend;
-  const contract13WeekValue = weeklyTotal * 13;
-
-  // Market Benchmark (Estimated National Fair Value)
-  const fairMarketWeekly = 4500;
-  const fairMarket13Week = fairMarketWeekly * 13;
-
-  // Underpayment Analysis
-  const weeklyUnderpayment = Math.max(0, fairMarketWeekly - weeklyTotal);
-  const contractUnderpayment = weeklyUnderpayment * 13;
-
-  // Recruiter Margin Estimate
-  const recruiterMargin = weeklyTotal * 0.15;
-
-  // Negotiation Opportunity
-  const negotiationLow = contractUnderpayment * 0.60;
-  const negotiationHigh = contractUnderpayment;
-
-  // Contract Score (0–100)
-  let score = Math.round((weeklyTotal / fairMarketWeekly) * 100);
-  score = Math.max(35, Math.min(score, 99));
-
-  // Score Rating
-  let rating = 'Excellent';
-  let scoreColor = 'text-green-600';
-
-  if (score < 60) {
-    rating = 'Significantly Underpaid';
-    scoreColor = 'text-red-600';
-  } else if (score < 75) {
-    rating = 'Below Market';
-    scoreColor = 'text-orange-600';
-  } else if (score < 90) {
-    rating = 'Competitive';
-    scoreColor = 'text-blue-600';
-  }
-
-    // SHOW SCORE SECTION
-document.getElementById('scoreSection').classList.remove('hidden');
-
-const scoreCircle = document.getElementById('scoreCircle');
-const verdict = document.getElementById('verdict');
-
-scoreCircle.innerText = score;
-
-if (score < 60) {
-  scoreCircle.style.background = '#dc2626';
-} else if (score < 75) {
-  scoreCircle.style.background = '#f59e0b';
-} else {
-  scoreCircle.style.background = '#16a34a';
-}
-
-verdict.innerText = rating;
-
-  // Results HTML
-  document.getElementById('results').innerHTML = `
-    <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
-      <h2 class="text-3xl font-bold text-center mb-6">Your Contract Analysis Results</h2>
-
-        <div class="grid md:grid-cols-2 gap-4 text-sm md:text-base">
-
-        <div class="bg-blue-50 p-4 rounded-xl">
-          <div class="text-gray-600">Weekly Compensation</div>
-          <div class="text-2xl font-bold">$${weeklyTotal.toLocaleString()}</div>
-        </div>
-
-        <div class="bg-indigo-50 p-4 rounded-xl">
-          <div class="text-gray-600">13-Week Contract Value</div>
-          <div class="text-2xl font-bold">$${contract13WeekValue.toLocaleString()}</div>
-        </div>
-
-        <div class="bg-green-50 p-4 rounded-xl">
-          <div class="text-gray-600">Fair Market Value</div>
-          <div class="text-2xl font-bold">$${fairMarket13Week.toLocaleString()}</div>
-        </div>
-
-        <div class="bg-red-50 p-4 rounded-xl">
-          <div class="text-gray-600">Potential Underpayment</div>
-          <div class="text-2xl font-bold text-red-600">$${contractUnderpayment.toLocaleString()}</div>
-        </div>
-
-        <div class="bg-yellow-50 p-4 rounded-xl">
-          <div class="text-gray-600">Estimated Recruiter Margin</div>
-          <div class="text-2xl font-bold">$${Math.round(recruiterMargin).toLocaleString()}/wk</div>
-        </div>
-
-        <div class="bg-purple-50 p-4 rounded-xl">
-          <div class="text-gray-600">Negotiation Opportunity</div>
-          <div class="text-xl font-bold">$${Math.round(negotiationLow).toLocaleString()}–$${Math.round(negotiationHigh).toLocaleString()}</div>
-        </div>
-
-      </div>
-    </div>
-  `;
-
-  // Premium Upsell
-  document.getElementById('premiumUpsell').classList.remove('hidden');
-  document.getElementById('premiumUpsell').innerHTML = `
-    <div class="bg-blue-600 text-white rounded-2xl shadow-lg p-8 text-center">
-
-<h3 class="text-4xl font-bold mb-4">
-You May Be Leaving $${contractUnderpayment.toLocaleString()} on the Table
-</h3>
-
-<p class="text-xl mb-8 max-w-3xl mx-auto">
-Unlock premium compensation intelligence, recruiter margin visibility,
-specialty pay benchmarks, underpayment detection,
-salary databases, negotiation tools, and predictive market forecasting.
-</p>
-
-<div class="grid md:grid-cols-3 gap-6 text-left mb-10">
-
-<div class="bg-white text-gray-900 rounded-2xl p-6">
-<h4 class="text-2xl font-bold mb-3">Basic</h4>
-<div class="text-4xl font-bold mb-4">$9.99/mo</div>
-<ul class="space-y-2 text-sm">
-<li>✓ Pay transparency tools</li>
-<li>✓ Contract analysis</li>
-<li>✓ Salary comparison</li>
-<li>✓ Housing tools</li>
-</ul>
-</div>
-
-<div class="bg-white text-gray-900 rounded-2xl p-6 border-4 border-yellow-400">
-<h4 class="text-2xl font-bold mb-3">Pro</h4>
-<div class="text-4xl font-bold mb-4">$29.99/mo</div>
-<ul class="space-y-2 text-sm">
-<li>✓ Recruiter margin analysis</li>
-<li>✓ Underpayment detection</li>
-<li>✓ Premium dashboards</li>
-<li>✓ Negotiation recommendations</li>
-</ul>
-</div>
-
-<div class="bg-white text-gray-900 rounded-2xl p-6">
-<h4 class="text-2xl font-bold mb-3">Elite</h4>
-<div class="text-4xl font-bold mb-4">$49.99/mo</div>
-<ul class="space-y-2 text-sm">
-<li>✓ Predictive forecasting</li>
-<li>✓ Real-time contract alerts</li>
-<li>✓ AI compensation optimization</li>
-<li>✓ Premium intelligence suite</li>
-</ul>
-</div>
-
-</div>
-
-<a href="/signup.html"
-class="inline-block bg-white text-blue-600 font-bold px-10 py-5 rounded-xl hover:bg-gray-100 transition text-xl">
-Create Your Account
-</a>
-
-</div>
-  `;
-
-  // Scroll to Results
-  setTimeout(() => {
-    document.getElementById('scoreSection').scrollIntoView({
-  behavior: 'smooth',
-  block: 'center'
-});
-  }, 100);
-}
-
-</script>
+</main>
 
 </body>
+
 </html>
