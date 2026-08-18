@@ -2,15 +2,22 @@
   "cleanUrls": true,
 
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+  {
+    "src": "/(login|signup|subscriber-dashboard|recruiter-subscription|recruiter-dashboard|enterprise|enterprise-dashboard|enterprise-contact|travel-nurse-pay-phoenix|travel-nurse-pay-heatmap|travel-nurse-demand-heatmap|travel-nurse-market-intelligence|travel-nurse-national-market|travel-nurse-live-contracts|travel-nurse-salary-database|travel-nurse-pay-by-hospital|travel-nurse-pay-by-specialty|travel-nurse-pay-comparison|travel-nurse-pay-directory|travel-nurse-pay-houston|travel-nurse-pay-san-diego|travel-nurse-pay-transparency|travel-nurse-tax-free-stipend-guide|travel-nurse-housing|highest-paying-travel-nurse-contracts|highest-paying-travel-nurse-contracts-this-week|highest-paying-contracts-this-week|highest-paying-travel-nurse-states)(\\.html)?$",
+    "status": 307,
+    "headers": {
+      "Location": "/"
     }
-  ],
+  },
+  {
+    "src": "/api/(.*)",
+    "dest": "/api/$1"
+  },
+  {
+    "src": "/(.*)",
+    "dest": "/$1"
+  }
+],
 
   "crons": [
     {
